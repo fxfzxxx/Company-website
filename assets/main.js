@@ -91,9 +91,17 @@
 		};
 
 		const loadPage = async (url, pushState = true) => {
+			const controller = new AbortController();
+			const timeoutId = window.setTimeout(() => controller.abort(), 8000);
 			try {
-				const response = await fetch(url, { headers: { "X-Requested-With": "spa" } });
-				if (!response.ok) return;
+				const response = await fetch(url, {
+					headers: { "X-Requested-With": "spa" },
+					signal: controller.signal,
+				});
+				if (!response.ok) {
+					window.location.href = url;
+					return;
+				}
 				const html = await response.text();
 				const parser = new DOMParser();
 				const doc = parser.parseFromString(html, "text/html");
@@ -110,6 +118,9 @@
 				window.scrollTo({ top: 0, behavior: "instant" });
 			} catch (error) {
 				console.error("SPA navigation failed:", error);
+				window.location.href = url;
+			} finally {
+				window.clearTimeout(timeoutId);
 			}
 		};
 

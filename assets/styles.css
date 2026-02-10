@@ -13,6 +13,10 @@
 	padding: 0;
 }
 
+html {
+	scrollbar-gutter: stable;
+}
+
 body {
 	font-family: "Helvetica Neue", "Noto Sans SC", "PingFang SC", Arial, sans-serif;
 	color: var(--text);
