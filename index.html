@@ -3,600 +3,51 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>BlackRock - 首页</title>
+	<title>Yonder Tech - 首页</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<style>
-		:root {
-			--text: #111;
-			--muted: #6b7280;
-			--border: #e5e7eb;
-			--accent: #f4c500;
-			--bg: #ffffff;
-			--shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-		}
-
-		* {
-			box-sizing: border-box;
-			margin: 0;
-			padding: 0;
-		}
-
-		body {
-			font-family: "Helvetica Neue", "Noto Sans SC", "PingFang SC", Arial, sans-serif;
-			color: var(--text);
-			background: #f7f6f2;
-		}
-
-		.page {
-			max-width: 1500px;
-			margin: 0 auto;
-			background: var(--bg);
-			box-shadow: var(--shadow);
-		}
-
-		.topbar {
-			background: #f2f2f2;
-			font-size: 12px;
-			color: #555;
-			padding: 6px 32px;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-
-		.topbar a {
-			color: inherit;
-			text-decoration: none;
-			margin-right: 16px;
-		}
-
-		header {
-			border-bottom: 1px solid var(--border);
-			padding: 18px 32px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 24px;
-		}
-
-		.logo {
-			display: flex;
-			align-items: center;
-			gap: 16px;
-		}
-
-		.logo-text {
-			font-weight: 900;
-			font-size: 25px;
-			line-height: 1.1;
-		}
-
-		.logo-sub {
-			font-size: 14px;
-			color: #333;
-		}
-
-		nav {
-			display: flex;
-			gap: 32px;
-			font-size: 14px;
-		}
-
-		nav a {
-			text-decoration: none;
-			color: #222;
-			font-weight: 500;
-		}
-
-		.search {
-			font-size: 18px;
-			color: #111;
-		}
-
-		.hero {
-			display: grid;
-			grid-template-columns: 1.1fr 1fr;
-			min-height: 520px;
-		}
-
-		.hero-content {
-			padding: 72px 64px 48px 64px;
-		}
-
-		.hero-tag {
-			font-size: 12px;
-			color: #cc0000;
-			font-weight: 700;
-			letter-spacing: 0.5px;
-			margin-bottom: 16px;
-			display: inline-block;
-		}
-
-		.hero-title {
-			font-size: 40px;
-			font-weight: 700;
-			margin-bottom: 20px;
-		}
-
-		.hero-desc {
-			font-size: 15px;
-			color: #333;
-			line-height: 1.7;
-			max-width: 520px;
-			margin-bottom: 24px;
-		}
-
-		.cta {
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-			background: #111;
-			color: #fff;
-			text-decoration: none;
-			font-size: 14px;
-			padding: 12px 18px;
-			border-radius: 2px;
-		}
-
-		.hero-image {
-			background: url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop") center/cover no-repeat;
-			min-height: 520px;
-		}
-
-		.highlight-bar {
-			background: var(--accent);
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 24px;
-			padding: 28px 32px;
-		}
-
-		.highlight-item {
-			border-right: 1px solid rgba(0, 0, 0, 0.2);
-			padding-right: 18px;
-		}
-
-		.highlight-item:last-child {
-			border-right: none;
-			padding-right: 0;
-		}
-
-		.highlight-title {
-			font-size: 12px;
-			font-weight: 700;
-			letter-spacing: 0.4px;
-			color: #111;
-			margin-bottom: 10px;
-		}
-
-		.highlight-text {
-			font-size: 14px;
-			line-height: 1.6;
-			margin-bottom: 12px;
-		}
-
-		.highlight-link {
-			text-decoration: none;
-			font-size: 13px;
-			font-weight: 600;
-			color: #111;
-		}
-
-		.section {
-			padding: 64px 64px;
-			border-bottom: 1px solid var(--border);
-		}
-
-		.section-header {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			margin-bottom: 28px;
-			gap: 24px;
-		}
-
-		.section-title {
-			font-size: 26px;
-			font-weight: 700;
-		}
-
-		.section-subtitle {
-			color: var(--muted);
-			font-size: 14px;
-			max-width: 520px;
-			line-height: 1.6;
-		}
-
-		.link-more {
-			text-decoration: none;
-			font-weight: 600;
-			color: #111;
-			font-size: 14px;
-		}
-
-		.card-grid {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 24px;
-		}
-
-		.card {
-			border: 1px solid var(--border);
-			background: #fff;
-			border-radius: 4px;
-			overflow: hidden;
-			box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-		}
-
-		.card img {
-			width: 100%;
-			height: 200px;
-			object-fit: cover;
-		}
-
-		.card-body {
-			padding: 20px 22px 22px 22px;
-			display: flex;
-			flex-direction: column;
-			gap: 12px;
-		}
-
-		.card-tag {
-			font-size: 12px;
-			letter-spacing: 0.4px;
-			color: #cc0000;
-			font-weight: 700;
-		}
-
-		.card-title {
-			font-size: 18px;
-			font-weight: 700;
-		}
-
-		.card-text {
-			color: #333;
-			line-height: 1.6;
-			font-size: 14px;
-		}
-
-		.card-link {
-			margin-top: auto;
-			font-weight: 600;
-			text-decoration: none;
-			color: #111;
-			font-size: 14px;
-		}
-
-		.split-band {
-			display: grid;
-			grid-template-columns: 1.1fr 1fr;
-			gap: 32px;
-			align-items: center;
-			background: #f2f2f2;
-			padding: 56px 64px;
-		}
-
-		.split-content h2 {
-			font-size: 30px;
-			margin-bottom: 16px;
-		}
-
-		.split-content p {
-			color: #333;
-			line-height: 1.7;
-			margin-bottom: 18px;
-			font-size: 15px;
-		}
-
-		.split-image {
-			min-height: 280px;
-			border-radius: 6px;
-			background: url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop") center/cover no-repeat;
-		}
-
-		.metrics {
-			display: grid;
-			grid-template-columns: repeat(4, 1fr);
-			gap: 24px;
-			text-align: center;
-		}
-
-		.metric {
-			padding: 26px 12px;
-			background: #fff;
-			border: 1px solid var(--border);
-			border-radius: 4px;
-		}
-
-		.metric strong {
-			display: block;
-			font-size: 28px;
-			margin-bottom: 8px;
-		}
-
-		.metric span {
-			color: var(--muted);
-			font-size: 13px;
-		}
-
-		.news-grid {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 22px;
-		}
-
-		.news-item {
-			border-top: 3px solid #111;
-			padding-top: 16px;
-		}
-
-		.news-item h4 {
-			font-size: 16px;
-			margin-bottom: 10px;
-		}
-
-		.news-item p {
-			font-size: 14px;
-			color: #333;
-			line-height: 1.6;
-		}
-
-		.news-item a {
-			text-decoration: none;
-			font-weight: 600;
-			color: #111;
-			font-size: 13px;
-		}
-
-		.resource-grid {
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: 24px;
-		}
-
-		.resource {
-			border: 1px solid var(--border);
-			padding: 24px;
-			border-radius: 4px;
-			background: #fff;
-		}
-
-		.resource h3 {
-			font-size: 18px;
-			margin-bottom: 10px;
-		}
-
-		.resource p {
-			color: #333;
-			line-height: 1.6;
-			font-size: 14px;
-		}
-
-		.signup {
-			background: #111;
-			color: #fff;
-			padding: 56px 64px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 24px;
-		}
-
-		.signup h2 {
-			font-size: 28px;
-			margin-bottom: 12px;
-		}
-
-		.signup p {
-			color: #d1d5db;
-			font-size: 14px;
-			line-height: 1.6;
-		}
-
-		.signup button {
-			background: var(--accent);
-			border: none;
-			padding: 12px 18px;
-			font-weight: 700;
-			cursor: pointer;
-			font-size: 14px;
-		}
-
-		.footer {
-			padding: 48px 64px;
-			background: #f2f2f2;
-		}
-
-		.footer-grid {
-			display: grid;
-			grid-template-columns: repeat(4, 1fr);
-			gap: 24px;
-		}
-
-		.footer h5 {
-			font-size: 14px;
-			margin-bottom: 12px;
-		}
-
-		.footer a {
-			display: block;
-			color: #333;
-			text-decoration: none;
-			font-size: 13px;
-			margin-bottom: 8px;
-		}
-
-		.footer-bottom {
-			margin-top: 28px;
-			border-top: 1px solid #ddd;
-			padding-top: 16px;
-			font-size: 12px;
-			color: #666;
-			display: flex;
-			justify-content: space-between;
-			flex-wrap: wrap;
-			gap: 12px;
-		}
-
-		@media (max-width: 1100px) {
-			.hero {
-				grid-template-columns: 1fr;
-			}
-
-			.hero-image {
-				min-height: 360px;
-			}
-
-			nav {
-				gap: 18px;
-			}
-
-			.card-grid {
-				grid-template-columns: repeat(2, 1fr);
-			}
-
-			.metrics {
-				grid-template-columns: repeat(2, 1fr);
-			}
-
-			.news-grid {
-				grid-template-columns: repeat(2, 1fr);
-			}
-
-			.footer-grid {
-				grid-template-columns: repeat(2, 1fr);
-			}
-		}
-
-		@media (max-width: 860px) {
-			header {
-				flex-wrap: wrap;
-				gap: 12px;
-			}
-
-			.hero-content {
-				padding: 48px 32px;
-			}
-
-			.highlight-bar {
-				grid-template-columns: 1fr;
-			}
-
-			.highlight-item {
-				border-right: none;
-				border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-				padding-bottom: 16px;
-			}
-
-			.highlight-item:last-child {
-				border-bottom: none;
-				padding-bottom: 0;
-			}
-
-			.section {
-				padding: 48px 32px;
-			}
-
-			.card-grid,
-			.news-grid,
-			.resource-grid {
-				grid-template-columns: 1fr;
-			}
-
-			.split-band {
-				grid-template-columns: 1fr;
-				padding: 48px 32px;
-			}
-
-			.metrics {
-				grid-template-columns: 1fr;
-			}
-
-			.signup {
-				flex-direction: column;
-				align-items: flex-start;
-				padding: 48px 32px;
-			}
-
-			.footer {
-				padding: 40px 32px;
-			}
-
-			.footer-grid {
-				grid-template-columns: 1fr;
-			}
-		}
-	</style>
+	<link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
 	<div class="page">
-		<div class="topbar">
-			<div>
-				<a href="#">央德 Yonder</a>
-				<a href="#">自动化 Automation</a>
-				<a href="#">全球页面(英文)</a>
-			</div>
-			<div>China Offshore - 中国境外 ▾</div>
-		</div>
-
-		<header>
-			<div class="logo">
-				<div>
-					<div class="logo-text">Yonder.</div>
-					<div class="logo-sub">央德</div>
-				</div>
-			</div>
-
-			<nav>
-				<a href="#">风格总览</a>
-				<a href="#">设计观点</a>
-				<a href="#">关于我们</a>
-				<a href="#">案例资料库</a>
-			</nav>
-
-			<div class="search"><i class="fa fa-search" aria-hidden="true"></i></div>
-		</header>
-
-		<section class="hero">
+		<div class="site-header"></div>
+		<div class="page-content">
+			<section class="hero">
 			<div class="hero-content">
 				<span class="hero-tag">2026年设计展望</span>
 				<h1 class="hero-title">突破传统界限</h1>
 				<p class="hero-desc">
 					我们为企业提供IT赋能与数字化咨询服务，覆盖技术战略、架构规划、系统集成与数据智能落地，帮助客户在组织与业务层面实现可持续的效率提升与增长。
 				</p>
-				<a class="cta" href="#">了解央德的IT赋能方案</a>
+				<a class="cta" href="services/index.html">了解央德的IT赋能方案</a>
 			</div>
 			<div class="hero-image" role="img" aria-label="Rock climbing near the sea"></div>
-		</section>
+			</section>
 
-		<section class="highlight-bar">
+			<section class="highlight-bar">
 			<div class="highlight-item">
 				<div class="highlight-title">IT赋能趋势</div>
 				<div class="highlight-text">本周数字化与IT转型要点</div>
-				<a class="highlight-link" href="#">› 了解更多</a>
+				<a class="highlight-link" href="trends/index.html">› 了解更多</a>
 			</div>
 			<div class="highlight-item">
 				<div class="highlight-title">央德首席执行官致客户信</div>
 				<div class="highlight-text">分享IT赋能与组织转型的实践</div>
-				<a class="highlight-link" href="#">› 阅读致信</a>
+				<a class="highlight-link" href="letter/index.html">› 阅读致信</a>
 			</div>
 			<div class="highlight-item">
 				<div class="highlight-title">服务与能力</div>
 				<div class="highlight-text">查看央德的IT咨询与交付体系</div>
-				<a class="highlight-link" href="#">› 了解更多</a>
+				<a class="highlight-link" href="services/index.html">› 了解更多</a>
 			</div>
-		</section>
+			</section>
 
-		<section class="section">
+			<section class="section">
 			<div class="section-header">
 				<div>
 					<h2 class="section-title">洞察与研究</h2>
 					<p class="section-subtitle">聚焦IT赋能、企业架构与数据智能，为管理层提供可落地的决策参考。</p>
 				</div>
-				<a class="link-more" href="#">› 查看全部研究</a>
+				<a class="link-more" href="insights/index.html">› 查看全部研究</a>
 			</div>
 			<div class="card-grid">
 				<article class="card">
@@ -605,7 +56,7 @@
 						<span class="card-tag">IT战略</span>
 						<h3 class="card-title">以业务为导向的技术路线图</h3>
 						<p class="card-text">围绕增长与成本目标规划能力蓝图，保障技术投入可衡量。</p>
-						<a class="card-link" href="#">› 阅读报告</a>
+						<a class="card-link" href="insights/it-strategy.html">› 阅读报告</a>
 					</div>
 				</article>
 				<article class="card">
@@ -614,7 +65,7 @@
 						<span class="card-tag">企业架构</span>
 						<h3 class="card-title">从应用到数据的一体化规划</h3>
 						<p class="card-text">梳理应用组合与数据资产，形成稳定可扩展的技术底座。</p>
-						<a class="card-link" href="#">› 查看方法</a>
+						<a class="card-link" href="insights/enterprise-architecture.html">› 查看方法</a>
 					</div>
 				</article>
 				<article class="card">
@@ -623,28 +74,28 @@
 						<span class="card-tag">数据智能</span>
 						<h3 class="card-title">AI与自动化的价值落地</h3>
 						<p class="card-text">以可控、可解释的模型能力提升运营效率与决策质量。</p>
-						<a class="card-link" href="#">› 了解项目</a>
+						<a class="card-link" href="insights/data-intelligence.html">› 了解项目</a>
 					</div>
 				</article>
 			</div>
-		</section>
+			</section>
 
-		<section class="split-band">
+			<section class="split-band">
 			<div class="split-content">
 				<h2>以IT赋能驱动业务增长</h2>
 				<p>央德聚焦IT咨询与数字化转型，覆盖技术战略、架构治理、系统集成与数据平台建设。我们与客户业务与技术团队协同，确保从规划到落地的持续成效。</p>
-				<a class="cta" href="#">了解央德的咨询方法论</a>
+				<a class="cta" href="methodology/index.html">了解央德的咨询方法论</a>
 			</div>
 			<div class="split-image" role="img" aria-label="Design workshop"></div>
-		</section>
+			</section>
 
-		<section class="section">
+			<section class="section">
 			<div class="section-header">
 				<div>
 					<h2 class="section-title">央德数据</h2>
 					<p class="section-subtitle">多年IT咨询与交付经验，帮助客户建立可持续的技术能力。</p>
 				</div>
-				<a class="link-more" href="#">› 查看完整能力</a>
+				<a class="link-more" href="capabilities/index.html">› 查看完整能力</a>
 			</div>
 			<div class="metrics">
 				<div class="metric"><strong>180+</strong><span>IT咨询与交付项目</span></div>
@@ -652,15 +103,15 @@
 				<div class="metric"><strong>92%</strong><span>客户复购与续约率</span></div>
 				<div class="metric"><strong>12</strong><span>交付中心与协作城市</span></div>
 			</div>
-		</section>
+			</section>
 
-		<section class="section">
+			<section class="section">
 			<div class="section-header">
 				<div>
 					<h2 class="section-title">精选案例</h2>
 					<p class="section-subtitle">覆盖IT咨询、系统集成与数据平台建设的代表性项目。</p>
 				</div>
-				<a class="link-more" href="#">› 进入案例库</a>
+				<a class="link-more" href="cases/index.html">› 进入案例库</a>
 			</div>
 			<div class="card-grid">
 				<article class="card">
@@ -669,7 +120,7 @@
 						<span class="card-tag">系统集成</span>
 						<h3 class="card-title">飞云协作平台集成升级</h3>
 						<p class="card-text">整合业务系统与流程平台，提升跨部门协作效率。</p>
-						<a class="card-link" href="#">› 查看案例</a>
+						<a class="card-link" href="cases/feyun-platform.html">› 查看案例</a>
 					</div>
 				</article>
 				<article class="card">
@@ -678,7 +129,7 @@
 						<span class="card-tag">数据平台</span>
 						<h3 class="card-title">澜禾数据中台建设</h3>
 						<p class="card-text">打通业务数据与分析链路，形成统一指标体系。</p>
-						<a class="card-link" href="#">› 查看案例</a>
+						<a class="card-link" href="cases/lanhe-data.html">› 查看案例</a>
 					</div>
 				</article>
 				<article class="card">
@@ -687,46 +138,46 @@
 						<span class="card-tag">云迁移</span>
 						<h3 class="card-title">禾木出行云化转型</h3>
 						<p class="card-text">通过云原生架构提升系统弹性与峰值承载能力。</p>
-						<a class="card-link" href="#">› 查看案例</a>
+						<a class="card-link" href="cases/hemu-cloud.html">› 查看案例</a>
 					</div>
 				</article>
 			</div>
-		</section>
+			</section>
 
-		<section class="section">
+			<section class="section">
 			<div class="section-header">
 				<div>
 					<h2 class="section-title">央德最新动态</h2>
 					<p class="section-subtitle">关注央德在IT咨询、交付与行业实践方面的最新进展。</p>
 				</div>
-				<a class="link-more" href="#">› 查看全部动态</a>
+				<a class="link-more" href="news/index.html">› 查看全部动态</a>
 			</div>
 			<div class="news-grid">
 				<div class="news-item">
 					<h4>央德新增IT运维与自动化服务线</h4>
 					<p>为企业提供运维治理、自动化脚本与流程优化服务。</p>
-					<a href="#">› 了解详情</a>
+					<a href="news/ops-automation.html">› 了解详情</a>
 				</div>
 				<div class="news-item">
 					<h4>上海交付中心扩容并升级项目管理流程</h4>
 					<p>新增交付经理与架构师岗位，提升跨区域协同效率。</p>
-					<a href="#">› 查看详情</a>
+					<a href="news/shanghai-delivery.html">› 查看详情</a>
 				</div>
 				<div class="news-item">
 					<h4>推出中小企业IT咨询快速启动包</h4>
 					<p>两周完成现状评估、技术路线与落地清单。</p>
-					<a href="#">› 了解服务</a>
+					<a href="news/sme-fast-start.html">› 了解服务</a>
 				</div>
 			</div>
-		</section>
+			</section>
 
-		<section class="section">
+			<section class="section">
 			<div class="section-header">
 				<div>
 					<h2 class="section-title">资源与能力</h2>
 					<p class="section-subtitle">完整的咨询交付与团队协作体系，支持快速启动与持续迭代。</p>
 				</div>
-				<a class="link-more" href="#">› 查看服务目录</a>
+				<a class="link-more" href="services/catalog.html">› 查看服务目录</a>
 			</div>
 			<div class="resource-grid">
 				<div class="resource">
@@ -746,48 +197,19 @@
 					<p>建立稳定运维与持续改进机制，保障系统长期价值。</p>
 				</div>
 			</div>
-		</section>
+			</section>
 
-		<section class="signup">
+			<section class="signup">
 			<div>
 				<h2>订阅央德IT赋能通讯</h2>
 				<p>每月精选趋势、案例与方法论，帮助你构建IT驱动的增长策略。</p>
 			</div>
 			<button type="button">立即订阅</button>
-		</section>
+			</section>
+		</div>
 
-		<footer class="footer">
-			<div class="footer-grid">
-				<div>
-					<h5>关于央德</h5>
-					<a href="#">公司简介</a>
-					<a href="#">领导团队</a>
-					<a href="#">可持续与责任</a>
-				</div>
-				<div>
-					<h5>服务与能力</h5>
-					<a href="#">品牌系统</a>
-					<a href="#">产品体验</a>
-					<a href="#">服务设计</a>
-				</div>
-				<div>
-					<h5>资源</h5>
-					<a href="#">洞察与报告</a>
-					<a href="#">案例库</a>
-					<a href="#">活动与培训</a>
-				</div>
-				<div>
-					<h5>联系</h5>
-					<a href="#">联系我们</a>
-					<a href="#">商务合作</a>
-					<a href="#">加入我们</a>
-				</div>
-			</div>
-			<div class="footer-bottom">
-				<span>© 2026 Yonder 央德设计咨询公司</span>
-				<span>隐私政策 · 使用条款 · Cookie设置</span>
-			</div>
-		</footer>
+		<div class="footer"></div>
 	</div>
+	<script src="assets/main.js"></script>
 </body>
 </html>
