@@ -230,6 +230,11 @@ nav a {
 	border-bottom: 1px solid var(--border);
 }
 
+.section + .news {
+   background-color: var(--accent);
+   border: none  ;
+}
+
 .section-header {
 	display: flex;
 	align-items: center;
