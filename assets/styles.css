@@ -960,6 +960,186 @@ nav a {
 	justify-self: start;
 }
 
+.about-hero {
+	background: radial-gradient(circle at top right, rgba(244, 197, 0, 0.18), transparent 52%),
+		linear-gradient(135deg, #ffffff 0%, #f7f6f2 48%, #f2efe6 100%);
+	border: 1px solid var(--border);
+	border-radius: 14px;
+	padding: 44px;
+	box-shadow: 0 14px 34px rgba(17, 17, 17, 0.08);
+	margin-bottom: 28px;
+}
+
+.about-hero-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 18px;
+	flex-wrap: wrap;
+}
+
+.about-back {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+	font-weight: 600;
+	padding: 9px 12px;
+	border: 1px solid #d1d5db;
+	border-radius: 999px;
+	background: #fff;
+}
+
+.about-kicker {
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.6px;
+	color: #374151;
+}
+
+.about-hero h1 {
+	font-size: 42px;
+	line-height: 1.15;
+	margin-bottom: 14px;
+	font-family: "Cormorant Garamond", "Times New Roman", serif;
+}
+
+.about-hero p {
+	max-width: 720px;
+	font-size: 16px;
+	line-height: 1.9;
+	color: #374151;
+}
+
+.about-link-section {
+	border: 1px solid var(--border);
+	border-radius: 14px;
+	padding: 30px;
+	background: #fff;
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+}
+
+.about-link-section h2 {
+	font-size: 22px;
+	margin-bottom: 16px;
+}
+
+.about-link-list {
+	list-style: none;
+	padding-left: 0;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.about-link-card {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 16px;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+	border-radius: 12px;
+	border: 1px solid #e6e7eb;
+	background: #fff;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.about-link-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 14px 28px rgba(17, 17, 17, 0.08);
+	border-color: #cfd4dc;
+}
+
+.about-link-card h3 {
+	font-size: 18px;
+	margin-bottom: 8px;
+}
+
+.about-link-card p {
+	font-size: 14px;
+	line-height: 1.7;
+	color: #4b5563;
+}
+
+.about-link-arrow {
+	font-size: 20px;
+	line-height: 1;
+	color: #111;
+	margin-top: 2px;
+}
+
+.about-sub-hero {
+	background: radial-gradient(circle at top left, rgba(244, 197, 0, 0.2), transparent 58%),
+		linear-gradient(135deg, #ffffff 0%, #f7f6f2 45%, #f2efe6 100%);
+	border: 1px solid var(--border);
+	border-radius: 14px;
+	padding: 40px;
+	box-shadow: 0 14px 30px rgba(17, 17, 17, 0.06);
+	margin-bottom: 22px;
+}
+
+.about-sub-hero h1 {
+	font-family: "Cormorant Garamond", "Times New Roman", serif;
+	font-size: 40px;
+	line-height: 1.15;
+	margin-bottom: 12px;
+}
+
+.about-sub-hero p {
+	max-width: 760px;
+	font-size: 16px;
+	line-height: 1.9;
+	color: #374151;
+}
+
+.about-section {
+	border: 1px solid var(--border);
+	border-radius: 14px;
+	background: #fff;
+	padding: 28px;
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+	margin-bottom: 22px;
+}
+
+.about-section-title {
+	font-size: 22px;
+	margin-bottom: 14px;
+}
+
+.about-info-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.about-info-card {
+	border: 1px solid #e6e7eb;
+	border-radius: 12px;
+	padding: 20px;
+	background: linear-gradient(180deg, #ffffff 0%, #fafaf9 100%);
+}
+
+.about-info-card h3 {
+	font-size: 18px;
+	margin-bottom: 8px;
+}
+
+.about-info-card p {
+	font-size: 14px;
+	line-height: 1.7;
+	color: #4b5563;
+}
+
+.about-link-card.is-active {
+	border-color: #111;
+	box-shadow: 0 12px 24px rgba(17, 17, 17, 0.1);
+	background: #fcfcfb;
+}
+
 @keyframes floatIn {
 	from {
 		transform: translateY(20px);
@@ -1019,6 +1199,14 @@ nav a {
 
 	.insights-grid {
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.about-link-list {
+		grid-template-columns: 1fr;
+	}
+
+	.about-info-grid {
+		grid-template-columns: 1fr;
 	}
 
 	.insights-gallery {
@@ -1132,5 +1320,29 @@ nav a {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
+	}
+
+	.about-hero {
+		padding: 30px 24px;
+	}
+
+	.about-hero h1 {
+		font-size: 34px;
+	}
+
+	.about-link-section {
+		padding: 22px;
+	}
+
+	.about-sub-hero {
+		padding: 28px 22px;
+	}
+
+	.about-sub-hero h1 {
+		font-size: 34px;
+	}
+
+	.about-section {
+		padding: 22px;
 	}
 }
