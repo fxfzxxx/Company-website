@@ -3,14 +3,20 @@
 		const marker = "/websites/";
 		const pathname = decodeURIComponent(pathnameOverride || window.location.pathname).replace(/\\/g, "/");
 		let depth = 0;
+		const isDirectoryPath = (value) => {
+			if (!value) return false;
+			const trimmed = value.endsWith("/") ? value.slice(0, -1) : value;
+			const last = trimmed.split("/").filter(Boolean).pop() || "";
+			return !last.includes(".");
+		};
 		if (pathname.includes(marker)) {
 			const subPath = pathname.split(marker).pop() || "";
 			const segments = subPath.split("/").filter(Boolean);
-			const trailingSlash = subPath.endsWith("/");
+			const trailingSlash = subPath.endsWith("/") || isDirectoryPath(subPath);
 			depth = trailingSlash ? segments.length : Math.max(segments.length - 1, 0);
 		} else {
 			const parts = pathname.split("/").filter(Boolean);
-			const trailingSlash = pathname.endsWith("/");
+			const trailingSlash = pathname.endsWith("/") || isDirectoryPath(pathname);
 			depth = trailingSlash ? parts.length : Math.max(parts.length - 1, 0);
 		}
 		return depth <= 0 ? "" : "../".repeat(depth);
@@ -36,15 +42,21 @@
 		return wrapper;
 	})();
 
+	const partialCache = new Map();
 	const injectPartial = async (path, target) => {
 		try {
-			const response = await fetch(`${base}${path}`);
-			if (!response.ok) {
-				console.error("Failed to load partial:", path, response.status);
-				return;
+			let template = partialCache.get(path);
+			if (!template) {
+				const response = await fetch(`${base}${path}`);
+				if (!response.ok) {
+					console.error("Failed to load partial:", path, response.status);
+					return;
+				}
+				template = await response.text();
+				partialCache.set(path, template);
 			}
-			const html = await response.text();
-			target.innerHTML = html.replace(/{{base}}/g, base);
+			target.innerHTML = template.replace(/{{base}}/g, base);
+			target.dataset.partialLoaded = "true";
 		} catch (error) {
 			console.error("Failed to load partial:", path, error);
 		}
