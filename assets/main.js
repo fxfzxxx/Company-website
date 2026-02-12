@@ -5,10 +5,13 @@
 		let depth = 0;
 		if (pathname.includes(marker)) {
 			const subPath = pathname.split(marker).pop() || "";
-			depth = subPath.split("/").filter(Boolean).length - 1;
+			const segments = subPath.split("/").filter(Boolean);
+			const trailingSlash = subPath.endsWith("/");
+			depth = trailingSlash ? segments.length : Math.max(segments.length - 1, 0);
 		} else {
 			const parts = pathname.split("/").filter(Boolean);
-			depth = Math.max(parts.length - 1, 0);
+			const trailingSlash = pathname.endsWith("/");
+			depth = trailingSlash ? parts.length : Math.max(parts.length - 1, 0);
 		}
 		return depth <= 0 ? "" : "../".repeat(depth);
 	};
