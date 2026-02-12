@@ -1,7 +1,7 @@
 (() => {
-	const getBasePath = () => {
+	const getBasePath = (pathnameOverride) => {
 		const marker = "/websites/";
-		const pathname = decodeURIComponent(window.location.pathname).replace(/\\/g, "/");
+		const pathname = decodeURIComponent(pathnameOverride || window.location.pathname).replace(/\\/g, "/");
 		let depth = 0;
 		if (pathname.includes(marker)) {
 			const subPath = pathname.split(marker).pop() || "";
@@ -121,7 +121,7 @@
 				}
 				contentTarget.innerHTML = newContent.innerHTML;
 				document.title = doc.title || document.title;
-				base = getBasePath();
+				base = getBasePath(new URL(url, window.location.href).pathname);
 				await refreshPartials();
 				if (pushState) {
 					window.history.pushState({ url }, "", url);
