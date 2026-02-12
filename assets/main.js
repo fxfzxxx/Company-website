@@ -13,7 +13,7 @@
 		return depth <= 0 ? "" : "../".repeat(depth);
 	};
 
-	const base = getBasePath();
+	let base = getBasePath();
 	const headerTarget = document.querySelector(".site-header") || (() => {
 		const wrapper = document.createElement("div");
 		wrapper.className = "site-header";
@@ -46,6 +46,12 @@
 			console.error("Failed to load partial:", path, error);
 		}
 	};
+
+	const refreshPartials = () =>
+		Promise.all([
+			injectPartial("assets/partials/header.html", headerTarget),
+			injectPartial("assets/partials/footer.html", footerTarget),
+		]);
 
 	const initScrollBehavior = () => {
 		const header = document.querySelector(".site-header");
@@ -112,6 +118,8 @@
 				}
 				contentTarget.innerHTML = newContent.innerHTML;
 				document.title = doc.title || document.title;
+				base = getBasePath();
+				await refreshPartials();
 				if (pushState) {
 					window.history.pushState({ url }, "", url);
 				}
@@ -139,10 +147,7 @@
 		});
 	};
 
-	Promise.all([
-		injectPartial("assets/partials/header.html", headerTarget),
-		injectPartial("assets/partials/footer.html", footerTarget),
-	]).finally(() => {
+	refreshPartials().finally(() => {
 		initScrollBehavior();
 		initSpaNavigation();
 	});
