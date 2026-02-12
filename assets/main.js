@@ -1,24 +1,42 @@
 (() => {
-	const getBasePath = (pathnameOverride) => {
-		const marker = "/websites/";
-		const pathname = decodeURIComponent(pathnameOverride || window.location.pathname).replace(/\\/g, "/");
-		let depth = 0;
-		const isDirectoryPath = (value) => {
-			if (!value) return false;
-			const trimmed = value.endsWith("/") ? value.slice(0, -1) : value;
-			const last = trimmed.split("/").filter(Boolean).pop() || "";
-			return !last.includes(".");
-		};
-		if (pathname.includes(marker)) {
-			const subPath = pathname.split(marker).pop() || "";
-			const segments = subPath.split("/").filter(Boolean);
-			const trailingSlash = subPath.endsWith("/") || isDirectoryPath(subPath);
-			depth = trailingSlash ? segments.length : Math.max(segments.length - 1, 0);
-		} else {
-			const parts = pathname.split("/").filter(Boolean);
-			const trailingSlash = pathname.endsWith("/") || isDirectoryPath(pathname);
-			depth = trailingSlash ? parts.length : Math.max(parts.length - 1, 0);
+	const getRootPath = () => {
+		const fallback = "/";
+		const script =
+			document.currentScript || document.querySelector('script[src*="assets/main.js"]');
+		if (!script) return fallback;
+		try {
+			const src = script.getAttribute("src") || "";
+			const url = new URL(src, window.location.href);
+			const parts = url.pathname.split("/").filter(Boolean);
+			const assetsIndex = parts.lastIndexOf("assets");
+			if (assetsIndex <= 0) return fallback;
+			return `/${parts.slice(0, assetsIndex).join("/")}/`;
+		} catch {
+			return fallback;
 		}
+	};
+
+	const rootPath = getRootPath();
+
+	const getBasePath = (pathnameOverride) => {
+		const pathname = decodeURIComponent(pathnameOverride || window.location.pathname).replace(/\\/g, "/");
+		const pathParts = pathname.split("/").filter(Boolean);
+		const currentDirParts =
+			pathParts.length > 0 && pathParts[pathParts.length - 1].includes(".")
+				? pathParts.slice(0, -1)
+				: pathParts;
+		const rootParts = rootPath.split("/").filter(Boolean);
+
+		let commonIndex = 0;
+		while (
+			commonIndex < currentDirParts.length &&
+			commonIndex < rootParts.length &&
+			currentDirParts[commonIndex] === rootParts[commonIndex]
+		) {
+			commonIndex += 1;
+		}
+
+		const depth = currentDirParts.length - commonIndex;
 		return depth <= 0 ? "" : "../".repeat(depth);
 	};
 
