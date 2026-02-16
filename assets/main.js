@@ -120,6 +120,68 @@
 		const contentTarget = document.querySelector(".page-content");
 		if (!contentTarget) return;
 
+		const initCaseLibrary = () => {
+			const library = document.querySelector(".case-library");
+			if (!library) return;
+			const buttons = Array.from(library.querySelectorAll(".filter-btn"));
+			const cards = Array.from(library.querySelectorAll(".case-card"));
+			if (buttons.length === 0 || cards.length === 0) return;
+
+			const applyFilter = (filter) => {
+				cards.forEach((card) => {
+					const tags = (card.dataset.tags || "").split(" ").filter(Boolean);
+					const matches = filter === "all" || tags.includes(filter);
+					card.classList.toggle("is-hidden", !matches);
+				});
+				buttons.forEach((button) => {
+					button.classList.toggle("is-active", button.dataset.filter === filter);
+				});
+			};
+
+			buttons.forEach((button) => {
+				button.addEventListener("click", () => {
+					applyFilter(button.dataset.filter || "all");
+				});
+			});
+
+			applyFilter("all");
+		};
+
+		const initCaseViewer = (urlOverride) => {
+			const viewer = document.querySelector(".case-viewer");
+			if (!viewer) return;
+			const frame = viewer.querySelector("iframe");
+			const fallback = viewer.querySelector(".case-viewer-fallback");
+			const errorText = viewer.querySelector(".case-viewer-error");
+			if (!frame) return;
+			const resolvedUrl = urlOverride ? new URL(urlOverride, window.location.href) : window.location;
+			const params = new URLSearchParams(resolvedUrl.search);
+			const casePath = params.get("case") || "";
+			const allowedPrefix = "cases/library/";
+			let normalized = casePath.trim();
+			if (normalized) {
+				try {
+					const parsed = new URL(normalized, window.location.href);
+					normalized = parsed.pathname.replace(/^\/+/, "");
+				} catch {
+					normalized = normalized.replace(/^\/+/, "");
+				}
+			}
+			if (!normalized.includes(allowedPrefix)) {
+				if (errorText) {
+					errorText.textContent = "Case path is missing or invalid.";
+				}
+				return;
+			}
+			const startIndex = normalized.indexOf(allowedPrefix);
+			const trimmed = normalized.slice(startIndex);
+			const fullPath = `${rootPath}${trimmed}`;
+			frame.src = fullPath;
+			if (fallback) {
+				fallback.href = fullPath;
+			}
+		};
+
 		const shouldHandle = (link) => {
 			if (!link) return false;
 			if (link.target && link.target !== "_self") return false;
@@ -156,6 +218,8 @@
 				if (pushState) {
 					window.history.pushState({ url }, "", url);
 				}
+				initCaseLibrary();
+				initCaseViewer(url);
 				window.scrollTo({ top: 0, behavior: "instant" });
 			} catch (error) {
 				console.error("SPA navigation failed:", error);
@@ -178,6 +242,9 @@
 			const url = event.state?.url || window.location.href;
 			loadPage(url, false);
 		});
+
+			initCaseLibrary();
+			initCaseViewer();
 	};
 
 	refreshPartials().finally(() => {
