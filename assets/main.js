@@ -62,9 +62,6 @@
 
 	const partialCache = new Map();
 	const injectPartial = async (path, target) => {
-		if (target?.dataset?.static === "true") {
-			return;
-		}
 		try {
 			let template = partialCache.get(path);
 			if (!template) {
