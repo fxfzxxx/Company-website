@@ -116,6 +116,34 @@
 		});
 	};
 
+	let revealObserver = null;
+	const initScrollReveals = (root = document) => {
+		const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const targets = Array.from(
+			root.querySelectorAll(".section, .highlight-bar, .split-band, .signup, .hero")
+		);
+		if (targets.length === 0) return;
+		targets.forEach((target) => target.classList.add("reveal"));
+		if (reduceMotion) {
+			targets.forEach((target) => target.classList.add("is-visible"));
+			return;
+		}
+		if (revealObserver) {
+			revealObserver.disconnect();
+		}
+		revealObserver = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry) => {
+					if (!entry.isIntersecting) return;
+					entry.target.classList.add("is-visible");
+					observer.unobserve(entry.target);
+				});
+			},
+			{ threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
+		);
+		targets.forEach((target) => revealObserver.observe(target));
+	};
+
 	const initSpaNavigation = () => {
 		const contentTarget = document.querySelector(".page-content");
 		if (!contentTarget) return;
@@ -220,6 +248,7 @@
 				}
 				initCaseLibrary();
 				initCaseViewer(url);
+				initScrollReveals(contentTarget);
 				window.scrollTo({ top: 0, behavior: "instant" });
 			} catch (error) {
 				console.error("SPA navigation failed:", error);
@@ -245,10 +274,12 @@
 
 			initCaseLibrary();
 			initCaseViewer();
+			initScrollReveals();
 	};
 
 	refreshPartials().finally(() => {
 		initScrollBehavior();
 		initSpaNavigation();
+		initScrollReveals();
 	});
 })();
