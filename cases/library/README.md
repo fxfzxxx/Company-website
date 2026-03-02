@@ -16,3 +16,12 @@ Then add a new card to cases/index.html that links to:
 viewer.html?case=cases/library/<case-slug>/index.html
 
 Tags are set with data-tags on the card.
+
+Current cases:
+
+- velvet-atelier
+- starlight-kingdom
+- aurora
+- tech-disruption
+- lumen-stream
+- atlas
