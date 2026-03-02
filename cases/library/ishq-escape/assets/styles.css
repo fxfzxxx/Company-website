@@ -21,6 +21,16 @@ body {
 	color: var(--text);
 }
 
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+	pointer-events: none;
+	opacity: 0.35;
+	z-index: 0;
+}
+
 a {
 	color: inherit;
 	text-decoration: none;
@@ -30,6 +40,8 @@ a {
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 28px 24px 80px;
+	position: relative;
+	z-index: 1;
 }
 
 .hero {
@@ -150,6 +162,47 @@ a {
 	transition: transform 0.3s ease;
 }
 
+.video-hero {
+	margin-top: 40px;
+	position: relative;
+	border-radius: 28px;
+	overflow: hidden;
+	min-height: 460px;
+	border: 1px solid var(--outline);
+	box-shadow: var(--shadow);
+	transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+	will-change: opacity, transform, filter;
+}
+
+.video-bg {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	filter: saturate(0.9) contrast(1.1);
+}
+
+.video-overlay {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(120deg, rgba(8, 7, 8, 0.75), rgba(8, 7, 8, 0.15));
+	padding: 60px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 18px;
+}
+
+.video-overlay h2 {
+	font-family: "Cormorant Garamond", serif;
+	font-size: 40px;
+}
+
+.video-overlay p {
+	color: var(--muted);
+	max-width: 420px;
+}
+
 .media-card {
 	position: absolute;
 	border-radius: 18px;
@@ -157,6 +210,12 @@ a {
 	background-position: center;
 	box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
 	border: 1px solid rgba(255, 255, 255, 0.12);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.media-card:hover {
+	transform: translateY(-8px) scale(1.02);
+	box-shadow: 0 32px 60px rgba(0, 0, 0, 0.6);
 }
 
 .media-card.large {
@@ -206,6 +265,17 @@ a {
 	animation: float 6s ease-in-out infinite;
 }
 
+.reveal {
+	opacity: 0;
+	transform: translateY(20px);
+	transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
 .section-header {
 	max-width: 520px;
 	margin-bottom: 32px;
@@ -237,11 +307,12 @@ a {
 	padding: 18px;
 	border: 1px solid var(--outline);
 	box-shadow: var(--shadow);
-	transition: transform 0.3s ease;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .collection-card:hover {
 	transform: translateY(-6px);
+	box-shadow: 0 32px 60px rgba(0, 0, 0, 0.5);
 }
 
 .collection-image {
@@ -254,7 +325,7 @@ a {
 }
 
 .collection-image.alt {
-	background-image: url("https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1000&q=80");
+	background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80");
 }
 
 .collection-image.third {
@@ -263,6 +334,33 @@ a {
 
 .experience {
 	margin-top: 70px;
+}
+
+.signature {
+	margin-top: 70px;
+}
+
+.signature-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+
+.signature-card {
+	background: rgba(16, 16, 18, 0.7);
+	border: 1px solid var(--outline);
+	border-radius: 18px;
+	padding: 20px;
+	box-shadow: var(--shadow);
+	transition: transform 0.3s ease;
+}
+
+.signature-card.accent {
+	background: linear-gradient(140deg, rgba(224, 200, 138, 0.2), rgba(16, 16, 18, 0.8));
+}
+
+.signature-card:hover {
+	transform: translateY(-6px);
 }
 
 .experience-grid {
@@ -309,10 +407,15 @@ a {
 	background-position: center;
 	border: 1px solid var(--outline);
 	box-shadow: var(--shadow);
+	transition: transform 0.3s ease;
+}
+
+.experience-card:hover {
+	transform: translateY(-6px);
 }
 
 .experience-card:nth-child(2) {
-	background-image: url("https://images.unsplash.com/photo-1499696010184-5b5ce3b5c0e6?auto=format&fit=crop&w=900&q=80");
+	background-image: url("https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80");
 }
 
 .experience-card:nth-child(3) {
@@ -335,11 +438,12 @@ a {
 	padding: 18px;
 	border: 1px solid var(--outline);
 	box-shadow: var(--shadow);
-	transition: transform 0.3s ease;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .retreat-card:hover {
 	transform: translateY(-6px);
+	box-shadow: 0 30px 56px rgba(0, 0, 0, 0.5);
 }
 
 .cta {
@@ -388,7 +492,8 @@ a {
 	}
 
 	.collection-grid,
-	.retreat-grid {
+	.retreat-grid,
+	.signature-grid {
 		grid-template-columns: 1fr;
 	}
 
@@ -399,6 +504,10 @@ a {
 	.cta {
 		flex-direction: column;
 		align-items: flex-start;
+	}
+
+	.video-overlay {
+		padding: 32px;
 	}
 }
 
