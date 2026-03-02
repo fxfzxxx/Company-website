@@ -121,7 +121,7 @@
 		const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 		const targets = Array.from(
 			root.querySelectorAll(
-				".section, .highlight-bar, .split-band, .signup, .hero, .contact-hero, .contact-grid, .contact-form, .contact-info, .contact-hero-copy, .contact-hero-card"
+				".section, .highlight-bar, .split-band, .signup, .hero, .overview-hero, .overview-metrics, .overview-band, .contact-hero, .contact-grid, .contact-form, .contact-info, .contact-hero-copy, .contact-hero-card"
 			)
 		);
 		if (targets.length === 0) return;

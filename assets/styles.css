@@ -146,6 +146,10 @@ blockquote {
 	padding: 48px 64px;
 }
 
+.page-content.page-content--flush {
+	padding: 0;
+}
+
 .simple-header {
 	display: flex;
 	justify-content: space-between;
@@ -645,19 +649,27 @@ nav a:focus-visible::after {
 	line-height: 1.6;
 }
 
-.signup button {
+.signup button,
+.signup a {
 	background: var(--accent);
 	border: none;
 	padding: 12px 18px;
 	font-weight: 700;
 	cursor: pointer;
 	font-size: 14px;
+	color: #111;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	transition: transform var(--duration-fast) var(--ease-out),
 		box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .signup button:hover,
-.signup button:focus-visible {
+.signup button:focus-visible,
+.signup a:hover,
+.signup a:focus-visible {
 	transform: translateY(-2px);
 	box-shadow: 0 12px 24px rgba(244, 197, 0, 0.35);
 }
