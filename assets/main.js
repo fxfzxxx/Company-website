@@ -146,6 +146,13 @@
 		targets.forEach((target) => revealObserver.observe(target));
 	};
 
+	const initContactFormSuccess = (root = document) => {
+		const successMessage = root.querySelector(".form-success");
+		if (!successMessage) return;
+		const params = new URLSearchParams(window.location.search);
+		successMessage.hidden = params.get("success") !== "true";
+	};
+
 	const initSpaNavigation = () => {
 		const contentTarget = document.querySelector(".page-content");
 		if (!contentTarget) return;
@@ -251,6 +258,7 @@
 				initCaseLibrary();
 				initCaseViewer(url);
 				initScrollReveals(contentTarget);
+				initContactFormSuccess(contentTarget);
 				window.scrollTo({ top: 0, behavior: "instant" });
 			} catch (error) {
 				console.error("SPA navigation failed:", error);
@@ -277,11 +285,13 @@
 			initCaseLibrary();
 			initCaseViewer();
 			initScrollReveals();
+			initContactFormSuccess();
 	};
 
 	refreshPartials().finally(() => {
 		initScrollBehavior();
 		initSpaNavigation();
 		initScrollReveals();
+		initContactFormSuccess();
 	});
 })();

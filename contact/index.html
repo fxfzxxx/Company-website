@@ -72,9 +72,12 @@
 			</section>
 
 			<section class="contact-grid">
-				<form class="contact-form reveal" action="mailto:aaronf@yondertech.co.nz" method="post" enctype="text/plain">
+				<form class="contact-form reveal" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact/index.html?success=true">
+					<input type="hidden" name="form-name" value="contact" />
+					<input type="hidden" name="bot-field" />
 					<h2>Start the conversation</h2>
-					<p>Send us your email and the message you’d like to discuss. Clicking send will open your email client with the draft.</p>
+					<p>Send us your email and the message you’d like to discuss. We’ll receive it directly and reply within 1–2 business days.</p>
+					<p class="form-success" role="status" aria-live="polite" hidden>Thanks! Your message has been sent successfully.</p>
 					<div class="form-row">
 						<label>
 							<span>First name</span>
