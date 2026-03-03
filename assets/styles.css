@@ -49,6 +49,25 @@ body {
 	}
 }
 
+@keyframes form-lines-drift {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 160px 140px;
+	}
+}
+
+@keyframes form-lines-scale {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.06);
+	}
+}
+
 .reveal {
 	opacity: 0;
 	transform: translateY(18px);
@@ -1972,16 +1991,65 @@ nav a:focus-visible::after {
 		gap: 16px;
 		transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 		position: relative;
+		overflow: hidden;
+	}
+
+	.form-lines {
+		position: absolute;
+		inset: 0;
+		border-radius: 20px;
+		pointer-events: none;
+		opacity: 0.72;
+		transform-origin: center;
+		animation: form-lines-scale 12s ease-in-out infinite;
+		z-index: 0;
+	}
+
+	.form-lines::before,
+	.form-lines::after {
+		content: "";
+		position: absolute;
+		inset: -40% -20%;
+		animation: form-lines-drift 8s linear infinite;
+	}
+
+	.form-lines::before {
+		background: repeating-linear-gradient(
+			90deg,
+			rgba(17, 17, 17, 0.11) 0,
+			rgba(17, 17, 17, 0.11) 1px,
+			transparent 1px,
+			transparent 24px
+		);
+		opacity: 0.55;
+	}
+
+	.form-lines::after {
+		background: repeating-linear-gradient(
+			0deg,
+			rgba(244, 197, 0, 0.2) 0,
+			rgba(244, 197, 0, 0.2) 1px,
+			transparent 1px,
+			transparent 34px
+		);
+		animation-duration: 12s;
+		opacity: 0.5;
+	}
+
+	.contact-form > *:not(.form-lines):not(.input-glow) {
+		position: relative;
+		z-index: 2;
 	}
 
 	.input-glow {
 		position: absolute;
-		inset: 16px;
-		border-radius: 16px;
+		inset: 0;
+		border-radius: 20px;
 		background: radial-gradient(circle at top right, rgba(244, 197, 0, 0.18), rgba(255, 255, 255, 0));
 		opacity: 0;
 		transition: opacity var(--duration-medium) var(--ease-out);
 		pointer-events: none;
+		z-index: 1;
 	}
 
 	.contact-form:focus-within .input-glow {
@@ -1995,6 +2063,12 @@ nav a:focus-visible::after {
 
 	.contact-form h2 {
 		font-size: 28px;
+	}
+
+	.form-row {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 16px;
 	}
 
 	.contact-form label {
@@ -2126,5 +2200,11 @@ nav a:focus-visible::after {
 
 		.contact-hero {
 			padding: 32px;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.form-row {
+			grid-template-columns: 1fr;
 		}
 	}

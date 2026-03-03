@@ -75,6 +75,16 @@
 				<form class="contact-form reveal" action="mailto:aaronf@yondertech.co.nz" method="post" enctype="text/plain">
 					<h2>Start the conversation</h2>
 					<p>Send us your email and the message you’d like to discuss. Clicking send will open your email client with the draft.</p>
+					<div class="form-row">
+						<label>
+							<span>First name</span>
+							<input type="text" name="first_name" placeholder="Avery" required />
+						</label>
+						<label>
+							<span>Last name</span>
+							<input type="text" name="last_name" placeholder="Fan" required />
+						</label>
+					</div>
 					<label>
 						<span>Your email</span>
 						<input type="email" name="email" placeholder="you@company.com" required />
@@ -83,6 +93,7 @@
 						<span>Message</span>
 						<textarea name="message" rows="6" placeholder="Tell us about your goals, challenges, or timeline..." required></textarea>
 					</label>
+					<div class="form-lines" aria-hidden="true"></div>
 					<div class="input-glow"></div>
 					<div class="form-actions">
 						<button class="primary" type="submit">Send message</button>
