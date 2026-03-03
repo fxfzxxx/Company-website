@@ -148,9 +148,66 @@
 
 	const initContactFormSuccess = (root = document) => {
 		const successMessage = root.querySelector(".form-success");
-		if (!successMessage) return;
+		const errorMessage = root.querySelector(".form-error");
+		if (!successMessage && !errorMessage) return;
 		const params = new URLSearchParams(window.location.search);
-		successMessage.hidden = params.get("success") !== "true";
+		if (successMessage) {
+			successMessage.hidden = params.get("success") !== "true";
+		}
+		if (errorMessage) {
+			errorMessage.hidden = params.get("error") !== "true";
+		}
+	};
+
+	const initContactFormSubmission = (root = document) => {
+		const form = root.querySelector(".contact-form");
+		if (!form || form.dataset.netlifyHandled === "true") return;
+		form.dataset.netlifyHandled = "true";
+		const successMessage = form.querySelector(".form-success");
+		const errorMessage = form.querySelector(".form-error");
+		const submitButton = form.querySelector('button[type="submit"]');
+		const defaultLabel = submitButton ? submitButton.textContent : "";
+
+		form.addEventListener("submit", async (event) => {
+			if (!form.hasAttribute("data-netlify")) return;
+			event.preventDefault();
+			if (successMessage) successMessage.hidden = true;
+			if (errorMessage) errorMessage.hidden = true;
+			if (submitButton) {
+				submitButton.disabled = true;
+				submitButton.textContent = "Sending...";
+			}
+
+			try {
+				const formData = new FormData(form);
+				const body = new URLSearchParams();
+				formData.forEach((value, key) => {
+					body.append(key, String(value));
+				});
+
+				const response = await fetch(form.getAttribute("action") || window.location.pathname, {
+					method: "POST",
+					headers: { "Content-Type": "application/x-www-form-urlencoded" },
+					body: body.toString(),
+				});
+
+				if (!response.ok) {
+					throw new Error("Form submission failed");
+				}
+				const successUrl = form.getAttribute("action") || window.location.pathname;
+				window.location.href = successUrl;
+			} catch {
+				if (errorMessage) errorMessage.hidden = false;
+				const url = new URL(window.location.href);
+				url.searchParams.set("error", "true");
+				window.history.replaceState({}, "", url.toString());
+			} finally {
+				if (submitButton) {
+					submitButton.disabled = false;
+					submitButton.textContent = defaultLabel;
+				}
+			}
+		});
 	};
 
 	const initSpaNavigation = () => {
@@ -259,6 +316,7 @@
 				initCaseViewer(url);
 				initScrollReveals(contentTarget);
 				initContactFormSuccess(contentTarget);
+				initContactFormSubmission(contentTarget);
 				window.scrollTo({ top: 0, behavior: "instant" });
 			} catch (error) {
 				console.error("SPA navigation failed:", error);
@@ -286,6 +344,7 @@
 			initCaseViewer();
 			initScrollReveals();
 			initContactFormSuccess();
+			initContactFormSubmission();
 	};
 
 	refreshPartials().finally(() => {
@@ -293,5 +352,6 @@
 		initSpaNavigation();
 		initScrollReveals();
 		initContactFormSuccess();
+		initContactFormSubmission();
 	});
 })();

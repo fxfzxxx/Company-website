@@ -2168,6 +2168,15 @@ nav a:focus-visible::after {
 		padding: 10px 12px;
 	}
 
+	.form-error {
+		font-size: 13px;
+		color: #7f1d1d;
+		background: rgba(239, 68, 68, 0.12);
+		border: 1px solid rgba(239, 68, 68, 0.28);
+		border-radius: 12px;
+		padding: 10px 12px;
+	}
+
 	.contact-info {
 		display: grid;
 		gap: 16px;
