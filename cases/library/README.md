@@ -19,19 +19,12 @@ Tags are set with data-tags on the card.
 
 Current cases:
 
+- atlas
+- aurora
+- ion-forge
 - ishq-escape
-- velvet-atelier
-- starlight-kingdom
-- aurora
-- tech-disruption
+- luna-bloom
 - lumen-stream
-- atlas
-
-Current cases:
-
-- velvet-atelier
 - starlight-kingdom
-- aurora
 - tech-disruption
-- lumen-stream
-- atlas
+- velvet-atelier
