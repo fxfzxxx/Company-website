@@ -61,7 +61,13 @@
 	})();
 
 	const partialCache = new Map();
-	const injectPartial = async (path, target) => {
+	const injectPartial = async (path, target, force) => {
+		// Pages ship with canonical static chrome (data-static) so nothing
+		// flashes on first paint; only SPA navigation re-injects, because the
+		// static markup's relative links are baked for the original page depth.
+		if (!force && target.dataset.static === "true") {
+			return;
+		}
 		try {
 			let template = partialCache.get(path);
 			if (!template) {
@@ -80,10 +86,10 @@
 		}
 	};
 
-	const refreshPartials = () =>
+	const refreshPartials = (force) =>
 		Promise.all([
-			injectPartial("assets/partials/header.html", headerTarget),
-			injectPartial("assets/partials/footer.html", footerTarget),
+			injectPartial("assets/partials/header.html", headerTarget, force),
+			injectPartial("assets/partials/footer.html", footerTarget, force),
 		]);
 
 	const initScrollBehavior = () => {
@@ -245,8 +251,11 @@
 			const viewer = document.querySelector(".case-viewer");
 			if (!viewer) return;
 			const frame = viewer.querySelector("iframe");
+			const frameWrap = viewer.querySelector(".case-viewer-frame");
 			const fallback = viewer.querySelector(".case-viewer-fallback");
 			const errorText = viewer.querySelector(".case-viewer-error");
+			const titleEl = viewer.querySelector(".case-viewer-title");
+			const expandBtn = viewer.querySelector(".case-viewer-expand");
 			if (!frame) return;
 			const resolvedUrl = urlOverride ? new URL(urlOverride, window.location.href) : window.location;
 			const params = new URLSearchParams(resolvedUrl.search);
@@ -265,14 +274,39 @@
 				if (errorText) {
 					errorText.textContent = "Case path is missing or invalid.";
 				}
+				if (frameWrap) frameWrap.classList.remove("is-loading");
 				return;
 			}
 			const startIndex = normalized.indexOf(allowedPrefix);
 			const trimmed = normalized.slice(startIndex);
 			const fullPath = `${rootPath}${trimmed}`;
+
+			const slug = (trimmed.split("/")[2] || "").replace(/-/g, " ");
+			if (slug && titleEl) {
+				const pretty = slug.replace(/\b\w/g, (c) => c.toUpperCase());
+				titleEl.textContent = pretty;
+				document.title = `${pretty} - Case Viewer - Yonder Tech`;
+			}
+
+			if (frameWrap) {
+				frameWrap.classList.add("is-loading");
+				frame.addEventListener(
+					"load",
+					() => frameWrap.classList.remove("is-loading"),
+					{ once: true }
+				);
+			}
 			frame.src = fullPath;
 			if (fallback) {
 				fallback.href = fullPath;
+			}
+			if (expandBtn && expandBtn.dataset.bound !== "true") {
+				expandBtn.dataset.bound = "true";
+				expandBtn.addEventListener("click", () => {
+					const expanded = viewer.classList.toggle("is-expanded");
+					expandBtn.setAttribute("aria-pressed", String(expanded));
+					expandBtn.textContent = expanded ? "Collapse view" : "Expand view";
+				});
 			}
 		};
 
@@ -308,7 +342,7 @@
 				contentTarget.innerHTML = newContent.innerHTML;
 				document.title = doc.title || document.title;
 				base = getBasePath(new URL(url, window.location.href).pathname);
-				await refreshPartials();
+				await refreshPartials(true);
 				if (pushState) {
 					window.history.pushState({ url }, "", url);
 				}

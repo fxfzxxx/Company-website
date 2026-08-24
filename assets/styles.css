@@ -1055,6 +1055,66 @@ nav a:focus-visible::after {
 	font-size: 13px;
 }
 
+.case-viewer-actions {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+
+.case-viewer-expand {
+	border: 1px solid var(--border);
+	background: #fff;
+	font: inherit;
+	font-size: 13px;
+	font-weight: 600;
+	padding: 8px 14px;
+	border-radius: 999px;
+	cursor: pointer;
+	transition: background 0.2s ease, color 0.2s ease;
+}
+
+.case-viewer-expand:hover {
+	background: #111;
+	color: #fff;
+}
+
+.case-viewer.is-expanded .case-viewer-frame iframe {
+	height: calc(100vh - 120px);
+}
+
+.case-viewer-frame {
+	position: relative;
+}
+
+.case-viewer-loader {
+	position: absolute;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	background: #fff;
+}
+
+.case-viewer-frame.is-loading .case-viewer-loader {
+	display: flex;
+}
+
+.case-viewer-loader span {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	border: 3px solid var(--border);
+	border-top-color: var(--accent);
+	animation: caseSpin 0.9s linear infinite;
+}
+
+@keyframes caseSpin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 .timeline {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
