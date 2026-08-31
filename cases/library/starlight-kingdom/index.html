@@ -20,10 +20,11 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 	<link rel="stylesheet" href="assets/styles.css" />
+	<link rel="stylesheet" href="../_effects/effects.css" />
 </head>
 <body>
 	<div class="site-shell" id="top">
-		<header class="hero" id="hero" data-parallax>
+		<header class="hero fx-sparkles" id="hero" data-parallax data-sparkles="70">
 			<nav class="top-nav">
 				<a class="brand" href="#top">
 					<span class="brand-mark"></span>
@@ -40,7 +41,7 @@
 
 			<div class="hero-content">
 				<p class="eyebrow">Destination concept case</p>
-				<h1>Step into a world where stories become adventures</h1>
+				<h1 class="fx-shimmer" style="--fx-shimmer-color: var(--gold);">Step into a world where stories become adventures</h1>
 				<p class="hero-copy">A premium park-style homepage concept designed for large-scale destinations, blending cinematic visuals, immersive interactions, and personalized trip planning.</p>
 				<div class="hero-actions">
 					<a class="btn btn-primary" href="project.html">Design Your Day</a>
@@ -74,7 +75,7 @@
 				<h2>Choose your realm</h2>
 			</div>
 			<div class="experience-grid">
-				<article class="experience-card" data-tilt>
+				<article class="experience-card fx-spotlight" data-tilt>
 					<div class="media media-one"></div>
 					<div class="card-body">
 						<h3>Aurora Harbor</h3>
@@ -82,7 +83,7 @@
 						<span>View attractions</span>
 					</div>
 				</article>
-				<article class="experience-card" data-tilt>
+				<article class="experience-card fx-spotlight" data-tilt>
 					<div class="media media-two"></div>
 					<div class="card-body">
 						<h3>Skyforge District</h3>
@@ -90,7 +91,7 @@
 						<span>View attractions</span>
 					</div>
 				</article>
-				<article class="experience-card" data-tilt>
+				<article class="experience-card fx-spotlight" data-tilt>
 					<div class="media media-three"></div>
 					<div class="card-body">
 						<h3>Mythic Gardens</h3>
@@ -194,5 +195,6 @@
 		</footer>
 	</div>
 	<script src="assets/main.js"></script>
+	<script src="../_effects/effects.js"></script>
 </body>
 </html>

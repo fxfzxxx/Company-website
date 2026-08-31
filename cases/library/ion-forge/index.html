@@ -20,6 +20,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
 	<link rel="stylesheet" href="assets/styles.css" />
+	<link rel="stylesheet" href="../_effects/effects.css" />
 </head>
 <body>
 	<div class="forge" id="top">
@@ -37,10 +38,10 @@
 			<a class="nav-cta" href="project.html">Launch Dossier</a>
 		</header>
 
-		<section class="hero" id="hero" data-parallax>
+		<section class="hero fx-meteors" id="hero" data-parallax data-meteors="16">
 			<div class="hero-copy reveal">
 				<p class="eyebrow">Dynamic product case</p>
-				<h1>Ion Forge X9. A cyber-metal statement in motion.</h1>
+				<h1 class="fx-shimmer">Ion Forge X9. A cyber-metal statement in motion.</h1>
 				<p class="hero-lead">Built for elite audio performance, Ion Forge blends brushed alloy, neon telemetry, and kinetic UI to signal a new class of electronics.</p>
 				<div class="hero-actions">
 					<a class="btn primary" href="#modules">Explore modules</a>
@@ -92,17 +93,17 @@
 				<p>Metallic panels, pressure reactive lighting, and layered UI streams create a physical-digital product reveal.</p>
 			</div>
 			<div class="module-grid">
-				<article class="module-card reveal" data-tilt>
+				<article class="module-card reveal fx-beam" data-tilt>
 					<div class="module-media media-one"></div>
 					<h3>Charge lattice</h3>
 					<p>Chromed contouring with LED micro-engrave highlighting touch flow.</p>
 				</article>
-				<article class="module-card reveal" data-tilt>
+				<article class="module-card reveal fx-beam" data-tilt>
 					<div class="module-media media-two"></div>
 					<h3>Pulse dock</h3>
 					<p>Dock station with magnetic ring illumination and heat mapped alloy.</p>
 				</article>
-				<article class="module-card reveal" data-tilt>
+				<article class="module-card reveal fx-beam" data-tilt>
 					<div class="module-media media-three"></div>
 					<h3>Neural HUD</h3>
 					<p>Diagnostic UI overlay with waveform projection and sync metrics.</p>
@@ -206,5 +207,6 @@
 		</footer>
 	</div>
 	<script src="assets/main.js"></script>
+	<script src="../_effects/effects.js"></script>
 </body>
 </html>

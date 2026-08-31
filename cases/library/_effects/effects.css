@@ -1,0 +1,295 @@
+/*
+ * Shared showcase effects — Inspira UI-inspired, dependency-free.
+ *
+ * Every effect inherits the host showcase's own --accent / --glow custom
+ * properties, so the same class blends into each case's palette.
+ * Opt in per element with the fx-* classes; effects.js drives the ones
+ * that need JS (meteors, sparkles, spotlight, tilt).
+ */
+
+.fx-scope {
+	--fx-accent: var(--accent, #6ea8ff);
+	--fx-glow: var(--glow, rgba(110, 168, 255, 0.35));
+}
+
+/* ---------------------------------------------------------------- aurora */
+/* Slow-drifting gradient blobs behind content. Put on a positioned parent. */
+.fx-aurora {
+	position: relative;
+	isolation: isolate;
+}
+
+.fx-aurora > .fx-aurora-layer {
+	position: absolute;
+	inset: -20%;
+	z-index: -1;
+	pointer-events: none;
+	overflow: hidden;
+	filter: blur(60px);
+	opacity: 0.55;
+}
+
+.fx-aurora > .fx-aurora-layer::before,
+.fx-aurora > .fx-aurora-layer::after {
+	content: "";
+	position: absolute;
+	width: 60%;
+	height: 60%;
+	border-radius: 50%;
+	background: radial-gradient(circle at 50% 50%, var(--fx-accent), transparent 65%);
+	animation: fxAuroraDrift 22s var(--fx-ease, ease-in-out) infinite alternate;
+}
+
+.fx-aurora > .fx-aurora-layer::after {
+	right: 0;
+	bottom: 0;
+	background: radial-gradient(circle at 50% 50%, var(--fx-aurora-second, var(--fx-glow)), transparent 65%);
+	animation-duration: 30s;
+	animation-direction: alternate-reverse;
+}
+
+@keyframes fxAuroraDrift {
+	0% {
+		transform: translate3d(-8%, -6%, 0) scale(1);
+	}
+	50% {
+		transform: translate3d(12%, 8%, 0) scale(1.25);
+	}
+	100% {
+		transform: translate3d(-4%, 14%, 0) scale(1.05);
+	}
+}
+
+/* --------------------------------------------------------------- meteors */
+/* Diagonal streaks falling across a section. Elements injected by effects.js. */
+.fx-meteors {
+	position: relative;
+	overflow: hidden;
+}
+
+.fx-meteor {
+	position: absolute;
+	top: -10%;
+	width: 2px;
+	height: 2px;
+	border-radius: 50%;
+	background: var(--fx-accent);
+	box-shadow: 0 0 0 1px color-mix(in srgb, var(--fx-accent) 25%, transparent);
+	pointer-events: none;
+	opacity: 0;
+	animation: fxMeteorFall linear infinite;
+	z-index: 0;
+}
+
+/* the trailing tail */
+.fx-meteor::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 0;
+	width: 70px;
+	height: 1px;
+	background: linear-gradient(90deg, var(--fx-accent), transparent);
+}
+
+@keyframes fxMeteorFall {
+	0% {
+		opacity: 0;
+		transform: translate3d(0, 0, 0) rotate(215deg);
+	}
+	8% {
+		opacity: 1;
+	}
+	75% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: translate3d(-680px, 680px, 0) rotate(215deg);
+	}
+}
+
+/* -------------------------------------------------------------- sparkles */
+/* Twinkling starfield. Elements injected by effects.js. */
+.fx-sparkles {
+	position: relative;
+}
+
+.fx-sparkle-field {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.fx-sparkle {
+	position: absolute;
+	border-radius: 50%;
+	background: var(--fx-sparkle-color, #fff);
+	opacity: 0;
+	animation: fxTwinkle ease-in-out infinite;
+}
+
+@keyframes fxTwinkle {
+	0%,
+	100% {
+		opacity: 0;
+		transform: scale(0.6);
+	}
+	50% {
+		opacity: var(--fx-sparkle-peak, 0.9);
+		transform: scale(1);
+	}
+}
+
+/* ------------------------------------------------------------- spotlight */
+/* Cursor-following radial glow inside a card. JS sets --fx-x / --fx-y. */
+.fx-spotlight {
+	position: relative;
+	overflow: hidden;
+}
+
+.fx-spotlight::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.35s ease;
+	background: radial-gradient(
+		320px circle at var(--fx-x, 50%) var(--fx-y, 50%),
+		color-mix(in srgb, var(--fx-accent) 18%, transparent),
+		transparent 70%
+	);
+	z-index: 1;
+}
+
+.fx-spotlight:hover::before,
+.fx-spotlight:focus-within::before {
+	opacity: 1;
+}
+
+/* keep card content above the glow */
+.fx-spotlight > * {
+	position: relative;
+	z-index: 2;
+}
+
+/* ----------------------------------------------------------- border beam */
+/* A light travelling around the card's border. */
+.fx-beam {
+	position: relative;
+}
+
+.fx-beam::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	padding: 1px;
+	pointer-events: none;
+	background: conic-gradient(
+		from var(--fx-angle, 0deg),
+		transparent 0deg,
+		transparent 300deg,
+		var(--fx-accent) 340deg,
+		transparent 360deg
+	);
+	-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+	-webkit-mask-composite: xor;
+	mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+	mask-composite: exclude;
+	opacity: 0;
+	transition: opacity 0.4s ease;
+	animation: fxBeamSpin 4s linear infinite;
+}
+
+.fx-beam:hover::after,
+.fx-beam.is-beaming::after {
+	opacity: 1;
+}
+
+@property --fx-angle {
+	syntax: "<angle>";
+	initial-value: 0deg;
+	inherits: false;
+}
+
+@keyframes fxBeamSpin {
+	to {
+		--fx-angle: 360deg;
+	}
+}
+
+/* --------------------------------------------------------- shimmer text */
+/* A highlight sweeping across a headline. */
+/* Note: the base colour must be an explicit value, not currentColor — this
+   element's own colour is transparent for background-clip, so currentColor
+   would resolve to transparent and erase the text. */
+.fx-shimmer {
+	background: linear-gradient(
+		100deg,
+		var(--fx-shimmer-base, var(--text, #fff)) 0%,
+		var(--fx-shimmer-base, var(--text, #fff)) 38%,
+		var(--fx-shimmer-color, var(--fx-accent)) 50%,
+		var(--fx-shimmer-base, var(--text, #fff)) 62%,
+		var(--fx-shimmer-base, var(--text, #fff)) 100%
+	);
+	background-size: 250% 100%;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	animation: fxShimmerSweep 6s linear infinite;
+}
+
+@keyframes fxShimmerSweep {
+	0% {
+		background-position: 150% 0;
+	}
+	100% {
+		background-position: -50% 0;
+	}
+}
+
+/* ------------------------------------------------------------- tilt card */
+/* Subtle 3D tilt toward the cursor. JS sets --fx-rx / --fx-ry. */
+.fx-tilt {
+	transform: perspective(900px) rotateX(var(--fx-rx, 0deg)) rotateY(var(--fx-ry, 0deg));
+	transition: transform 0.4s var(--fx-ease, ease-out);
+	transform-style: preserve-3d;
+	will-change: transform;
+}
+
+.fx-tilt.is-tilting {
+	transition: transform 0.08s linear;
+}
+
+/* --------------------------------------------------------------- a11y */
+@media (prefers-reduced-motion: reduce) {
+	.fx-aurora > .fx-aurora-layer::before,
+	.fx-aurora > .fx-aurora-layer::after,
+	.fx-meteor,
+	.fx-sparkle,
+	.fx-beam::after,
+	.fx-shimmer {
+		animation: none !important;
+	}
+
+	.fx-meteor,
+	.fx-sparkle {
+		display: none;
+	}
+
+	.fx-shimmer {
+		background: none;
+		-webkit-background-clip: border-box;
+		background-clip: border-box;
+		color: var(--fx-shimmer-base, var(--text, inherit));
+	}
+
+	.fx-tilt {
+		transform: none !important;
+	}
+}
