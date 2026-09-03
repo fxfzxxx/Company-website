@@ -2,281 +2,43 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Yonder Tech is an Auckland-based IT enablement and digital consulting firm covering technology strategy, enterprise architecture, system integration, and data intelligence." />
-	<link rel="canonical" href="https://yondertech.co.nz/index.html" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Yonder Tech</title>
+	<meta name="robots" content="noindex, follow" />
+	<link rel="canonical" href="https://yondertech.co.nz/en/index.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/index.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/index.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/index.html" />
 	<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-	<meta name="theme-color" content="#111111" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Yonder Tech - Home" />
-	<meta property="og:description" content="Yonder Tech is an Auckland-based IT enablement and digital consulting firm covering technology strategy, enterprise architecture, system integration, and data intelligence." />
-	<meta property="og:url" content="https://yondertech.co.nz/index.html" />
-	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop" />
-	<meta property="og:locale" content="en_NZ" />
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="Yonder Tech - Home" />
-	<meta name="twitter:description" content="Yonder Tech is an Auckland-based IT enablement and digital consulting firm covering technology strategy, enterprise architecture, system integration, and data intelligence." />
-	<title>Yonder Tech - Home</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="assets/styles.css" />
-	<script type="application/ld+json">
-	{
-		"@context": "https://schema.org",
-		"@type": "Organization",
-		"name": "Yonder Tech",
-		"url": "https://yondertech.co.nz/",
-		"logo": "https://yondertech.co.nz/assets/favicon.svg",
-		"description": "IT enablement and digital consulting across technology strategy, enterprise architecture, system integration, and data intelligence.",
-		"address": {
-			"@type": "PostalAddress",
-			"streetAddress": "Level 18, 100 Queen Street",
-			"addressLocality": "Auckland",
-			"postalCode": "1010",
-			"addressCountry": "NZ"
-		},
-		"contactPoint": {
-			"@type": "ContactPoint",
-			"email": "aaronf@yondertech.co.nz",
-			"telephone": "+64 22 595 0228",
-			"contactType": "customer service"
-		}
-	}
+	<noscript><meta http-equiv="refresh" content="0; url=en/index.html" /></noscript>
+	<script>
+		(function () {
+			var target = "en";
+			try {
+				var stored = window.localStorage.getItem("yt-lang");
+				if (stored === "en" || stored === "zh") {
+					target = stored;
+				} else {
+					var langs = navigator.languages || [navigator.language || ""];
+					for (var i = 0; i < langs.length; i++) {
+						if (/^zh\b/i.test(langs[i])) { target = "zh"; break; }
+						if (/^[a-z]{2}\b/i.test(langs[i])) break;
+					}
+				}
+			} catch (e) { /* private mode, or no storage: fall through to English */ }
+			window.location.replace(target + "/index.html");
+		})();
 	</script>
+	<style>
+		body { margin: 0; display: grid; min-height: 100vh; place-items: center;
+			background: #f3f2f2; color: #201e1d; font: 15px/1.6 system-ui, sans-serif; }
+		a { color: #713227; }
+	</style>
 </head>
 
 <body>
-	<div class="page">
-		<div class="site-header" data-static="true">
-			<div class="topbar">
-				<div>
-					<a href="index.html">Yonder Tech</a>
-					<a href="automation/index.html">Automation</a>
-					<a href="en/index.html">Global (EN)</a>
-				</div>
-				<div>Login</div>
-			</div>
-
-			<header>
-				<a class="logo" href="index.html">
-					<div>
-						<div class="logo-text">Yonder.</div>
-					</div>
-				</a>
-
-				<nav>
-					<a href="index.html">Home</a>
-					<a href="services/index.html">Services</a>
-					<a href="insights/index.html">Insights</a>
-					<a href="about/index.html">About</a>
-					<a href="cases/index.html">Case Library</a>
-				</nav>
-
-				<div class="search"><i class="fa fa-search" aria-hidden="true"></i></div>
-			</header>
-		</div>
-		<div class="page-content">
-			<section class="hero">
-				<div class="hero-content">
-					<span class="hero-tag">2026 Design Outlook</span>
-					<h1 class="hero-title">Breaking Conventional Boundaries</h1>
-					<p class="hero-desc">
-						We deliver IT enablement and digital transformation consulting across technology strategy, architecture planning, system integration, and data intelligence, helping clients achieve sustained efficiency and growth across organizations and business units.
-					</p>
-					<a class="cta" href="services/index.html">Explore Yonder IT Enablement</a>
-				</div>
-				<div class="hero-image" role="img" aria-label="Rock climbing near the sea"></div>
-			</section>
-
-			<section class="highlight-bar">
-				<div class="highlight-item">
-					<div class="highlight-title">IT Enablement Trends</div>
-					<div class="highlight-text">Key updates in digital and IT transformation this week</div>
-					<a class="highlight-link" href="trends/index.html">› Learn more</a>
-				</div>
-				<div class="highlight-item">
-					<div class="highlight-title">CEO Letter to Clients</div>
-					<div class="highlight-text">Practical notes on IT enablement and organizational change</div>
-					<a class="highlight-link" href="letter/index.html">› Read the letter</a>
-				</div>
-				<div class="highlight-item">
-					<div class="highlight-title">Services &amp; Capabilities</div>
-					<div class="highlight-text">Explore Yonder's consulting and delivery model</div>
-					<a class="highlight-link" href="services/index.html">› Learn more</a>
-				</div>
-			</section>
-
-			<section class="section">
-				<div class="section-header">
-					<div>
-						<h2 class="section-title">Insights &amp; Research</h2>
-						<p class="section-subtitle">Focused on IT enablement, enterprise architecture, and data intelligence to support leadership decisions with actionable guidance.</p>
-					</div>
-					<a class="link-more" href="insights/index.html">› View all insights</a>
-				</div>
-				<div class="card-grid">
-					<article class="card">
-						<img
-							src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop"
-							alt="Design team discussion" />
-						<div class="card-body">
-							<span class="card-tag">IT Strategy</span>
-							<h3 class="card-title">A business-led technology roadmap</h3>
-							<p class="card-text">Plan capability blueprints around growth and cost goals to keep technology investments measurable.</p>
-							<a class="card-link" href="insights/it-strategy.html">› Read report</a>
-						</div>
-					</article>
-					<article class="card">
-						<img
-							src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop"
-							alt="Creative workshop" />
-						<div class="card-body">
-							<span class="card-tag">Enterprise Architecture</span>
-							<h3 class="card-title">Unified planning from apps to data</h3>
-							<p class="card-text">Structure application portfolios and data assets to build a stable, scalable technology foundation.</p>
-							<a class="card-link" href="insights/enterprise-architecture.html">› View method</a>
-						</div>
-					</article>
-					<article class="card">
-						<img
-							src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop"
-							alt="User research" />
-						<div class="card-body">
-							<span class="card-tag">Data Intelligence</span>
-							<h3 class="card-title">Realizing value with AI and automation</h3>
-							<p class="card-text">Improve operational efficiency and decision quality with controllable, explainable models.</p>
-							<a class="card-link" href="insights/data-intelligence.html">› View project</a>
-						</div>
-					</article>
-				</div>
-			</section>
-
-			<section class="split-band">
-				<div class="split-content">
-					<h2>Driving growth through IT enablement</h2>
-					<p>Yonder focuses on IT consulting and digital transformation, spanning technology strategy, architecture governance, system integration, and data platform delivery. We work alongside business and technology teams to ensure sustained impact from planning to execution.</p>
-					<a class="cta" href="methodology/index.html">Explore our consulting methodology</a>
-				</div>
-				<div class="split-image" role="img" aria-label="Design workshop"></div>
-			</section>
-
-			<section class="section">
-				<div class="section-header">
-					<div>
-						<h2 class="section-title">Yonder by the Numbers</h2>
-						<p class="section-subtitle">Years of IT consulting and delivery experience help clients build sustainable technology capabilities.</p>
-					</div>
-					<a class="link-more" href="capabilities/index.html">› View full capabilities</a>
-				</div>
-				<div class="metrics">
-					<div class="metric"><strong>180+</strong><span>IT consulting and delivery engagements</span></div>
-					<div class="metric"><strong>36</strong><span>Industry solutions covered</span></div>
-					<div class="metric"><strong>92%</strong><span>Client renewal and repeat rate</span></div>
-					<div class="metric"><strong>12</strong><span>Delivery hubs and collaboration cities</span></div>
-				</div>
-			</section>
-
-			<section class="section">
-				<div class="section-header">
-					<div>
-						<h2 class="section-title">Resources &amp; Capabilities</h2>
-						<p class="section-subtitle">A full consulting delivery and team collaboration system supports rapid start and continuous iteration.</p>
-					</div>
-					<a class="link-more" href="services/catalog.html">› View service catalog</a>
-				</div>
-				<div class="resource-grid">
-					<div class="resource">
-						<h3>IT Strategy &amp; Architecture Governance</h3>
-						<p>Define technology roadmaps and governance standards to align investments with business goals.</p>
-					</div>
-					<div class="resource">
-						<h3>System Integration &amp; Platform Build</h3>
-						<p>Integrate business systems and shared platforms to improve collaboration efficiency and data consistency.</p>
-					</div>
-					<div class="resource">
-						<h3>Data Platforms &amp; AI Applications</h3>
-						<p>Build metrics systems and analytics capabilities to operationalize AI in business scenarios.</p>
-					</div>
-					<div class="resource">
-						<h3>Operations &amp; Continuous Optimization</h3>
-						<p>Establish stable operations and continuous improvement to sustain long-term system value.</p>
-					</div>
-				</div>
-			</section>
-
-			<section class="section news">
-				<div class="section-header">
-					<div>
-						<h2 class="section-title">Latest from Yonder</h2>
-						<p>Follow Yonder's latest progress in IT consulting, delivery, and industry practice.</p>
-					</div>
-					<a class="link-more" href="news/index.html">› View all news</a>
-				</div>
-				<div class="news-grid">
-					<div class="news-item">
-						<h4>New IT operations and automation service line</h4>
-						<p>Delivering operations governance, automation scripts, and process optimization.</p>
-						<a href="news/ops-automation.html">› Learn more</a>
-					</div>
-					<div class="news-item">
-						<h4>Shanghai delivery center expansion and process upgrade</h4>
-						<p>New delivery manager and architect roles improve cross-region collaboration.</p>
-						<a href="news/shanghai-delivery.html">› View details</a>
-					</div>
-					<div class="news-item">
-						<h4>SME rapid-start IT consulting package</h4>
-						<p>Two-week assessment, technology roadmap, and delivery checklist.</p>
-						<a href="news/sme-fast-start.html">› View service</a>
-					</div>
-				</div>
-			</section>
-
-			<section class="signup">
-				<div>
-					<h2>Subscribe to the Yonder IT Enablement Briefing</h2>
-					<p>Monthly highlights on trends, cases, and methodologies to help you build an IT-driven growth strategy.</p>
-				</div>
-				<button type="button">Subscribe now</button>
-			</section>
-		</div>
-
-		<div class="footer" data-static="true">
-			<footer class="footer">
-				<div class="footer-grid">
-					<div>
-						<h5><a href="about/index.html">About</a></h5>
-						<a href="about/company.html">Company Profile</a>
-						<a href="about/leadership.html">Leadership</a>
-						<a href="about/sustainability.html">Sustainability</a>
-					</div>
-					<div>
-						<h5><a href="services/index.html">Services</a></h5>
-						<a href="services/it-strategy.html">IT Strategy</a>
-						<a href="services/system-integration.html">System Integration</a>
-						<a href="services/data-ai.html">Data &amp; AI</a>
-					</div>
-					<div>
-						<h5><a href="insights/index.html">Resources</a></h5>
-						<a href="insights/index.html">Insights</a>
-						<a href="cases/index.html">Case Library</a>
-						<a href="events/index.html">Events</a>
-					</div>
-					<div>
-						<h5><a href="contact/index.html">Contact</a></h5>
-						<a href="contact/index.html">Contact Us</a>
-						<a href="contact/careers.html">Careers</a>
-						<a href="news/index.html">Newsroom</a>
-					</div>
-				</div>
-				<div class="footer-bottom">
-					<span>© 2026 Yonder Consulting</span>
-					<span>Privacy Policy · Terms of Use · Cookie Settings</span>
-				</div>
-			</footer>
-		</div>
-	</div>
-	<script src="assets/main.js"></script>
+	<p><a href="en/index.html">English</a> · <a href="zh/index.html" lang="zh-CN">中文</a></p>
 </body>
 
 </html>

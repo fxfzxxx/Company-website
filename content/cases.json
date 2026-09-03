@@ -1,0 +1,1279 @@
+[
+  {
+    "slug": "luna-bloom",
+    "num": "01",
+    "tags": [
+      "Web",
+      "UI",
+      "Brand"
+    ],
+    "year": "2026",
+    "thumb": "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop",
+    "hero": "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop",
+    "figure": {
+      "en": "12",
+      "zh": "12"
+    },
+    "measure": {
+      "en": "Component families",
+      "zh": "组件族"
+    },
+    "lib": {
+      "en": {
+        "meta": "Community platform · Concept",
+        "title": "Luna Bloom Society maternity community",
+        "brief": "Maternity communities default to high-volume social mechanics. The concept had to hold long-form editorial and peer conversation without the pull of an endless feed.",
+        "decisions": [
+          "Stories arrive in small, complete sets — ending the page is a feature, not a failure.",
+          "Open comment threads replaced by small trimester rooms with a guide present.",
+          "Long-form journal pieces lead the experience, so membership is asked for after trust is earned."
+        ],
+        "outcome": "A complete concept — feed, community rooms, editorial studio and events — in one design language, built from twelve component families over six weeks and ready to extend into a product build."
+      },
+      "zh": {
+        "meta": "社区平台 · 概念作品",
+        "title": "Luna Bloom Society 母婴社区",
+        "brief": "母婴社区通常依赖高频社交机制。这个概念要在没有无限信息流的前提下，同时容纳长文内容和用户之间的交流。",
+        "decisions": [
+          "内容以小批完整的形式呈现，页面有明确结尾，而不是无限下拉。",
+          "取消公开评论，改为按孕期分组的小型房间，并配有引导者。",
+          "长文放在最前，先建立信任，再谈会员转化。"
+        ],
+        "outcome": "一套完整概念：信息流、社区房间、内容工作室和活动模块统一在同一设计语言下，由十二个组件族构成，六周完成，可直接延伸到产品开发。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "01 — Community platform",
+        "title": "Softness as a design system.",
+        "lede": "A maternity community concept built to hold long-form editorial and peer conversation without the pull of an endless feed.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Web · UI · Brand"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Feed, community rooms, editorial studio, events"
+          },
+          {
+            "label": "Duration",
+            "value": "6 weeks"
+          }
+        ],
+        "brief": "Luna Bloom Society asked for a digital home that feels like a held breath: calm, luminous and intimate. Maternity platforms default to high-volume social mechanics, and the brief ruled those out from the start.",
+        "briefTwo": "The problem was structural rather than visual — how to run a community without infinite scroll, open comment threads or engagement counters, and still give members a reason to return.",
+        "decisions": [
+          "Stories arrive in small, complete sets. Ending the page is a feature: members leave calm rather than drained.",
+          "Open comment threads were replaced by small trimester rooms with a guide present, so conversation stays high-touch.",
+          "Long-form journal pieces lead the experience, so the brand earns trust before it asks for membership."
+        ],
+        "outcome": "A complete concept — feed, community rooms, editorial studio and events — expressed in one design language across twelve component families, ready to extend into a full product build.",
+        "specs": [
+          {
+            "figure": "12",
+            "label": "Component families",
+            "note": "Story, studio and event cards share one rhythm."
+          },
+          {
+            "figure": "4",
+            "label": "Core feed rituals",
+            "note": "Each ritual is a complete, finite set."
+          },
+          {
+            "figure": "6 wks",
+            "label": "Concept to craft",
+            "note": "Brief, visual language and interaction decisions."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "01 — 社区平台",
+        "title": "把「柔和」做成一套系统。",
+        "lede": "母婴社区概念，要在没有无限信息流的前提下同时容纳长文内容和用户交流。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "Web · UI · 品牌"
+          },
+          {
+            "label": "交付物",
+            "value": "信息流、社区房间、内容工作室、活动"
+          },
+          {
+            "label": "周期",
+            "value": "6 周"
+          }
+        ],
+        "brief": "Luna Bloom Society 需要的是一个像深呼吸一样的线上空间：安静、明亮、私密。母婴平台通常依赖高频社交机制，而这次一开始就排除了这些做法。",
+        "briefTwo": "问题不在视觉，而在结构：如何在没有无限下拉、公开评论和互动计数的情况下运营社区，同时让成员有理由回来。",
+        "decisions": [
+          "内容以小批完整的形式出现。页面有明确结尾是刻意设计：成员离开时是平静的，不是被耗尽的。",
+          "取消公开评论，改为按孕期分组的小型房间并配有引导者，保持交流的质量。",
+          "长文内容放在最前，先建立信任，再谈会员转化。"
+        ],
+        "outcome": "一套完整概念：信息流、社区房间、内容工作室和活动统一在同一设计语言下，由十二个组件族构成，可直接延伸到完整产品开发。",
+        "specs": [
+          {
+            "figure": "12",
+            "label": "组件族",
+            "note": "故事卡、工作室卡与活动卡共用同一节奏。"
+          },
+          {
+            "figure": "4",
+            "label": "核心内容仪式",
+            "note": "每个仪式都是完整有限的集合。"
+          },
+          {
+            "figure": "6 周",
+            "label": "概念到成稿",
+            "note": "包含课题、视觉语言与交互决策。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "ion-forge",
+    "num": "02",
+    "tags": [
+      "Web",
+      "UI",
+      "Product"
+    ],
+    "year": "2026",
+    "thumb": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
+    "hero": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop",
+    "figure": {
+      "en": "74",
+      "zh": "74"
+    },
+    "measure": {
+      "en": "Components in the launch system",
+      "zh": "发布系统组件数"
+    },
+    "lib": {
+      "en": {
+        "meta": "Product launch · Concept",
+        "title": "Ion Forge X9 product launch system",
+        "brief": "A hardware launch page has to carry industrial design, spec detail and motion in one view, then repeat across twelve regional markets without a rebuild.",
+        "decisions": [
+          "A metal material system with defined macro and micro states, so surfaces stay consistent at every crop.",
+          "Motion held in tokens — pulse, scan and hover are declared once and reused.",
+          "A localisation layer separating copy and telemetry overlays from layout."
+        ],
+        "outcome": "Seventy-four components and eighteen scenes covering twelve markets, with the design and engineering stack documented as one delivery blueprint."
+      },
+      "zh": {
+        "meta": "产品发布 · 概念作品",
+        "title": "Ion Forge X9 产品发布系统",
+        "brief": "硬件发布页需要在同一屏内承载工业设计、参数细节和动效，并在十二个区域市场复用而无需重做。",
+        "decisions": [
+          "金属材质系统定义了宏观与微观两种状态，任意裁切下表面表现一致。",
+          "动效以 token 形式管理，脉冲、扫描、悬停各定义一次并复用。",
+          "本地化层把文案与遥测叠层从布局中分离出来。"
+        ],
+        "outcome": "七十四个组件、十八个场景，覆盖十二个市场；设计与工程栈作为一份交付蓝图完整记录。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "02 — Product launch",
+        "title": "From industrial design to kinetic product storytelling.",
+        "lede": "A hardware launch system carrying industrial design, spec detail and motion in one view, and repeating across twelve markets.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Web · UI · Product"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Material system, motion tokens, launch ops layer"
+          },
+          {
+            "label": "Coverage",
+            "value": "12 regional markets"
+          }
+        ],
+        "brief": "A hardware launch page has to sell the object and its specification at once, then survive translation into twelve regional markets without being rebuilt each time.",
+        "briefTwo": "The blueprint had to align design, engineering and motion as one delivery, rather than three teams handing work over a wall.",
+        "decisions": [
+          "A metal material system with defined macro and micro states, so surfaces stay consistent at every crop and scale.",
+          "Motion held in tokens — pulse, scan and hover are declared once and reused, never re-animated per page.",
+          "A localisation layer that separates copy and telemetry overlays from layout, so markets change content without touching structure."
+        ],
+        "outcome": "Seventy-four components across eighteen scenes covering twelve markets, with the design and engineering stack — token library, shader set, motion engine, localisation layer — documented as a single delivery blueprint.",
+        "specs": [
+          {
+            "figure": "74",
+            "label": "Components",
+            "note": "Visual core, motion grid and launch ops."
+          },
+          {
+            "figure": "18",
+            "label": "Scenes",
+            "note": "Each composed from the same token set."
+          },
+          {
+            "figure": "12",
+            "label": "Markets",
+            "note": "Localised without layout changes."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "02 — 产品发布",
+        "title": "从工业设计到动态产品叙事。",
+        "lede": "硬件发布系统，在同一屏内承载工业设计、参数与动效，并复用于十二个市场。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "Web · UI · 产品"
+          },
+          {
+            "label": "交付物",
+            "value": "材质系统、动效 token、发布运营层"
+          },
+          {
+            "label": "覆盖",
+            "value": "12 个区域市场"
+          }
+        ],
+        "brief": "硬件发布页要同时卖产品本身和它的参数，还要在十二个区域市场落地而不必每次重做。",
+        "briefTwo": "这份蓝图需要把设计、工程和动效当成一次交付来对齐，而不是三个团队各自交接。",
+        "decisions": [
+          "金属材质系统定义宏观与微观两种状态，任意裁切和尺度下表面表现一致。",
+          "动效以 token 管理：脉冲、扫描、悬停各定义一次并复用，不逐页重做。",
+          "本地化层把文案和遥测叠层从布局中分离，各市场只改内容、不动结构。"
+        ],
+        "outcome": "七十四个组件、十八个场景，覆盖十二个市场；token 库、着色器集、动效引擎和本地化层作为一份完整交付蓝图记录。",
+        "specs": [
+          {
+            "figure": "74",
+            "label": "组件数",
+            "note": "视觉核心、动效网格与发布运营。"
+          },
+          {
+            "figure": "18",
+            "label": "场景数",
+            "note": "全部由同一套 token 组成。"
+          },
+          {
+            "figure": "12",
+            "label": "市场数",
+            "note": "本地化不改动布局。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "velvet-atelier",
+    "num": "03",
+    "tags": [
+      "Web",
+      "UI",
+      "Brand"
+    ],
+    "year": "2026",
+    "thumb": "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop",
+    "hero": "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2000&auto=format&fit=crop",
+    "figure": {
+      "en": "64",
+      "zh": "64"
+    },
+    "measure": {
+      "en": "Components in the maison system",
+      "zh": "品牌系统组件数"
+    },
+    "lib": {
+      "en": {
+        "meta": "Luxury commerce · Concept",
+        "title": "Velvet Atelier commerce blueprint",
+        "brief": "Luxury retail splits across editorial, commerce, concierge and aftercare, and each is usually designed by a different team in a different voice.",
+        "decisions": [
+          "Four experience pillars fixed up front so the same story survives every channel.",
+          "Product pages carry concierge prompts rather than a second checkout path.",
+          "A modular system with motion tokens and a content ops toolkit for the client’s own team."
+        ],
+        "outcome": "A sixty-four-component system covering the full maison journey, with editorial flow, commerce craft and client rituals documented as one blueprint."
+      },
+      "zh": {
+        "meta": "高端零售 · 概念作品",
+        "title": "Velvet Atelier 零售体验蓝图",
+        "brief": "高端零售被拆成内容、电商、专属服务和售后四块，通常由不同团队用不同语气分别设计。",
+        "decisions": [
+          "先确定四条体验主线，保证同一叙事在各渠道都成立。",
+          "商品页嵌入专属服务入口，而不是另开一条结账路径。",
+          "模块化系统附带动效 token 和一套内容运营工具，交给客户团队自行维护。"
+        ],
+        "outcome": "六十四个组件覆盖完整购买旅程，内容动线、电商细节与客户仪式统一记录为一份蓝图。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "03 — Luxury commerce",
+        "title": "A luxury commerce experience blueprint.",
+        "lede": "The maison journey mapped across editorial, commerce, concierge and aftercare as one system rather than four.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Web · UI · Brand"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Experience map, modular system, content ops toolkit"
+          },
+          {
+            "label": "System",
+            "value": "64 components"
+          }
+        ],
+        "brief": "Luxury retail splits across editorial, commerce, concierge and aftercare, and each part is usually designed by a different team in a different voice.",
+        "briefTwo": "The blueprint had to make the maison story consistent across channels and formats, and be maintainable by the client’s own content team afterwards.",
+        "decisions": [
+          "Four experience pillars fixed up front, so the same narrative survives every channel and format.",
+          "Product pages carry concierge prompts rather than opening a second checkout path.",
+          "A modular system with motion tokens and a content ops toolkit, so the client’s team can publish without design support."
+        ],
+        "outcome": "A sixty-four-component system covering the full journey — editorial flow, commerce craft, client rituals and aftercare — with personalisation and motion documented as part of the handover.",
+        "specs": [
+          {
+            "figure": "64",
+            "label": "Components",
+            "note": "One system across all four pillars."
+          },
+          {
+            "figure": "4",
+            "label": "Experience pillars",
+            "note": "Editorial, commerce, concierge, aftercare."
+          },
+          {
+            "figure": "1",
+            "label": "Content ops toolkit",
+            "note": "Publishing without design support."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "03 — 高端零售",
+        "title": "高端零售体验蓝图。",
+        "lede": "把内容、电商、专属服务和售后四段旅程画成一套系统，而不是四套。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "Web · UI · 品牌"
+          },
+          {
+            "label": "交付物",
+            "value": "体验地图、模块化系统、内容运营工具"
+          },
+          {
+            "label": "系统规模",
+            "value": "64 个组件"
+          }
+        ],
+        "brief": "高端零售被拆成内容、电商、专属服务和售后四块，通常由不同团队用不同语气分别设计。",
+        "briefTwo": "蓝图要让品牌叙事在各渠道、各格式下保持一致，并且交付后客户的内容团队能自行维护。",
+        "decisions": [
+          "先确定四条体验主线，保证同一叙事在任何渠道和格式下都成立。",
+          "商品页嵌入专属服务入口，而不是另开一条结账路径。",
+          "模块化系统附带动效 token 和内容运营工具，客户团队无需设计支持即可发布。"
+        ],
+        "outcome": "六十四个组件覆盖完整旅程——内容动线、电商细节、客户仪式与售后——个性化与动效作为交接内容一并记录。",
+        "specs": [
+          {
+            "figure": "64",
+            "label": "组件数",
+            "note": "四条主线共用一套系统。"
+          },
+          {
+            "figure": "4",
+            "label": "体验主线",
+            "note": "内容、电商、专属服务、售后。"
+          },
+          {
+            "figure": "1",
+            "label": "内容运营工具",
+            "note": "发布不依赖设计团队。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "ishq-escape",
+    "num": "04",
+    "tags": [
+      "Web",
+      "UI",
+      "Brand"
+    ],
+    "year": "2026",
+    "thumb": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=800&auto=format&fit=crop",
+    "hero": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=2000&auto=format&fit=crop",
+    "figure": {
+      "en": "64",
+      "zh": "64"
+    },
+    "measure": {
+      "en": "Screens in the guest journey",
+      "zh": "住客旅程屏数"
+    },
+    "lib": {
+      "en": {
+        "meta": "Hospitality booking · Concept",
+        "title": "Ishq Escape private villa booking",
+        "brief": "High-value villa bookings rarely close in one session. Discovery, private enquiry and confirmation all needed to sit in a single flow.",
+        "decisions": [
+          "Storytelling and imagery layered so browsing carries the same weight as booking.",
+          "Villa matching driven by stated preferences rather than search filters alone.",
+          "Concierge scheduling built into the funnel, not bolted on after confirmation."
+        ],
+        "outcome": "Sixty-four screens mapping discovery through aftercare, with three retreat themes showing how the system absorbs different estates."
+      },
+      "zh": {
+        "meta": "酒店预订 · 概念作品",
+        "title": "Ishq Escape 私人别墅预订",
+        "brief": "高客单价的别墅预订很少一次成交，浏览、私下咨询和最终确认必须在同一条动线里完成。",
+        "decisions": [
+          "内容与影像分层呈现，让浏览阶段与预订阶段同等重要。",
+          "别墅匹配基于住客表述的偏好，而不只依赖筛选器。",
+          "专属服务预约直接嵌入转化路径，而非确认后再补。"
+        ],
+        "outcome": "六十四屏覆盖从发现到售后的完整旅程，三个度假主题验证了系统对不同物业的适配能力。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "04 — Hospitality booking",
+        "title": "Luxury booking with concierge-led conversion.",
+        "lede": "A full-funnel villa booking concept balancing discovery, private enquiry and confirmation in one flow.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Web · UI · Brand"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Guest journey map, booking flow, concierge scheduling"
+          },
+          {
+            "label": "Scope",
+            "value": "64 screens"
+          }
+        ],
+        "brief": "High-value villa bookings rarely close in a single session. Discovery, private enquiry and confirmation usually live in separate products with separate tones.",
+        "briefTwo": "The concept had to keep browsing as valuable as booking, and give the concierge a place inside the funnel rather than after it.",
+        "decisions": [
+          "Storytelling and imagery layered so browsing carries the same weight as the booking step.",
+          "Villa matching driven by stated guest preferences rather than search filters alone.",
+          "Concierge scheduling built into the funnel, not bolted on after confirmation."
+        ],
+        "outcome": "Sixty-four screens mapping discovery through aftercare, with three retreat themes — forest, ocean and heritage — demonstrating how the system absorbs estates with very different atmospheres.",
+        "specs": [
+          {
+            "figure": "64",
+            "label": "Screens",
+            "note": "Discovery through concierge follow-up."
+          },
+          {
+            "figure": "3",
+            "label": "Retreat themes",
+            "note": "Forest, ocean and heritage estates."
+          },
+          {
+            "figure": "1",
+            "label": "Booking flow",
+            "note": "Enquiry and confirmation in one path."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "04 — 酒店预订",
+        "title": "以专属服务驱动转化的高端预订。",
+        "lede": "全漏斗别墅预订概念，把浏览、私下咨询与最终确认放进同一条动线。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "Web · UI · 品牌"
+          },
+          {
+            "label": "交付物",
+            "value": "住客旅程地图、预订流程、专属服务预约"
+          },
+          {
+            "label": "规模",
+            "value": "64 屏"
+          }
+        ],
+        "brief": "高客单价的别墅预订很少一次成交。浏览、私下咨询和最终确认通常分属不同产品，语气也各不相同。",
+        "briefTwo": "这个概念要让浏览阶段与预订阶段同等重要，并把专属服务放进转化路径内部，而不是确认之后。",
+        "decisions": [
+          "内容与影像分层呈现，让浏览阶段和预订步骤同等重要。",
+          "别墅匹配基于住客表述的偏好，而不只依赖筛选器。",
+          "专属服务预约直接嵌入转化路径，而非确认后再补。"
+        ],
+        "outcome": "六十四屏覆盖从发现到售后的完整旅程；森林、海洋、人文三个度假主题验证了系统对氛围差异极大的物业同样适配。",
+        "specs": [
+          {
+            "figure": "64",
+            "label": "屏数",
+            "note": "从发现到专属服务跟进。"
+          },
+          {
+            "figure": "3",
+            "label": "度假主题",
+            "note": "森林、海滨与人文庄园。"
+          },
+          {
+            "figure": "1",
+            "label": "预订流程",
+            "note": "咨询与确认在同一路径。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "starlight-kingdom",
+    "num": "05",
+    "tags": [
+      "Web",
+      "UI",
+      "Brand",
+      "Product"
+    ],
+    "year": "2026",
+    "thumb": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop",
+    "hero": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2000&auto=format&fit=crop",
+    "figure": {
+      "en": "3",
+      "zh": "3"
+    },
+    "measure": {
+      "en": "Planner modes",
+      "zh": "行程规划模式"
+    },
+    "lib": {
+      "en": {
+        "meta": "Destination experience · Concept",
+        "title": "Starlight Kingdom destination planner",
+        "brief": "Destination sites sell the visit but leave planning to the visitor. The concept had to do both in one place.",
+        "decisions": [
+          "Three planner modes — explorer, family and night spectacle — instead of one generic itinerary builder.",
+          "Routes optimised against queue times, with live show reminders as part of the plan.",
+          "Cinematic landing and the planning workspace share one visual system."
+        ],
+        "outcome": "A landing concept and a planning workspace that read as one product, with itinerary output as the page’s primary conversion."
+      },
+      "zh": {
+        "meta": "目的地体验 · 概念作品",
+        "title": "Starlight Kingdom 目的地行程规划",
+        "brief": "目的地网站通常只负责吸引到访，把行程安排留给游客自己。这个概念要把两件事放在一起完成。",
+        "decisions": [
+          "提供探索、家庭、夜场三种规划模式，而不是一个通用的行程工具。",
+          "路线按排队时长优化，演出提醒作为行程的一部分。",
+          "影院感的落地页与规划工作台共用一套视觉系统。"
+        ],
+        "outcome": "落地页与规划工作台读起来是同一个产品，行程输出成为页面的主要转化动作。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "05 — Destination experience",
+        "title": "A destination page that also plans the day.",
+        "lede": "A cinematic landing concept and a queue-aware itinerary planner sharing one visual system.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Web · UI · Brand · Product"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Landing concept, planner workspace, itinerary logic"
+          },
+          {
+            "label": "Modes",
+            "value": "3 planner modes"
+          }
+        ],
+        "brief": "Destination sites sell the visit and then leave the planning to the visitor, usually in a separate app with a different design language.",
+        "briefTwo": "The concept had to do both jobs in one place, and make the itinerary — not the brochure — the page’s primary output.",
+        "decisions": [
+          "Three planner modes — explorer, family and night spectacle — instead of one generic itinerary builder.",
+          "Routes optimised against queue times, with live show reminders treated as part of the plan.",
+          "The cinematic landing and the planning workspace share one visual system, so the handoff never feels like a different product."
+        ],
+        "outcome": "A landing page and a planning workspace that read as one product, with itinerary output as the page’s primary conversion instead of a generic ticket link.",
+        "specs": [
+          {
+            "figure": "3",
+            "label": "Planner modes",
+            "note": "Explorer, family, night spectacle."
+          },
+          {
+            "figure": "1",
+            "label": "Visual system",
+            "note": "Landing and workspace share it."
+          },
+          {
+            "figure": "0",
+            "label": "Separate apps",
+            "note": "Planning stays on the site."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "05 — 目的地体验",
+        "title": "既做目的地展示，也做当日行程。",
+        "lede": "影院感落地页与考虑排队时长的行程规划工作台共用一套视觉系统。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "Web · UI · 品牌 · 产品"
+          },
+          {
+            "label": "交付物",
+            "value": "落地页概念、规划工作台、行程逻辑"
+          },
+          {
+            "label": "模式",
+            "value": "3 种规划模式"
+          }
+        ],
+        "brief": "目的地网站通常只负责吸引到访，把行程安排留给游客自己，而且往往在另一个设计语言完全不同的 App 里。",
+        "briefTwo": "这个概念要在同一处完成两件事，并让行程输出而非宣传册成为页面的主要产出。",
+        "decisions": [
+          "提供探索、家庭、夜场三种规划模式，而不是一个通用行程工具。",
+          "路线按排队时长优化，演出提醒被当作行程的一部分。",
+          "影院感落地页与规划工作台共用一套视觉系统，衔接时不会像换了个产品。"
+        ],
+        "outcome": "落地页与规划工作台读起来是同一个产品，页面的主要转化动作是生成行程，而不是一个通用的购票链接。",
+        "specs": [
+          {
+            "figure": "3",
+            "label": "规划模式",
+            "note": "探索、家庭、夜场。"
+          },
+          {
+            "figure": "1",
+            "label": "视觉系统",
+            "note": "落地页与工作台共用。"
+          },
+          {
+            "figure": "0",
+            "label": "独立 App",
+            "note": "规划留在站内完成。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "aurora",
+    "num": "06",
+    "tags": [
+      "Web",
+      "UI",
+      "Brand"
+    ],
+    "year": "2026",
+    "thumb": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=800&auto=format&fit=crop",
+    "hero": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=2000&auto=format&fit=crop",
+    "figure": {
+      "en": "3",
+      "zh": "3"
+    },
+    "measure": {
+      "en": "Career discovery surfaces",
+      "zh": "招聘入口层级"
+    },
+    "lib": {
+      "en": {
+        "meta": "Employer brand · Concept",
+        "title": "Aurora Studio employer brand experience",
+        "brief": "Careers sites usually reduce to a job list. The brief was to make teams, mission and location the reason someone applies.",
+        "decisions": [
+          "Search sits above the fold, but teams and programmes are given equal weight beside it.",
+          "Three discovery surfaces — teams, categories, locations — instead of a single filtered list.",
+          "Editorial cards carry the studio’s tone so brand and recruitment share one system."
+        ],
+        "outcome": "A careers experience where role search and employer storytelling occupy the same page without either being demoted to a footer link."
+      },
+      "zh": {
+        "meta": "雇主品牌 · 概念作品",
+        "title": "Aurora Studio 雇主品牌体验",
+        "brief": "招聘站往往退化成一份职位列表。这里要让团队、使命和地点本身成为投递的理由。",
+        "decisions": [
+          "搜索放在首屏，但团队和项目与它并列，权重相同。",
+          "设置团队、职能、地点三个发现入口，而非单一筛选列表。",
+          "内容卡片延续工作室语气，品牌与招聘共用一套系统。"
+        ],
+        "outcome": "职位搜索与雇主叙事共处一页，两者都没有被降级成页脚链接。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "06 — Employer brand",
+        "title": "A careers site that is not a job list.",
+        "lede": "Teams, mission and location given equal standing beside role search, in one employer brand system.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Web · UI · Brand"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Employer brand system, discovery surfaces, search pattern"
+          },
+          {
+            "label": "Surfaces",
+            "value": "3 discovery surfaces"
+          }
+        ],
+        "brief": "Careers sites reduce to a filtered job list, and the employer story ends up as a footer link nobody follows.",
+        "briefTwo": "The brief was to make teams, mission and location the reason someone applies, without demoting the search that candidates actually arrive for.",
+        "decisions": [
+          "Search sits above the fold, but teams and launch programmes are given equal weight beside it.",
+          "Three discovery surfaces — teams, job categories, locations — replace a single filtered list.",
+          "Editorial cards carry the studio’s own tone, so brand and recruitment run on one system."
+        ],
+        "outcome": "A careers experience where role search and employer storytelling occupy the same page, with three discovery routes into the same set of roles.",
+        "specs": [
+          {
+            "figure": "3",
+            "label": "Discovery surfaces",
+            "note": "Teams, categories, locations."
+          },
+          {
+            "figure": "1",
+            "label": "Shared system",
+            "note": "Brand and recruitment together."
+          },
+          {
+            "figure": "1",
+            "label": "Search pattern",
+            "note": "Above the fold, not the whole page."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "06 — 雇主品牌",
+        "title": "招聘站不该只是一份职位列表。",
+        "lede": "团队、使命与地点和职位搜索并列，统一在一套雇主品牌系统里。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "Web · UI · 品牌"
+          },
+          {
+            "label": "交付物",
+            "value": "雇主品牌系统、发现入口、搜索模式"
+          },
+          {
+            "label": "入口",
+            "value": "3 个发现入口"
+          }
+        ],
+        "brief": "招聘站往往退化成一份带筛选的职位列表，雇主叙事最后变成没人点的页脚链接。",
+        "briefTwo": "这里要让团队、使命和地点本身成为投递理由，同时不削弱候选人真正为之而来的搜索功能。",
+        "decisions": [
+          "搜索放在首屏，但团队和项目与它并列，权重相同。",
+          "用团队、职能、地点三个发现入口替代单一筛选列表。",
+          "内容卡片延续工作室语气，品牌与招聘运行在同一套系统上。"
+        ],
+        "outcome": "职位搜索与雇主叙事共处一页，三条发现路径通向同一批职位。",
+        "specs": [
+          {
+            "figure": "3",
+            "label": "发现入口",
+            "note": "团队、职能、地点。"
+          },
+          {
+            "figure": "1",
+            "label": "共用系统",
+            "note": "品牌与招聘统一。"
+          },
+          {
+            "figure": "1",
+            "label": "搜索模式",
+            "note": "置于首屏，但不占满页面。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "tech-disruption",
+    "num": "07",
+    "tags": [
+      "Web",
+      "UI"
+    ],
+    "year": "2026",
+    "thumb": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop",
+    "hero": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=2000&auto=format&fit=crop",
+    "figure": {
+      "en": "9",
+      "zh": "9"
+    },
+    "measure": {
+      "en": "Simultaneous research stories",
+      "zh": "同屏研究条目"
+    },
+    "lib": {
+      "en": {
+        "meta": "Research hub · Concept",
+        "title": "Northbridge Capital research hub",
+        "brief": "Northbridge publishes daily across AI, market structure and enterprise innovation. The hub had to absorb that volume without reading as a link dump.",
+        "decisions": [
+          "A strict nine-card grid — every insight gets identical space, hierarchy comes from imagery and category.",
+          "Category labels lead each card so researchers scan by theme before headline.",
+          "Ink, paper and one accent bar; hover lift is the only motion on the page."
+        ],
+        "outcome": "A template that takes weekly publishing volume without redesign, now the pattern for the full insights programme, with one call to action placed after the reader has value."
+      },
+      "zh": {
+        "meta": "研究平台 · 概念作品",
+        "title": "Northbridge Capital 研究平台",
+        "brief": "Northbridge 每天在 AI、市场结构和企业创新三个方向发文。平台要承载这个发布量，又不能变成一堆链接。",
+        "decisions": [
+          "严格的九宫格：每条内容占据同等面积，层级由图片和分类决定。",
+          "分类标签置于标题之前，方便研究者按主题快速扫读。",
+          "只用墨黑、纸白和一条强调色；页面唯一的动效是悬停微抬。"
+        ],
+        "outcome": "模板能承接每周的发布量而无需改版，已成为整个研究栏目的通用结构；唯一的转化入口放在读者获得价值之后。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "07 — Research hub",
+        "title": "Making dense research feel effortless.",
+        "lede": "A daily-publishing research hub that absorbs editorial volume without reading as a link dump.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Web · UI"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Grid system, category taxonomy, hub template"
+          },
+          {
+            "label": "Density",
+            "value": "9 stories per view"
+          }
+        ],
+        "brief": "Northbridge Capital publishes daily across AI, market structure and enterprise innovation. The hub had to handle that volume in a modern finance tone and never feel like a link dump.",
+        "briefTwo": "Density was the constraint: nine simultaneous stories had to stay scannable without shrinking type or stacking cards by importance.",
+        "decisions": [
+          "A strict nine-card grid — every insight gets identical space, and hierarchy comes from imagery and category rather than card size.",
+          "Small-caps category labels lead each card, so researchers scan by theme before committing to a headline.",
+          "Ink, paper and one accent bar; a 4px hover lift is the only motion on the page."
+        ],
+        "outcome": "A template that takes weekly publishing volume without redesign, now the pattern for the full insights programme, with a single call to action placed after the reader has already had value from the grid.",
+        "specs": [
+          {
+            "figure": "9",
+            "label": "Stories per view",
+            "note": "Identical space, no size games."
+          },
+          {
+            "figure": "6",
+            "label": "Design decisions",
+            "note": "Type, layout, colour, IA, motion, conversion."
+          },
+          {
+            "figure": "1",
+            "label": "Call to action",
+            "note": "Placed last, after the grid."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "07 — 研究平台",
+        "title": "让高密度研究读起来不费力。",
+        "lede": "每日更新的研究平台，要承载发布量，又不能变成一堆链接。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "Web · UI"
+          },
+          {
+            "label": "交付物",
+            "value": "网格系统、分类体系、平台模板"
+          },
+          {
+            "label": "密度",
+            "value": "同屏 9 条内容"
+          }
+        ],
+        "brief": "Northbridge Capital 每天在 AI、市场结构和企业创新三个方向发文。平台要以现代金融的语气承载这个发布量，同时不能读起来像一堆链接。",
+        "briefTwo": "密度是核心约束：九条内容同屏出现，既不能缩小字号，也不能按重要性堆叠卡片。",
+        "decisions": [
+          "严格的九宫格：每条内容占据同等面积，层级由图片和分类决定，而不是卡片大小。",
+          "小型大写的分类标签置于标题之前，研究者可以先按主题扫读。",
+          "只用墨黑、纸白和一条强调色；页面唯一的动效是 4px 悬停微抬。"
+        ],
+        "outcome": "模板能承接每周的发布量而无需改版，现已成为整个研究栏目的通用结构；唯一的转化入口放在读者已从网格中获得价值之后。",
+        "specs": [
+          {
+            "figure": "9",
+            "label": "同屏条目",
+            "note": "面积相同，不玩大小对比。"
+          },
+          {
+            "figure": "6",
+            "label": "设计决策",
+            "note": "字体、布局、色彩、信息架构、动效、转化。"
+          },
+          {
+            "figure": "1",
+            "label": "转化入口",
+            "note": "放在网格之后。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "lumen-stream",
+    "num": "08",
+    "tags": [
+      "Web",
+      "UI",
+      "Product"
+    ],
+    "year": "2026",
+    "thumb": "https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=800&auto=format&fit=crop",
+    "hero": "https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=2000&auto=format&fit=crop",
+    "figure": {
+      "en": "6 wks",
+      "zh": "6 周"
+    },
+    "measure": {
+      "en": "Concept to UI system",
+      "zh": "概念到 UI 系统"
+    },
+    "lib": {
+      "en": {
+        "meta": "Streaming platform · Concept",
+        "title": "Lumen Stream entertainment hub",
+        "brief": "Streaming homepages have to serve discovery and sign-up at once, and the two usually compete for the same screen.",
+        "decisions": [
+          "A single bold hero statement with one action, ahead of the content wall.",
+          "A poster grid sized for browsing depth rather than editorial promotion.",
+          "Motion tokens and a content grid delivered alongside the UI system."
+        ],
+        "outcome": "A cinematic homepage concept delivered in six weeks as a UI system, motion tokens and content grid, with the sign-up path kept to one route."
+      },
+      "zh": {
+        "meta": "流媒体平台 · 概念作品",
+        "title": "Lumen Stream 娱乐平台",
+        "brief": "流媒体首页要同时服务内容发现和注册转化，这两件事通常在争夺同一块屏幕。",
+        "decisions": [
+          "首屏一句主张、一个动作，放在内容墙之前。",
+          "海报网格按浏览深度排布，而不是按运营位推荐。",
+          "UI 系统之外同时交付动效 token 和内容网格。"
+        ],
+        "outcome": "六周交付一套影院感首页概念，包含 UI 系统、动效 token 和内容网格，注册路径只保留一条。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "08 — Streaming platform",
+        "title": "A streaming homepage that serves discovery and sign-up.",
+        "lede": "A cinematic entertainment hub concept where browsing depth and a single sign-up route stop competing.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Web · UI · Product"
+          },
+          {
+            "label": "Deliverables",
+            "value": "UI system, motion tokens, content grid"
+          },
+          {
+            "label": "Duration",
+            "value": "6 weeks"
+          }
+        ],
+        "brief": "Streaming homepages have to serve content discovery and sign-up at once, and the two normally compete for the same region of the screen.",
+        "briefTwo": "The concept blends premium discovery with a focused sign-up path, so neither is buried by the other.",
+        "decisions": [
+          "A single bold hero statement with one action, placed ahead of the content wall.",
+          "A poster grid sized for browsing depth rather than editorial promotion slots.",
+          "Motion tokens and a content grid delivered alongside the UI system, so the wall stays consistent as the catalogue grows."
+        ],
+        "outcome": "A cinematic homepage concept delivered in six weeks as a UI system, motion tokens and content grid, with the sign-up path kept to a single route.",
+        "specs": [
+          {
+            "figure": "6 wks",
+            "label": "Concept to UI system",
+            "note": "Including motion tokens and content grid."
+          },
+          {
+            "figure": "1",
+            "label": "Sign-up route",
+            "note": "One action, ahead of the wall."
+          },
+          {
+            "figure": "3",
+            "label": "Delivered systems",
+            "note": "UI, motion, content grid."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "08 — 流媒体平台",
+        "title": "同时服务内容发现与注册的流媒体首页。",
+        "lede": "影院感娱乐平台概念，让浏览深度与唯一注册路径不再互相挤占。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "Web · UI · 产品"
+          },
+          {
+            "label": "交付物",
+            "value": "UI 系统、动效 token、内容网格"
+          },
+          {
+            "label": "周期",
+            "value": "6 周"
+          }
+        ],
+        "brief": "流媒体首页要同时服务内容发现和注册转化，这两件事通常在争夺屏幕上的同一块区域。",
+        "briefTwo": "这个概念把高质量的内容发现和一条明确的注册路径结合起来，两者互不掩盖。",
+        "decisions": [
+          "首屏一句主张、一个动作，放在内容墙之前。",
+          "海报网格按浏览深度排布，而不是按运营推荐位。",
+          "UI 系统之外同时交付动效 token 和内容网格，片库增长时内容墙仍保持一致。"
+        ],
+        "outcome": "六周交付一套影院感首页概念，包含 UI 系统、动效 token 和内容网格，注册路径只保留一条。",
+        "specs": [
+          {
+            "figure": "6 周",
+            "label": "概念到 UI 系统",
+            "note": "含动效 token 与内容网格。"
+          },
+          {
+            "figure": "1",
+            "label": "注册路径",
+            "note": "一个动作，位于内容墙之前。"
+          },
+          {
+            "figure": "3",
+            "label": "交付系统",
+            "note": "UI、动效、内容网格。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "atlas",
+    "num": "09",
+    "tags": [
+      "Product",
+      "UI"
+    ],
+    "year": "2026",
+    "thumb": "https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=800&auto=format&fit=crop",
+    "hero": "https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=2000&auto=format&fit=crop",
+    "figure": {
+      "en": "8 wks",
+      "zh": "8 周"
+    },
+    "measure": {
+      "en": "Concept to UI kit",
+      "zh": "概念到 UI 套件"
+    },
+    "lib": {
+      "en": {
+        "meta": "Institutional finance · Concept",
+        "title": "Atlas Capital institutional experience",
+        "brief": "Institutional finance sites bury conviction under boilerplate. The brief asked for the opposite: one confident statement, numbers stated plainly, leadership given a real voice.",
+        "decisions": [
+          "An editorial type scale — display headlines against a quiet sans body for broadsheet rhythm.",
+          "One number at a time: the AUM figure stands alone with its as-of date, no dashboards or counters.",
+          "A leadership interview module in place of stock photography."
+        ],
+        "outcome": "A restrained editorial system that scales across What We Do, Strategies and Insights while staying unmistakably institutional — delivered in eight weeks as a landing concept, grid and UI kit."
+      },
+      "zh": {
+        "meta": "机构金融 · 概念作品",
+        "title": "Atlas Capital 机构级体验",
+        "brief": "机构金融网站常把观点埋在套话里。这里要反过来：一句明确主张，数据直接陈述，管理层有真实的发声位置。",
+        "decisions": [
+          "出版级字体层级：展示体标题配安静的无衬线正文，形成报纸式节奏。",
+          "一次只讲一个数字：AUM 单独呈现并标注截止日期，不做仪表盘和滚动计数。",
+          "用管理层访谈模块替代图库配图。"
+        ],
+        "outcome": "一套克制的编辑体系，可延伸到业务、策略、洞察各栏目而保持机构感；八周内交付落地概念、网格与 UI 套件。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "09 — Institutional finance",
+        "title": "Designing institutional confidence.",
+        "lede": "An investor-facing experience carrying the weight of a large asset manager without decoration for decoration’s sake.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Product · UI"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Landing concept, editorial grid, UI kit"
+          },
+          {
+            "label": "Duration",
+            "value": "8 weeks"
+          }
+        ],
+        "brief": "Institutional finance sites tend to bury conviction under boilerplate. The brief asked for the opposite: lead with a single confident statement, let numbers speak plainly, and give leadership a voice through media rather than stock photography.",
+        "briefTwo": "The system also had to scale across What We Do, Strategies and Insights without losing its restraint.",
+        "decisions": [
+          "An editorial type scale — display headlines against a quiet sans body — creating a broadsheet rhythm: authority without shouting.",
+          "One number at a time: the AUM figure stands alone with its as-of date. No dashboards, no counters, a single audited fact.",
+          "A leadership interview module anchors the page in place of stock photography, giving the firm a human voice."
+        ],
+        "outcome": "A restrained editorial system that scales across the full site while staying unmistakably institutional, delivered in eight weeks as a landing concept, editorial grid and UI kit — now the visual reference for the wider build-out.",
+        "specs": [
+          {
+            "figure": "8 wks",
+            "label": "Concept to UI kit",
+            "note": "Brand, product and motion in one team."
+          },
+          {
+            "figure": "1",
+            "label": "Headline number",
+            "note": "Stated with its as-of date, nothing else."
+          },
+          {
+            "figure": "3",
+            "label": "Sections covered",
+            "note": "What We Do, Strategies, Insights."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "09 — 机构金融",
+        "title": "设计出机构级的信任感。",
+        "lede": "面向投资者的体验，要撑得起大型资产管理机构的分量，同时不做任何为装饰而装饰的处理。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "产品 · UI"
+          },
+          {
+            "label": "交付物",
+            "value": "落地页概念、编辑网格、UI 套件"
+          },
+          {
+            "label": "周期",
+            "value": "8 周"
+          }
+        ],
+        "brief": "机构金融网站常把观点埋在套话里。这里要反过来：以一句明确主张开场，数据直接陈述，管理层通过影音而非图库配图发声。",
+        "briefTwo": "这套体系还要能延伸到业务、策略、洞察各栏目，并且不失克制。",
+        "decisions": [
+          "出版级字体层级：展示体标题配安静的无衬线正文，形成报纸式节奏——有权威感但不喧哗。",
+          "一次只讲一个数字：AUM 单独呈现并标注截止日期，不做仪表盘、不做滚动计数，只给一个经审计的事实。",
+          "用管理层访谈模块作为页面锚点，替代图库配图，让机构有真实的人声。"
+        ],
+        "outcome": "一套克制的编辑体系，可延伸到全站栏目而保持机构感；八周内交付落地概念、编辑网格与 UI 套件，现已成为后续开发的视觉基准。",
+        "specs": [
+          {
+            "figure": "8 周",
+            "label": "概念到 UI 套件",
+            "note": "品牌、产品与动效同一团队完成。"
+          },
+          {
+            "figure": "1",
+            "label": "核心数字",
+            "note": "只标注截止日期，不加其他。"
+          },
+          {
+            "figure": "3",
+            "label": "覆盖栏目",
+            "note": "业务、策略、洞察。"
+          }
+        ]
+      }
+    }
+  }
+]

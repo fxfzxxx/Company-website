@@ -1,0 +1,313 @@
+/* Chinese typography deltas.
+   These are design decisions, not translation: Chinese never takes uppercase
+   or wide tracking, its body line-height rises to 1.85, headings drop to
+   weight 700 and sit flush at margin-left 0, and ch-based measures are about
+   0.6x the English value because CJK glyphs are full-width.
+
+   Scoped to the document language so the markup stays one component tree.
+   Numerals (metric figures, stat figures, index numbers) deliberately stay
+   in Archivo 800 with tabular numerals in both languages. */
+
+:root[lang^="zh"] body {
+	font-family: "Noto Sans SC", var(--font-body);
+	line-height: 1.85;
+}
+
+:root[lang^="zh"] h1,
+:root[lang^="zh"] h2,
+:root[lang^="zh"] h3,
+:root[lang^="zh"] h4 {
+	font-family: "Noto Sans SC", var(--font-heading);
+	font-weight: 700;
+}
+
+/* — labels: no uppercase, tracking reduced or dropped ——————————— */
+
+:root[lang^="zh"] .yt-eyebrow,
+:root[lang^="zh"] .yt-meta,
+:root[lang^="zh"] .yt-contact-label,
+:root[lang^="zh"] .yt-form-eyebrow,
+:root[lang^="zh"] .yt-field label,
+:root[lang^="zh"] .yt-foot-title,
+:root[lang^="zh"] .yt-filter-label,
+:root[lang^="zh"] .yt-panel-label,
+:root[lang^="zh"] .yt-fact-label,
+:root[lang^="zh"] .yt-crumb,
+:root[lang^="zh"] .yt-next-label {
+	text-transform: none;
+	letter-spacing: 0.08em;
+}
+
+:root[lang^="zh"] .yt-metric-label,
+:root[lang^="zh"] .yt-stat-label,
+:root[lang^="zh"] .yt-spec-label {
+	text-transform: none;
+	letter-spacing: 0;
+	line-height: 1.6;
+}
+
+:root[lang^="zh"] .yt-link,
+:root[lang^="zh"] .yt-submit,
+:root[lang^="zh"] .yt-next-read {
+	text-transform: none;
+	letter-spacing: 0.04em;
+	font-size: 14.5px;
+	font-weight: 500;
+}
+
+:root[lang^="zh"] .yt-submit {
+	font-weight: 600;
+}
+
+/* — headings ——————————————————————————————————————————————————— */
+
+:root[lang^="zh"] .yt-h1 {
+	font-size: clamp(34px, 5vw, 68px);
+	line-height: 1.18;
+	letter-spacing: 0.005em;
+	margin-left: 0;
+}
+
+:root[lang^="zh"] .yt-h2 {
+	font-size: clamp(26px, 3.2vw, 38px);
+	line-height: 1.3;
+	letter-spacing: 0;
+	margin-left: 0;
+}
+
+:root[lang^="zh"] .yt-h2-sub {
+	font-size: clamp(24px, 2.8vw, 34px);
+	line-height: 1.35;
+}
+
+:root[lang^="zh"] .yt-h3 {
+	font-size: clamp(18px, 1.8vw, 23px);
+	line-height: 1.4;
+	letter-spacing: 0;
+}
+
+:root[lang^="zh"] .yt-cap h3 {
+	font-size: 18px;
+	line-height: 1.5;
+	letter-spacing: 0;
+}
+
+:root[lang^="zh"] .yt-step-title {
+	font-family: "Noto Sans SC", var(--font-heading);
+	font-weight: 700;
+	font-size: 16.5px;
+}
+
+:root[lang^="zh"] .yt-cap-heading {
+	max-width: 18ch;
+}
+
+:root[lang^="zh"] .yt-method-heading {
+	max-width: 16ch;
+}
+
+/* — body copy: line-height up, measures down ————————————————————— */
+
+:root[lang^="zh"] .yt-lede {
+	font-size: 16.5px;
+	line-height: 1.85;
+	max-width: 34ch;
+}
+
+:root[lang^="zh"] .yt-head-lede {
+	font-size: 15.5px;
+	line-height: 1.85;
+	max-width: 34ch;
+}
+
+:root[lang^="zh"] .yt-row-text {
+	font-size: 15px;
+	line-height: 1.85;
+	max-width: 34ch;
+}
+
+:root[lang^="zh"] .yt-cap p {
+	font-size: 14.5px;
+	line-height: 1.85;
+}
+
+:root[lang^="zh"] .yt-step p {
+	font-size: 14.5px;
+	line-height: 1.85;
+	max-width: 30ch;
+}
+
+:root[lang^="zh"] .yt-note {
+	line-height: 1.7;
+}
+
+:root[lang^="zh"] .yt-metric-label,
+:root[lang^="zh"] .yt-stat-label {
+	font-size: 12.5px;
+}
+
+:root[lang^="zh"] .yt-stat-label {
+	font-size: 13px;
+}
+
+/* — cards ——————————————————————————————————————————————————————— */
+
+:root[lang^="zh"] .card-title {
+	font-family: "Noto Sans SC", var(--font-heading);
+	font-weight: 700;
+	line-height: 1.5;
+	letter-spacing: 0;
+}
+
+:root[lang^="zh"] .card-body {
+	line-height: 1.85;
+}
+
+/* — contact banner and form ————————————————————————————————————— */
+
+:root[lang^="zh"] .yt-contact-h2 {
+	font-size: clamp(28px, 4vw, 48px);
+	line-height: 1.25;
+	letter-spacing: 0;
+	margin-left: 0;
+}
+
+:root[lang^="zh"] .yt-contact-body {
+	font-size: 16px;
+	line-height: 1.85;
+	max-width: 32ch;
+}
+
+:root[lang^="zh"] .yt-contact-label,
+:root[lang^="zh"] .yt-field label {
+	font-size: 12.5px;
+}
+
+:root[lang^="zh"] .yt-contact-link {
+	font-size: clamp(17px, 1.9vw, 22px);
+}
+
+:root[lang^="zh"] .yt-contact-addr {
+	font-size: 15px;
+	line-height: 1.75;
+}
+
+:root[lang^="zh"] .yt-form-msg {
+	max-width: 32ch;
+}
+
+/* — navigation and footer —————————————————————————————————————— */
+
+:root[lang^="zh"] .yt-nav-links {
+	font-size: 14.5px;
+}
+
+:root[lang^="zh"] .yt-foot-title {
+	font-family: "Noto Sans SC", var(--font-heading);
+	font-weight: 700;
+	font-size: 13px;
+}
+
+:root[lang^="zh"] .yt-foot-links {
+	font-size: 14px;
+}
+
+/* — case library ——————————————————————————————————————————————— */
+
+:root[lang^="zh"] .yt-lib-h1 {
+	font-size: clamp(30px, 4.4vw, 56px);
+	line-height: 1.25;
+	letter-spacing: 0;
+	margin-left: 0;
+}
+
+:root[lang^="zh"] .yt-lib-lede {
+	line-height: 1.85;
+	max-width: 30ch;
+}
+
+:root[lang^="zh"] .yt-lib-title {
+	font-family: "Noto Sans SC", var(--font-heading);
+	font-weight: 700;
+	font-size: clamp(18px, 1.8vw, 23px);
+	line-height: 1.4;
+	letter-spacing: 0;
+}
+
+:root[lang^="zh"] .yt-chip {
+	font-size: 13.5px;
+	letter-spacing: 0;
+}
+
+:root[lang^="zh"] .yt-panel-text,
+:root[lang^="zh"] .yt-decision-text {
+	line-height: 1.85;
+}
+
+:root[lang^="zh"] .yt-btn-solid,
+:root[lang^="zh"] .yt-link-accent {
+	font-size: 14px;
+	letter-spacing: 0;
+}
+
+/* — case detail ———————————————————————————————————————————————— */
+
+:root[lang^="zh"] .yt-detail-h1 {
+	font-size: clamp(30px, 4.4vw, 54px);
+	line-height: 1.25;
+	letter-spacing: 0;
+	margin-left: 0;
+}
+
+:root[lang^="zh"] .yt-detail-lede {
+	line-height: 1.85;
+	max-width: 28ch;
+}
+
+:root[lang^="zh"] .yt-fact-value {
+	font-size: 15px;
+	line-height: 1.75;
+}
+
+:root[lang^="zh"] .yt-block-title {
+	font-family: "Noto Sans SC", var(--font-heading);
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 1.5;
+	letter-spacing: 0;
+}
+
+:root[lang^="zh"] .yt-block-body p {
+	font-size: 16px;
+	line-height: 1.85;
+	max-width: 38ch;
+}
+
+:root[lang^="zh"] .yt-dec p {
+	font-size: 15.5px;
+	line-height: 1.85;
+	max-width: 36ch;
+}
+
+:root[lang^="zh"] .yt-spec-note {
+	line-height: 1.75;
+}
+
+:root[lang^="zh"] .yt-live-title {
+	font-size: clamp(22px, 2.4vw, 30px);
+	line-height: 1.35;
+	letter-spacing: 0;
+}
+
+:root[lang^="zh"] .yt-live-body {
+	line-height: 1.85;
+	max-width: 34ch;
+}
+
+:root[lang^="zh"] .yt-next-title {
+	font-family: "Noto Sans SC", var(--font-heading);
+	font-weight: 700;
+	font-size: clamp(18px, 1.8vw, 23px);
+	line-height: 1.4;
+	letter-spacing: 0;
+}

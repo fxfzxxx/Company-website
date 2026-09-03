@@ -1,99 +1,362 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="The global landing page for Yonder Tech, an IT enablement and digital consulting firm." />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Yonder Tech works with New Zealand businesses on IT strategy, system integration, data platforms and managed operations." />
 	<link rel="canonical" href="https://yondertech.co.nz/en/index.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/index.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/index.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/index.html" />
 	<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-	<meta name="theme-color" content="#111111" />
+	<meta name="theme-color" content="#a8503f" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Yonder Tech - Global" />
-	<meta property="og:description" content="The global landing page for Yonder Tech, an IT enablement and digital consulting firm." />
+	<meta property="og:title" content="Yonder Tech — IT enablement &amp; digital consulting, Auckland" />
+	<meta property="og:description" content="Yonder Tech works with New Zealand businesses on IT strategy, system integration, data platforms and managed operations." />
 	<meta property="og:url" content="https://yondertech.co.nz/en/index.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop" />
+	<meta property="og:image" content="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&amp;w=1400&amp;auto=format&amp;fit=crop" />
 	<meta property="og:locale" content="en_NZ" />
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="Yonder Tech - Global" />
-	<meta name="twitter:description" content="The global landing page for Yonder Tech, an IT enablement and digital consulting firm." />
-	<title>Yonder Tech - Global</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="../assets/styles.css" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Yonder Tech — IT enablement &amp; digital consulting, Auckland" />
+	<meta name="twitter:description" content="Yonder Tech works with New Zealand businesses on IT strategy, system integration, data platforms and managed operations." />
+	<title>Yonder Tech — IT enablement &amp; digital consulting, Auckland</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../assets/design/site.css" />
+	<link rel="stylesheet" href="../assets/design/locale.css" />
 </head>
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		"name": "Yonder Tech",
+		"url": "https://yondertech.co.nz/",
+		"logo": "https://yondertech.co.nz/assets/favicon.svg",
+		"description": "IT enablement and digital consulting across technology strategy, enterprise architecture, system integration, and data intelligence.",
+		"address": {
+			"@type": "PostalAddress",
+			"streetAddress": "Level 18, 100 Queen Street",
+			"addressLocality": "Auckland",
+			"postalCode": "1010",
+			"addressCountry": "NZ"
+		},
+		"contactPoint": {
+			"@type": "ContactPoint",
+			"email": "aaronf@yondertech.co.nz",
+			"telephone": "+64 22 595 0228",
+			"contactType": "customer service"
+		}
+	}
+	</script>
+
 <body>
-	<div class="page">
-		<div class="site-header" data-static="true">
-			<div class="topbar">
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="index.html">Yonder.</a>
+				<span class="yt-nav-links">
+					<a href="#work" aria-current="page">Work</a>
+					<a href="cases/index.html">Case library</a>
+					<a href="#capabilities">Capabilities</a>
+					<a href="#method">Method</a>
+					<a href="#insights">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../zh/index.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<section class="yt-wrap yt-hero">
+			<span class="yt-eyebrow">IT enablement &amp; digital consulting · Auckland</span>
+			<h1 class="yt-h1"><span>Technology that earns</span><span>its place on the</span><span>balance sheet.</span></h1>
+			<p class="yt-lede">Yonder Tech works with New Zealand businesses and delivery partners on the unglamorous half of digital transformation: deciding what to build, integrating what already exists, and proving the result in numbers a board recognises.</p>
+			<div class="yt-btn-row">
+				<a class="yt-link hv1" href="#work">Selected work <span class="yt-arrow" aria-hidden="true">↓</span></a>
+				<a class="yt-link yt-link-muted hv2" href="#capabilities">What we do</a>
+			</div>
+		</section>
+
+		<section class="yt-wrap yt-rule yt-work" id="work">
+			<div class="yt-head-row">
 				<div>
-					<a href="../index.html">Yonder Tech</a>
-					<a href="../automation/index.html">Automation</a>
-					<a href="../en/index.html">Global (EN)</a>
+					<span class="yt-eyebrow">Selected work</span>
+					<h2 class="yt-h2">Nine concepts. Four to start with.</h2>
+					<p class="yt-head-lede">Self-directed concept work. Each entry carries its brief, the decisions that shaped it, and the design system it delivered.</p>
 				</div>
-				<div>Login</div>
+				<a class="yt-link yt-link-nowrap hv1" href="cases/index.html">Full case library <span class="yt-arrow" aria-hidden="true">→</span></a>
 			</div>
 
-			<header>
-				<a class="logo" href="../index.html">
-					<div>
-						<div class="logo-text">Yonder.</div>
+				<div class="yt-row">
+					<div class="yt-row-num">01</div>
+					<div class="yt-thumb grayscale">
+						<img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Luna Bloom Society maternity community concept" loading="lazy" width="800" height="600" />
 					</div>
-				</a>
-
-				<nav>
-					<a href="../index.html">Home</a>
-					<a href="../services/index.html">Services</a>
-					<a href="../insights/index.html">Insights</a>
-					<a href="../about/index.html">About</a>
-					<a href="../cases/index.html">Case Library</a>
-				</nav>
-
-				<div class="search"><i class="fa fa-search" aria-hidden="true"></i></div>
-			</header>
-		</div>
-		<div class="page-content">
-			<a href="../index.html">Back to Home</a>
-			<h1 class="hero-title">Global Site</h1>
-			<p>This is a simplified global landing page for Yonder Tech.</p>
-		</div>
-		<div class="footer" data-static="true">
-			<footer class="footer">
-				<div class="footer-grid">
-					<div>
-						<h5><a href="../about/index.html">About</a></h5>
-						<a href="../about/company.html">Company Profile</a>
-						<a href="../about/leadership.html">Leadership</a>
-						<a href="../about/sustainability.html">Sustainability</a>
+					<div class="yt-row-body">
+						<div class="yt-meta">Community platform · Concept</div>
+						<h3 class="yt-h3"><a href="cases/luna-bloom.html">Luna Bloom Society maternity community</a></h3>
+						<p class="yt-row-text">A community that holds long-form editorial and peer conversation without an endless feed: complete story sets, small trimester rooms, no engagement counters.</p>
 					</div>
-					<div>
-						<h5><a href="../services/index.html">Services</a></h5>
-						<a href="../services/it-strategy.html">IT Strategy</a>
-						<a href="../services/system-integration.html">System Integration</a>
-						<a href="../services/data-ai.html">Data &amp; AI</a>
-					</div>
-					<div>
-						<h5><a href="../insights/index.html">Resources</a></h5>
-						<a href="../insights/index.html">Insights</a>
-						<a href="../cases/index.html">Case Library</a>
-						<a href="../events/index.html">Events</a>
-					</div>
-					<div>
-						<h5><a href="../contact/index.html">Contact</a></h5>
-						<a href="../contact/index.html">Contact Us</a>
-						<a href="../contact/careers.html">Careers</a>
-						<a href="../news/index.html">Newsroom</a>
+					<div class="yt-metric">
+						<div class="yt-metric-figure">12</div>
+						<div class="yt-metric-label">Component families</div>
 					</div>
 				</div>
-				<div class="footer-bottom">
-					<span>© 2026 Yonder Consulting</span>
-					<span>Privacy Policy · Terms of Use · Cookie Settings</span>
+
+				<div class="yt-row">
+					<div class="yt-row-num">02</div>
+					<div class="yt-thumb grayscale">
+						<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Ion Forge X9 product launch concept" loading="lazy" width="800" height="600" />
+					</div>
+					<div class="yt-row-body">
+						<div class="yt-meta">Product launch · Concept</div>
+						<h3 class="yt-h3"><a href="cases/ion-forge.html">Ion Forge X9 product launch system</a></h3>
+						<p class="yt-row-text">A hardware launch system carrying industrial design, spec detail and motion in one view, then repeating across twelve markets without a rebuild.</p>
+					</div>
+					<div class="yt-metric">
+						<div class="yt-metric-figure">74</div>
+						<div class="yt-metric-label">Components across 18 scenes</div>
+					</div>
 				</div>
-			</footer>
-		</div>
-	</div>
-	<script src="../assets/main.js"></script>
+
+				<div class="yt-row">
+					<div class="yt-row-num">03</div>
+					<div class="yt-thumb grayscale">
+						<img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Northbridge Capital research hub concept" loading="lazy" width="800" height="600" />
+					</div>
+					<div class="yt-row-body">
+						<div class="yt-meta">Research hub · Concept</div>
+						<h3 class="yt-h3"><a href="cases/tech-disruption.html">Northbridge Capital research hub</a></h3>
+						<p class="yt-row-text">A daily-publishing research hub that absorbs editorial volume without reading as a link dump. Identical card space; hierarchy from imagery and category.</p>
+					</div>
+					<div class="yt-metric">
+						<div class="yt-metric-figure">9</div>
+						<div class="yt-metric-label">Stories held in one view</div>
+					</div>
+				</div>
+
+				<div class="yt-row">
+					<div class="yt-row-num">04</div>
+					<div class="yt-thumb grayscale">
+						<img src="https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Atlas Capital institutional experience concept" loading="lazy" width="800" height="600" />
+					</div>
+					<div class="yt-row-body">
+						<div class="yt-meta">Institutional finance · Concept</div>
+						<h3 class="yt-h3"><a href="cases/atlas.html">Atlas Capital institutional experience</a></h3>
+						<p class="yt-row-text">One confident statement, one audited number stated with its as-of date, and a leadership interview module in place of stock photography.</p>
+					</div>
+					<div class="yt-metric">
+						<div class="yt-metric-figure">8 wks</div>
+						<div class="yt-metric-label">Concept to UI kit</div>
+					</div>
+				</div>
+
+			<p class="yt-note">Concept projects designed in-house, not client engagements. Figures describe the delivered design system, not commercial results.</p>
+		</section>
+
+		<section class="yt-wrap">
+			<div class="yt-stats">
+				<div>
+					<div class="yt-stat-figure">180+</div>
+					<div class="yt-stat-label">Engagements delivered</div>
+				</div>
+				<div>
+					<div class="yt-stat-figure">92%</div>
+					<div class="yt-stat-label">Clients who re-engage</div>
+				</div>
+				<div>
+					<div class="yt-stat-figure">6 wks</div>
+					<div class="yt-stat-label">Median time to first release</div>
+				</div>
+				<div>
+					<div class="yt-stat-figure">12</div>
+					<div class="yt-stat-label">Delivery &amp; partner cities</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="yt-wrap yt-rule yt-section" id="capabilities">
+			<span class="yt-eyebrow">Capabilities</span>
+			<h2 class="yt-h2 yt-cap-heading">Four things we do, and nothing we don&#39;t.</h2>
+			<div class="yt-cap-grid">
+				<div class="yt-cap">
+					<div class="yt-cap-num">01</div>
+					<h3>IT strategy &amp; architecture governance</h3>
+					<p>A technology roadmap tied to the commercial plan, with a decision record for every choice, so the next person can see why.</p>
+				</div>
+				<div class="yt-cap">
+					<div class="yt-cap-num">02</div>
+					<h3>System integration &amp; platform build</h3>
+					<p>Connecting what you already run before proposing anything new. Fewer systems, fewer manual bridges, one consistent record.</p>
+				</div>
+				<div class="yt-cap">
+					<div class="yt-cap-num">03</div>
+					<h3>Data platforms &amp; applied AI</h3>
+					<p>Agreed metric definitions first, automation second, models only where the decision they support is worth the maintenance.</p>
+				</div>
+				<div class="yt-cap">
+					<div class="yt-cap-num">04</div>
+					<h3>Operations &amp; continuous optimisation</h3>
+					<p>Someone accountable after go-live: run-books, service levels and a quarterly review that reports against the original measure.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="yt-rule" id="method">
+			<div class="yt-wrap yt-section yt-method">
+				<div class="yt-method-col">
+					<span class="yt-eyebrow">How we work</span>
+					<h2 class="yt-h2 yt-h2-sub yt-method-heading">Two weeks to a decision you can defend.</h2>
+					<div class="yt-steps">
+						<div class="yt-step">
+							<div class="yt-step-num">01</div>
+							<div>
+								<div class="yt-step-title">Diagnose</div>
+								<p>Two weeks, fixed fee. Systems, data, cost and the three constraints that actually block you.</p>
+							</div>
+						</div>
+						<div class="yt-step">
+							<div class="yt-step-num">02</div>
+							<div>
+								<div class="yt-step-title">Decide</div>
+								<p>A costed roadmap with sequencing, a measure per stage, and the option to stop after any one of them.</p>
+							</div>
+						</div>
+						<div class="yt-step">
+							<div class="yt-step-num">03</div>
+							<div>
+								<div class="yt-step-title">Deliver</div>
+								<p>Our team or yours, with the same named lead from diagnosis through to the quarterly review.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<figure class="yt-method-figure grayscale">
+					<img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&amp;w=1400&amp;auto=format&amp;fit=crop" alt="Meeting room in an office tower" loading="lazy" width="1400" height="1750" />
+				</figure>
+			</div>
+		</section>
+
+		<section class="yt-rule" id="insights">
+			<div class="yt-wrap yt-section">
+				<div class="yt-head-row">
+					<div>
+						<span class="yt-eyebrow">Insights</span>
+						<h2 class="yt-h2 yt-h2-sub">Written for the person signing the invoice.</h2>
+					</div>
+					<a class="yt-link yt-link-nowrap hv1" href="../insights/index.html" data-no-spa>All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="../insights/it-strategy.html" data-no-spa>
+						<div class="card-kicker">IT strategy</div>
+						<h3 class="card-title">What a technology roadmap owes the board</h3>
+						<p class="card-body">Three questions a roadmap has to answer before it is worth presenting: what stops, what starts, and what it costs to be wrong.</p>
+						<div class="card-meta">8 min read · March 2026</div>
+					</a>
+					<a class="card" href="../insights/enterprise-architecture.html" data-no-spa>
+						<div class="card-kicker">Integration</div>
+						<h3 class="card-title">The case against replacing your ERP</h3>
+						<p class="card-body">Most integration pain is process pain wearing a technical costume. How to tell the difference before committing to a migration.</p>
+						<div class="card-meta">6 min read · February 2026</div>
+					</a>
+					<a class="card" href="../insights/data-intelligence.html" data-no-spa>
+						<div class="card-kicker">Data &amp; AI</div>
+						<h3 class="card-title">Metrics before models</h3>
+						<p class="card-body">Why the first automation project should be the one nobody wants to demo, and how to sequence the rest behind it.</p>
+						<div class="card-meta">7 min read · January 2026</div>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the</span><span>two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:aaronf@yondertech.co.nz">aaronf@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Phone</div>
+						<a class="yt-contact-link hv3" href="tel:+64225950228">+64 22 595 0228</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">Level 18, 100 Queen Street<br />Auckland 1010</div>
+					</div>
+				</div>
+				<form class="yt-form" data-contact-form name="contact" method="POST" data-netlify="true"
+					netlify-honeypot="bot-field" action="/en/index.html?success=true">
+					<input type="hidden" name="form-name" value="contact" />
+					<input type="hidden" name="bot-field" />
+					<span class="yt-form-eyebrow">Send a message</span>
+					<div class="yt-form-grid">
+						<div class="yt-field">
+							<label for="yt-first">First name</label>
+							<input class="yt-input" id="yt-first" type="text" name="first_name" autocomplete="given-name" required />
+						</div>
+						<div class="yt-field">
+							<label for="yt-last">Last name</label>
+							<input class="yt-input" id="yt-last" type="text" name="last_name" autocomplete="family-name" required />
+						</div>
+						<div class="yt-field yt-field-wide">
+							<label for="yt-email">Your email</label>
+							<input class="yt-input" id="yt-email" type="email" name="email" autocomplete="email" required />
+						</div>
+						<div class="yt-field yt-field-wide">
+							<label for="yt-message">What you need</label>
+							<textarea class="yt-input" id="yt-message" name="message" rows="4"
+								placeholder="What you are trying to decide, and by when." required></textarea>
+						</div>
+					</div>
+					<div class="yt-form-actions">
+						<button class="yt-submit" data-submit type="submit" data-busy="Sending…">Send message</button>
+						<p class="yt-form-msg" data-success role="status" aria-live="polite" hidden>Thanks — your message has been sent. We reply within one to two business days.</p>
+						<p class="yt-form-msg" data-error role="alert" aria-live="polite" hidden>That did not send. Email aaronf@yondertech.co.nz and we will pick it up from there.</p>
+					</div>
+				</form>
+			</div>
+		</section>
+	</main>
+
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">About</div>
+					<div class="yt-foot-links"><a href="../about/company.html">Company profile</a><a href="../about/leadership.html">Leadership</a><a href="../about/sustainability.html">Sustainability</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Services</div>
+					<div class="yt-foot-links"><a href="../services/it-strategy.html">IT strategy</a><a href="../services/system-integration.html">System integration</a><a href="../services/data-ai.html">Data &amp; AI</a><a href="../services/index.html">Managed operations</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../insights/index.html">Insights</a><a href="cases/index.html">Case library</a><a href="../events/index.html">Events</a><a href="../news/index.html">Newsroom</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:aaronf@yondertech.co.nz">aaronf@yondertech.co.nz</a><a href="tel:+64225950228">+64 22 595 0228</a><a href="../contact/index.html">Contact us</a><a href="../contact/careers.html">Careers</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../zh/index.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../assets/design/site.js"></script>
 </body>
+
 </html>
-
-
-
