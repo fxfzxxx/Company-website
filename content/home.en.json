@@ -1,0 +1,158 @@
+{
+  "htmlLang": "en",
+  "ogLocale": "en_NZ",
+  "title": "Yonder Tech — IT enablement & digital consulting, Auckland",
+  "description": "Yonder Tech works with New Zealand businesses on IT strategy, system integration, data platforms and managed operations.",
+  "nav": {
+    "work": "Work",
+    "library": "Case library",
+    "capabilities": "Capabilities",
+    "method": "Method",
+    "insights": "Insights",
+    "contact": "Contact"
+  },
+  "hero": {
+    "eyebrow": "IT enablement & digital consulting · Auckland",
+    "lines": ["Technology that earns", "its place on the", "balance sheet."],
+    "lede": "Yonder Tech works with New Zealand businesses and delivery partners on the unglamorous half of digital transformation: deciding what to build, integrating what already exists, and proving the result in numbers a board recognises.",
+    "primary": "Selected work",
+    "secondary": "What we do"
+  },
+  "work": {
+    "eyebrow": "Selected work",
+    "heading": "Nine concepts. Four to start with.",
+    "lede": "Self-directed concept work. Each entry carries its brief, the decisions that shaped it, and the design system it delivered.",
+    "link": "Full case library",
+    "rows": [
+      {
+        "num": "01",
+        "slug": "luna-bloom",
+        "meta": "Community platform · Concept",
+        "title": "Luna Bloom Society maternity community",
+        "body": "A community that holds long-form editorial and peer conversation without an endless feed: complete story sets, small trimester rooms, no engagement counters.",
+        "figure": "12",
+        "measure": "Component families",
+        "alt": "Luna Bloom Society maternity community concept"
+      },
+      {
+        "num": "02",
+        "slug": "ion-forge",
+        "meta": "Product launch · Concept",
+        "title": "Ion Forge X9 product launch system",
+        "body": "A hardware launch system carrying industrial design, spec detail and motion in one view, then repeating across twelve markets without a rebuild.",
+        "figure": "74",
+        "measure": "Components across 18 scenes",
+        "alt": "Ion Forge X9 product launch concept"
+      },
+      {
+        "num": "03",
+        "slug": "tech-disruption",
+        "meta": "Research hub · Concept",
+        "title": "Northbridge Capital research hub",
+        "body": "A daily-publishing research hub that absorbs editorial volume without reading as a link dump. Identical card space; hierarchy from imagery and category.",
+        "figure": "9",
+        "measure": "Stories held in one view",
+        "alt": "Northbridge Capital research hub concept"
+      },
+      {
+        "num": "04",
+        "slug": "atlas",
+        "meta": "Institutional finance · Concept",
+        "title": "Atlas Capital institutional experience",
+        "body": "One confident statement, one audited number stated with its as-of date, and a leadership interview module in place of stock photography.",
+        "figure": "8 wks",
+        "measure": "Concept to UI kit",
+        "alt": "Atlas Capital institutional experience concept"
+      }
+    ],
+    "note": "Concept projects designed in-house, not client engagements. Figures describe the delivered design system, not commercial results."
+  },
+  "stats": [
+    { "figure": "180+", "label": "Engagements delivered" },
+    { "figure": "92%", "label": "Clients who re-engage" },
+    { "figure": "6 wks", "label": "Median time to first release" },
+    { "figure": "12", "label": "Delivery & partner cities" }
+  ],
+  "capabilities": {
+    "eyebrow": "Capabilities",
+    "heading": "Four things we do, and nothing we don't.",
+    "items": [
+      { "num": "01", "title": "IT strategy & architecture governance", "body": "A technology roadmap tied to the commercial plan, with a decision record for every choice, so the next person can see why." },
+      { "num": "02", "title": "System integration & platform build", "body": "Connecting what you already run before proposing anything new. Fewer systems, fewer manual bridges, one consistent record." },
+      { "num": "03", "title": "Data platforms & applied AI", "body": "Agreed metric definitions first, automation second, models only where the decision they support is worth the maintenance." },
+      { "num": "04", "title": "Operations & continuous optimisation", "body": "Someone accountable after go-live: run-books, service levels and a quarterly review that reports against the original measure." }
+    ]
+  },
+  "method": {
+    "eyebrow": "How we work",
+    "heading": "Two weeks to a decision you can defend.",
+    "photo": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1400&auto=format&fit=crop",
+    "photoAlt": "Meeting room in an office tower",
+    "steps": [
+      { "num": "01", "title": "Diagnose", "body": "Two weeks, fixed fee. Systems, data, cost and the three constraints that actually block you." },
+      { "num": "02", "title": "Decide", "body": "A costed roadmap with sequencing, a measure per stage, and the option to stop after any one of them." },
+      { "num": "03", "title": "Deliver", "body": "Our team or yours, with the same named lead from diagnosis through to the quarterly review." }
+    ]
+  },
+  "insights": {
+    "eyebrow": "Insights",
+    "heading": "Written for the person signing the invoice.",
+    "link": "All insights",
+    "cards": [
+      { "kicker": "IT strategy", "title": "What a technology roadmap owes the board", "body": "Three questions a roadmap has to answer before it is worth presenting: what stops, what starts, and what it costs to be wrong.", "meta": "8 min read · March 2026", "href": "insights/it-strategy.html" },
+      { "kicker": "Integration", "title": "The case against replacing your ERP", "body": "Most integration pain is process pain wearing a technical costume. How to tell the difference before committing to a migration.", "meta": "6 min read · February 2026", "href": "insights/enterprise-architecture.html" },
+      { "kicker": "Data & AI", "title": "Metrics before models", "body": "Why the first automation project should be the one nobody wants to demo, and how to sequence the rest behind it.", "meta": "7 min read · January 2026", "href": "insights/data-intelligence.html" }
+    ]
+  },
+  "contact": {
+    "lines": ["Start with the", "two-week diagnostic."],
+    "body": "A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.",
+    "email": "Email",
+    "phone": "Phone",
+    "office": "Office",
+    "officeLine1": "Level 18, 100 Queen Street",
+    "officeLine2": "Auckland 1010",
+    "form": {
+      "eyebrow": "Send a message",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "emailLabel": "Your email",
+      "message": "What you need",
+      "messagePlaceholder": "What you are trying to decide, and by when.",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "success": "Thanks — your message has been sent. We reply within one to two business days.",
+      "error": "That did not send. Email aaronf@yondertech.co.nz and we will pick it up from there."
+    }
+  },
+  "footer": {
+    "columns": [
+      { "title": "About", "links": [
+        { "label": "Company profile", "href": "about/company.html" },
+        { "label": "Leadership", "href": "about/leadership.html" },
+        { "label": "Sustainability", "href": "about/sustainability.html" }
+      ] },
+      { "title": "Services", "links": [
+        { "label": "IT strategy", "href": "services/it-strategy.html" },
+        { "label": "System integration", "href": "services/system-integration.html" },
+        { "label": "Data & AI", "href": "services/data-ai.html" },
+        { "label": "Managed operations", "href": "services/index.html" }
+      ] },
+      { "title": "Resources", "links": [
+        { "label": "Insights", "href": "insights/index.html" },
+        { "label": "Case library", "href": "@library" },
+        { "label": "Events", "href": "events/index.html" },
+        { "label": "Newsroom", "href": "news/index.html" }
+      ] },
+      { "title": "Contact", "links": [
+        { "label": "aaronf@yondertech.co.nz", "href": "mailto:aaronf@yondertech.co.nz" },
+        { "label": "+64 22 595 0228", "href": "tel:+64225950228" },
+        { "label": "Contact us", "href": "contact/index.html" },
+        { "label": "Careers", "href": "contact/careers.html" }
+      ] }
+    ],
+    "legal": "© 2026 Yonder Tech · Auckland, New Zealand",
+    "otherLang": "中文",
+    "legalLinks": "Privacy policy · Terms of use"
+  }
+}

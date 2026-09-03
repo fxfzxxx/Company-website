@@ -1,0 +1,158 @@
+{
+  "htmlLang": "zh-CN",
+  "ogLocale": "zh_CN",
+  "title": "Yonder Tech — IT 咨询与数字化交付，奥克兰",
+  "description": "Yonder Tech 与新西兰企业合作，提供 IT 战略、系统集成、数据平台与托管运维服务。",
+  "nav": {
+    "work": "案例",
+    "library": "案例库",
+    "capabilities": "能力",
+    "method": "方法",
+    "insights": "洞察",
+    "contact": "联系"
+  },
+  "hero": {
+    "eyebrow": "IT 咨询与数字化交付 · 奥克兰",
+    "lines": ["让每一笔技术投入", "都能被验证。"],
+    "lede": "Yonder Tech 与新西兰本地企业及交付伙伴合作，处理数字化转型中最不光鲜的那一半：判断该建什么、整合已有系统，并用董事会认得的数字证明结果。",
+    "primary": "查看案例",
+    "secondary": "我们做什么"
+  },
+  "work": {
+    "eyebrow": "精选案例",
+    "heading": "九个概念，先看四个。",
+    "lede": "自主设计的概念作品。每条记录都包含课题、关键决策，以及最终交付的设计系统。",
+    "link": "完整案例库",
+    "rows": [
+      {
+        "num": "01",
+        "slug": "luna-bloom",
+        "meta": "社区平台 · 概念作品",
+        "title": "Luna Bloom Society 母婴社区",
+        "body": "在没有无限信息流的前提下承载长文与用户交流：内容成组完整呈现，按孕期分组的小型房间，不设互动计数。",
+        "figure": "12",
+        "measure": "组件族",
+        "alt": "Luna Bloom Society 母婴社区概念"
+      },
+      {
+        "num": "02",
+        "slug": "ion-forge",
+        "meta": "产品发布 · 概念作品",
+        "title": "Ion Forge X9 产品发布系统",
+        "body": "硬件发布系统在同一屏内承载工业设计、参数与动效，并复用于十二个市场而无需重做。",
+        "figure": "74",
+        "measure": "组件数，覆盖 18 个场景",
+        "alt": "Ion Forge X9 产品发布概念"
+      },
+      {
+        "num": "03",
+        "slug": "tech-disruption",
+        "meta": "研究平台 · 概念作品",
+        "title": "Northbridge Capital 研究平台",
+        "body": "每日更新的研究平台要承载发布量，又不能变成一堆链接。每条内容面积相同，层级由图片和分类决定。",
+        "figure": "9",
+        "measure": "同屏承载的内容条数",
+        "alt": "Northbridge Capital 研究平台概念"
+      },
+      {
+        "num": "04",
+        "slug": "atlas",
+        "meta": "机构金融 · 概念作品",
+        "title": "Atlas Capital 机构级体验",
+        "body": "一句明确主张，一个标注截止日期的经审计数字，以及用管理层访谈模块替代图库配图。",
+        "figure": "8 周",
+        "measure": "概念到 UI 套件",
+        "alt": "Atlas Capital 机构级体验概念"
+      }
+    ],
+    "note": "以上为自主设计的概念项目，非客户委托项目。文中数字描述的是交付的设计系统本身，不代表商业业绩。"
+  },
+  "stats": [
+    { "figure": "180+", "label": "已交付项目" },
+    { "figure": "92%", "label": "客户续约与复购率" },
+    { "figure": "6 周", "label": "首次上线中位周期" },
+    { "figure": "12", "label": "交付与合作城市" }
+  ],
+  "capabilities": {
+    "eyebrow": "服务能力",
+    "heading": "我们只做四件事，其余不做。",
+    "items": [
+      { "num": "01", "title": "IT 战略与架构治理", "body": "与经营计划绑定的技术路线图，每个决策都留有记录，接手的人能看懂为什么这么定。" },
+      { "num": "02", "title": "系统集成与平台建设", "body": "先把现有系统连通，再谈新建。更少的系统、更少的人工桥接、一份一致的记录。" },
+      { "num": "03", "title": "数据平台与 AI 落地", "body": "先统一指标口径，再做自动化；只有当模型支撑的决策值得长期维护时才引入模型。" },
+      { "num": "04", "title": "运维与持续优化", "body": "上线之后仍有人负责：运维手册、服务级别，以及对照初始指标的季度复盘。" }
+    ]
+  },
+  "method": {
+    "eyebrow": "合作方式",
+    "heading": "两周，得到一个能对外解释的决定。",
+    "photo": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1400&auto=format&fit=crop",
+    "photoAlt": "写字楼中的会议室",
+    "steps": [
+      { "num": "01", "title": "诊断", "body": "两周，固定费用。盘系统、盘数据、盘成本，找出真正卡住你的三个约束。" },
+      { "num": "02", "title": "定案", "body": "带预算与先后次序的路线图，每一阶段都有指标，任何一阶段之后都可以停。" },
+      { "num": "03", "title": "交付", "body": "我们的团队或你的团队，从诊断到季度复盘由同一位负责人跟到底。" }
+    ]
+  },
+  "insights": {
+    "eyebrow": "洞察",
+    "heading": "写给签字的那个人。",
+    "link": "全部洞察",
+    "cards": [
+      { "kicker": "IT 战略", "title": "技术路线图应当回答董事会什么", "body": "值得上会的路线图必须先回答三个问题：什么停掉、什么开始、判断错了要付多少代价。", "meta": "8 分钟 · 2026 年 3 月", "href": "insights/it-strategy.html" },
+      { "kicker": "系统集成", "title": "先别急着换掉你的 ERP", "body": "多数集成上的痛，其实是流程的痛套了一层技术外衣。在决定迁移之前，如何分清两者。", "meta": "6 分钟 · 2026 年 2 月", "href": "insights/enterprise-architecture.html" },
+      { "kicker": "数据与 AI", "title": "先有指标，再谈模型", "body": "第一个自动化项目往往是最不适合做演示的那个，以及后面的顺序该怎么排。", "meta": "7 分钟 · 2026 年 1 月", "href": "insights/data-intelligence.html" }
+    ]
+  },
+  "contact": {
+    "lines": ["先从两周诊断开始。"],
+    "body": "先一次 60 分钟沟通，再决定是否进入两周固定费用的诊断。结束时你会拿到一份带预算的路线图，没有继续合作的义务。",
+    "email": "邮箱",
+    "phone": "电话",
+    "office": "办公地址",
+    "officeLine1": "奥克兰皇后街 100 号 18 楼",
+    "officeLine2": "Auckland 1010",
+    "form": {
+      "eyebrow": "在线留言",
+      "firstName": "名",
+      "lastName": "姓",
+      "emailLabel": "邮箱",
+      "message": "你的需求",
+      "messagePlaceholder": "你要决定的事，以及时间点。",
+      "submit": "发送",
+      "sending": "发送中…",
+      "success": "已收到。我们会在 1–2 个工作日内回复。",
+      "error": "发送失败。请直接邮件至 aaronf@yondertech.co.nz，我们会跟进。"
+    }
+  },
+  "footer": {
+    "columns": [
+      { "title": "关于", "links": [
+        { "label": "公司简介", "href": "about/company.html" },
+        { "label": "管理团队", "href": "about/leadership.html" },
+        { "label": "可持续发展", "href": "about/sustainability.html" }
+      ] },
+      { "title": "服务", "links": [
+        { "label": "IT 战略", "href": "services/it-strategy.html" },
+        { "label": "系统集成", "href": "services/system-integration.html" },
+        { "label": "数据与 AI", "href": "services/data-ai.html" },
+        { "label": "托管运维", "href": "services/index.html" }
+      ] },
+      { "title": "资源", "links": [
+        { "label": "洞察", "href": "insights/index.html" },
+        { "label": "案例库", "href": "@library" },
+        { "label": "活动", "href": "events/index.html" },
+        { "label": "新闻", "href": "news/index.html" }
+      ] },
+      { "title": "联系", "links": [
+        { "label": "aaronf@yondertech.co.nz", "href": "mailto:aaronf@yondertech.co.nz" },
+        { "label": "+64 22 595 0228", "href": "tel:+64225950228" },
+        { "label": "联系我们", "href": "contact/index.html" },
+        { "label": "加入我们", "href": "contact/careers.html" }
+      ] }
+    ],
+    "legal": "© 2026 Yonder Tech · 新西兰奥克兰",
+    "otherLang": "English",
+    "legalLinks": "隐私政策 · 使用条款"
+  }
+}
