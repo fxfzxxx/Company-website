@@ -389,6 +389,7 @@ button {
 .yt-thumb img {
 	display: block;
 	width: 100%;
+	height: auto;
 	aspect-ratio: 4 / 3;
 	object-fit: cover;
 }
@@ -567,6 +568,7 @@ button {
 .yt-method-figure img {
 	display: block;
 	width: 100%;
+	height: auto;
 	aspect-ratio: 4 / 5;
 	max-height: 560px;
 	object-fit: cover;
@@ -1141,6 +1143,7 @@ textarea.yt-input {
 .yt-detail-hero img {
 	display: block;
 	width: 100%;
+	height: auto;
 	max-height: 62vh;
 	object-fit: cover;
 }
