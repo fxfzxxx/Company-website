@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Specimen 03 — three.js study</title>
+	<meta name="robots" content="noindex, nofollow" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<style>
+		:root {
+			--ink: #e8e6e2;
+			--dim: #8a8681;
+			--rule: rgba(232, 230, 226, 0.16);
+			--mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+		}
+
+		* { box-sizing: border-box; }
+
+		html, body {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			background: #0b0b0c;
+			color: var(--ink);
+			font-family: var(--mono);
+			overflow: hidden;
+		}
+
+		#stage {
+			position: fixed;
+			inset: 0;
+			cursor: grab;
+		}
+
+		#stage.is-dragging { cursor: grabbing; }
+
+		/* — chrome: nothing here is 3D, it just frames the plate — */
+
+		.hud {
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			padding: clamp(16px, 3.2vw, 40px);
+			display: grid;
+			grid-template-rows: auto 1fr auto;
+			font-size: 11px;
+			letter-spacing: 0.09em;
+			text-transform: uppercase;
+		}
+
+		.hud a, .hud button { pointer-events: auto; }
+
+		.row {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 24px;
+		}
+
+		.row.bottom { align-items: flex-end; }
+
+		.title {
+			font-size: clamp(30px, 6.5vw, 74px);
+			line-height: 0.92;
+			letter-spacing: -0.02em;
+			text-transform: none;
+			font-weight: 400;
+			margin: 0 0 18px;
+		}
+
+		.lede {
+			max-width: 27ch;
+			color: var(--dim);
+			line-height: 1.75;
+			text-transform: none;
+			letter-spacing: 0.02em;
+			margin: 0;
+		}
+
+		.tag { color: var(--dim); }
+
+		.index {
+			font-size: clamp(38px, 8vw, 92px);
+			line-height: 0.86;
+			letter-spacing: -0.03em;
+			color: var(--ink);
+		}
+
+		.specs {
+			display: grid;
+			gap: 4px;
+			color: var(--dim);
+			text-align: right;
+		}
+
+		.left { max-width: 40ch; }
+
+		/* thin registration marks, like the reference plate */
+		.mark {
+			position: fixed;
+			width: 9px;
+			height: 9px;
+			border: 1px solid var(--rule);
+		}
+
+		.mark.tl { top: 14px; left: 14px; border-right: 0; border-bottom: 0; }
+		.mark.tr { top: 14px; right: 14px; border-left: 0; border-bottom: 0; }
+		.mark.bl { bottom: 14px; left: 14px; border-right: 0; border-top: 0; }
+		.mark.br { bottom: 14px; right: 14px; border-left: 0; border-top: 0; }
+
+		.crosshair {
+			position: fixed;
+			left: 50%;
+			top: 50%;
+			width: 26px;
+			height: 26px;
+			margin: -13px 0 0 -13px;
+			opacity: 0.22;
+		}
+
+		.crosshair::before, .crosshair::after {
+			content: "";
+			position: absolute;
+			background: var(--ink);
+		}
+
+		.crosshair::before { left: 50%; top: 0; width: 1px; height: 100%; }
+		.crosshair::after { top: 50%; left: 0; height: 1px; width: 100%; }
+
+		/* — panel — */
+
+		#toggle {
+			appearance: none;
+			background: transparent;
+			border: 1px solid var(--rule);
+			color: var(--ink);
+			font: inherit;
+			font-size: 10px;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			padding: 7px 11px;
+			cursor: pointer;
+		}
+
+		#toggle:hover { border-color: rgba(232, 230, 226, 0.45); }
+
+		#panel {
+			position: fixed;
+			top: clamp(16px, 3.2vw, 40px);
+			right: clamp(16px, 3.2vw, 40px);
+			width: 232px;
+			padding: 14px;
+			border: 1px solid var(--rule);
+			background: rgba(11, 11, 12, 0.82);
+			backdrop-filter: blur(6px);
+			display: grid;
+			gap: 10px;
+			pointer-events: auto;
+			font-size: 10px;
+			letter-spacing: 0.08em;
+		}
+
+		#panel[hidden] { display: none; }
+
+		#panel label {
+			display: grid;
+			gap: 5px;
+			color: var(--dim);
+			text-transform: uppercase;
+		}
+
+		#panel label span { display: flex; justify-content: space-between; }
+
+		#panel input[type="range"] {
+			appearance: none;
+			width: 100%;
+			height: 1px;
+			background: var(--rule);
+			outline: none;
+		}
+
+		#panel input[type="range"]::-webkit-slider-thumb {
+			appearance: none;
+			width: 9px;
+			height: 9px;
+			background: var(--ink);
+			cursor: pointer;
+		}
+
+		#panel input[type="range"]::-moz-range-thumb {
+			width: 9px;
+			height: 9px;
+			border: 0;
+			background: var(--ink);
+			cursor: pointer;
+		}
+
+		#fallback {
+			position: fixed;
+			inset: 0;
+			display: none;
+			place-items: center;
+			text-align: center;
+			padding: 24px;
+			color: var(--dim);
+			line-height: 1.8;
+		}
+
+		@media (max-width: 760px) {
+			.lede, .specs { display: none; }
+			#panel { top: auto; bottom: 74px; right: 16px; left: 16px; width: auto; }
+		}
+	</style>
+</head>
+
+<body>
+	<div id="stage"></div>
+
+	<div class="hud">
+		<div class="row">
+			<div class="left">
+				<div class="tag">Yonder Tech · Lab</div>
+			</div>
+			<button id="toggle" type="button" aria-expanded="false" aria-controls="panel">Parameters</button>
+		</div>
+
+		<div class="row"></div>
+
+		<div class="row bottom">
+			<div class="left">
+				<h1 class="title">Form &amp; Function</h1>
+				<p class="lede">
+					A specimen of an unfolding story — mineral gestures caught in transit, arranged with silent
+					intent. Drag to turn the body.
+				</p>
+			</div>
+			<div>
+				<div class="specs">
+					<div>Dispersive shell · IOR 1.46</div>
+					<div>Sediment core · opaque backdrop</div>
+					<div>Six filament orbits</div>
+				</div>
+				<div class="index">03/06</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mark tl"></div>
+	<div class="mark tr"></div>
+	<div class="mark bl"></div>
+	<div class="mark br"></div>
+	<div class="crosshair"></div>
+
+	<div id="panel" hidden></div>
+	<div id="fallback"><p>This study needs WebGL 2. Try a current desktop browser.</p></div>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../../assets/vendor/three/three.module.min.js",
+				"three/addons/": "../../assets/vendor/three/addons/"
+			}
+		}
+	</script>
+
+	<script type="module">
+		import { createSpecimen } from "./specimen.js";
+
+		const stage = document.getElementById("stage");
+		let api;
+
+		try {
+			api = createSpecimen(stage);
+		} catch (error) {
+			console.error(error);
+			document.getElementById("fallback").style.display = "grid";
+			document.getElementById("toggle").hidden = true;
+		}
+
+		/* — parameter panel ————————————————————————————————————————
+		   The same handles used to art-direct the look, exposed live so the
+		   numbers in specimen.js can be settled by eye. */
+
+		if (api) {
+			const controls = [
+				["Dispersion", 0, 25, 0.5, () => api.materials.glass.dispersion, (v) => (api.materials.glass.dispersion = v)],
+				["Roughness", 0, 0.4, 0.005, () => api.materials.glass.roughness, (v) => (api.materials.glass.roughness = v)],
+				["Thickness", 0, 3, 0.05, () => api.materials.glass.thickness, (v) => (api.materials.glass.thickness = v)],
+				["IOR", 1.05, 2.2, 0.01, () => api.materials.glass.ior, (v) => (api.materials.glass.ior = v)],
+				["Iridescence", 0, 1, 0.01, () => api.materials.glass.iridescence, (v) => (api.materials.glass.iridescence = v)],
+				["Exposure", 0.4, 2, 0.01, () => api.renderer.toneMappingExposure, (v) => (api.renderer.toneMappingExposure = v)],
+				["Bloom", 0, 1.5, 0.01, () => api.post.bloom.strength, (v) => (api.post.bloom.strength = v)],
+				["Grain", 0, 0.16, 0.002, () => api.post.grade.uniforms.uGrain.value, (v) => (api.post.grade.uniforms.uGrain.value = v)],
+				["Spin", 0, 0.3, 0.005, () => api.motion.spin, (v) => (api.motion.spin = v)],
+			];
+
+			const panel = document.getElementById("panel");
+			for (const [name, min, max, step, get, set] of controls) {
+				const label = document.createElement("label");
+				const caption = document.createElement("span");
+				const value = document.createElement("b");
+				const input = document.createElement("input");
+				value.style.fontWeight = "400";
+				value.textContent = (+get()).toFixed(2);
+				caption.append(name, value);
+				input.type = "range";
+				input.min = min;
+				input.max = max;
+				input.step = step;
+				input.value = get();
+				input.addEventListener("input", () => {
+					set(parseFloat(input.value));
+					value.textContent = parseFloat(input.value).toFixed(2);
+				});
+				label.append(caption, input);
+				panel.append(label);
+			}
+
+			const toggle = document.getElementById("toggle");
+			toggle.addEventListener("click", () => {
+				panel.hidden = !panel.hidden;
+				toggle.setAttribute("aria-expanded", String(!panel.hidden));
+			});
+		}
+	</script>
+</body>
+
+</html>
