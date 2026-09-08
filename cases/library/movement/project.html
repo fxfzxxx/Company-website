@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Case study: Movement 01 - building an instrument that reads as industrial and hand-made at once, generated in the browser from gear maths and canvas engraving." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/movement/project.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#e7e3da" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Movement 01 - Case study" />
+	<meta property="og:description"
+		content="Building an instrument that reads as industrial and hand-made at once, generated in the browser." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/movement/project.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/movement/assets/hero.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Movement 01 - Case study" />
+	<meta name="twitter:description" content="An instrument generated in the browser: real ratios, hand finishes." />
+	<title>Movement 01 - Case study</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+	<div class="study">
+		<div class="nav">
+			<strong>Movement 01</strong>
+			<div class="nav-links">
+				<a href="index.html">Live concept</a>
+				<a href="project.html">Case study</a>
+				<a href="../../index.html" target="_top">Case Library</a>
+			</div>
+		</div>
+
+		<h1>Precision that was made by people.</h1>
+		<p class="lede-block">
+			The brief pulled in two directions: more industrial than the last study, and warmer. Those fight each
+			other in most subjects, so the answer was to pick one where they have never been in conflict — a watch
+			movement, the densest piece of precision engineering that people still finish by hand.
+		</p>
+
+		<img class="plate-shot" src="assets/hero.jpg" width="2000" height="1333"
+			alt="A generated watch movement: gilt plate with an engine-turned rosette, rhodium bridges, ruby jewels, a copper coil and a blued steel hand, set in a turned walnut dish." />
+
+		<dl class="facts">
+			<div>
+				<dt>Type</dt>
+				<dd>Concept · self-directed</dd>
+			</div>
+			<div>
+				<dt>Discipline</dt>
+				<dd>Real-time 3D · Web</dd>
+			</div>
+			<div>
+				<dt>Deliverables</dt>
+				<dd>Live scene, part index, case study</dd>
+			</div>
+			<div>
+				<dt>Payload</dt>
+				<dd>No models, no image files</dd>
+			</div>
+		</dl>
+
+		<section>
+			<h2>The brief</h2>
+			<p>
+				A previous study grew an abstract specimen out of noise. Noise is the wrong tool here: it makes
+				organic things, and industry does not look organic. It looks like it was cut, faced, chamfered and
+				measured. But a page made only of that reads cold, and the brief asked for the opposite of cold.
+			</p>
+			<p>
+				A movement resolves it, because every industrial quality in it is there for a reason a person
+				decided — the tooth counts come from the ratio someone wanted, the bridges are shaped by hand
+				because they only have to clear the wheels, and the finishes exist purely so the thing is
+				beautiful inside a case nobody opens.
+			</p>
+		</section>
+
+		<section>
+			<h2>Design decisions</h2>
+			<div class="cards">
+				<article>
+					<h3>Real ratios, so the motion is honest</h3>
+					<p>
+						The great wheel has 80 teeth and each pinion 12, on a shared module, so the pinions sit at
+						the exact centre distance and turn 6.67 times per wheel revolution — backwards, as a driven
+						pinion must. Get that wrong and the eye notices before the mind does.
+					</p>
+				</article>
+				<article>
+					<h3>The finishes carry the hand</h3>
+					<p>
+						A guilloché rosette is engraved into the plate, perlage is ground across the bridges, and no
+						two screw slots sit at the same angle. Machines could make all three even. Nobody wants them
+						even — the unevenness is the signature.
+					</p>
+				</article>
+				<article>
+					<h3>Wood is what the hand touches</h3>
+					<p>
+						The metal is set into a turned walnut dish whose growth rings run oval, never round. It is
+						the one part of the object a person would actually hold, and it warms every metal around it.
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<section>
+			<h2>How it is built</h2>
+			<p>
+				Wheels are extruded profiles: the tooth radius is a function of angle, sampled fourteen times per
+				tooth, with the crossings cut as annular holes and the whole thing bevelled — the chamfer is what
+				catches the light and says <code>machined</code>. Turned parts are lathe profiles written the way
+				you would sketch them on paper. The knurl on the bezel and crown is two opposing helical waves that
+				fade out before the ends, because a knurling wheel never runs into the chamfer.
+			</p>
+			<p>
+				The engraving is drawn to a canvas at load: the rosette is a family of epitrochoids, perlage is
+				overlapping ground circles, walnut is oval growth rings with a wobble summed from nine harmonics.
+				They arrive as roughness and bump maps, so the plate does not carry a picture of engraving — it
+				carries the light behaviour of it.
+			</p>
+			<p>
+				One directional light casts real shadows over the stack, which is the only thing that tells you a
+				bridge sits above a wheel and a wheel above the plate. The environment does the rest.
+			</p>
+		</section>
+
+		<section>
+			<h2>What got cut</h2>
+			<p>
+				An eight-bladed iris sat at the centre for four rounds. Physically it was fine; as an image it read
+				as a flower laid on top of a mechanism, and it competed with the wheels for the middle of the
+				frame. A dense object needs exactly one quiet focus, so the iris came out and a lens in a gold
+				bezel went in. The whole piece improved the moment something was removed rather than added.
+			</p>
+		</section>
+
+		<section>
+			<h2>Craft notes</h2>
+			<ul>
+				<li>Hovering any part names it and lifts it off the plate, the way you would pick it up with
+					tweezers; the index at the top right marks the same row, so the drawing and its key are one
+					document.</li>
+				<li>The callout points at the spot the ray actually struck, not at the part's origin — a bridge's
+					origin is the middle of the movement, and a leader line that always points there points at
+					nothing.</li>
+				<li>Small screens and coarse pointers get a smaller shadow map and a half-size transmission target;
+					portrait viewports recentre the instrument instead of cropping it.</li>
+				<li><code>prefers-reduced-motion</code> stops the train, the balance and the grain.</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Outcome</h2>
+			<p>
+				An instrument that is generated rather than shipped: thirteen named parts, five jewels, a hundred
+				and eighty engraved circles, and not one model or image file. Both halves of the brief hold at
+				once, because the subject was chosen so they would never have to argue.
+			</p>
+		</section>
+
+		<footer>Movement 01 design case study · Yonder Case Library · 2026</footer>
+	</div>
+</body>
+
+</html>
