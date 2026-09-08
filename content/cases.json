@@ -1,7 +1,291 @@
 [
   {
-    "slug": "luna-bloom",
+    "slug": "movement",
     "num": "01",
+    "tags": [
+      "Web",
+      "UI"
+    ],
+    "year": "2026",
+    "thumb": "/cases/library/movement/assets/thumb.jpg",
+    "hero": "/cases/library/movement/assets/hero.jpg",
+    "colorHero": true,
+    "figure": {
+      "en": "13",
+      "zh": "13"
+    },
+    "measure": {
+      "en": "Parts, none from a file",
+      "zh": "个部件，无一来自文件"
+    },
+    "lib": {
+      "en": {
+        "meta": "Real-time 3D · Concept",
+        "title": "Movement 01 instrument study",
+        "brief": "The brief pulled two ways: more industrial than the studies before it, and warmer. Most subjects make those fight each other, so the work began by choosing one where they never have — a watch movement, the densest precision engineering people still finish by hand.",
+        "decisions": [
+          "The going train runs on real ratios: one module across the great wheel and its pinions, so they sit at the correct centre distance and turn at the rate their tooth counts demand.",
+          "The finishes carry the hand — a guilloché rosette engraved into the plate, perlage ground across the bridges, and no two screw slots left at the same angle.",
+          "An eight-bladed iris held the centre for four rounds and read as a flower laid on a mechanism; removing it, not adding to it, is what made the piece work."
+        ],
+        "outcome": "Thirteen named parts, five jewels and a hundred and ninety engraved circles, generated in the browser with no model or image files. Hovering names a part and lifts it off the plate, and the index beside it marks the same row."
+      },
+      "zh": {
+        "meta": "实时 3D · 概念作品",
+        "title": "Movement 01 仪器研究",
+        "brief": "课题往两个方向拉：比之前的研究更工业，同时更温暖。多数题材里这两者互相打架，所以工作从选题开始——钟表机芯，人类至今仍用手修饰的、最密集的精密工程。",
+        "decisions": [
+          "轮系跑的是真实传动比：大轮与小齿轮共用一个模数，因而中心距是算出来的，转速由齿数决定。",
+          "打磨纹路承载手作：夹板上刻玑镂、桥板上磨珍珠纹，每颗螺丝的一字槽都停在不同角度。",
+          "中央的八叶光圈做了四轮，最终看上去像摊在机构上的一朵花；让作品成立的是把它拿掉，而不是再加东西。"
+        ],
+        "outcome": "十三个可命名部件、五颗宝石、一百九十条雕刻曲线，全部在浏览器里生成，没有模型文件也没有图片文件。悬停会报出部件名并把它从夹板上抬起，旁边的索引同步标记同一行。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "01 — Real-time 3D",
+        "title": "Precision that was made by people.",
+        "lede": "An instrument generated at load, where every industrial quality in it is there because a person decided it should be.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Real-time 3D · Web"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Live scene, part index, case study"
+          },
+          {
+            "label": "Payload",
+            "value": "No models, no image files"
+          }
+        ],
+        "brief": "An earlier study grew an abstract specimen out of noise. Noise is the wrong tool here: it makes organic things, and industry does not look organic — it looks cut, faced, chamfered and measured. But a page made only of that reads cold, and the brief asked for the opposite of cold.",
+        "briefTwo": "A movement resolves the tension, because every industrial quality in it exists for a reason a person decided. The tooth counts come from a ratio someone wanted, the bridges are shaped by hand because they only have to clear the wheels, and the finishes exist purely so the thing is beautiful inside a case nobody opens.",
+        "decisions": [
+          "Real ratios, so the motion is honest. The great wheel and its pinions share one module, which puts them at the exact centre distance and turns each pinion 6.67 times per revolution of the wheel — backwards, as a driven pinion must.",
+          "The finishes carry the hand. A guilloché rosette is engraved into the plate, perlage is ground across the bridges, and no two screw slots sit at the same angle. A machine could make all three even; nobody wants them even.",
+          "Wood is what the hand touches. The metal is set into a turned walnut dish whose growth rings run oval, never round — the one part a person would actually hold, and it warms every metal around it."
+        ],
+        "outcome": "Thirteen named parts, five jewels and a hundred and ninety engraved circles, with not one model or image file. Both halves of the brief hold at once, because the subject was chosen so they would never have to argue.",
+        "specs": [
+          {
+            "figure": "6.67:1",
+            "label": "Gear ratio",
+            "note": "80 teeth to 12, on a shared module."
+          },
+          {
+            "figure": "3",
+            "label": "Finishes drawn at load",
+            "note": "Guilloché, perlage and oval walnut grain."
+          },
+          {
+            "figure": "0",
+            "label": "Asset files",
+            "note": "Geometry and engraving are both generated."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "01 — 实时 3D",
+        "title": "由人做出来的精密。",
+        "lede": "一件在加载时生成的仪器——它身上每一处工业属性，都是因为某个人决定它该如此。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "实时 3D · Web"
+          },
+          {
+            "label": "交付物",
+            "value": "实时场景、部件索引、案例研究"
+          },
+          {
+            "label": "体积",
+            "value": "无模型、无图片文件"
+          }
+        ],
+        "brief": "此前的一次研究用噪声长出了一颗抽象标本。噪声在这里是错的工具：它做有机的东西，而工业不长成有机的样子——它是被切削、车平、倒角、量过的。但只有这些的页面会很冷，而课题要的正是冷的反面。",
+        "briefTwo": "机芯化解了这对矛盾，因为它身上每一处工业属性都源于某个人的决定：齿数来自某人想要的传动比，桥板的形状是随手画的、只需让开轮系，而那些打磨纹路存在的唯一理由，是让这东西在一个没人会打开的壳子里依然好看。",
+        "decisions": [
+          "真实传动比，让运动是诚实的。大轮与小齿轮共用一个模数，因而中心距精确、每转带动小齿轮 6.67 圈，并且反向——被动齿轮必然如此。",
+          "打磨纹路承载手作。夹板上刻玑镂，桥板上磨珍珠纹，没有两颗螺丝的槽停在同一角度。机器可以把这三样做得很均匀，但没有人想要均匀。",
+          "木头是手真正触到的部分。金属被嵌进一只车削的胡桃木盘，它的年轮是椭圆而非正圆——这是整件东西上唯一会被握住的地方，也让周围所有金属都暖了下来。"
+        ],
+        "outcome": "十三个可命名部件、五颗宝石、一百九十条雕刻曲线，没有任何模型或图片文件。课题的两半同时成立，因为选题本身就让它们不必争。",
+        "specs": [
+          {
+            "figure": "6.67:1",
+            "label": "传动比",
+            "note": "80 齿对 12 齿，共用模数。"
+          },
+          {
+            "figure": "3",
+            "label": "加载时绘制的纹路",
+            "note": "玑镂、珍珠纹、椭圆木纹。"
+          },
+          {
+            "figure": "0",
+            "label": "素材文件",
+            "note": "几何与雕刻都是生成的。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "specimen",
+    "num": "02",
+    "tags": [
+      "Web",
+      "UI"
+    ],
+    "year": "2026",
+    "thumb": "/cases/library/specimen/assets/thumb.jpg",
+    "hero": "/cases/library/specimen/assets/hero.jpg",
+    "colorHero": true,
+    "figure": {
+      "en": "0",
+      "zh": "0"
+    },
+    "measure": {
+      "en": "Asset files shipped",
+      "zh": "运行时加载的资源文件"
+    },
+    "lib": {
+      "en": {
+        "meta": "Real-time 3D · Concept",
+        "title": "Specimen 03 dispersive study",
+        "brief": "The reference was a still: a mineral body seen through thick glass, its edges broken into spectra, thin orbits passing in front and behind. A first pass produced it as an exported model — the shape survived the export, the light did not.",
+        "decisions": [
+          "The spectrum is refraction, not a filter: the core is left opaque so it enters the transmission backdrop, and the glass splits it per wavelength as the body turns.",
+          "The lighting is a room rather than lamps — a procedural dark studio whose three narrow bright strips are the thing dispersion has to smear.",
+          "The wings grow out of the body's own displacement field, so one continuous refracting surface carries the spectrum all the way to the silhouette."
+        ],
+        "outcome": "A showcase generated in the browser rather than shipped to it: no model files, no textures, no third-party scripts. It carries live art-direction controls, a lighter tier for phones, and a seed number that rebuilds the same specimen every time."
+      },
+      "zh": {
+        "meta": "实时 3D · 概念作品",
+        "title": "Specimen 03 色散标本",
+        "brief": "参考只是一张静帧：厚玻璃里的矿物体，边缘裂成光谱，细环从前后穿过。第一版把它做成了导出模型——形状留下来了，光没有。",
+        "decisions": [
+          "光谱来自真实折射，而不是后期滤镜：内核保持不透明，进入折射背景，玻璃再按波长把它拆开，随物体转动而变化。",
+          "照明是一间房，不是几盏灯。程序生成的暗色影棚里三条窄亮条，正是色散需要拉开的那部分光。",
+          "外侧的翼由外壳自身的位移场长出，同一张连续折射面把光谱一直带到轮廓边缘。"
+        ],
+        "outcome": "一个在浏览器里生成、而不是传输过去的展示：没有模型文件、没有贴图、没有第三方脚本。附带实时调参面板、为手机准备的更轻一档，以及一个能复现同一颗标本的种子数。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "02 — Real-time 3D",
+        "title": "Light is the model.",
+        "lede": "A dispersive glass specimen rebuilt as a live scene, where the spectrum comes out of refraction instead of a picture of it.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Real-time 3D · Web"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Live scene, art-direction panel, case study"
+          },
+          {
+            "label": "Payload",
+            "value": "No models, no textures, no CDN"
+          }
+        ],
+        "brief": "The plate to match was a mineral body inside thick glass, its edges broken into spectra and thin orbits crossing in front and behind. Producing the shape was the easy half: exported as a model and dropped into a page, it read as a grey lump. Everything convincing about the reference lived in the lighting and the refraction, and neither of those survives an export.",
+        "briefTwo": "So the work was not to reproduce a picture but to rebuild the conditions that make it — something that holds up while it turns, on a viewport of any shape, without shipping a single asset.",
+        "decisions": [
+          "Dispersion is physical here. The core is an opaque mesh, so it lands in the renderer's transmission backdrop and the shell refracts it per wavelength — the fringe moves correctly as the body turns, which a screen-space effect never does.",
+          "A procedural environment does the lighting: a dark room with a few broad panels and three narrow bright strips, pre-filtered into an environment map. The strips are what smear into spectra; without them glass has nothing to bend.",
+          "Separate membranes for the wings read as grey plastic against a dark ground, so they were dropped. The shell's displacement field grows lobes instead, keeping one continuous refracting surface out to the silhouette."
+        ],
+        "outcome": "About forty kilobytes of hand-written code over a vendored renderer, generating its own geometry, lighting and grain at load. It survives being turned, resized and re-seeded, drops into any page as a module, and hands the GPU back when the section unmounts.",
+        "specs": [
+          {
+            "figure": "0",
+            "label": "Asset files",
+            "note": "Geometry, colour and dust are grown from seeded noise."
+          },
+          {
+            "figure": "2",
+            "label": "Displaced icospheres",
+            "note": "Glass body and sediment core, normals from tangent probes."
+          },
+          {
+            "figure": "40 kB",
+            "label": "Hand-written code",
+            "note": "Over a vendored renderer, no third-party scripts."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "02 — 实时 3D",
+        "title": "光才是模型。",
+        "lede": "把一颗色散玻璃标本重建为实时场景：光谱来自折射本身，而不是折射的照片。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "实时 3D · Web"
+          },
+          {
+            "label": "交付物",
+            "value": "实时场景、调参面板、案例研究"
+          },
+          {
+            "label": "体积",
+            "value": "无模型、无贴图、无 CDN"
+          }
+        ],
+        "brief": "要对上的画面，是厚玻璃里的矿物体，边缘裂成光谱，细环在前后穿行。做出形状是容易的那一半：导出成模型放进页面，它就是一坨灰色的东西。参考图里真正成立的部分都在照明和折射上，而这两样都无法随导出一起带走。",
+        "briefTwo": "所以要做的不是复制一张图，而是重建让这张图成立的条件——在任意比例的视窗里、在物体转动时都站得住，并且不传输任何素材文件。",
+        "decisions": [
+          "色散是物理的。内核是不透明网格，因此会进入渲染器的折射背景，外壳再按波长折射它——彩色边随物体转动而正确移动，屏幕空间特效做不到这一点。",
+          "照明由程序化环境承担：暗房里几块宽光板加三条窄亮条，预过滤成环境贴图。被拉成光谱的正是那几条亮条；没有它们，玻璃就无光可折。",
+          "翼原本做成独立薄片，在暗背景下像灰塑料，于是弃用。改由外壳的位移场长出凸起，让同一张连续折射面一直延伸到轮廓之外。"
+        ],
+        "outcome": "约四十千字节手写代码，跑在随仓库分发的渲染器之上，在加载时生成自己的几何、照明与颗粒。它经得起转动、缩放和换种子，可作为模块嵌入任意页面，组件卸载时把显卡资源交还。",
+        "specs": [
+          {
+            "figure": "0",
+            "label": "素材文件",
+            "note": "几何、颜色与尘埃都由带种子的噪声生成。"
+          },
+          {
+            "figure": "2",
+            "label": "位移球体",
+            "note": "玻璃本体与沉积内核，法线由切向探针求出。"
+          },
+          {
+            "figure": "40 kB",
+            "label": "手写代码",
+            "note": "跑在随仓库分发的渲染器上，无第三方脚本。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "luna-bloom",
+    "num": "03",
     "tags": [
       "Web",
       "UI",
@@ -44,7 +328,7 @@
     },
     "det": {
       "en": {
-        "crumb": "01 — Community platform",
+        "crumb": "03 — Community platform",
         "title": "Softness as a design system.",
         "lede": "A maternity community concept built to hold long-form editorial and peer conversation without the pull of an endless feed.",
         "facts": [
@@ -92,7 +376,7 @@
         ]
       },
       "zh": {
-        "crumb": "01 — 社区平台",
+        "crumb": "03 — 社区平台",
         "title": "把「柔和」做成一套系统。",
         "lede": "母婴社区概念，要在没有无限信息流的前提下同时容纳长文内容和用户交流。",
         "facts": [
@@ -143,7 +427,7 @@
   },
   {
     "slug": "ion-forge",
-    "num": "02",
+    "num": "04",
     "tags": [
       "Web",
       "UI",
@@ -186,7 +470,7 @@
     },
     "det": {
       "en": {
-        "crumb": "02 — Product launch",
+        "crumb": "04 — Product launch",
         "title": "From industrial design to kinetic product storytelling.",
         "lede": "A hardware launch system carrying industrial design, spec detail and motion in one view, and repeating across twelve markets.",
         "facts": [
@@ -234,7 +518,7 @@
         ]
       },
       "zh": {
-        "crumb": "02 — 产品发布",
+        "crumb": "04 — 产品发布",
         "title": "从工业设计到动态产品叙事。",
         "lede": "硬件发布系统，在同一屏内承载工业设计、参数与动效，并复用于十二个市场。",
         "facts": [
@@ -285,7 +569,7 @@
   },
   {
     "slug": "velvet-atelier",
-    "num": "03",
+    "num": "05",
     "tags": [
       "Web",
       "UI",
@@ -328,7 +612,7 @@
     },
     "det": {
       "en": {
-        "crumb": "03 — Luxury commerce",
+        "crumb": "05 — Luxury commerce",
         "title": "A luxury commerce experience blueprint.",
         "lede": "The maison journey mapped across editorial, commerce, concierge and aftercare as one system rather than four.",
         "facts": [
@@ -376,7 +660,7 @@
         ]
       },
       "zh": {
-        "crumb": "03 — 高端零售",
+        "crumb": "05 — 高端零售",
         "title": "高端零售体验蓝图。",
         "lede": "把内容、电商、专属服务和售后四段旅程画成一套系统，而不是四套。",
         "facts": [
@@ -427,7 +711,7 @@
   },
   {
     "slug": "ishq-escape",
-    "num": "04",
+    "num": "06",
     "tags": [
       "Web",
       "UI",
@@ -470,7 +754,7 @@
     },
     "det": {
       "en": {
-        "crumb": "04 — Hospitality booking",
+        "crumb": "06 — Hospitality booking",
         "title": "Luxury booking with concierge-led conversion.",
         "lede": "A full-funnel villa booking concept balancing discovery, private enquiry and confirmation in one flow.",
         "facts": [
@@ -518,7 +802,7 @@
         ]
       },
       "zh": {
-        "crumb": "04 — 酒店预订",
+        "crumb": "06 — 酒店预订",
         "title": "以专属服务驱动转化的高端预订。",
         "lede": "全漏斗别墅预订概念，把浏览、私下咨询与最终确认放进同一条动线。",
         "facts": [
@@ -569,7 +853,7 @@
   },
   {
     "slug": "starlight-kingdom",
-    "num": "05",
+    "num": "07",
     "tags": [
       "Web",
       "UI",
@@ -613,7 +897,7 @@
     },
     "det": {
       "en": {
-        "crumb": "05 — Destination experience",
+        "crumb": "07 — Destination experience",
         "title": "A destination page that also plans the day.",
         "lede": "A cinematic landing concept and a queue-aware itinerary planner sharing one visual system.",
         "facts": [
@@ -661,7 +945,7 @@
         ]
       },
       "zh": {
-        "crumb": "05 — 目的地体验",
+        "crumb": "07 — 目的地体验",
         "title": "既做目的地展示，也做当日行程。",
         "lede": "影院感落地页与考虑排队时长的行程规划工作台共用一套视觉系统。",
         "facts": [
@@ -712,7 +996,7 @@
   },
   {
     "slug": "aurora",
-    "num": "06",
+    "num": "08",
     "tags": [
       "Web",
       "UI",
@@ -755,7 +1039,7 @@
     },
     "det": {
       "en": {
-        "crumb": "06 — Employer brand",
+        "crumb": "08 — Employer brand",
         "title": "A careers site that is not a job list.",
         "lede": "Teams, mission and location given equal standing beside role search, in one employer brand system.",
         "facts": [
@@ -803,7 +1087,7 @@
         ]
       },
       "zh": {
-        "crumb": "06 — 雇主品牌",
+        "crumb": "08 — 雇主品牌",
         "title": "招聘站不该只是一份职位列表。",
         "lede": "团队、使命与地点和职位搜索并列，统一在一套雇主品牌系统里。",
         "facts": [
@@ -854,7 +1138,7 @@
   },
   {
     "slug": "tech-disruption",
-    "num": "07",
+    "num": "09",
     "tags": [
       "Web",
       "UI"
@@ -896,7 +1180,7 @@
     },
     "det": {
       "en": {
-        "crumb": "07 — Research hub",
+        "crumb": "09 — Research hub",
         "title": "Making dense research feel effortless.",
         "lede": "A daily-publishing research hub that absorbs editorial volume without reading as a link dump.",
         "facts": [
@@ -944,7 +1228,7 @@
         ]
       },
       "zh": {
-        "crumb": "07 — 研究平台",
+        "crumb": "09 — 研究平台",
         "title": "让高密度研究读起来不费力。",
         "lede": "每日更新的研究平台，要承载发布量，又不能变成一堆链接。",
         "facts": [
@@ -995,7 +1279,7 @@
   },
   {
     "slug": "lumen-stream",
-    "num": "08",
+    "num": "10",
     "tags": [
       "Web",
       "UI",
@@ -1038,7 +1322,7 @@
     },
     "det": {
       "en": {
-        "crumb": "08 — Streaming platform",
+        "crumb": "10 — Streaming platform",
         "title": "A streaming homepage that serves discovery and sign-up.",
         "lede": "A cinematic entertainment hub concept where browsing depth and a single sign-up route stop competing.",
         "facts": [
@@ -1086,7 +1370,7 @@
         ]
       },
       "zh": {
-        "crumb": "08 — 流媒体平台",
+        "crumb": "10 — 流媒体平台",
         "title": "同时服务内容发现与注册的流媒体首页。",
         "lede": "影院感娱乐平台概念，让浏览深度与唯一注册路径不再互相挤占。",
         "facts": [
@@ -1137,7 +1421,7 @@
   },
   {
     "slug": "atlas",
-    "num": "09",
+    "num": "11",
     "tags": [
       "Product",
       "UI"
@@ -1179,7 +1463,7 @@
     },
     "det": {
       "en": {
-        "crumb": "09 — Institutional finance",
+        "crumb": "11 — Institutional finance",
         "title": "Designing institutional confidence.",
         "lede": "An investor-facing experience carrying the weight of a large asset manager without decoration for decoration’s sake.",
         "facts": [
@@ -1227,7 +1511,7 @@
         ]
       },
       "zh": {
-        "crumb": "09 — 机构金融",
+        "crumb": "11 — 机构金融",
         "title": "设计出机构级的信任感。",
         "lede": "面向投资者的体验，要撑得起大型资产管理机构的分量，同时不做任何为装饰而装饰的处理。",
         "facts": [
@@ -1271,148 +1555,6 @@
             "figure": "3",
             "label": "覆盖栏目",
             "note": "业务、策略、洞察。"
-          }
-        ]
-      }
-    }
-  },
-  {
-    "slug": "specimen",
-    "num": "10",
-    "tags": [
-      "Web",
-      "UI"
-    ],
-    "year": "2026",
-    "thumb": "/cases/library/specimen/assets/thumb.jpg",
-    "hero": "/cases/library/specimen/assets/hero.jpg",
-    "colorHero": true,
-    "figure": {
-      "en": "0",
-      "zh": "0"
-    },
-    "measure": {
-      "en": "Asset files shipped",
-      "zh": "运行时加载的资源文件"
-    },
-    "lib": {
-      "en": {
-        "meta": "Real-time 3D · Concept",
-        "title": "Specimen 03 dispersive study",
-        "brief": "The reference was a still: a mineral body seen through thick glass, its edges broken into spectra, thin orbits passing in front and behind. A first pass produced it as an exported model — the shape survived the export, the light did not.",
-        "decisions": [
-          "The spectrum is refraction, not a filter: the core is left opaque so it enters the transmission backdrop, and the glass splits it per wavelength as the body turns.",
-          "The lighting is a room rather than lamps — a procedural dark studio whose three narrow bright strips are the thing dispersion has to smear.",
-          "The wings grow out of the body's own displacement field, so one continuous refracting surface carries the spectrum all the way to the silhouette."
-        ],
-        "outcome": "A showcase generated in the browser rather than shipped to it: no model files, no textures, no third-party scripts. It carries live art-direction controls, a lighter tier for phones, and a seed number that rebuilds the same specimen every time."
-      },
-      "zh": {
-        "meta": "实时 3D · 概念作品",
-        "title": "Specimen 03 色散标本",
-        "brief": "参考只是一张静帧：厚玻璃里的矿物体，边缘裂成光谱，细环从前后穿过。第一版把它做成了导出模型——形状留下来了，光没有。",
-        "decisions": [
-          "光谱来自真实折射，而不是后期滤镜：内核保持不透明，进入折射背景，玻璃再按波长把它拆开，随物体转动而变化。",
-          "照明是一间房，不是几盏灯。程序生成的暗色影棚里三条窄亮条，正是色散需要拉开的那部分光。",
-          "外侧的翼由外壳自身的位移场长出，同一张连续折射面把光谱一直带到轮廓边缘。"
-        ],
-        "outcome": "一个在浏览器里生成、而不是传输过去的展示：没有模型文件、没有贴图、没有第三方脚本。附带实时调参面板、为手机准备的更轻一档，以及一个能复现同一颗标本的种子数。"
-      }
-    },
-    "det": {
-      "en": {
-        "crumb": "10 — Real-time 3D",
-        "title": "Light is the model.",
-        "lede": "A dispersive glass specimen rebuilt as a live scene, where the spectrum comes out of refraction instead of a picture of it.",
-        "facts": [
-          {
-            "label": "Type",
-            "value": "Concept · self-directed"
-          },
-          {
-            "label": "Discipline",
-            "value": "Real-time 3D · Web"
-          },
-          {
-            "label": "Deliverables",
-            "value": "Live scene, art-direction panel, case study"
-          },
-          {
-            "label": "Payload",
-            "value": "No models, no textures, no CDN"
-          }
-        ],
-        "brief": "The plate to match was a mineral body inside thick glass, its edges broken into spectra and thin orbits crossing in front and behind. Producing the shape was the easy half: exported as a model and dropped into a page, it read as a grey lump. Everything convincing about the reference lived in the lighting and the refraction, and neither of those survives an export.",
-        "briefTwo": "So the work was not to reproduce a picture but to rebuild the conditions that make it — something that holds up while it turns, on a viewport of any shape, without shipping a single asset.",
-        "decisions": [
-          "Dispersion is physical here. The core is an opaque mesh, so it lands in the renderer's transmission backdrop and the shell refracts it per wavelength — the fringe moves correctly as the body turns, which a screen-space effect never does.",
-          "A procedural environment does the lighting: a dark room with a few broad panels and three narrow bright strips, pre-filtered into an environment map. The strips are what smear into spectra; without them glass has nothing to bend.",
-          "Separate membranes for the wings read as grey plastic against a dark ground, so they were dropped. The shell's displacement field grows lobes instead, keeping one continuous refracting surface out to the silhouette."
-        ],
-        "outcome": "About forty kilobytes of hand-written code over a vendored renderer, generating its own geometry, lighting and grain at load. It survives being turned, resized and re-seeded, drops into any page as a module, and hands the GPU back when the section unmounts.",
-        "specs": [
-          {
-            "figure": "0",
-            "label": "Asset files",
-            "note": "Geometry, colour and dust are grown from seeded noise."
-          },
-          {
-            "figure": "2",
-            "label": "Displaced icospheres",
-            "note": "Glass body and sediment core, normals from tangent probes."
-          },
-          {
-            "figure": "40 kB",
-            "label": "Hand-written code",
-            "note": "Over a vendored renderer, no third-party scripts."
-          }
-        ]
-      },
-      "zh": {
-        "crumb": "10 — 实时 3D",
-        "title": "光才是模型。",
-        "lede": "把一颗色散玻璃标本重建为实时场景：光谱来自折射本身，而不是折射的照片。",
-        "facts": [
-          {
-            "label": "属性",
-            "value": "概念作品 · 自主设计"
-          },
-          {
-            "label": "方向",
-            "value": "实时 3D · Web"
-          },
-          {
-            "label": "交付物",
-            "value": "实时场景、调参面板、案例研究"
-          },
-          {
-            "label": "体积",
-            "value": "无模型、无贴图、无 CDN"
-          }
-        ],
-        "brief": "要对上的画面，是厚玻璃里的矿物体，边缘裂成光谱，细环在前后穿行。做出形状是容易的那一半：导出成模型放进页面，它就是一坨灰色的东西。参考图里真正成立的部分都在照明和折射上，而这两样都无法随导出一起带走。",
-        "briefTwo": "所以要做的不是复制一张图，而是重建让这张图成立的条件——在任意比例的视窗里、在物体转动时都站得住，并且不传输任何素材文件。",
-        "decisions": [
-          "色散是物理的。内核是不透明网格，因此会进入渲染器的折射背景，外壳再按波长折射它——彩色边随物体转动而正确移动，屏幕空间特效做不到这一点。",
-          "照明由程序化环境承担：暗房里几块宽光板加三条窄亮条，预过滤成环境贴图。被拉成光谱的正是那几条亮条；没有它们，玻璃就无光可折。",
-          "翼原本做成独立薄片，在暗背景下像灰塑料，于是弃用。改由外壳的位移场长出凸起，让同一张连续折射面一直延伸到轮廓之外。"
-        ],
-        "outcome": "约四十千字节手写代码，跑在随仓库分发的渲染器之上，在加载时生成自己的几何、照明与颗粒。它经得起转动、缩放和换种子，可作为模块嵌入任意页面，组件卸载时把显卡资源交还。",
-        "specs": [
-          {
-            "figure": "0",
-            "label": "素材文件",
-            "note": "几何、颜色与尘埃都由带种子的噪声生成。"
-          },
-          {
-            "figure": "2",
-            "label": "位移球体",
-            "note": "玻璃本体与沉积内核，法线由切向探针求出。"
-          },
-          {
-            "figure": "40 kB",
-            "label": "手写代码",
-            "note": "跑在随仓库分发的渲染器上，无第三方脚本。"
           }
         ]
       }

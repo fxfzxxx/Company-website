@@ -13,14 +13,18 @@
   },
   "hero": {
     "eyebrow": "IT enablement & digital consulting · Auckland",
-    "lines": ["Technology that earns", "its place on the", "balance sheet."],
+    "lines": [
+      "Technology that earns",
+      "its place on the",
+      "balance sheet."
+    ],
     "lede": "Yonder Tech works with New Zealand businesses and delivery partners on the unglamorous half of digital transformation: deciding what to build, integrating what already exists, and proving the result in numbers a board recognises.",
     "primary": "Selected work",
     "secondary": "What we do"
   },
   "work": {
     "eyebrow": "Selected work",
-    "heading": "Nine concepts. Four to start with.",
+    "heading": "Eleven concepts. Four to start with.",
     "lede": "Self-directed concept work. Each entry carries its brief, the decisions that shaped it, and the design system it delivered.",
     "link": "Full case library",
     "rows": [
@@ -68,19 +72,47 @@
     "note": "Concept projects designed in-house, not client engagements. Figures describe the delivered design system, not commercial results."
   },
   "stats": [
-    { "figure": "180+", "label": "Engagements delivered" },
-    { "figure": "92%", "label": "Clients who re-engage" },
-    { "figure": "6 wks", "label": "Median time to first release" },
-    { "figure": "12", "label": "Delivery & partner cities" }
+    {
+      "figure": "180+",
+      "label": "Engagements delivered"
+    },
+    {
+      "figure": "92%",
+      "label": "Clients who re-engage"
+    },
+    {
+      "figure": "6 wks",
+      "label": "Median time to first release"
+    },
+    {
+      "figure": "12",
+      "label": "Delivery & partner cities"
+    }
   ],
   "capabilities": {
     "eyebrow": "Capabilities",
     "heading": "Four things we do, and nothing we don't.",
     "items": [
-      { "num": "01", "title": "IT strategy & architecture governance", "body": "A technology roadmap tied to the commercial plan, with a decision record for every choice, so the next person can see why." },
-      { "num": "02", "title": "System integration & platform build", "body": "Connecting what you already run before proposing anything new. Fewer systems, fewer manual bridges, one consistent record." },
-      { "num": "03", "title": "Data platforms & applied AI", "body": "Agreed metric definitions first, automation second, models only where the decision they support is worth the maintenance." },
-      { "num": "04", "title": "Operations & continuous optimisation", "body": "Someone accountable after go-live: run-books, service levels and a quarterly review that reports against the original measure." }
+      {
+        "num": "01",
+        "title": "IT strategy & architecture governance",
+        "body": "A technology roadmap tied to the commercial plan, with a decision record for every choice, so the next person can see why."
+      },
+      {
+        "num": "02",
+        "title": "System integration & platform build",
+        "body": "Connecting what you already run before proposing anything new. Fewer systems, fewer manual bridges, one consistent record."
+      },
+      {
+        "num": "03",
+        "title": "Data platforms & applied AI",
+        "body": "Agreed metric definitions first, automation second, models only where the decision they support is worth the maintenance."
+      },
+      {
+        "num": "04",
+        "title": "Operations & continuous optimisation",
+        "body": "Someone accountable after go-live: run-books, service levels and a quarterly review that reports against the original measure."
+      }
     ]
   },
   "method": {
@@ -89,9 +121,21 @@
     "photo": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1400&auto=format&fit=crop",
     "photoAlt": "Meeting room in an office tower",
     "steps": [
-      { "num": "01", "title": "Diagnose", "body": "Two weeks, fixed fee. Systems, data, cost and the three constraints that actually block you." },
-      { "num": "02", "title": "Decide", "body": "A costed roadmap with sequencing, a measure per stage, and the option to stop after any one of them." },
-      { "num": "03", "title": "Deliver", "body": "Our team or yours, with the same named lead from diagnosis through to the quarterly review." }
+      {
+        "num": "01",
+        "title": "Diagnose",
+        "body": "Two weeks, fixed fee. Systems, data, cost and the three constraints that actually block you."
+      },
+      {
+        "num": "02",
+        "title": "Decide",
+        "body": "A costed roadmap with sequencing, a measure per stage, and the option to stop after any one of them."
+      },
+      {
+        "num": "03",
+        "title": "Deliver",
+        "body": "Our team or yours, with the same named lead from diagnosis through to the quarterly review."
+      }
     ]
   },
   "insights": {
@@ -99,13 +143,34 @@
     "heading": "Written for the person signing the invoice.",
     "link": "All insights",
     "cards": [
-      { "kicker": "IT strategy", "title": "What a technology roadmap owes the board", "body": "Three questions a roadmap has to answer before it is worth presenting: what stops, what starts, and what it costs to be wrong.", "meta": "8 min read · March 2026", "href": "insights/it-strategy.html" },
-      { "kicker": "Integration", "title": "The case against replacing your ERP", "body": "Most integration pain is process pain wearing a technical costume. How to tell the difference before committing to a migration.", "meta": "6 min read · February 2026", "href": "insights/enterprise-architecture.html" },
-      { "kicker": "Data & AI", "title": "Metrics before models", "body": "Why the first automation project should be the one nobody wants to demo, and how to sequence the rest behind it.", "meta": "7 min read · January 2026", "href": "insights/data-intelligence.html" }
+      {
+        "kicker": "IT strategy",
+        "title": "What a technology roadmap owes the board",
+        "body": "Three questions a roadmap has to answer before it is worth presenting: what stops, what starts, and what it costs to be wrong.",
+        "meta": "8 min read · March 2026",
+        "href": "insights/it-strategy.html"
+      },
+      {
+        "kicker": "Integration",
+        "title": "The case against replacing your ERP",
+        "body": "Most integration pain is process pain wearing a technical costume. How to tell the difference before committing to a migration.",
+        "meta": "6 min read · February 2026",
+        "href": "insights/enterprise-architecture.html"
+      },
+      {
+        "kicker": "Data & AI",
+        "title": "Metrics before models",
+        "body": "Why the first automation project should be the one nobody wants to demo, and how to sequence the rest behind it.",
+        "meta": "7 min read · January 2026",
+        "href": "insights/data-intelligence.html"
+      }
     ]
   },
   "contact": {
-    "lines": ["Start with the", "two-week diagnostic."],
+    "lines": [
+      "Start with the",
+      "two-week diagnostic."
+    ],
     "body": "A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.",
     "email": "Email",
     "phone": "Phone",
@@ -127,29 +192,86 @@
   },
   "footer": {
     "columns": [
-      { "title": "About", "links": [
-        { "label": "Company profile", "href": "about/company.html" },
-        { "label": "Leadership", "href": "about/leadership.html" },
-        { "label": "Sustainability", "href": "about/sustainability.html" }
-      ] },
-      { "title": "Services", "links": [
-        { "label": "IT strategy", "href": "services/it-strategy.html" },
-        { "label": "System integration", "href": "services/system-integration.html" },
-        { "label": "Data & AI", "href": "services/data-ai.html" },
-        { "label": "Managed operations", "href": "services/index.html" }
-      ] },
-      { "title": "Resources", "links": [
-        { "label": "Insights", "href": "insights/index.html" },
-        { "label": "Case library", "href": "@library" },
-        { "label": "Events", "href": "events/index.html" },
-        { "label": "Newsroom", "href": "news/index.html" }
-      ] },
-      { "title": "Contact", "links": [
-        { "label": "aaronf@yondertech.co.nz", "href": "mailto:aaronf@yondertech.co.nz" },
-        { "label": "+64 22 595 0228", "href": "tel:+64225950228" },
-        { "label": "Contact us", "href": "contact/index.html" },
-        { "label": "Careers", "href": "contact/careers.html" }
-      ] }
+      {
+        "title": "About",
+        "links": [
+          {
+            "label": "Company profile",
+            "href": "about/company.html"
+          },
+          {
+            "label": "Leadership",
+            "href": "about/leadership.html"
+          },
+          {
+            "label": "Sustainability",
+            "href": "about/sustainability.html"
+          }
+        ]
+      },
+      {
+        "title": "Services",
+        "links": [
+          {
+            "label": "IT strategy",
+            "href": "services/it-strategy.html"
+          },
+          {
+            "label": "System integration",
+            "href": "services/system-integration.html"
+          },
+          {
+            "label": "Data & AI",
+            "href": "services/data-ai.html"
+          },
+          {
+            "label": "Managed operations",
+            "href": "services/index.html"
+          }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          {
+            "label": "Insights",
+            "href": "insights/index.html"
+          },
+          {
+            "label": "Case library",
+            "href": "@library"
+          },
+          {
+            "label": "Events",
+            "href": "events/index.html"
+          },
+          {
+            "label": "Newsroom",
+            "href": "news/index.html"
+          }
+        ]
+      },
+      {
+        "title": "Contact",
+        "links": [
+          {
+            "label": "aaronf@yondertech.co.nz",
+            "href": "mailto:aaronf@yondertech.co.nz"
+          },
+          {
+            "label": "+64 22 595 0228",
+            "href": "tel:+64225950228"
+          },
+          {
+            "label": "Contact us",
+            "href": "contact/index.html"
+          },
+          {
+            "label": "Careers",
+            "href": "contact/careers.html"
+          }
+        ]
+      }
     ],
     "legal": "© 2026 Yonder Tech · Auckland, New Zealand",
     "otherLang": "中文",
