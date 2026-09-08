@@ -6,26 +6,31 @@ on a grained near-black ground.
 
 Everything is generated in the browser — no model file, no textures, no CDN.
 three.js is vendored at `/assets/vendor/three` (r185 minified build plus five
-postprocessing addons), so the page stays a plain static file like the rest of
-the site.
+postprocessing addons), so the showcase stays a plain static page like the rest
+of the library.
 
 ## Run it
 
 Any static server rooted at the repository:
 
 ```
-python3 -m http.server 8000     # then open /lab/specimen/
+python3 -m http.server 8000
 ```
 
-Modules and the import map need a real origin; `file://` will not work.
+Then open `/cases/library/specimen/` directly, or through the library viewer at
+`/cases/viewer.html?case=cases/library/specimen/index.html`. Modules and the
+import map need a real origin; `file://` will not work.
 
 ## Files
 
 | File | What it holds |
 | --- | --- |
-| `index.html` | Page chrome, import map, and the live parameter panel |
+| `index.html` | The live concept: plate chrome, import map, parameter panel |
+| `project.html` | The case study |
 | `specimen.js` | The scene: geometry fields, materials, environment, post chain, input |
 | `noise.js` | Seeded 3D Perlin noise with fBm and ridged fBm |
+| `assets/styles.css` | Shared by both pages |
+| `assets/cover.jpg` | Card image for `cases/index.html`, rendered from this scene |
 
 ## How the look is made
 
@@ -63,7 +68,7 @@ same rock, the same lobes, the same dust.
 	               "three/addons/": "/assets/vendor/three/addons/" } }
 </script>
 <script type="module">
-	import { createSpecimen } from "/lab/specimen/specimen.js";
+	import { createSpecimen } from "/cases/library/specimen/specimen.js";
 	const view = createSpecimen(document.getElementById("specimen"), {
 		shell: { dispersion: 9 },
 		background: 0x0b0b0c,

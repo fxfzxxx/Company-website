@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Case study: Specimen 03 - how a dispersive glass specimen was rebuilt as a real-time three.js scene generated from seeded noise, with no model files or textures." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/specimen/project.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#0b0b0c" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Specimen 03 - Case study" />
+	<meta property="og:description"
+		content="How a dispersive glass specimen was rebuilt as a real-time three.js scene generated from seeded noise, with no model files or textures." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/specimen/project.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/specimen/assets/cover.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Specimen 03 - Case study" />
+	<meta name="twitter:description"
+		content="How a dispersive glass specimen was rebuilt as a real-time three.js scene generated from seeded noise." />
+	<title>Specimen 03 - Case study</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+	<div class="study">
+		<div class="nav">
+			<strong>Specimen 03</strong>
+			<div class="nav-links">
+				<a href="index.html">Live concept</a>
+				<a href="project.html">Case study</a>
+				<a href="../../index.html" target="_top">Case Library</a>
+			</div>
+		</div>
+
+		<h1>A specimen you can turn in your hands.</h1>
+		<p class="lede-block">
+			A dispersive glass body around a sedimentary core, crossed by iridescent filament orbits. It began as an
+			exported model that only looked right in the frame it was rendered in. This study rebuilds it as a live
+			three.js scene: nothing is downloaded at runtime, the geometry is grown from seeded noise, and the
+			spectrum comes out of real refraction rather than a post-processing trick.
+		</p>
+
+		<img class="plate-shot" src="assets/cover.jpg" width="1200" height="675"
+			alt="The specimen: a bright mineral core inside a refracting glass body, ringed by thin elliptical orbits on a black ground." />
+
+		<dl class="facts">
+			<div>
+				<dt>Type</dt>
+				<dd>Concept · self-directed</dd>
+			</div>
+			<div>
+				<dt>Discipline</dt>
+				<dd>Real-time 3D · WebGL</dd>
+			</div>
+			<div>
+				<dt>Built with</dt>
+				<dd>three.js r185, vendored</dd>
+			</div>
+			<div>
+				<dt>Payload</dt>
+				<dd>No models, no textures</dd>
+			</div>
+		</dl>
+
+		<section>
+			<h2>The brief</h2>
+			<p>
+				The reference was a still: a mineral body seen through thick glass, its edges broken into spectra,
+				thin orbits passing in front and behind. A first pass produced the shape as an exported model, and
+				the shape was the easy half — dropped into a page it read as a grey lump. Everything that made the
+				plate convincing lived in the lighting and the refraction, and none of that survives an export.
+			</p>
+			<p>
+				So the goal was not to reproduce the picture but to rebuild the conditions that make it: something
+				that holds up while it turns, on a viewport of any shape, without shipping a single asset.
+			</p>
+		</section>
+
+		<section>
+			<h2>Design decisions</h2>
+			<div class="cards">
+				<article>
+					<h3>Dispersion, not a rainbow filter</h3>
+					<p>
+						The core is an opaque mesh, so it lands in three's transmission backdrop; the shell then
+						refracts it per wavelength. The spectral fringe is the refraction — it moves correctly as
+						the body turns, which a screen-space effect never does.
+					</p>
+				</article>
+				<article>
+					<h3>The environment is the lighting</h3>
+					<p>
+						A procedural dark room — a few broad panels and three narrow bright strips — is pre-filtered
+						into an environment map. The strips are what smear into spectra. Without them, glass has
+						nothing to bend and the whole plate goes flat.
+					</p>
+				</article>
+				<article>
+					<h3>The wings are the body</h3>
+					<p>
+						Separate membrane meshes were tried first and read as grey plastic against the dark ground.
+						Instead the shell's displacement field grows a handful of lobes, so one continuous
+						refracting surface carries the spectrum out to the silhouette.
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<section>
+			<h2>How it is built</h2>
+			<p>
+				Two displaced icospheres do most of the work. A field function pushes each vertex along its own
+				direction — soft noise lumps and cosine lobes for the glass, ridged noise for the core's plates —
+				and normals are taken analytically from two tangent probes of that same field, so the surface stays
+				smooth without a welding or faceting pass. The core's stone colour, its dark blotches and the dust
+				around it all come from the same seeded generator, which means a seed number is a specimen: type the
+				same one and you get the same rock twice.
+			</p>
+			<p>
+				The orbits are opaque iridescent filaments on purpose — being opaque, they enter the transmission
+				backdrop, so the arcs passing behind the body get refracted along with everything else. A short post
+				chain finishes it: bloom on the spectral highlights, then vignette, lens chroma and film grain
+				applied after tone mapping to seat the render in the page's black.
+			</p>
+			<p>
+				The <code>Parameters</code> panel on the live concept drives the same handles the source file
+				exposes — dispersion, roughness, IOR, exposure, bloom, grain — so the look can be settled by eye and
+				the values written back into the defaults.
+			</p>
+		</section>
+
+		<section>
+			<h2>Craft notes</h2>
+			<ul>
+				<li>three.js is vendored under <code>/assets/vendor/three</code>; the showcase loads no third-party
+					scripts and stays a plain static page like the rest of the library.</li>
+				<li>Small screens and coarse pointers get a lighter tier — less shell subdivision, half-size
+					transmission target, capped pixel ratio — because the transmission pass is paid for twice.</li>
+				<li>Portrait viewports pull the camera back only as far as the framing needs, so the specimen never
+					shrinks to a bead on a phone.</li>
+				<li>The render loop parks while the tab is hidden, and
+					<code>prefers-reduced-motion</code> freezes the tumble, the orbits and the grain.</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Outcome</h2>
+			<p>
+				A showcase that is generated rather than shipped: about 40&nbsp;KB of hand-written code over a
+				vendored renderer, no model files, no textures, no CDN. It survives being turned, resized and
+				re-seeded, and the same module drops into any page — hand it a container, it fills it, and
+				<code>dispose()</code> gives the GPU back.
+			</p>
+		</section>
+
+		<footer>Specimen 03 design case study · Yonder Case Library · 2026</footer>
+	</div>
+</body>
+
+</html>

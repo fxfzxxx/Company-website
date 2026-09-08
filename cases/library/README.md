@@ -64,6 +64,7 @@ Current cases:
 - ion-forge
 - ishq-escape
 - luna-bloom
+- specimen
 - lumen-stream
 - starlight-kingdom
 - tech-disruption
