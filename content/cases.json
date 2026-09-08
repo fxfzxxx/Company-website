@@ -1275,5 +1275,146 @@
         ]
       }
     }
+  },
+  {
+    "slug": "specimen",
+    "num": "10",
+    "tags": [
+      "Web",
+      "UI"
+    ],
+    "year": "2026",
+    "thumb": "/cases/library/specimen/assets/thumb.jpg",
+    "hero": "/cases/library/specimen/assets/hero.jpg",
+    "figure": {
+      "en": "0",
+      "zh": "0"
+    },
+    "measure": {
+      "en": "Asset files shipped",
+      "zh": "运行时加载的资源文件"
+    },
+    "lib": {
+      "en": {
+        "meta": "Real-time 3D · Concept",
+        "title": "Specimen 03 dispersive study",
+        "brief": "The reference was a still: a mineral body seen through thick glass, its edges broken into spectra, thin orbits passing in front and behind. A first pass produced it as an exported model — the shape survived the export, the light did not.",
+        "decisions": [
+          "The spectrum is refraction, not a filter: the core is left opaque so it enters the transmission backdrop, and the glass splits it per wavelength as the body turns.",
+          "The lighting is a room rather than lamps — a procedural dark studio whose three narrow bright strips are the thing dispersion has to smear.",
+          "The wings grow out of the body's own displacement field, so one continuous refracting surface carries the spectrum all the way to the silhouette."
+        ],
+        "outcome": "A showcase generated in the browser rather than shipped to it: no model files, no textures, no third-party scripts. It carries live art-direction controls, a lighter tier for phones, and a seed number that rebuilds the same specimen every time."
+      },
+      "zh": {
+        "meta": "实时 3D · 概念作品",
+        "title": "Specimen 03 色散标本",
+        "brief": "参考只是一张静帧：厚玻璃里的矿物体，边缘裂成光谱，细环从前后穿过。第一版把它做成了导出模型——形状留下来了，光没有。",
+        "decisions": [
+          "光谱来自真实折射，而不是后期滤镜：内核保持不透明，进入折射背景，玻璃再按波长把它拆开，随物体转动而变化。",
+          "照明是一间房，不是几盏灯。程序生成的暗色影棚里三条窄亮条，正是色散需要拉开的那部分光。",
+          "外侧的翼由外壳自身的位移场长出，同一张连续折射面把光谱一直带到轮廓边缘。"
+        ],
+        "outcome": "一个在浏览器里生成、而不是传输过去的展示：没有模型文件、没有贴图、没有第三方脚本。附带实时调参面板、为手机准备的更轻一档，以及一个能复现同一颗标本的种子数。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "10 — Real-time 3D",
+        "title": "Light is the model.",
+        "lede": "A dispersive glass specimen rebuilt as a live scene, where the spectrum comes out of refraction instead of a picture of it.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Real-time 3D · Web"
+          },
+          {
+            "label": "Deliverables",
+            "value": "Live scene, art-direction panel, case study"
+          },
+          {
+            "label": "Payload",
+            "value": "No models, no textures, no CDN"
+          }
+        ],
+        "brief": "The plate to match was a mineral body inside thick glass, its edges broken into spectra and thin orbits crossing in front and behind. Producing the shape was the easy half: exported as a model and dropped into a page, it read as a grey lump. Everything convincing about the reference lived in the lighting and the refraction, and neither of those survives an export.",
+        "briefTwo": "So the work was not to reproduce a picture but to rebuild the conditions that make it — something that holds up while it turns, on a viewport of any shape, without shipping a single asset.",
+        "decisions": [
+          "Dispersion is physical here. The core is an opaque mesh, so it lands in the renderer's transmission backdrop and the shell refracts it per wavelength — the fringe moves correctly as the body turns, which a screen-space effect never does.",
+          "A procedural environment does the lighting: a dark room with a few broad panels and three narrow bright strips, pre-filtered into an environment map. The strips are what smear into spectra; without them glass has nothing to bend.",
+          "Separate membranes for the wings read as grey plastic against a dark ground, so they were dropped. The shell's displacement field grows lobes instead, keeping one continuous refracting surface out to the silhouette."
+        ],
+        "outcome": "About forty kilobytes of hand-written code over a vendored renderer, generating its own geometry, lighting and grain at load. It survives being turned, resized and re-seeded, drops into any page as a module, and hands the GPU back when the section unmounts.",
+        "specs": [
+          {
+            "figure": "0",
+            "label": "Asset files",
+            "note": "Geometry, colour and dust are grown from seeded noise."
+          },
+          {
+            "figure": "2",
+            "label": "Displaced icospheres",
+            "note": "Glass body and sediment core, normals from tangent probes."
+          },
+          {
+            "figure": "40 kB",
+            "label": "Hand-written code",
+            "note": "Over a vendored renderer, no third-party scripts."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "10 — 实时 3D",
+        "title": "光才是模型。",
+        "lede": "把一颗色散玻璃标本重建为实时场景：光谱来自折射本身，而不是折射的照片。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "实时 3D · Web"
+          },
+          {
+            "label": "交付物",
+            "value": "实时场景、调参面板、案例研究"
+          },
+          {
+            "label": "体积",
+            "value": "无模型、无贴图、无 CDN"
+          }
+        ],
+        "brief": "要对上的画面，是厚玻璃里的矿物体，边缘裂成光谱，细环在前后穿行。做出形状是容易的那一半：导出成模型放进页面，它就是一坨灰色的东西。参考图里真正成立的部分都在照明和折射上，而这两样都无法随导出一起带走。",
+        "briefTwo": "所以要做的不是复制一张图，而是重建让这张图成立的条件——在任意比例的视窗里、在物体转动时都站得住，并且不传输任何素材文件。",
+        "decisions": [
+          "色散是物理的。内核是不透明网格，因此会进入渲染器的折射背景，外壳再按波长折射它——彩色边随物体转动而正确移动，屏幕空间特效做不到这一点。",
+          "照明由程序化环境承担：暗房里几块宽光板加三条窄亮条，预过滤成环境贴图。被拉成光谱的正是那几条亮条；没有它们，玻璃就无光可折。",
+          "翼原本做成独立薄片，在暗背景下像灰塑料，于是弃用。改由外壳的位移场长出凸起，让同一张连续折射面一直延伸到轮廓之外。"
+        ],
+        "outcome": "约四十千字节手写代码，跑在随仓库分发的渲染器之上，在加载时生成自己的几何、照明与颗粒。它经得起转动、缩放和换种子，可作为模块嵌入任意页面，组件卸载时把显卡资源交还。",
+        "specs": [
+          {
+            "figure": "0",
+            "label": "素材文件",
+            "note": "几何、颜色与尘埃都由带种子的噪声生成。"
+          },
+          {
+            "figure": "2",
+            "label": "位移球体",
+            "note": "玻璃本体与沉积内核，法线由切向探针求出。"
+          },
+          {
+            "figure": "40 kB",
+            "label": "手写代码",
+            "note": "跑在随仓库分发的渲染器上，无第三方脚本。"
+          }
+        ]
+      }
+    }
   }
 ]
