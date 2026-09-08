@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Design showcase: Specimen 03 - a real-time three.js study of a dispersive glass body, generated in the browser from seeded noise." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/specimen/index.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#0b0b0c" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Specimen 03 - Live concept" />
+	<meta property="og:description"
+		content="Design showcase: Specimen 03 - a real-time three.js study of a dispersive glass body, generated in the browser from seeded noise." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/specimen/index.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/specimen/assets/hero.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Specimen 03 - Live concept" />
+	<meta name="twitter:description"
+		content="A real-time three.js study of a dispersive glass body, generated in the browser from seeded noise." />
+	<title>Specimen 03 - Live concept</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body class="plate">
+	<div id="stage"></div>
+
+	<div class="hud">
+		<div class="row">
+			<div class="hud-nav">
+				<a href="../../index.html" target="_top">Yonder Case Library</a>
+				<a href="project.html">Case study</a>
+			</div>
+			<button id="toggle" class="ghost-button" type="button" aria-expanded="false"
+				aria-controls="panel">Parameters</button>
+		</div>
+
+		<div class="row"></div>
+
+		<div class="row bottom">
+			<div class="left">
+				<h1 class="title">Form &amp; Function</h1>
+				<p class="lede">
+					A specimen of an unfolding story — mineral gestures caught in transit, arranged with silent
+					intent. Drag to turn the body.
+				</p>
+			</div>
+			<div>
+				<div class="specs">
+					<div>Dispersive shell · IOR 1.46</div>
+					<div>Sediment core · opaque backdrop</div>
+					<div>Five filament orbits</div>
+				</div>
+				<div class="index">03/06</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mark tl"></div>
+	<div class="mark tr"></div>
+	<div class="mark bl"></div>
+	<div class="mark br"></div>
+	<div class="crosshair"></div>
+
+	<div id="panel" hidden></div>
+	<div id="fallback"><p>This study needs WebGL 2. Try a current desktop browser.</p></div>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../../../assets/vendor/three/three.module.min.js",
+				"three/addons/": "../../../assets/vendor/three/addons/"
+			}
+		}
+	</script>
+
+	<script type="module">
+		import { createSpecimen } from "./specimen.js";
+
+		const stage = document.getElementById("stage");
+		let api;
+
+		try {
+			api = createSpecimen(stage);
+		} catch (error) {
+			console.error(error);
+			document.getElementById("fallback").style.display = "grid";
+			document.getElementById("toggle").hidden = true;
+		}
+
+		/* — parameter panel ————————————————————————————————————————
+		   The same handles used to art-direct the look, exposed live so the
+		   numbers in specimen.js can be settled by eye. */
+
+		if (api) {
+			const controls = [
+				["Dispersion", 0, 25, 0.5, () => api.materials.glass.dispersion, (v) => (api.materials.glass.dispersion = v)],
+				["Roughness", 0, 0.4, 0.005, () => api.materials.glass.roughness, (v) => (api.materials.glass.roughness = v)],
+				["Thickness", 0, 3, 0.05, () => api.materials.glass.thickness, (v) => (api.materials.glass.thickness = v)],
+				["IOR", 1.05, 2.2, 0.01, () => api.materials.glass.ior, (v) => (api.materials.glass.ior = v)],
+				["Iridescence", 0, 1, 0.01, () => api.materials.glass.iridescence, (v) => (api.materials.glass.iridescence = v)],
+				["Exposure", 0.4, 2, 0.01, () => api.renderer.toneMappingExposure, (v) => (api.renderer.toneMappingExposure = v)],
+				["Bloom", 0, 1.5, 0.01, () => api.post.bloom.strength, (v) => (api.post.bloom.strength = v)],
+				["Grain", 0, 0.16, 0.002, () => api.post.grade.uniforms.uGrain.value, (v) => (api.post.grade.uniforms.uGrain.value = v)],
+				["Spin", 0, 0.3, 0.005, () => api.motion.spin, (v) => (api.motion.spin = v)],
+			];
+
+			const panel = document.getElementById("panel");
+			for (const [name, min, max, step, get, set] of controls) {
+				const label = document.createElement("label");
+				const caption = document.createElement("span");
+				const value = document.createElement("b");
+				const input = document.createElement("input");
+				value.style.fontWeight = "400";
+				value.textContent = (+get()).toFixed(2);
+				caption.append(name, value);
+				input.type = "range";
+				input.min = min;
+				input.max = max;
+				input.step = step;
+				input.value = get();
+				input.addEventListener("input", () => {
+					set(parseFloat(input.value));
+					value.textContent = parseFloat(input.value).toFixed(2);
+				});
+				label.append(caption, input);
+				panel.append(label);
+			}
+
+			const toggle = document.getElementById("toggle");
+			toggle.addEventListener("click", () => {
+				panel.hidden = !panel.hidden;
+				toggle.setAttribute("aria-expanded", String(!panel.hidden));
+			});
+		}
+	</script>
+</body>
+
+</html>

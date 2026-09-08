@@ -55,7 +55,7 @@ ${c.facts
 				</div>
 			</section>
 
-			<figure class="yt-detail-hero grayscale">
+			<figure class="yt-detail-hero${item.colorHero ? "" : " grayscale"}">
 				<img src="${esc(item.hero)}" alt="${esc(c.title)}" width="2000" height="1333" />
 			</figure>
 
