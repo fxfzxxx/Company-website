@@ -146,10 +146,10 @@ button {
 	flex-wrap: nowrap;
 }
 
-.yt-brand {
+.yt-nav .yt-brand {
 	font-family: var(--font-heading);
 	font-weight: 800;
-	font-size: 18px;
+	font-size: 20px;
 	letter-spacing: -0.03em;
 	flex: 0 0 auto;
 	margin-right: 0;
