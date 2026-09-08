@@ -30,7 +30,7 @@ import map need a real origin; `file://` will not work.
 | `specimen.js` | The scene: geometry fields, materials, environment, post chain, input |
 | `noise.js` | Seeded 3D Perlin noise with fBm and ridged fBm |
 | `assets/styles.css` | Shared by both pages |
-| `assets/cover.jpg` | Card image for `cases/index.html`, rendered from this scene |
+| `assets/thumb.jpg`, `assets/hero.jpg` | Case library stills, rendered from this scene itself |
 
 ## How the look is made
 

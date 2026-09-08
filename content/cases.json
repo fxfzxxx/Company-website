@@ -1286,6 +1286,7 @@
     "year": "2026",
     "thumb": "/cases/library/specimen/assets/thumb.jpg",
     "hero": "/cases/library/specimen/assets/hero.jpg",
+    "colorHero": true,
     "figure": {
       "en": "0",
       "zh": "0"
