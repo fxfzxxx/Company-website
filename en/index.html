@@ -77,13 +77,17 @@
 		</div>
 
 	<main>
-		<section class="yt-wrap yt-hero">
-			<span class="yt-eyebrow">IT enablement &amp; digital consulting · Auckland</span>
-			<h1 class="yt-h1"><span>Technology that earns</span><span>its place on the</span><span>balance sheet.</span></h1>
-			<p class="yt-lede">Yonder Tech works with New Zealand businesses and delivery partners on the unglamorous half of digital transformation: deciding what to build, integrating what already exists, and proving the result in numbers a board recognises.</p>
-			<div class="yt-btn-row">
-				<a class="yt-link hv1" href="#work">Selected work <span class="yt-arrow" aria-hidden="true">↓</span></a>
-				<a class="yt-link yt-link-muted hv2" href="#capabilities">What we do</a>
+		<section class="yt-hero-band">
+			<div class="yt-hero-globe" id="yt-globe"></div>
+			<div class="yt-hero-scrim" aria-hidden="true"></div>
+			<div class="yt-wrap yt-hero">
+				<span class="yt-eyebrow">IT enablement &amp; digital consulting · Auckland</span>
+				<h1 class="yt-h1"><span>Technology that earns</span><span>its place on the</span><span>balance sheet.</span></h1>
+				<p class="yt-lede">Yonder Tech works with New Zealand businesses and delivery partners on the unglamorous half of digital transformation: deciding what to build, integrating what already exists, and proving the result in numbers a board recognises.</p>
+				<div class="yt-btn-row">
+					<a class="yt-link hv1" href="#work">Selected work <span class="yt-arrow" aria-hidden="true">↓</span></a>
+					<a class="yt-link yt-link-muted hv2" href="#capabilities">What we do</a>
+				</div>
 			</div>
 		</section>
 
@@ -91,7 +95,7 @@
 			<div class="yt-head-row">
 				<div>
 					<span class="yt-eyebrow">Selected work</span>
-					<h2 class="yt-h2">Eleven concepts. Four to start with.</h2>
+					<h2 class="yt-h2">Twelve concepts. Four to start with.</h2>
 					<p class="yt-head-lede">Self-directed concept work. Each entry carries its brief, the decisions that shaped it, and the design system it delivered.</p>
 				</div>
 				<a class="yt-link yt-link-nowrap hv1" href="cases/index.html">Full case library <span class="yt-arrow" aria-hidden="true">→</span></a>
@@ -99,7 +103,7 @@
 
 				<div class="yt-row">
 					<div class="yt-row-num">01</div>
-					<div class="yt-thumb grayscale">
+					<div class="yt-thumb">
 						<img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Luna Bloom Society maternity community concept" loading="lazy" width="800" height="600" />
 					</div>
 					<div class="yt-row-body">
@@ -115,7 +119,7 @@
 
 				<div class="yt-row">
 					<div class="yt-row-num">02</div>
-					<div class="yt-thumb grayscale">
+					<div class="yt-thumb">
 						<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Ion Forge X9 product launch concept" loading="lazy" width="800" height="600" />
 					</div>
 					<div class="yt-row-body">
@@ -131,7 +135,7 @@
 
 				<div class="yt-row">
 					<div class="yt-row-num">03</div>
-					<div class="yt-thumb grayscale">
+					<div class="yt-thumb">
 						<img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Northbridge Capital research hub concept" loading="lazy" width="800" height="600" />
 					</div>
 					<div class="yt-row-body">
@@ -147,7 +151,7 @@
 
 				<div class="yt-row">
 					<div class="yt-row-num">04</div>
-					<div class="yt-thumb grayscale">
+					<div class="yt-thumb">
 						<img src="https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Atlas Capital institutional experience concept" loading="lazy" width="800" height="600" />
 					</div>
 					<div class="yt-row-body">
@@ -356,6 +360,54 @@
 				<span><a href="../zh/index.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
 			</div>
 		</footer>
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../assets/vendor/three/three.module.min.js",
+				"three/addons/": "../assets/vendor/three/addons/"
+			}
+		}
+	</script>
+	<script type="module">
+		/* The globe is a quarter of a megabyte of renderer before it draws a
+		   pixel, so it is imported only once the hero is actually on screen —
+		   a visitor who lands and scrolls straight past never pays for it. */
+		const mount = document.getElementById("yt-globe");
+		if (mount) {
+			const start = async () => {
+				try {
+					const { createEarth } = await import("../cases/library/earth/earth.js");
+					const view = await createEarth(mount, {
+						background: 0x05070d,
+						stars: true,
+						arcs: 26,
+						mapSize: 1024,
+						landSize: 2048,
+						segments: 96,
+						camera: { fov: 26, distance: 7.1 },
+						bloom: { strength: 0.34, radius: 0.7, threshold: 0.8 },
+						grain: 0.02,
+						vignette: 0.55,
+					});
+					mount.dataset.ready = "true";
+					window.addEventListener("pagehide", () => view.dispose(), { once: true });
+				} catch (error) {
+					console.error(error);
+				}
+			};
+			if ("IntersectionObserver" in window) {
+				const watcher = new IntersectionObserver((entries, observer) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						observer.disconnect();
+						start();
+					}
+				}, { rootMargin: "300px" });
+				watcher.observe(mount);
+			} else {
+				start();
+			}
+		}
+	</script>
 	<script src="../assets/design/site.js"></script>
 </body>
 

@@ -8,7 +8,7 @@ export const renderHome = (ctx, cases) => {
 		const c = thumbFor(row.slug);
 		return `				<div class="yt-row">
 					<div class="yt-row-num">${esc(row.num)}</div>
-					<div class="yt-thumb grayscale">
+					<div class="yt-thumb">
 						<img src="${esc(c.thumb)}" alt="${esc(row.alt)}" loading="lazy" width="800" height="600" />
 					</div>
 					<div class="yt-row-body">
@@ -35,13 +35,17 @@ ${orgJsonLd()}
 ${header(ctx, "work")}
 
 	<main>
-		<section class="yt-wrap yt-hero">
-			<span class="yt-eyebrow">${esc(home.hero.eyebrow)}</span>
-			<h1 class="yt-h1">${home.hero.lines.map((l) => `<span>${esc(l)}</span>`).join("")}</h1>
-			<p class="yt-lede">${esc(home.hero.lede)}</p>
-			<div class="yt-btn-row">
-				<a class="yt-link hv1" href="#work">${esc(home.hero.primary)} <span class="yt-arrow" aria-hidden="true">↓</span></a>
-				<a class="yt-link yt-link-muted hv2" href="#capabilities">${esc(home.hero.secondary)}</a>
+		<section class="yt-hero-band">
+			<div class="yt-hero-globe" id="yt-globe"></div>
+			<div class="yt-hero-scrim" aria-hidden="true"></div>
+			<div class="yt-wrap yt-hero">
+				<span class="yt-eyebrow">${esc(home.hero.eyebrow)}</span>
+				<h1 class="yt-h1">${home.hero.lines.map((l) => `<span>${esc(l)}</span>`).join("")}</h1>
+				<p class="yt-lede">${esc(home.hero.lede)}</p>
+				<div class="yt-btn-row">
+					<a class="yt-link hv1" href="#work">${esc(home.hero.primary)} <span class="yt-arrow" aria-hidden="true">↓</span></a>
+					<a class="yt-link yt-link-muted hv2" href="#capabilities">${esc(home.hero.secondary)}</a>
+				</div>
 			</div>
 		</section>
 
@@ -142,6 +146,54 @@ ${contact(ctx, { lines: home.contact.lines, body: home.contact.body, withForm: t
 	</main>
 
 ${footer(ctx)}
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "${root}assets/vendor/three/three.module.min.js",
+				"three/addons/": "${root}assets/vendor/three/addons/"
+			}
+		}
+	</script>
+	<script type="module">
+		/* The globe is a quarter of a megabyte of renderer before it draws a
+		   pixel, so it is imported only once the hero is actually on screen —
+		   a visitor who lands and scrolls straight past never pays for it. */
+		const mount = document.getElementById("yt-globe");
+		if (mount) {
+			const start = async () => {
+				try {
+					const { createEarth } = await import("${root}cases/library/earth/earth.js");
+					const view = await createEarth(mount, {
+						background: 0x05070d,
+						stars: true,
+						arcs: 26,
+						mapSize: 1024,
+						landSize: 2048,
+						segments: 96,
+						camera: { fov: 26, distance: 7.1 },
+						bloom: { strength: 0.34, radius: 0.7, threshold: 0.8 },
+						grain: 0.02,
+						vignette: 0.55,
+					});
+					mount.dataset.ready = "true";
+					window.addEventListener("pagehide", () => view.dispose(), { once: true });
+				} catch (error) {
+					console.error(error);
+				}
+			};
+			if ("IntersectionObserver" in window) {
+				const watcher = new IntersectionObserver((entries, observer) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						observer.disconnect();
+						start();
+					}
+				}, { rootMargin: "300px" });
+				watcher.observe(mount);
+			} else {
+				start();
+			}
+		}
+	</script>
 ${scripts(ctx)}
 </body>
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Design showcase: Terra 01 - a lit globe with a weather deck, city lights on the night side and live routes, generated in the browser from vector data." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/earth/index.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#04060c" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Terra 01 - Live concept" />
+	<meta property="og:description"
+		content="A lit globe with a weather deck, city lights on the night side and live routes." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/earth/index.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<title>Terra 01 - Live concept</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body class="plate">
+	<div id="stage"></div>
+
+	<div class="hud">
+		<div class="row">
+			<div class="hud-nav">
+				<a href="../../index.html" target="_top">Yonder Case Library</a>
+				<a href="project.html">Case study</a>
+			</div>
+			<dl class="readout" id="readout"></dl>
+		</div>
+
+		<div class="row"></div>
+
+		<div class="row bottom">
+			<div>
+				<h1 class="title">Terra 01</h1>
+				<p class="lede">
+					Coastlines and cities from vector data; weather, water and light made at load. The sun stays
+					put and the planet turns under it. Drag to spin.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="mark tl"></div>
+	<div class="mark tr"></div>
+	<div class="mark bl"></div>
+	<div class="mark br"></div>
+
+	<div id="fallback"><p>This study needs WebGL 2. Try a current desktop browser.</p></div>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../../../assets/vendor/three/three.module.min.js",
+				"three/addons/": "../../../assets/vendor/three/addons/"
+			}
+		}
+	</script>
+
+	<script type="module">
+		import { createEarth } from "./earth.js";
+
+		const stage = document.getElementById("stage");
+		try {
+			const api = await createEarth(stage);
+			const readout = document.getElementById("readout");
+			for (const [term, value] of [
+				["Coastline", "Natural Earth 1:50m"],
+				["Cities lit", "2,181"],
+				["Cloud deck", `${api.config.mapSize}²`],
+				["Image files", "0"],
+			]) {
+				const row = document.createElement("div");
+				const dt = document.createElement("dt");
+				const dd = document.createElement("dd");
+				dt.textContent = term;
+				dd.textContent = value;
+				row.append(dt, dd);
+				readout.append(row);
+			}
+		} catch (error) {
+			console.error(error);
+			document.getElementById("fallback").style.display = "grid";
+		}
+	</script>
+</body>
+
+</html>

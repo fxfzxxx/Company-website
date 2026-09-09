@@ -1,7 +1,149 @@
 [
   {
-    "slug": "movement",
+    "slug": "earth",
     "num": "01",
+    "tags": [
+      "Web",
+      "UI"
+    ],
+    "year": "2026",
+    "thumb": "/cases/library/earth/assets/thumb.jpg",
+    "hero": "/cases/library/earth/assets/hero.jpg",
+    "colorHero": true,
+    "figure": {
+      "en": "200 kB",
+      "zh": "200 kB"
+    },
+    "measure": {
+      "en": "Of data, and no images",
+      "zh": "数据，且没有图片"
+    },
+    "lib": {
+      "en": {
+        "meta": "Real-time 3D · Concept",
+        "title": "Terra 01 globe study",
+        "brief": "The studies before this one were generated outright. That approach breaks for a planet: no amount of noise will draw you Europe. This one takes two small pieces of public data — coastlines and a city list — and makes everything they touch.",
+        "decisions": [
+          "Data carries the shape and code carries the rest: ocean depth, biome colour, the cloud deck, city glow and the terminator are all computed at load from 200 kB of vectors.",
+          "The sun is fixed in world space and the planet turns under it, so day breaks over a coastline instead of sitting still.",
+          "The halo fades on how close each line of sight passes to the planet rather than on the silhouette of the sphere drawing it — the difference between an atmosphere and a visible bubble."
+        ],
+        "outcome": "A globe that reads as Earth from across a room and holds up when you drag it. The same module runs the case page and the homepage hero, where it is imported only once the hero is on screen and disposed when the page is hidden."
+      },
+      "zh": {
+        "meta": "实时 3D · 概念作品",
+        "title": "Terra 01 地球研究",
+        "brief": "之前的两次研究都是纯生成的。这条路在行星上走不通：再多噪声也画不出欧洲。这一次只用两份公开数据——海岸线和城市表——其余一切由它们现场生成。",
+        "decisions": [
+          "数据负责形状，代码负责其余：海深、地貌配色、云层、城市辉光和晨昏线，全部在加载时由 200 kB 矢量算出。",
+          "太阳固定在世界坐标里，行星在它下面自转，于是天亮是从某条海岸线开始的，而不是停在原处。",
+          "大气的衰减取决于视线离地球多近，而不是画它的那个球的轮廓——这决定了你看到的是大气层还是一个套在地球外面的泡。"
+        ],
+        "outcome": "一颗隔着房间也认得出的地球，拖动时依然成立。同一个模块同时驱动案例页和首页首屏；在首页上，它只在首屏进入视野时才被载入，页面隐藏时释放。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "01 — Real-time 3D",
+        "title": "A planet has to be recognisable.",
+        "lede": "A lit globe with weather, night cities and traffic, built from two public data files and a great deal of arithmetic.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Real-time 3D · Web"
+          },
+          {
+            "label": "Ships",
+            "value": "Two JSON files, 200 kB"
+          },
+          {
+            "label": "Image files",
+            "value": "None"
+          }
+        ],
+        "brief": "A globe with weather, sunlight and cities visible on the night side — and it had to carry the homepage, not just a case page. That second half set the constraints: it has to hold up at a glance, survive being dragged, and cost a visitor nothing before the first sentence of the page has rendered.",
+        "briefTwo": "It also had to stay honest to how the rest of this library is built. Generating a planet outright was not an option, so the compromise is narrow and stated plainly: shape comes from data, everything else is made.",
+        "decisions": [
+          "Natural Earth coastlines at 1:50m, simplified to a tenth of a degree, and every settlement over 200,000 people. From those: a land mask, a distance-to-land shelf channel that turns coasts turquoise, latitude-banded biomes, and city lights scaled by the log of population.",
+          "The cloud deck is baked on the GPU in one pass — fractal noise sampled on the sphere each pixel maps to, so it wraps at the antimeridian and does not pinch at the poles — then banded wet at the equator, dry at the horse latitudes, stormy in the mid-latitudes.",
+          "The surface shader reads the deck twice, once underfoot and once offset along the sun, so the clouds throw a shadow on the ground beneath them."
+        ],
+        "outcome": "A globe that reads as Earth at a glance: weather moving at its own rate, cities coming on as the terminator passes, a limb that glows because air thins rather than because a sphere was drawn slightly larger. It runs the same code in the case page and the homepage hero.",
+        "specs": [
+          {
+            "figure": "200 kB",
+            "label": "Data shipped",
+            "note": "Coastlines and 2,181 cities, no imagery."
+          },
+          {
+            "figure": "0",
+            "label": "Image files",
+            "note": "Every map is drawn at load."
+          },
+          {
+            "figure": "1",
+            "label": "Light source",
+            "note": "A fixed sun; the planet turns under it."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "01 — 实时 3D",
+        "title": "行星必须认得出来。",
+        "lede": "一颗带天气、夜间城市与航路的地球，由两份公开数据和大量运算构成。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "实时 3D · Web"
+          },
+          {
+            "label": "随页分发",
+            "value": "两个 JSON，200 kB"
+          },
+          {
+            "label": "图片文件",
+            "value": "无"
+          }
+        ],
+        "brief": "一颗有天气、有日照、夜半球能看见城市灯光的地球——而且它要撑起首页，不只是案例页。后半句定下了约束：一眼要成立、拖得动、并且在页面第一句话渲染出来之前不该让访客付出任何代价。",
+        "briefTwo": "它还得对得起这个案例库其余作品的做法。纯生成一颗行星是不可能的，所以妥协被限定得很窄，并且明说：形状来自数据，其余全部现场生成。",
+        "decisions": [
+          "1:50m 的 Natural Earth 海岸线（简化到十分之一度）加上全部二十万人以上的聚居地。由此得到：陆地遮罩、让海岸泛出青绿的离岸距离通道、按纬度成带的地貌配色，以及按人口对数缩放的城市灯光。",
+          "云层在 GPU 上一次烘焙完成——噪声是在每个像素对应的球面位置上采样的，因此在换日线无缝、在两极不打结——再按纬度成带：赤道多雨、副热带干燥、中纬度多风暴。",
+          "地表着色器读两次云层，一次在脚下，一次沿太阳方向偏移，于是云会在它下面的地面上投出阴影。"
+        ],
+        "outcome": "一颗一眼就成立的地球：天气以自己的速率移动，城市随晨昏线推移次第亮起，边缘的辉光来自空气变薄，而不是因为多画了一个稍大的球。案例页与首页首屏跑的是同一份代码。",
+        "specs": [
+          {
+            "figure": "200 kB",
+            "label": "随页分发的数据",
+            "note": "海岸线与 2,181 座城市，无任何图像。"
+          },
+          {
+            "figure": "0",
+            "label": "图片文件",
+            "note": "所有贴图都在加载时绘制。"
+          },
+          {
+            "figure": "1",
+            "label": "光源",
+            "note": "一颗固定的太阳，行星在它下面转。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "movement",
+    "num": "02",
     "tags": [
       "Web",
       "UI"
@@ -44,7 +186,7 @@
     },
     "det": {
       "en": {
-        "crumb": "01 — Real-time 3D",
+        "crumb": "02 — Real-time 3D",
         "title": "Precision that was made by people.",
         "lede": "An instrument generated at load, where every industrial quality in it is there because a person decided it should be.",
         "facts": [
@@ -92,7 +234,7 @@
         ]
       },
       "zh": {
-        "crumb": "01 — 实时 3D",
+        "crumb": "02 — 实时 3D",
         "title": "由人做出来的精密。",
         "lede": "一件在加载时生成的仪器——它身上每一处工业属性，都是因为某个人决定它该如此。",
         "facts": [
@@ -143,7 +285,7 @@
   },
   {
     "slug": "specimen",
-    "num": "02",
+    "num": "03",
     "tags": [
       "Web",
       "UI"
@@ -186,7 +328,7 @@
     },
     "det": {
       "en": {
-        "crumb": "02 — Real-time 3D",
+        "crumb": "03 — Real-time 3D",
         "title": "Light is the model.",
         "lede": "A dispersive glass specimen rebuilt as a live scene, where the spectrum comes out of refraction instead of a picture of it.",
         "facts": [
@@ -234,7 +376,7 @@
         ]
       },
       "zh": {
-        "crumb": "02 — 实时 3D",
+        "crumb": "03 — 实时 3D",
         "title": "光才是模型。",
         "lede": "把一颗色散玻璃标本重建为实时场景：光谱来自折射本身，而不是折射的照片。",
         "facts": [
@@ -285,7 +427,7 @@
   },
   {
     "slug": "luna-bloom",
-    "num": "03",
+    "num": "04",
     "tags": [
       "Web",
       "UI",
@@ -328,7 +470,7 @@
     },
     "det": {
       "en": {
-        "crumb": "03 — Community platform",
+        "crumb": "04 — Community platform",
         "title": "Softness as a design system.",
         "lede": "A maternity community concept built to hold long-form editorial and peer conversation without the pull of an endless feed.",
         "facts": [
@@ -376,7 +518,7 @@
         ]
       },
       "zh": {
-        "crumb": "03 — 社区平台",
+        "crumb": "04 — 社区平台",
         "title": "把「柔和」做成一套系统。",
         "lede": "母婴社区概念，要在没有无限信息流的前提下同时容纳长文内容和用户交流。",
         "facts": [
@@ -427,7 +569,7 @@
   },
   {
     "slug": "ion-forge",
-    "num": "04",
+    "num": "05",
     "tags": [
       "Web",
       "UI",
@@ -470,7 +612,7 @@
     },
     "det": {
       "en": {
-        "crumb": "04 — Product launch",
+        "crumb": "05 — Product launch",
         "title": "From industrial design to kinetic product storytelling.",
         "lede": "A hardware launch system carrying industrial design, spec detail and motion in one view, and repeating across twelve markets.",
         "facts": [
@@ -518,7 +660,7 @@
         ]
       },
       "zh": {
-        "crumb": "04 — 产品发布",
+        "crumb": "05 — 产品发布",
         "title": "从工业设计到动态产品叙事。",
         "lede": "硬件发布系统，在同一屏内承载工业设计、参数与动效，并复用于十二个市场。",
         "facts": [
@@ -569,7 +711,7 @@
   },
   {
     "slug": "velvet-atelier",
-    "num": "05",
+    "num": "06",
     "tags": [
       "Web",
       "UI",
@@ -612,7 +754,7 @@
     },
     "det": {
       "en": {
-        "crumb": "05 — Luxury commerce",
+        "crumb": "06 — Luxury commerce",
         "title": "A luxury commerce experience blueprint.",
         "lede": "The maison journey mapped across editorial, commerce, concierge and aftercare as one system rather than four.",
         "facts": [
@@ -660,7 +802,7 @@
         ]
       },
       "zh": {
-        "crumb": "05 — 高端零售",
+        "crumb": "06 — 高端零售",
         "title": "高端零售体验蓝图。",
         "lede": "把内容、电商、专属服务和售后四段旅程画成一套系统，而不是四套。",
         "facts": [
@@ -711,7 +853,7 @@
   },
   {
     "slug": "ishq-escape",
-    "num": "06",
+    "num": "07",
     "tags": [
       "Web",
       "UI",
@@ -754,7 +896,7 @@
     },
     "det": {
       "en": {
-        "crumb": "06 — Hospitality booking",
+        "crumb": "07 — Hospitality booking",
         "title": "Luxury booking with concierge-led conversion.",
         "lede": "A full-funnel villa booking concept balancing discovery, private enquiry and confirmation in one flow.",
         "facts": [
@@ -802,7 +944,7 @@
         ]
       },
       "zh": {
-        "crumb": "06 — 酒店预订",
+        "crumb": "07 — 酒店预订",
         "title": "以专属服务驱动转化的高端预订。",
         "lede": "全漏斗别墅预订概念，把浏览、私下咨询与最终确认放进同一条动线。",
         "facts": [
@@ -853,7 +995,7 @@
   },
   {
     "slug": "starlight-kingdom",
-    "num": "07",
+    "num": "08",
     "tags": [
       "Web",
       "UI",
@@ -897,7 +1039,7 @@
     },
     "det": {
       "en": {
-        "crumb": "07 — Destination experience",
+        "crumb": "08 — Destination experience",
         "title": "A destination page that also plans the day.",
         "lede": "A cinematic landing concept and a queue-aware itinerary planner sharing one visual system.",
         "facts": [
@@ -945,7 +1087,7 @@
         ]
       },
       "zh": {
-        "crumb": "07 — 目的地体验",
+        "crumb": "08 — 目的地体验",
         "title": "既做目的地展示，也做当日行程。",
         "lede": "影院感落地页与考虑排队时长的行程规划工作台共用一套视觉系统。",
         "facts": [
@@ -996,7 +1138,7 @@
   },
   {
     "slug": "aurora",
-    "num": "08",
+    "num": "09",
     "tags": [
       "Web",
       "UI",
@@ -1039,7 +1181,7 @@
     },
     "det": {
       "en": {
-        "crumb": "08 — Employer brand",
+        "crumb": "09 — Employer brand",
         "title": "A careers site that is not a job list.",
         "lede": "Teams, mission and location given equal standing beside role search, in one employer brand system.",
         "facts": [
@@ -1087,7 +1229,7 @@
         ]
       },
       "zh": {
-        "crumb": "08 — 雇主品牌",
+        "crumb": "09 — 雇主品牌",
         "title": "招聘站不该只是一份职位列表。",
         "lede": "团队、使命与地点和职位搜索并列，统一在一套雇主品牌系统里。",
         "facts": [
@@ -1138,7 +1280,7 @@
   },
   {
     "slug": "tech-disruption",
-    "num": "09",
+    "num": "10",
     "tags": [
       "Web",
       "UI"
@@ -1180,7 +1322,7 @@
     },
     "det": {
       "en": {
-        "crumb": "09 — Research hub",
+        "crumb": "10 — Research hub",
         "title": "Making dense research feel effortless.",
         "lede": "A daily-publishing research hub that absorbs editorial volume without reading as a link dump.",
         "facts": [
@@ -1228,7 +1370,7 @@
         ]
       },
       "zh": {
-        "crumb": "09 — 研究平台",
+        "crumb": "10 — 研究平台",
         "title": "让高密度研究读起来不费力。",
         "lede": "每日更新的研究平台，要承载发布量，又不能变成一堆链接。",
         "facts": [
@@ -1279,7 +1421,7 @@
   },
   {
     "slug": "lumen-stream",
-    "num": "10",
+    "num": "11",
     "tags": [
       "Web",
       "UI",
@@ -1322,7 +1464,7 @@
     },
     "det": {
       "en": {
-        "crumb": "10 — Streaming platform",
+        "crumb": "11 — Streaming platform",
         "title": "A streaming homepage that serves discovery and sign-up.",
         "lede": "A cinematic entertainment hub concept where browsing depth and a single sign-up route stop competing.",
         "facts": [
@@ -1370,7 +1512,7 @@
         ]
       },
       "zh": {
-        "crumb": "10 — 流媒体平台",
+        "crumb": "11 — 流媒体平台",
         "title": "同时服务内容发现与注册的流媒体首页。",
         "lede": "影院感娱乐平台概念，让浏览深度与唯一注册路径不再互相挤占。",
         "facts": [
@@ -1421,7 +1563,7 @@
   },
   {
     "slug": "atlas",
-    "num": "11",
+    "num": "12",
     "tags": [
       "Product",
       "UI"
@@ -1463,7 +1605,7 @@
     },
     "det": {
       "en": {
-        "crumb": "11 — Institutional finance",
+        "crumb": "12 — Institutional finance",
         "title": "Designing institutional confidence.",
         "lede": "An investor-facing experience carrying the weight of a large asset manager without decoration for decoration’s sake.",
         "facts": [
@@ -1511,7 +1653,7 @@
         ]
       },
       "zh": {
-        "crumb": "11 — 机构金融",
+        "crumb": "12 — 机构金融",
         "title": "设计出机构级的信任感。",
         "lede": "面向投资者的体验，要撑得起大型资产管理机构的分量，同时不做任何为装饰而装饰的处理。",
         "facts": [

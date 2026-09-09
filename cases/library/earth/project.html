@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Case study: Terra 01 - a lit globe built from vector coastlines and a city list, with a generated weather deck, night lights and an atmosphere that falls off the way air does." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/earth/project.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#e7e3da" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Terra 01 - Case study" />
+	<meta property="og:description"
+		content="A lit globe built from vector coastlines and a city list, with a generated weather deck and night lights." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/earth/project.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/earth/assets/hero.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Terra 01 - Case study" />
+	<meta name="twitter:description" content="A globe made at load from coastlines, cities and noise." />
+	<title>Terra 01 - Case study</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body class="study-page">
+	<div class="study">
+		<div class="nav">
+			<strong>Terra 01</strong>
+			<div class="nav-links">
+				<a href="index.html">Live concept</a>
+				<a href="project.html">Case study</a>
+				<a href="../../index.html" target="_top">Case Library</a>
+			</div>
+		</div>
+
+		<h1>A planet has to be recognisable.</h1>
+		<p class="lede-block">
+			The two studies before this one were generated outright — noise grew the specimen, profiles and ratios
+			cut the movement. That approach breaks here: no amount of noise will draw you Europe. So this one takes
+			two small pieces of public data, and makes everything they touch.
+		</p>
+
+		<img class="plate-shot" src="assets/hero.jpg" width="2000" height="1333"
+			alt="A globe at dusk: the day side shows ocean, desert and cloud, the night side carries city lights, and a blue atmosphere glows along the limb." />
+
+		<dl class="facts">
+			<div>
+				<dt>Type</dt>
+				<dd>Concept · self-directed</dd>
+			</div>
+			<div>
+				<dt>Discipline</dt>
+				<dd>Real-time 3D · Web</dd>
+			</div>
+			<div>
+				<dt>Ships</dt>
+				<dd>Two JSON files, 200 kB</dd>
+			</div>
+			<div>
+				<dt>Image files</dt>
+				<dd>None</dd>
+			</div>
+		</dl>
+
+		<section>
+			<h2>The brief</h2>
+			<p>
+				A globe with weather, sunlight, and cities visible on the night side — and it had to carry the
+				homepage, not just a case page. That second half set the constraints: it has to hold up at a glance,
+				it has to survive being dragged, and it cannot cost a visitor half a megabyte of imagery before the
+				first sentence of the page has rendered.
+			</p>
+		</section>
+
+		<section>
+			<h2>Design decisions</h2>
+			<div class="cards">
+				<article>
+					<h3>Data for shape, code for everything else</h3>
+					<p>
+						Natural Earth coastlines at 1:50m, simplified to a tenth of a degree, and every settlement
+						over 200,000 people: 200 kB of vectors. Ocean depth, biome colour, cloud deck, city glow and
+						the terminator are all computed from them at load.
+					</p>
+				</article>
+				<article>
+					<h3>The sun stays put; the planet turns</h3>
+					<p>
+						Lighting is one direction in world space, so the terminator sweeps across the surface as the
+						globe rotates. Day breaks over a coastline instead of sitting still — the thing that makes a
+						globe feel like a planet rather than a textured ball.
+					</p>
+				</article>
+				<article>
+					<h3>Air, not a shell</h3>
+					<p>
+						The halo fades on how close each line of sight passes to the planet, not on the silhouette
+						of the sphere drawing it. That one change is the difference between an atmosphere and a
+						visible bubble around the globe.
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<section>
+			<h2>How it is built</h2>
+			<p>
+				Coastlines are filled to a canvas as a land mask — rings that straddle the antimeridian are cut
+				there, or a continent smears across the map. A second pass measures distance from land out to sea
+				and stores it as a shelf channel, which is what turns coasts turquoise and leaves the abyssal
+				plains almost black.
+			</p>
+			<p>
+				The cloud deck is baked on the GPU in a single pass: fractal noise sampled on the sphere each pixel
+				maps to, so it wraps at the antimeridian and does not pinch at the poles, then banded by latitude —
+				wet at the equator, dry at the horse latitudes, stormy in the mid-latitudes. The same field is read
+				twice by the surface shader, once where you are standing and once offset along the sun, so the deck
+				throws a shadow on the ground beneath it.
+			</p>
+			<p>
+				City lights are drawn as splats scaled by the log of population, with satellite towns scattered
+				around each one. Scale mattered more than brightness: at a first attempt each metro was a thousand
+				kilometres wide and North America fused into a single white mass.
+			</p>
+		</section>
+
+		<section>
+			<h2>Craft notes</h2>
+			<ul>
+				<li>Great-circle routes run between the largest cities with a pulse travelling each line; the rest
+					of the arc stays a faint filament so the route is still readable between pulses.</li>
+				<li>The homepage imports the module only once the hero is on screen, and disposes it on
+					<code>pagehide</code> — a visitor who lands and scrolls straight past never pays for the
+					renderer.</li>
+				<li>Small screens take half-size maps and fewer segments; <code>prefers-reduced-motion</code>
+					stops the rotation, the pulses and the grain.</li>
+				<li>Coastlines get a 4096-wide mask while everything else stays at 2048 — recognition lives in the
+					outlines, and nowhere else.</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Outcome</h2>
+			<p>
+				A globe that reads as Earth from across a room and holds up when you drag it: weather that moves at
+				its own rate, cities that come on as the terminator passes, a limb that glows because of how air
+				thins rather than because a sphere was drawn slightly larger. It runs the same code on the case page
+				and on the homepage, with different framing and one less layer of post.
+			</p>
+		</section>
+
+		<footer>Terra 01 design case study · Yonder Case Library · 2026</footer>
+	</div>
+</body>
+
+</html>
