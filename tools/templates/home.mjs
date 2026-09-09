@@ -8,7 +8,7 @@ export const renderHome = (ctx, cases) => {
 		const c = thumbFor(row.slug);
 		return `				<div class="yt-row">
 					<div class="yt-row-num">${esc(row.num)}</div>
-					<div class="yt-thumb grayscale">
+					<div class="yt-thumb">
 						<img src="${esc(c.thumb)}" alt="${esc(row.alt)}" loading="lazy" width="800" height="600" />
 					</div>
 					<div class="yt-row-body">

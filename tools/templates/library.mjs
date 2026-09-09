@@ -18,7 +18,7 @@ export const renderLibrary = (ctx, cases) => {
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-${esc(c.slug)}">
 						<span class="yt-row-num">${esc(c.num)}</span>
-						<span class="yt-lib-thumb grayscale">
+						<span class="yt-lib-thumb">
 							<img src="${esc(c.thumb)}" alt="${esc(body.title)}" loading="lazy" width="800" height="600" />
 						</span>
 						<span class="yt-lib-body">
