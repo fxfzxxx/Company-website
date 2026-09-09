@@ -243,10 +243,10 @@ button {
 	flex-wrap: nowrap;
 }
 
-.yt-brand {
+.yt-nav .yt-brand {
 	font-family: var(--font-heading);
 	font-weight: 800;
-	font-size: 18px;
+	font-size: 20px;
 	letter-spacing: -0.03em;
 	flex: 0 0 auto;
 	margin-right: 0;
@@ -440,7 +440,7 @@ button {
 	margin-bottom: clamp(24px, 3vw, 44px);
 }
 
-.yt-head-row > div {
+.yt-head-row>div {
 	max-width: 640px;
 }
 
@@ -1297,7 +1297,7 @@ textarea.yt-input {
 	color: var(--color-neutral-800);
 }
 
-.yt-block-body p + p {
+.yt-block-body p+p {
 	margin-top: 20px;
 }
 
