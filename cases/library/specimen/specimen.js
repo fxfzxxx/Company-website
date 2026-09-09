@@ -24,7 +24,7 @@ import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
-import { makeNoise3D, mulberry32, fbm, ridged } from "./noise.js";
+import { makeNoise3D, mulberry32, fbm, ridged } from "../../../assets/lib/noise.js";
 
 /* — art direction ——————————————————————————————————————————————
    Everything an art director would want to reach for. Seeds are stable: the

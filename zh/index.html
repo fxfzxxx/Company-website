@@ -77,13 +77,17 @@
 		</div>
 
 	<main>
-		<section class="yt-wrap yt-hero">
-			<span class="yt-eyebrow">IT 咨询与数字化交付 · 奥克兰</span>
-			<h1 class="yt-h1"><span>让每一笔技术投入</span><span>都能被验证。</span></h1>
-			<p class="yt-lede">Yonder Tech 与新西兰本地企业及交付伙伴合作，处理数字化转型中最不光鲜的那一半：判断该建什么、整合已有系统，并用董事会认得的数字证明结果。</p>
-			<div class="yt-btn-row">
-				<a class="yt-link hv1" href="#work">查看案例 <span class="yt-arrow" aria-hidden="true">↓</span></a>
-				<a class="yt-link yt-link-muted hv2" href="#capabilities">我们做什么</a>
+		<section class="yt-hero-band">
+			<div class="yt-hero-globe" id="yt-globe"></div>
+			<div class="yt-hero-scrim" aria-hidden="true"></div>
+			<div class="yt-wrap yt-hero">
+				<span class="yt-eyebrow">IT 咨询与数字化交付 · 奥克兰</span>
+				<h1 class="yt-h1"><span>让每一笔技术投入</span><span>都能被验证。</span></h1>
+				<p class="yt-lede">Yonder Tech 与新西兰本地企业及交付伙伴合作，处理数字化转型中最不光鲜的那一半：判断该建什么、整合已有系统，并用董事会认得的数字证明结果。</p>
+				<div class="yt-btn-row">
+					<a class="yt-link hv1" href="#work">查看案例 <span class="yt-arrow" aria-hidden="true">↓</span></a>
+					<a class="yt-link yt-link-muted hv2" href="#capabilities">我们做什么</a>
+				</div>
 			</div>
 		</section>
 
@@ -91,7 +95,7 @@
 			<div class="yt-head-row">
 				<div>
 					<span class="yt-eyebrow">精选案例</span>
-					<h2 class="yt-h2">十一个概念，先看四个。</h2>
+					<h2 class="yt-h2">十二个概念，先看四个。</h2>
 					<p class="yt-head-lede">自主设计的概念作品。每条记录都包含课题、关键决策，以及最终交付的设计系统。</p>
 				</div>
 				<a class="yt-link yt-link-nowrap hv1" href="cases/index.html">完整案例库 <span class="yt-arrow" aria-hidden="true">→</span></a>
@@ -356,6 +360,54 @@
 				<span><a href="../en/index.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
 			</div>
 		</footer>
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../assets/vendor/three/three.module.min.js",
+				"three/addons/": "../assets/vendor/three/addons/"
+			}
+		}
+	</script>
+	<script type="module">
+		/* The globe is a quarter of a megabyte of renderer before it draws a
+		   pixel, so it is imported only once the hero is actually on screen —
+		   a visitor who lands and scrolls straight past never pays for it. */
+		const mount = document.getElementById("yt-globe");
+		if (mount) {
+			const start = async () => {
+				try {
+					const { createEarth } = await import("../cases/library/earth/earth.js");
+					const view = await createEarth(mount, {
+						background: 0x05070d,
+						stars: true,
+						arcs: 26,
+						mapSize: 1024,
+						landSize: 2048,
+						segments: 96,
+						camera: { fov: 26, distance: 7.1 },
+						bloom: { strength: 0.34, radius: 0.7, threshold: 0.8 },
+						grain: 0.02,
+						vignette: 0.55,
+					});
+					mount.dataset.ready = "true";
+					window.addEventListener("pagehide", () => view.dispose(), { once: true });
+				} catch (error) {
+					console.error(error);
+				}
+			};
+			if ("IntersectionObserver" in window) {
+				const watcher = new IntersectionObserver((entries, observer) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						observer.disconnect();
+						start();
+					}
+				}, { rootMargin: "300px" });
+				watcher.observe(mount);
+			} else {
+				start();
+			}
+		}
+	</script>
 	<script src="../assets/design/site.js"></script>
 </body>
 

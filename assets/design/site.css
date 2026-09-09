@@ -103,6 +103,103 @@ button {
 	padding-block: clamp(48px, 8vw, 108px) clamp(36px, 5vw, 60px);
 }
 
+/* — hero band ————————————————————————————————————————————————
+   The first screen carries a live globe. It is the one place on the site
+   that goes dark: the planet needs a night sky behind it, and the copy sits
+   on the left over a scrim so it never competes with the terminator. */
+
+.yt-hero-band {
+	position: relative;
+	isolation: isolate;
+	background: #05070d;
+	color: #f1f2f5;
+	overflow: hidden;
+}
+
+.yt-hero-globe {
+	position: absolute;
+	inset: 0 0 0 auto;
+	width: min(96vw, 1180px);
+	z-index: -2;
+	cursor: grab;
+	/* Until the module has drawn, the band is simply a dark field. */
+	opacity: 0;
+	transition: opacity 0.9s ease;
+}
+
+.yt-hero-globe[data-ready="true"] {
+	opacity: 1;
+}
+
+.yt-hero-globe.is-dragging {
+	cursor: grabbing;
+}
+
+.yt-hero-scrim {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background:
+		linear-gradient(90deg, #05070d 8%, color-mix(in srgb, #05070d 82%, transparent) 34%, transparent 66%),
+		linear-gradient(180deg, color-mix(in srgb, #05070d 55%, transparent), transparent 28%);
+}
+
+.yt-hero-band .yt-hero {
+	position: relative;
+	padding-block: clamp(64px, 10vw, 132px) clamp(60px, 9vw, 128px);
+	pointer-events: none;
+}
+
+.yt-hero-band .yt-hero a {
+	pointer-events: auto;
+}
+
+.yt-hero-band .yt-h1 {
+	max-width: 15ch;
+}
+
+.yt-hero-band .yt-eyebrow {
+	color: #d9a08c;
+}
+
+.yt-hero-band .yt-lede {
+	color: color-mix(in srgb, #f1f2f5 78%, transparent);
+	max-width: 48ch;
+}
+
+.yt-hero-band .yt-link {
+	color: #f1f2f5;
+	border-bottom-color: color-mix(in srgb, #f1f2f5 55%, transparent);
+}
+
+.yt-hero-band .yt-link-muted {
+	color: color-mix(in srgb, #f1f2f5 70%, transparent);
+	border-bottom-color: color-mix(in srgb, #f1f2f5 30%, transparent);
+}
+
+.yt-hero-band .yt-link:hover {
+	color: #ffffff;
+	border-bottom-color: #ffffff;
+}
+
+@media (max-width: 860px) {
+	.yt-hero-globe {
+		inset: auto 0 0 auto;
+		width: 100%;
+		height: 62%;
+	}
+
+	.yt-hero-scrim {
+		background:
+			linear-gradient(180deg, #05070d 26%, color-mix(in srgb, #05070d 70%, transparent) 52%, transparent 78%);
+	}
+
+	.yt-hero-band .yt-hero {
+		padding-bottom: clamp(200px, 46vw, 320px);
+	}
+}
+
 .yt-hero .yt-eyebrow {
 	margin-bottom: 28px;
 }
