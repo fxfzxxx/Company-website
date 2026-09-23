@@ -119,7 +119,7 @@ export const header = (ctx, current) => {
 	return `		<div class="yt-header">
 			<nav class="nav yt-nav" aria-label="${loc === "zh" ? "主导航" : "Main"}">
 				<a class="yt-brand" href="${homeHref}">
-					<img class="yt-brand-lockup" src="${root}assets/brand/lockup.svg" alt="Yonder Technology" width="164" height="36" />
+					<img class="yt-brand-lockup" src="${root}assets/brand/lockup.svg" alt="Yonder Technology" width="157" height="36" />
 					<img class="yt-brand-mark" src="${root}assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
 				</a>
 				<span class="yt-nav-links">
