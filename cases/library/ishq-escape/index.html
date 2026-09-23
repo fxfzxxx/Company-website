@@ -3,177 +3,174 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Ishq Escape is a luxury villa brand experience concept with immersive storytelling and high-end booking touchpoints." />
+	<meta name="description" content="Ishq Escape: private villa booking with concierge-led enquiry, from discovery to confirmation in one flow — a design concept by Yonder Tech." />
 	<link rel="canonical" href="https://yondertech.co.nz/cases/library/ishq-escape/index.html" />
 	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
-	<meta name="theme-color" content="#111111" />
+	<meta name="theme-color" content="#f5efe6" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Ishq Escape" />
-	<meta property="og:description" content="Ishq Escape is a luxury villa brand experience concept with immersive storytelling and high-end booking touchpoints." />
+	<meta property="og:description" content="Private villas in forest, ocean and heritage settings, matched to you by a concierge." />
 	<meta property="og:url" content="https://yondertech.co.nz/cases/library/ishq-escape/index.html" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/ishq-escape/assets/hero.jpg" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="Ishq Escape" />
-	<meta name="twitter:description" content="Ishq Escape is a luxury villa brand experience concept with immersive storytelling and high-end booking touchpoints." />
+	<meta name="twitter:card" content="summary_large_image" />
 	<title>Ishq Escape</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@400;500&display=swap" />
+	<link rel="stylesheet" href="../_shared/base.css" />
 	<link rel="stylesheet" href="assets/styles.css" />
-	<link rel="stylesheet" href="../_effects/effects.css" />
 </head>
 <body>
-	<div class="page">
-		<header class="hero">
-			<nav class="hero-nav">
-				<div class="brand">Ishq Escape</div>
-				<div class="nav-links">
-					<a href="#collection">Collection</a>
-					<a href="#experience">Experience</a>
-					<a href="#retreats">Retreats</a>
-					<a href="#contact">Contact</a>
-				</div>
-				<button class="ghost">Reserve</button>
+	<header class="nav" data-header>
+		<div class="wrap nav-inner">
+			<a class="logo" href="#top">Ishq <span>Escape</span></a>
+			<nav class="nav-links" aria-label="Main">
+				<a href="#retreats">Retreats</a>
+				<a href="#villas">Villas</a>
+				<a href="#match">Find your villa</a>
+				<a href="#concierge">Concierge</a>
+				<a href="project.html">Case study</a>
 			</nav>
-			<div class="hero-content reveal">
-				<span class="eyebrow">Exclusive private stays</span>
-				<h1 class="hero-title fx-shimmer">Private villa experiences that feel personal, artful, and unforgettable.</h1>
-				<p>We crafted a luxury booking journey with cinematic photography, intimate storytelling, and a layered concierge flow.</p>
-				<div class="hero-actions">
-					<button class="primary">Book a stay</button>
-					<a class="ghost" href="project.html">View villa guide</a>
-				</div>
-				<div class="hero-stats">
-					<div>
-						<strong>14</strong>
-						<span>Private homes curated</span>
-					</div>
-					<div>
-						<strong>48h</strong>
-						<span>Concierge response</span>
-					</div>
-					<div>
-						<strong>4.9</strong>
-						<span>Guest rating average</span>
-					</div>
-				</div>
-			</div>
-			<div class="hero-media parallax-layer" id="heroMedia">
-				<div class="media-card large"></div>
-				<div class="media-card top"></div>
-				<div class="media-card side"></div>
-				<div class="glow-orb"></div>
-				<div class="hero-tag">Sri Lanka · Coastal Estates</div>
-			</div>
-		</header>
+			<a class="btn btn-sm" href="#match">Enquire</a>
+		</div>
+	</header>
 
-		<section class="video-hero" id="videoHero">
-			<video class="video-bg" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80">
-				<source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4" />
-			</video>
-			<div class="video-overlay">
-				<span class="eyebrow">Private villas · 360° immersion</span>
-				<h2>Every stay unfolds like a private film.</h2>
-				<p>Ambient soundscapes, concierge-driven rituals, and curated landscapes create a cinematic escape.</p>
-				<button class="primary">Explore the journey</button>
+	<main id="top">
+		<section class="hero">
+			<img class="hero-img" src="assets/img/hero.jpg" width="2400" height="1400" alt="An infinity pool edge at dusk, looking over a still bay to the setting sun between palms." />
+			<div class="hero-shade"></div>
+			<div class="wrap hero-copy" data-stagger>
+				<p class="over">Private villas · Sri Lanka, Bali, Rajasthan</p>
+				<h1>Fourteen houses, <em>chosen for you.</em></h1>
+				<p class="lede">Tell us how you want to feel. A concierge matches you to the right villa and plans the days around it.</p>
 			</div>
+			<form class="search wrap" data-reveal onsubmit="event.preventDefault(); location.hash = 'match';">
+				<label><span>Where</span><select><option>Anywhere quiet</option><option>By the ocean</option><option>In the forest</option><option>A heritage estate</option></select></label>
+				<label><span>When</span><input type="text" value="12 – 19 March" /></label>
+				<label><span>Guests</span><input type="text" value="2 adults" /></label>
+				<button class="btn" type="submit">Find my villa</button>
+			</form>
 		</section>
 
-		<section class="collection" id="collection">
-			<div class="section-header">
-				<h2>Signature collection</h2>
-				<p>Every villa is styled to feel like a private gallery — spacious, serene, and handcrafted.</p>
-			</div>
-			<div class="collection-grid">
-				<article class="collection-card reveal fx-spotlight">
-					<div class="collection-image"></div>
-					<h3>Colombo Courtyard</h3>
-					<p>Garden courtyards, private pool, and curated dining moments.</p>
-				</article>
-				<article class="collection-card reveal fx-spotlight">
-					<div class="collection-image alt"></div>
-					<h3>Talpe Oceanline</h3>
-					<p>Sea-facing decks and curated spa rituals for long stays.</p>
-				</article>
-				<article class="collection-card reveal fx-spotlight">
-					<div class="collection-image third"></div>
-					<h3>Writers Lodge</h3>
-					<p>Library-led interiors and private chef experiences.</p>
-				</article>
-			</div>
-		</section>
-
-		<section class="experience" id="experience">
-			<div class="experience-grid">
-				<div class="experience-copy reveal">
-					<h2>Immersive guest journey</h2>
-					<p>We mapped the villa journey across discovery, booking, and on-property services with soft motion and tactile cues.</p>
-					<ul>
-						<li>Concierge-led booking flow</li>
-						<li>Personal itinerary builder</li>
-						<li>Private event curation</li>
-					</ul>
-				</div>
-				<div class="experience-cards">
-					<div class="experience-card reveal"></div>
-					<div class="experience-card reveal"></div>
-					<div class="experience-card reveal"></div>
-				</div>
-			</div>
-		</section>
-
-		<section class="signature">
-			<div class="signature-grid">
-				<div class="signature-card">
-					<h3>Signature details</h3>
-					<p>Handwritten welcome notes, curated playlists, and bespoke scent profiles.</p>
-				</div>
-				<div class="signature-card accent">
-					<h3>Concierge rituals</h3>
-					<p>Tailored menus, private chefs, and sunrise wellness sessions.</p>
-				</div>
-				<div class="signature-card">
-					<h3>Heritage craft</h3>
-					<p>Local artisans and galleries curated for each retreat.</p>
-				</div>
-			</div>
+		<section class="intro wrap">
+			<p data-reveal>Every Ishq house is privately owned, fully staffed and visited by our team each season. We don’t list them; <em>we introduce you to them.</em></p>
 		</section>
 
 		<section class="retreats" id="retreats">
-			<div class="section-header">
-				<h2>Retreat highlights</h2>
-				<p>Story-led itineraries and curated estates designed for private groups.</p>
-			</div>
-			<div class="retreat-grid">
-				<div class="retreat-card reveal">
-					<h4>Garden Ritual</h4>
-					<p>Sunrise yoga, chef-led breakfast, curated botanical tours.</p>
+			<div class="wrap">
+				<div class="head" data-reveal>
+					<p class="over">Three kinds of quiet</p>
+					<h2>Choose a retreat.</h2>
 				</div>
-				<div class="retreat-card reveal">
-					<h4>Coastal Solstice</h4>
-					<p>Oceanfront dinners, slow travel itineraries, villa-hosted wellness.</p>
-				</div>
-				<div class="retreat-card reveal">
-					<h4>Heritage Nights</h4>
-					<p>Historic estate walks, art tours, and private music sets.</p>
+				<div class="retreat-grid" data-stagger>
+					<a class="retreat" href="#villas"><img src="assets/img/forest.jpg" width="1200" height="1500" alt="Misty layered hills of pine forest." loading="lazy" /><div><span>05 villas</span><h3>Forest</h3><p>Tea country and cloud forest, 1,800 m up.</p></div></a>
+					<a class="retreat" href="#villas"><img src="assets/img/ocean.jpg" width="1200" height="1500" alt="A pool edge over a calm turquoise sea." loading="lazy" /><div><span>06 villas</span><h3>Ocean</h3><p>South coast bays and cliff-top pools.</p></div></a>
+					<a class="retreat" href="#villas"><img src="assets/img/heritage.jpg" width="1200" height="1500" alt="An arched pavilion with a dome, among palms in desert light." loading="lazy" /><div><span>03 villas</span><h3>Heritage</h3><p>Restored havelis and colonial estates.</p></div></a>
 				</div>
 			</div>
 		</section>
 
-		<section class="cta reveal" id="contact">
-			<div>
-				<h2>Plan your private escape</h2>
-				<p>Connect with our team to design a bespoke itinerary and preferred villa portfolio.</p>
+		<section class="villas" id="villas">
+			<div class="wrap">
+				<div class="head split" data-reveal>
+					<h2>This season’s houses</h2>
+					<a class="link" href="#match">See all fourteen →</a>
+				</div>
+				<div class="villa-list">
+					<article class="villa" data-reveal>
+						<img src="assets/img/villa-1.jpg" width="1400" height="1000" alt="A pool terrace at dusk facing a palm-fringed bay." loading="lazy" />
+						<div class="villa-body">
+							<p class="over">Ocean · Tangalle, Sri Lanka</p>
+							<h3>Villa Samudra</h3>
+							<p>Five bedrooms on a private cove, with a 30-metre pool that seems to empty into the bay.</p>
+							<ul class="facts"><li>5 bedrooms</li><li>Chef &amp; butler</li><li>Private beach</li></ul>
+							<div class="villa-foot"><span><b>from US$1,450</b> / night</span><a class="btn btn-line" href="#match">Enquire privately</a></div>
+						</div>
+					</article>
+					<article class="villa flip" data-reveal>
+						<img src="assets/img/villa-2.jpg" width="1400" height="1000" alt="Mountain ridges and pine forest under a pale sky." loading="lazy" />
+						<div class="villa-body">
+							<p class="over">Forest · Ella, Sri Lanka</p>
+							<h3>The Cloud House</h3>
+							<p>A tea planter’s bungalow above the mist line, with fires lit every evening and walks from the door.</p>
+							<ul class="facts"><li>4 bedrooms</li><li>Guide on call</li><li>Tea estate</li></ul>
+							<div class="villa-foot"><span><b>from US$980</b> / night</span><a class="btn btn-line" href="#match">Enquire privately</a></div>
+						</div>
+					</article>
+					<article class="villa" data-reveal>
+						<img src="assets/img/villa-3.jpg" width="1400" height="1000" alt="Sandstone arches and palms against a warm sunset." loading="lazy" />
+						<div class="villa-body">
+							<p class="over">Heritage · Jaisalmer, Rajasthan</p>
+							<h3>Haveli Noor</h3>
+							<p>A 17th-century merchant’s house, restored room by room, with a rooftop that faces the fort.</p>
+							<ul class="facts"><li>7 bedrooms</li><li>Private courtyard</li><li>Desert camp</li></ul>
+							<div class="villa-foot"><span><b>from US$1,120</b> / night</span><a class="btn btn-line" href="#match">Enquire privately</a></div>
+						</div>
+					</article>
+				</div>
 			</div>
-			<button class="primary">Contact concierge</button>
 		</section>
 
-		<footer class="page-footer">
-			<div>© 2026 Ishq Escape · Curated villas</div>
-			<div>Privacy · Terms · Contact</div>
-		</footer>
-	</div>
-	<script src="assets/main.js"></script>
-	<script src="../_effects/effects.js"></script>
+		<section class="match" id="match">
+			<div class="wrap match-grid">
+				<div data-reveal>
+					<p class="over">Find your villa</p>
+					<h2>Three questions, then a person.</h2>
+					<p class="muted">We match on how you want the week to feel, not on filters. A concierge replies within the hour with two houses and a plan.</p>
+				</div>
+				<form class="match-card" data-reveal onsubmit="event.preventDefault(); this.classList.add('is-sent');">
+					<fieldset>
+						<legend>1 · The mood</legend>
+						<div class="chips" data-toggle-group>
+							<button type="button" aria-pressed="true">Stillness</button>
+							<button type="button" aria-pressed="false">Adventure</button>
+							<button type="button" aria-pressed="false">Celebration</button>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>2 · Who’s coming</legend>
+						<div class="chips" data-toggle-group>
+							<button type="button" aria-pressed="false">Two of us</button>
+							<button type="button" aria-pressed="true">Family</button>
+							<button type="button" aria-pressed="false">Friends</button>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>3 · Looked after</legend>
+						<div class="chips" data-toggle-group>
+							<button type="button" aria-pressed="false">Left alone</button>
+							<button type="button" aria-pressed="true">Every day planned</button>
+						</div>
+					</fieldset>
+					<button class="btn" type="submit">Introduce me to a concierge</button>
+					<p class="sent" role="status">Anjali will be in touch within the hour.</p>
+				</form>
+			</div>
+		</section>
+
+		<section class="concierge" id="concierge">
+			<div class="wrap">
+				<div class="head" data-reveal>
+					<p class="over">After you book</p>
+					<h2>Your week, arranged.</h2>
+				</div>
+				<ol class="timeline" data-stagger>
+					<li><span>Day 0</span><h3>Confirmed</h3><p>A single page with your house, your concierge and your first evening.</p></li>
+					<li><span>Day −14</span><h3>A call</h3><p>Twenty minutes to plan meals, drivers and anything you’re celebrating.</p></li>
+					<li><span>Arrival</span><h3>Met at the airport</h3><p>Your driver has the house number; the pool has been warmed.</p></li>
+					<li><span>Every day</span><h3>On WhatsApp</h3><p>The same person, from enquiry to the drive home.</p></li>
+				</ol>
+			</div>
+		</section>
+	</main>
+
+	<footer class="foot">
+		<div class="wrap foot-inner">
+			<span class="logo">Ishq <span>Escape</span></span>
+			<span>A design concept by <a href="../../../en/index.html" target="_top">Yonder Tech</a> · <a href="project.html">Case study</a></span>
+		</div>
+	</footer>
+	<script src="../_shared/concept.js"></script>
 </body>
 </html>

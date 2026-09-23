@@ -8,8 +8,8 @@ Recommended structure:
   - index.html (the live design concept)
   - project.html (the design case study: brief, decisions, outcome — link it from index.html's nav)
   - assets/
-    - styles.css
-    - images/
+    - styles.css (tokens on :root, then the concept's own styles)
+    - img/ (generated, see Images below)
 
 Then add a new card to cases/index.html that links to:
 
@@ -18,44 +18,41 @@ viewer.html?case=cases/library/<case-slug>/index.html
 Tags are set with data-tags on the card.
 
 Conventions:
-- Style project.html with the same assets/styles.css as the concept so the case study feels native.
+- project.html uses the same assets/styles.css as the concept so the case study feels native.
 - Links back to the main site must go three levels up (e.g. ../../../contact/index.html).
 - Avoid javascript:void(0); use in-page anchors or project.html for demo nav links.
 
-## Shared effects (`_effects/`)
+## Shared files
 
-Optional animated effects, inspired by Inspira UI but written in plain CSS/JS so
-they work in these static pages (Inspira UI itself is Vue + Tailwind only).
+- `_shared/base.css` — reset, reveal motion and the case-study layout. Each
+  concept declares its tokens (`--bg --surface --ink --muted --line --accent
+  --on-accent --font-display --font-body --radius`) on `:root` in its own
+  `assets/styles.css`, loaded after this file.
+- `_shared/concept.js` — scroll reveals (`data-reveal`, `data-stagger`), the
+  header's `.is-scrolled` state (`data-header`), tab groups (`data-tabs` with
+  `data-tab` / `data-panel`) and exclusive chip rows (`data-toggle-group`).
 
-Opt in per showcase:
+## Images
 
-```html
-<link rel="stylesheet" href="../_effects/effects.css" />  <!-- after your own styles.css -->
-<script src="../_effects/effects.js"></script>            <!-- after your own main.js -->
+No concept uses photography. Every image under `<slug>/assets/img/` is
+painted from seeded noise by `_art/art.js`; open `_art/index.html` for a
+contact sheet. After changing a piece:
+
+```
+node tools/render-case-art.mjs [piece-prefix]    # assets/img/*.jpg
+node tools/render-case-stills.mjs [slug]         # assets/hero.jpg, assets/thumb.jpg
 ```
 
-Then add classes in markup:
+`hero.jpg` and `thumb.jpg` are screenshots of the concept itself, used by the
+case pages and the library grid. Both scripts need Playwright, which is not a
+site dependency; set `PLAYWRIGHT_CHROMIUM` to a browser binary if the bundled
+one is not installed.
 
-| Class | Effect | Options |
-| --- | --- | --- |
-| `fx-meteors` | diagonal streaks falling through the section | `data-meteors="16"` |
-| `fx-sparkles` | twinkling starfield | `data-sparkles="70"` |
-| `fx-aurora` | slow drifting gradient blobs behind content | — |
-| `fx-spotlight` | glow that follows the cursor across a card | — |
-| `fx-beam` | light travelling around the card border on hover | — |
-| `fx-shimmer` | highlight sweeping across a headline | `--fx-shimmer-color` |
-| `fx-tilt` | 3D tilt toward the cursor | `data-tilt="8"` |
+## Case studies
 
-Every effect inherits the showcase's own `--accent` (and `--text`, `--glow`), so
-the same class blends into each palette automatically. Override per element with
-`style="--fx-shimmer-color: var(--gold);"`.
-
-Notes:
-- All decorative motion is disabled under `prefers-reduced-motion: reduce`.
-- `fx-meteors` / `fx-sparkles` need a positioned container; both set it themselves.
-- `fx-spotlight` sets `overflow: hidden` and lifts direct children to `z-index: 2`.
-- Skip these on deliberately restrained concepts (atlas, tech-disruption) — the
-  restraint is the design point there.
+`project.html` for the nine web concepts is generated from
+`content/cases.json` by `node tools/build-case-studies.mjs`, so it always
+matches the case page on the main site. Edit the JSON, not the HTML.
 
 Current cases:
 

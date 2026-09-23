@@ -3,99 +3,182 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Design showcase: Aurora Studio - a premium brand experience concept with layered visuals and interaction rhythm." />
+	<meta name="description" content="Aurora Studio careers: role search above the fold, with teams, categories and locations given equal standing — a design concept by Yonder Tech." />
 	<link rel="canonical" href="https://yondertech.co.nz/cases/library/aurora/index.html" />
 	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
-	<meta name="theme-color" content="#111111" />
+	<meta name="theme-color" content="#050b14" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Aurora Studio" />
-	<meta property="og:description" content="Design showcase: Aurora Studio - a premium brand experience concept with layered visuals and interaction rhythm." />
+	<meta property="og:title" content="Careers at Aurora Studio" />
+	<meta property="og:description" content="Build the tools the next decade runs on." />
 	<meta property="og:url" content="https://yondertech.co.nz/cases/library/aurora/index.html" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/aurora/assets/hero.jpg" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="Aurora Studio" />
-	<meta name="twitter:description" content="Design showcase: Aurora Studio - a premium brand experience concept with layered visuals and interaction rhythm." />
-	<title>Aurora Studio</title>
+	<meta name="twitter:card" content="summary_large_image" />
+	<title>Careers at Aurora Studio</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" />
+	<link rel="stylesheet" href="../_shared/base.css" />
 	<link rel="stylesheet" href="assets/styles.css" />
-	<link rel="stylesheet" href="../_effects/effects.css" />
 </head>
 <body>
-	<div class="site">
-		<header class="top-bar">
-			<div class="brand">
-				<span class="menu">☰</span>
-				<span class="logo">aurorajobs</span>
+	<header class="nav" data-header>
+		<div class="wrap nav-inner">
+			<a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>aurora <small>careers</small></a>
+			<nav class="nav-links" aria-label="Main">
+				<a href="#discover">Teams</a>
+				<a href="#roles">Open roles</a>
+				<a href="#places">Locations</a>
+				<a href="#programmes">Programmes</a>
+				<a href="project.html">Case study</a>
+			</nav>
+			<div class="nav-end">
+				<a href="#roles" class="saved">Saved <span>2</span></a>
+				<a class="btn btn-light" href="#alerts">Sign in</a>
 			</div>
-			<div class="top-actions">
-				<a href="project.html">My career</a>
-				<span class="caret">▼</span>
-			</div>
-		</header>
+		</div>
+	</header>
 
-		<section class="search-hero">
-			<div class="search-row">
-				<div class="search-field">
-					<input type="text" placeholder="Search for roles by title or keyword" />
+	<main id="top">
+		<section class="hero">
+			<img class="hero-img" src="assets/img/hero.jpg" width="2400" height="1300" alt="" />
+			<div class="hero-shade"></div>
+			<div class="wrap hero-inner">
+				<div data-stagger>
+					<p class="over">412 open roles · 9 studios · 31 teams</p>
+					<h1>Build the tools the next decade <em>runs on.</em></h1>
 				</div>
-				<div class="search-field">
-					<span class="icon">📍</span>
-					<input type="text" placeholder="Location" />
+				<form class="search" data-reveal onsubmit="event.preventDefault(); location.hash = 'roles';">
+					<label class="field">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+						<span class="sr-only">Role or keyword</span>
+						<input type="text" placeholder="Role, team or skill" />
+					</label>
+					<label class="field">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+						<span class="sr-only">Location</span>
+						<input type="text" placeholder="City or remote" />
+					</label>
+					<button class="btn btn-accent" type="submit">Search roles</button>
+				</form>
+				<div class="popular" data-reveal>
+					<span>Popular:</span>
+					<a href="#roles">Applied AI</a><a href="#roles">Design systems</a><a href="#roles">Graduate 2027</a><a href="#roles">Remote</a>
 				</div>
-				<button class="search-button" aria-label="Search">🔍</button>
 			</div>
-			<div class="hero-banner fx-aurora">
+		</section>
+
+		<section class="discover" id="discover">
+			<div class="wrap">
+				<div class="head" data-reveal>
+					<h2>Three ways in. <em>Same roles.</em></h2>
+					<p>Start from the people, the craft or the place — whichever matters most to you.</p>
+				</div>
+				<div class="surfaces" data-stagger>
+					<a class="surface" href="#teams">
+						<img src="assets/img/teams.jpg" width="1200" height="900" alt="" loading="lazy" />
+						<div><span class="count">31 teams</span><h3>Meet the teams</h3><p>Who you’d work with, what they’re building, and how they work.</p><span class="go" aria-hidden="true">→</span></div>
+					</a>
+					<a class="surface" href="#roles">
+						<img src="assets/img/categories.jpg" width="1200" height="900" alt="" loading="lazy" />
+						<div><span class="count">12 disciplines</span><h3>Browse by craft</h3><p>Engineering, design, research, operations and the roles between.</p><span class="go" aria-hidden="true">→</span></div>
+					</a>
+					<a class="surface" href="#places">
+						<img src="assets/img/locations.jpg" width="1200" height="900" alt="" loading="lazy" />
+						<div><span class="count">9 studios</span><h3>Find a studio</h3><p>From Auckland to Oslo, and a remote team across four time zones.</p><span class="go" aria-hidden="true">→</span></div>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="teams" id="teams">
+			<div class="wrap">
+				<div class="head split" data-reveal>
+					<h2>Teams hiring now</h2>
+					<a class="link" href="#roles">All 31 teams →</a>
+				</div>
+				<div class="team-grid" data-stagger>
+					<article class="team" style="--c: #29f0b4"><span class="team-roles">14 roles</span><h3>Applied AI</h3><blockquote>“We ship models into tools people already use, and we measure whether they got faster.”</blockquote><footer><span class="face" style="--h: 160">RK</span>Ravi K., team lead</footer></article>
+					<article class="team" style="--c: #7a9bff"><span class="team-roles">9 roles</span><h3>Design Systems</h3><blockquote>“One component library for eleven products. We say no a lot, kindly.”</blockquote><footer><span class="face" style="--h: 230">SM</span>Sofia M., principal designer</footer></article>
+					<article class="team" style="--c: #ff9a6b"><span class="team-roles">6 roles</span><h3>Devices</h3><blockquote>“Hardware, firmware and the app, in one room. Prototypes on every desk.”</blockquote><footer><span class="face" style="--h: 20">TA</span>Tom A., engineering manager</footer></article>
+					<article class="team" style="--c: #d58bff"><span class="team-roles">11 roles</span><h3>Studio Operations</h3><blockquote>“The people who make nine studios feel like one company.”</blockquote><footer><span class="face" style="--h: 290">NL</span>Nadia L., head of operations</footer></article>
+				</div>
+			</div>
+		</section>
+
+		<section class="roles" id="roles">
+			<div class="wrap">
+				<div class="head split" data-reveal>
+					<h2>Open roles</h2>
+					<div class="filters" data-toggle-group role="group" aria-label="Discipline">
+						<button aria-pressed="true">All <span>412</span></button>
+						<button aria-pressed="false">Engineering <span>188</span></button>
+						<button aria-pressed="false">Design <span>64</span></button>
+						<button aria-pressed="false">Research <span>37</span></button>
+						<button aria-pressed="false">Operations <span>123</span></button>
+					</div>
+				</div>
+				<ul class="role-list" data-stagger>
+					<li><a href="project.html"><div><h3>Senior ML Engineer, Evaluation</h3><span>Applied AI</span></div><span>Auckland · Hybrid</span><span>Full-time</span><span class="new">New</span><span class="arrow" aria-hidden="true">→</span></a></li>
+					<li><a href="project.html"><div><h3>Product Designer, Components</h3><span>Design Systems</span></div><span>Oslo · Remote EU</span><span>Full-time</span><span>3 d ago</span><span class="arrow" aria-hidden="true">→</span></a></li>
+					<li><a href="project.html"><div><h3>Firmware Engineer, Audio</h3><span>Devices</span></div><span>Singapore · On-site</span><span>Full-time</span><span>5 d ago</span><span class="arrow" aria-hidden="true">→</span></a></li>
+					<li><a href="project.html"><div><h3>Research Scientist, Human–AI Interaction</h3><span>Research</span></div><span>London · Hybrid</span><span>Full-time</span><span class="new">New</span><span class="arrow" aria-hidden="true">→</span></a></li>
+					<li><a href="project.html"><div><h3>Studio Coordinator</h3><span>Studio Operations</span></div><span>Melbourne · On-site</span><span>Part-time</span><span>1 w ago</span><span class="arrow" aria-hidden="true">→</span></a></li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="programmes" id="programmes">
+			<div class="wrap prog-grid">
+				<div class="prog-art" data-reveal><img src="assets/img/story.jpg" width="1600" height="1100" alt="" loading="lazy" /><span>Graduate cohort, 2026</span></div>
 				<div>
-					<p class="eyebrow">Imagine it. Create it.</p>
-					<p class="hero-text">Explore opportunities with Aurora Studio devices & services.</p>
+					<p class="over dark" data-reveal>Launch programmes</p>
+					<h2 data-reveal>Start here, <em>grow anywhere.</em></h2>
+					<ul class="prog-list" data-stagger>
+						<li><strong>Graduate programme</strong><span>Two rotations in eighteen months. Applications open 1 March.</span></li>
+						<li><strong>Internships</strong><span>Twelve paid weeks over summer, on a shipping team.</span></li>
+						<li><strong>AI residency</strong><span>A year for researchers moving into applied work.</span></li>
+						<li><strong>Apprenticeships</strong><span>Hardware and studio trades, paid while you learn.</span></li>
+					</ul>
 				</div>
-				<button class="hero-cta">Explore</button>
 			</div>
 		</section>
 
-		<section class="card-strip">
-			<article class="info-card">
-				<h3>Student opportunities</h3>
-				<p>At Aurora, we're building today that defines tomorrow. Explore internships, apprenticeships, and graduate roles where you can grow your impact.</p>
-				<button>Find your role</button>
-			</article>
-			<article class="info-card">
-				<h3>Hourly jobs</h3>
-				<p>From studio operations to client delivery, every role has an impact. Search open jobs and discover how you can shape the future.</p>
-				<button>Find your role</button>
-			</article>
-			<article class="info-card">
-				<h3>AI careers</h3>
-				<p>From intelligent automation to immersive experiences, our teams build tools that help people work smarter every day.</p>
-				<button>Find your role</button>
-			</article>
-		</section>
-
-		<section class="explore">
-			<h2>Innovate with us</h2>
-			<div class="explore-grid">
-				<article class="image-card fx-spotlight">
-					<div class="image-block image-one"></div>
-					<h3>Teams</h3>
-					<p>Get to know Aurora teams and how we're shaping the future together.</p>
-					<a href="project.html">Discover teams</a>
-				</article>
-				<article class="image-card fx-spotlight">
-					<div class="image-block image-two"></div>
-					<h3>Job categories</h3>
-					<p>Find the right role to shape your future at Aurora Studio.</p>
-					<a href="project.html">Browse categories</a>
-				</article>
-				<article class="image-card fx-spotlight">
-					<div class="image-block image-three"></div>
-					<h3>Locations</h3>
-					<p>See where Aurora teams worldwide are making every day better.</p>
-					<a href="project.html">Explore locations</a>
-				</article>
+		<section class="places" id="places">
+			<div class="wrap">
+				<div class="head" data-reveal><h2>Nine studios. <em>One team.</em></h2></div>
+				<ul class="place-list" data-stagger>
+					<li><span>Auckland</span><small>HQ · 86 roles</small></li>
+					<li><span>Oslo</span><small>62 roles</small></li>
+					<li><span>London</span><small>58 roles</small></li>
+					<li><span>Singapore</span><small>47 roles</small></li>
+					<li><span>Melbourne</span><small>41 roles</small></li>
+					<li><span>Toronto</span><small>36 roles</small></li>
+					<li><span>Berlin</span><small>33 roles</small></li>
+					<li><span>Tokyo</span><small>24 roles</small></li>
+					<li><span>Remote</span><small>25 roles</small></li>
+				</ul>
 			</div>
 		</section>
 
-		<footer class="footer">Aurora Studio case sample · 2026</footer>
-	</div>
-	<script src="../_effects/effects.js"></script>
+		<section class="alerts" id="alerts">
+			<div class="wrap alerts-card" data-reveal>
+				<div><h2>Not the right role yet?</h2><p>Get one email when something opens in your craft and city.</p></div>
+				<form onsubmit="event.preventDefault(); this.classList.add('is-sent');">
+					<label><span class="sr-only">Email</span><input type="email" placeholder="you@example.com" required /></label>
+					<button class="btn btn-accent" type="submit">Create alert</button>
+					<p class="sent" role="status">Done. We’ll only write when it’s relevant.</p>
+				</form>
+			</div>
+		</section>
+	</main>
+
+	<footer class="foot">
+		<div class="wrap foot-inner">
+			<span>Aurora Studio · Careers</span>
+			<span>A design concept by <a href="../../../en/index.html" target="_top">Yonder Tech</a> · <a href="project.html">Case study</a></span>
+		</div>
+	</footer>
+	<script src="../_shared/concept.js"></script>
 </body>
 </html>
