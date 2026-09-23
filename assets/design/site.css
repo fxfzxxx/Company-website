@@ -7,10 +7,55 @@
    Border radius is 0 everywhere. No shadows on any surface. Rules are 2px. */
 
 :root {
-	--color-accent: #a8503f;
-	--color-accent-500: #b8604e;
-	--color-accent-600: #8f4232;
-	--color-accent-700: #713227;
+	/* Palette — sampled off the brand sheet (disc average, r=7px), not the
+	   handoff's warm greys. Everything modernist.css defines is overridden
+	   here so nothing falls back to the original terracotta system. */
+	--color-text: #17181b;
+	--color-bg: #f2f0ec;
+	--color-surface: #e3e1dd;
+	--color-divider: color-mix(in srgb, #17181b 40%, transparent);
+
+	/* Tonal ramps, regenerated in OKLCH: each step keeps the handoff ramp's
+	   lightness, so every rule built on a step keeps its contrast; only
+	   chroma and hue move onto the sheet's slate. */
+	--color-neutral-100: #f7f5f1;
+	--color-neutral-200: #eae8e4;
+	--color-neutral-300: #d3d5d2;
+	--color-neutral-400: #b5b8b9;
+	--color-neutral-500: #909aa1;
+	/* one step darker than the handoff's lightness (L 0.580 -> 0.530). This is
+	   the caption tier — case meta, notes, fact labels — and at the handoff's
+	   value it sat at 3.85:1 on the page ground, below AA. 4.60:1 here. */
+	--color-neutral-600: #606e7b;
+	--color-neutral-700: #515f70;
+	--color-neutral-800: #374353;
+	--color-neutral-900: #222c3b;
+
+	--color-accent: #192231;
+	--color-accent-100: #f5f5f6;
+	--color-accent-200: #e7e8ea;
+	--color-accent-300: #d2d4d8;
+	--color-accent-400: #b4b8be;
+	--color-accent-500: #2c3a4e;
+	--color-accent-600: #0f1620;
+	--color-accent-700: #0c1118;
+	--color-accent-800: #3a4350;
+	--color-accent-900: #232c3b;
+
+	--color-accent-2: #566576;
+	--color-accent-2-500: #6e7c8a;
+	--color-accent-2-600: #46546a;
+	--color-accent-2-700: #374353;
+
+	/* The accent as text — eyebrows, numerals, link hover. It cannot be the
+	   navy: against #17181b body copy that reads as no change at all. This
+	   slate is 5.2:1 on --color-bg and 4.6:1 on --color-surface, and stays
+	   3.0:1 apart from the body ink so the hover is visibly a hover. */
+	--yt-accent-ink: #566576;
+
+	/* The mark's own colours, for the reversed lockup on the accent field. */
+	--yt-bone: #ece8e3;
+	--yt-silver: #b8babb;
 }
 
 html {
@@ -31,7 +76,7 @@ a {
 }
 
 a:hover {
-	color: var(--color-accent-700);
+	color: var(--yt-accent-ink);
 }
 
 button {
@@ -111,8 +156,8 @@ button {
 .yt-hero-band {
 	position: relative;
 	isolation: isolate;
-	background: #05070d;
-	color: #f1f2f5;
+	background: #080b12;
+	color: #ece8e3;
 	overflow: hidden;
 }
 
@@ -141,8 +186,8 @@ button {
 	z-index: -1;
 	pointer-events: none;
 	background:
-		linear-gradient(90deg, #05070d 8%, color-mix(in srgb, #05070d 82%, transparent) 34%, transparent 66%),
-		linear-gradient(180deg, color-mix(in srgb, #05070d 55%, transparent), transparent 28%);
+		linear-gradient(90deg, #080b12 8%, color-mix(in srgb, #080b12 82%, transparent) 34%, transparent 66%),
+		linear-gradient(180deg, color-mix(in srgb, #080b12 55%, transparent), transparent 28%);
 }
 
 .yt-hero-band .yt-hero {
@@ -160,22 +205,22 @@ button {
 }
 
 .yt-hero-band .yt-eyebrow {
-	color: #d9a08c;
+	color: var(--yt-silver);
 }
 
 .yt-hero-band .yt-lede {
-	color: color-mix(in srgb, #f1f2f5 78%, transparent);
+	color: color-mix(in srgb, #ece8e3 78%, transparent);
 	max-width: 48ch;
 }
 
 .yt-hero-band .yt-link {
-	color: #f1f2f5;
-	border-bottom-color: color-mix(in srgb, #f1f2f5 55%, transparent);
+	color: #ece8e3;
+	border-bottom-color: color-mix(in srgb, #ece8e3 55%, transparent);
 }
 
 .yt-hero-band .yt-link-muted {
-	color: color-mix(in srgb, #f1f2f5 70%, transparent);
-	border-bottom-color: color-mix(in srgb, #f1f2f5 30%, transparent);
+	color: color-mix(in srgb, #ece8e3 70%, transparent);
+	border-bottom-color: color-mix(in srgb, #ece8e3 30%, transparent);
 }
 
 .yt-hero-band .yt-link:hover {
@@ -192,7 +237,7 @@ button {
 
 	.yt-hero-scrim {
 		background:
-			linear-gradient(180deg, #05070d 26%, color-mix(in srgb, #05070d 70%, transparent) 52%, transparent 78%);
+			linear-gradient(180deg, #080b12 26%, color-mix(in srgb, #080b12 70%, transparent) 52%, transparent 78%);
 	}
 
 	.yt-hero-band .yt-hero {
@@ -244,12 +289,35 @@ button {
 }
 
 .yt-nav .yt-brand {
-	font-family: var(--font-heading);
-	font-weight: 800;
-	font-size: 20px;
-	letter-spacing: -0.03em;
 	flex: 0 0 auto;
 	margin-right: 0;
+	display: flex;
+	align-items: center;
+}
+
+/* height drives it; width follows the 4.442:1 lockup. The width/height
+   attributes are the anti-shift hint, so height must stay auto or they
+   become presentational sizes and override this.
+
+   The six-link nav already overflows below ~720px; the full lockup would
+   take another 95px off it, so the mark stands in on its own there. Both
+   rules below are selected the same way, or the wider one wins on
+   specificity and the two marks stack. */
+.yt-nav .yt-brand .yt-brand-lockup {
+	display: block;
+	height: 38px;
+	width: auto;
+}
+
+.yt-nav .yt-brand .yt-brand-mark {
+	display: none;
+	height: 30px;
+	width: auto;
+}
+
+@media (max-width: 720px) {
+	.yt-nav .yt-brand .yt-brand-lockup { display: none; }
+	.yt-nav .yt-brand .yt-brand-mark { display: block; }
 }
 
 .yt-nav-links {
@@ -268,7 +336,7 @@ button {
 }
 
 .yt-nav-links a[aria-current="page"] {
-	color: var(--color-accent-700);
+	color: var(--yt-accent-ink);
 }
 
 .yt-lang {
@@ -301,7 +369,7 @@ button {
 	font-size: 12.5px;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: var(--color-accent-700);
+	color: var(--yt-accent-ink);
 	font-weight: 600;
 	margin-bottom: 20px;
 }
@@ -424,7 +492,7 @@ button {
 	font-size: 13.5px;
 	letter-spacing: 0.04em;
 	font-weight: 600;
-	color: var(--color-accent-700);
+	color: var(--yt-accent-ink);
 	border-bottom: 2px solid var(--color-accent);
 	padding-bottom: 3px;
 }
@@ -688,7 +756,7 @@ button {
 }
 
 .yt-cards a.card:hover .card-title {
-	color: var(--color-accent-700);
+	color: var(--yt-accent-ink);
 }
 
 /* — contact banner ————————————————————————————————————————————— */
@@ -803,7 +871,7 @@ button {
 	color: var(--color-bg);
 	background: transparent;
 	border: 0;
-	border-bottom: 2px solid color-mix(in srgb, #f3f2f2 45%, transparent);
+	border-bottom: 2px solid color-mix(in srgb, #f2f0ec 45%, transparent);
 	border-radius: 0;
 	padding: 8px 0;
 	transition: border-color 160ms ease;
@@ -812,7 +880,7 @@ button {
 }
 
 .yt-input::placeholder {
-	color: color-mix(in srgb, #f3f2f2 62%, transparent);
+	color: color-mix(in srgb, #f2f0ec 62%, transparent);
 }
 
 .yt-input:hover,
@@ -1095,7 +1163,7 @@ textarea.yt-input {
 	font-weight: 800;
 	font-size: 19px;
 	line-height: 1;
-	color: var(--color-accent-700);
+	color: var(--yt-accent-ink);
 }
 
 .yt-lib-panel {
@@ -1114,7 +1182,7 @@ textarea.yt-input {
 	font-size: 11.5px;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: var(--color-accent-700);
+	color: var(--yt-accent-ink);
 	font-weight: 600;
 	margin-bottom: 12px;
 }
@@ -1474,4 +1542,12 @@ textarea.yt-input {
 	font-weight: 600;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
+}
+/* — modernist component overrides ————————————————————————————————
+   .card-meta mixes the ink to 50%, which lands at 3.17:1 on --color-surface.
+   That predates the palette swap and is the same on the handoff's greys; 65%
+   clears AA on both the card surface and the page ground. */
+
+.yt-cards .card-meta {
+	color: color-mix(in srgb, var(--color-text) 65%, transparent);
 }

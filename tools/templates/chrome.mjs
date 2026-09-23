@@ -48,7 +48,7 @@ export const head = ({ ctx, title, description, image, robots }) => {
 	<link rel="alternate" hreflang="${HREFLANG.zh}" href="${SITE}/${zhPath}" />
 	<link rel="alternate" hreflang="x-default" href="${SITE}/${enPath}" />
 	<link rel="icon" href="${root}assets/favicon.svg" type="image/svg+xml" />
-	<meta name="theme-color" content="#a8503f" />${robots ? `\n\t<meta name="robots" content="${robots}" />` : ""}
+	<meta name="theme-color" content="#192231" />${robots ? `\n\t<meta name="robots" content="${robots}" />` : ""}
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="${esc(title)}" />
 	<meta property="og:description" content="${esc(description)}" />
@@ -99,7 +99,7 @@ export const orgJsonLd = () => `	<script type="application/ld+json">
 /* The nav is six items. Anchors resolve against this locale's homepage, so
    they work from the library and detail pages too. */
 export const header = (ctx, current) => {
-	const { home, homeHref, libraryHref, loc, altHref } = ctx;
+	const { home, homeHref, libraryHref, loc, altHref, root } = ctx;
 	const n = home.nav;
 	const anchor = (id) => (homeHref === "index.html" ? `#${id}` : `${homeHref}#${id}`);
 	const links = [
@@ -118,7 +118,10 @@ export const header = (ctx, current) => {
 
 	return `		<div class="yt-header">
 			<nav class="nav yt-nav" aria-label="${loc === "zh" ? "主导航" : "Main"}">
-				<a class="yt-brand" href="${homeHref}">Yonder.</a>
+				<a class="yt-brand" href="${homeHref}">
+					<img class="yt-brand-lockup" src="${root}assets/brand/lockup.svg" alt="Yonder Technology" width="169" height="38" />
+					<img class="yt-brand-mark" src="${root}assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
 				<span class="yt-nav-links">
 ${links
 	.map(
