@@ -171,10 +171,9 @@
     ],
     "body": "先一次 60 分钟沟通，再决定是否进入两周固定费用的诊断。结束时你会拿到一份带预算的路线图，没有继续合作的义务。",
     "email": "邮箱",
-    "phone": "电话",
     "office": "办公地址",
-    "officeLine1": "奥克兰皇后街 100 号 18 楼",
-    "officeLine2": "Auckland 1010",
+    "officeLine1": "23A Dromorne Rd, Remuera",
+    "officeLine2": "Auckland",
     "form": {
       "eyebrow": "在线留言",
       "firstName": "名",
@@ -185,7 +184,7 @@
       "submit": "发送",
       "sending": "发送中…",
       "success": "已收到。我们会在 1–2 个工作日内回复。",
-      "error": "发送失败。请直接邮件至 aaronf@yondertech.co.nz，我们会跟进。"
+      "error": "发送失败。请直接邮件至 admin@yondertech.co.nz，我们会跟进。"
     }
   },
   "footer": {
@@ -253,12 +252,8 @@
         "title": "联系",
         "links": [
           {
-            "label": "aaronf@yondertech.co.nz",
-            "href": "mailto:aaronf@yondertech.co.nz"
-          },
-          {
-            "label": "+64 22 595 0228",
-            "href": "tel:+64225950228"
+            "label": "admin@yondertech.co.nz",
+            "href": "mailto:admin@yondertech.co.nz"
           },
           {
             "label": "联系我们",

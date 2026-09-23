@@ -173,10 +173,9 @@
     ],
     "body": "A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.",
     "email": "Email",
-    "phone": "Phone",
     "office": "Office",
-    "officeLine1": "Level 18, 100 Queen Street",
-    "officeLine2": "Auckland 1010",
+    "officeLine1": "23A Dromorne Rd, Remuera",
+    "officeLine2": "Auckland",
     "form": {
       "eyebrow": "Send a message",
       "firstName": "First name",
@@ -187,7 +186,7 @@
       "submit": "Send message",
       "sending": "Sending…",
       "success": "Thanks — your message has been sent. We reply within one to two business days.",
-      "error": "That did not send. Email aaronf@yondertech.co.nz and we will pick it up from there."
+      "error": "That did not send. Email admin@yondertech.co.nz and we will pick it up from there."
     }
   },
   "footer": {
@@ -255,12 +254,8 @@
         "title": "Contact",
         "links": [
           {
-            "label": "aaronf@yondertech.co.nz",
-            "href": "mailto:aaronf@yondertech.co.nz"
-          },
-          {
-            "label": "+64 22 595 0228",
-            "href": "tel:+64225950228"
+            "label": "admin@yondertech.co.nz",
+            "href": "mailto:admin@yondertech.co.nz"
           },
           {
             "label": "Contact us",

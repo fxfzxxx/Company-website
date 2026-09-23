@@ -82,15 +82,13 @@ export const orgJsonLd = () => `	<script type="application/ld+json">
 		"description": "IT enablement and digital consulting across technology strategy, enterprise architecture, system integration, and data intelligence.",
 		"address": {
 			"@type": "PostalAddress",
-			"streetAddress": "Level 18, 100 Queen Street",
+			"streetAddress": "23A Dromorne Rd, Remuera",
 			"addressLocality": "Auckland",
-			"postalCode": "1010",
 			"addressCountry": "NZ"
 		},
 		"contactPoint": {
 			"@type": "ContactPoint",
-			"email": "aaronf@yondertech.co.nz",
-			"telephone": "+64 22 595 0228",
+			"email": "admin@yondertech.co.nz",
 			"contactType": "customer service"
 		}
 	}
@@ -186,11 +184,7 @@ export const contact = (ctx, { lines, body, withForm }) => {
 				<div class="yt-contact-grid">
 					<div>
 						<div class="yt-contact-label">${esc(c.email)}</div>
-						<a class="yt-contact-link hv3" href="mailto:aaronf@yondertech.co.nz">aaronf@yondertech.co.nz</a>
-					</div>
-					<div>
-						<div class="yt-contact-label">${esc(c.phone)}</div>
-						<a class="yt-contact-link hv3" href="tel:+64225950228">+64 22 595 0228</a>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
 					</div>
 					<div>
 						<div class="yt-contact-label">${esc(c.office)}</div>
