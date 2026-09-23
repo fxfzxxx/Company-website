@@ -3,198 +3,166 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Starlight Kingdom is an immersive destination concept featuring attractions, live shows, and personalized planning." />
+	<meta name="description" content="Starlight Kingdom: a cinematic destination page and a queue-aware day planner in one visual system — a design concept by Yonder Tech." />
 	<link rel="canonical" href="https://yondertech.co.nz/cases/library/starlight-kingdom/index.html" />
 	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
-	<meta name="theme-color" content="#111111" />
+	<meta name="theme-color" content="#0a0920" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Starlight Kingdom - Theme Experience" />
-	<meta property="og:description" content="An immersive park-style digital experience concept with premium visuals and interactive storytelling." />
+	<meta property="og:title" content="Starlight Kingdom" />
+	<meta property="og:description" content="The night the kingdom wakes. Plan your day around the queues and the show." />
 	<meta property="og:url" content="https://yondertech.co.nz/cases/library/starlight-kingdom/index.html" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/starlight-kingdom/assets/hero.jpg" />
 	<meta property="og:site_name" content="Yonder Tech" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Starlight Kingdom - Theme Experience" />
-	<meta name="twitter:description" content="An immersive park-style digital experience concept with premium visuals and interactive storytelling." />
-	<title>Starlight Kingdom - Theme Experience</title>
+	<title>Starlight Kingdom</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@400;500;600&display=swap" />
+	<link rel="stylesheet" href="../_shared/base.css" />
 	<link rel="stylesheet" href="assets/styles.css" />
-	<link rel="stylesheet" href="../_effects/effects.css" />
 </head>
 <body>
-	<div class="site-shell" id="top">
-		<header class="hero fx-sparkles" id="hero" data-parallax data-sparkles="70">
-			<nav class="top-nav">
-				<a class="brand" href="#top">
-					<span class="brand-mark"></span>
-					<strong>Starlight Kingdom</strong>
-				</a>
-				<div class="nav-links">
-					<a href="#experiences">Experiences</a>
-					<a href="#schedule">Schedule</a>
-					<a href="#night-show">Night Show</a>
-					<a href="project.html">Plan Day</a>
-				</div>
-				<a class="nav-cta" href="project.html">Get Pass</a>
+	<header class="nav" data-header>
+		<div class="wrap nav-inner">
+			<a class="brand" href="#top">
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8Z" fill="currentColor"/><circle cx="19" cy="4" r="1.2" fill="currentColor"/><circle cx="5" cy="19" r="1" fill="currentColor"/></svg>
+				Starlight Kingdom
+			</a>
+			<nav class="nav-links" aria-label="Main">
+				<a href="#lands">Lands</a>
+				<a href="#plan">Day planner</a>
+				<a href="#show">Night show</a>
+				<a href="project.html">Case study</a>
 			</nav>
+			<a class="btn btn-gold" href="#plan">Plan my day</a>
+		</div>
+	</header>
 
-			<div class="hero-content">
-				<p class="eyebrow">Destination concept case</p>
-				<h1 class="hero-title fx-shimmer" style=">--fx-shimmer-color: var(--gold);"Step into a world where stories become adventures</h1>
-				<p class="hero-copy">A premium park-style homepage concept designed for large-scale destinations, blending cinematic visuals, immersive interactions, and personalized trip planning.</p>
-				<div class="hero-actions">
-					<a class="btn btn-primary" href="project.html">Design Your Day</a>
-					<a class="btn btn-ghost" href="#experiences">Explore Lands</a>
+	<main id="top">
+		<section class="hero">
+			<img class="hero-img" src="assets/img/hero.jpg" width="2400" height="1400" alt="A fairy-tale castle silhouetted against a violet sky full of stars and fireworks, reflected in a lake." />
+			<div class="hero-shade"></div>
+			<div class="wrap hero-copy" data-stagger>
+				<p class="over">Open until 11 pm tonight</p>
+				<h1>The night the kingdom wakes.</h1>
+				<p class="lede">Twelve lands, fifty-eight attractions and a sky show at half past nine. Tell us who’s coming and we’ll plan the day around the queues.</p>
+				<div class="actions">
+					<a class="btn btn-gold" href="#plan">Plan my day</a>
+					<a class="btn btn-glass" href="#lands">Explore the lands</a>
 				</div>
 			</div>
-
-			<div class="hero-stats">
-				<article>
-					<strong data-counter="12">0</strong>
-					<span>Themed Lands</span>
-				</article>
-				<article>
-					<strong data-counter="58">0</strong>
-					<span>Signature Attractions</span>
-				</article>
-				<article>
-					<strong data-counter="640">0</strong>
-					<span>Daily Live Performers</span>
-				</article>
-				<article>
-					<strong data-counter="4.9">0</strong>
-					<span>Guest Satisfaction</span>
-				</article>
-			</div>
-		</header>
-
-		<section class="section experiences" id="experiences">
-			<div class="section-head">
-				<p class="eyebrow">Featured zones</p>
-				<h2>Choose your realm</h2>
-			</div>
-			<div class="experience-grid">
-				<article class="experience-card fx-spotlight" data-tilt>
-					<div class="media media-one"></div>
-					<div class="card-body">
-						<h3>Aurora Harbor</h3>
-						<p>Waterfront adventures with kinetic light sculptures, wave coasters, and floating drone ballets after sunset.</p>
-						<span>View attractions</span>
-					</div>
-				</article>
-				<article class="experience-card fx-spotlight" data-tilt>
-					<div class="media media-two"></div>
-					<div class="card-body">
-						<h3>Skyforge District</h3>
-						<p>High-energy thrills powered by steampunk-inspired engineering, aerial rail rides, and immersive missions.</p>
-						<span>View attractions</span>
-					</div>
-				</article>
-				<article class="experience-card fx-spotlight" data-tilt>
-					<div class="media media-three"></div>
-					<div class="card-body">
-						<h3>Mythic Gardens</h3>
-						<p>A calmer journey through interactive bioluminescent landscapes, orchestral storytelling, and family quests.</p>
-						<span>View attractions</span>
-					</div>
-				</article>
+			<div class="status wrap" data-reveal>
+				<div><span class="pulse"></span><strong>Queues are short</strong> Average wait 14 min</div>
+				<div><strong>Sunset</strong> 7:48 pm</div>
+				<div><strong>Constellation</strong> Tonight 9:30 pm · Crystal Lake</div>
 			</div>
 		</section>
 
-		<section class="section timeline" id="schedule">
-			<div class="section-head">
-				<p class="eyebrow">Sample itinerary</p>
-				<h2>One unforgettable day</h2>
-			</div>
-			<div class="timeline-grid">
-				<div class="time-item reveal">
-					<span>09:30</span>
-					<div>
-						<h4>Park opening procession</h4>
-						<p>Multi-cast welcome parade with kinetic stage elements and live score.</p>
-					</div>
+		<section class="lands" id="lands">
+			<div class="wrap">
+				<div class="head" data-reveal>
+					<p class="over">Featured lands</p>
+					<h2>Where will you start?</h2>
 				</div>
-				<div class="time-item reveal">
-					<span>12:00</span>
-					<div>
-						<h4>Skyforge challenge run</h4>
-						<p>Fast-track missions via app check-in and dynamic queue balancing.</p>
-					</div>
-				</div>
-				<div class="time-item reveal">
-					<span>16:30</span>
-					<div>
-						<h4>Mythic orchestra garden</h4>
-						<p>Augmented soundscapes that react to visitor movement in real time.</p>
-					</div>
-				</div>
-				<div class="time-item reveal">
-					<span>20:45</span>
-					<div>
-						<h4>Celestial night spectacular</h4>
-						<p>Synchronized projection, light drones, and fountain choreography above the central castle.</p>
-					</div>
+				<div class="land-grid" data-stagger>
+					<article class="land">
+						<img src="assets/img/harbor.jpg" width="1200" height="900" alt="A calm harbour under a deep blue starry sky." loading="lazy" />
+						<div class="land-body">
+							<span class="wait ok">8 min wait</span>
+							<h3>Aurora Harbour</h3>
+							<p>Wave coasters, a floating drone ballet and the best seats for the fireworks.</p>
+						</div>
+					</article>
+					<article class="land">
+						<img src="assets/img/lanterns.jpg" width="1200" height="900" alt="A forest at night filled with hundreds of glowing lanterns." loading="lazy" />
+						<div class="land-body">
+							<span class="wait mid">22 min wait</span>
+							<h3>Lantern Wood</h3>
+							<p>A slow boat through a thousand lanterns. Gentle enough for the smallest guests.</p>
+						</div>
+					</article>
+					<article class="land">
+						<img src="assets/img/citadel.jpg" width="1200" height="900" alt="A castle of tall spires against a rose-coloured dusk sky." loading="lazy" />
+						<div class="land-body">
+							<span class="wait hi">41 min wait</span>
+							<h3>Sky Citadel</h3>
+							<p>The flying-carpet dark ride, the castle climb and the kingdom’s tallest drop.</p>
+						</div>
+					</article>
 				</div>
 			</div>
 		</section>
 
-		<section class="section night-show" id="night-show">
-			<div class="night-panel">
-				<div>
-					<p class="eyebrow">Tonight’s highlight</p>
-					<h2>Celestial Symphony</h2>
-					<p>A layered visual performance using projection mapping, autonomous lights, and synchronized orchestral score.</p>
-					<a class="btn btn-primary" href="project.html">Reserve viewing zone</a>
+		<section class="plan" id="plan">
+			<div class="wrap">
+				<div class="head" data-reveal>
+					<p class="over">Day planner</p>
+					<h2>Your day, routed around the queues.</h2>
 				</div>
-				<div class="show-kpis">
-					<div>
-						<strong data-counter="700">0</strong>
-						<span>Smart light drones</span>
+				<div class="planner" data-tabs data-reveal>
+					<aside class="modes" role="tablist" aria-label="Planner mode">
+						<button role="tab" data-tab="explorer" aria-selected="true"><strong>Explorer</strong><span>Every big ride, fastest route</span></button>
+						<button role="tab" data-tab="family"><strong>Family</strong><span>Short walks, rests and early shows</span></button>
+						<button role="tab" data-tab="night"><strong>Night spectacle</strong><span>Arrive late, stay for the sky</span></button>
+						<div class="modes-note">Routes update every five minutes from live wait times.</div>
+					</aside>
+
+					<div class="itinerary" data-panel="explorer">
+						<div class="it-head"><span>Saturday · 2 adults</span><span class="saved">6 stops · 3 h 10 min queuing saved</span></div>
+						<ol>
+							<li><time>9:05</time><div><strong>Sky Citadel Drop</strong><span>Sky Citadel</span></div><em class="wait ok">5 min</em></li>
+							<li><time>9:40</time><div><strong>Flying Carpet</strong><span>Sky Citadel</span></div><em class="wait ok">10 min</em></li>
+							<li><time>10:35</time><div><strong>Wave Runner</strong><span>Aurora Harbour</span></div><em class="wait mid">18 min</em></li>
+							<li class="is-show"><time>1:00</time><div><strong>Parade of Crowns</strong><span>Main Street · show reminder</span></div><em class="wait show">Show</em></li>
+							<li><time>2:20</time><div><strong>Comet Coaster</strong><span>Star Fields</span></div><em class="wait ok">12 min</em></li>
+							<li class="is-show"><time>9:30</time><div><strong>Constellation</strong><span>Crystal Lake · seats held</span></div><em class="wait show">Show</em></li>
+						</ol>
 					</div>
-					<div>
-						<strong data-counter="28">0</strong>
-						<span>Projection towers</span>
+					<div class="itinerary" data-panel="family" hidden>
+						<div class="it-head"><span>Saturday · 2 adults, 2 children</span><span class="saved">5 stops · 2 rests · 2 h saved</span></div>
+						<ol>
+							<li><time>9:30</time><div><strong>Lantern Boats</strong><span>Lantern Wood</span></div><em class="wait ok">6 min</em></li>
+							<li><time>10:20</time><div><strong>Meet the Star Keeper</strong><span>Lantern Wood</span></div><em class="wait ok">8 min</em></li>
+							<li class="is-rest"><time>11:30</time><div><strong>Lunch &amp; shade</strong><span>Harbour picnic lawn</span></div><em class="wait rest">Rest</em></li>
+							<li class="is-show"><time>1:00</time><div><strong>Parade of Crowns</strong><span>Main Street · kerb seats</span></div><em class="wait show">Show</em></li>
+							<li><time>2:40</time><div><strong>Little Comet</strong><span>Star Fields · 90 cm+</span></div><em class="wait mid">15 min</em></li>
+							<li class="is-show"><time>7:15</time><div><strong>Early Constellation</strong><span>Crystal Lake · family showing</span></div><em class="wait show">Show</em></li>
+						</ol>
 					</div>
-					<div>
-						<strong data-counter="360">0</strong>
-						<span>Audio channels</span>
+					<div class="itinerary" data-panel="night" hidden>
+						<div class="it-head"><span>Saturday · from 5 pm</span><span class="saved">Twilight pass · 4 stops</span></div>
+						<ol>
+							<li><time>5:10</time><div><strong>Flying Carpet</strong><span>Sky Citadel · after-school lull</span></div><em class="wait ok">9 min</em></li>
+							<li><time>6:30</time><div><strong>Dinner on the ramparts</strong><span>Citadel Terrace · booked</span></div><em class="wait rest">Table</em></li>
+							<li><time>8:15</time><div><strong>Lantern Boats by night</strong><span>Lantern Wood</span></div><em class="wait ok">7 min</em></li>
+							<li class="is-show"><time>9:30</time><div><strong>Constellation</strong><span>Crystal Lake · front-row lawn</span></div><em class="wait show">Show</em></li>
+						</ol>
+					</div>
+					<div class="it-foot">
+						<p>Your plan comes with the passes. Change it any time on the day.</p>
+						<a class="btn btn-gold" href="project.html">Save plan &amp; get passes</a>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<section class="section guest-voices">
-			<div class="section-head">
-				<p class="eyebrow">Guest reactions</p>
-				<h2>What visitors are saying</h2>
-			</div>
-			<div class="quote-slider" id="quote-slider">
-				<article class="quote is-active">
-					<p>“The transitions between lands felt seamless, and every zone had its own cinematic personality.”</p>
-					<span>— Product Director, Experience Client</span>
-				</article>
-				<article class="quote">
-					<p>“The itinerary planner and dynamic queue insights made the day smooth even at peak hours.”</p>
-					<span>— Family Travel Creator</span>
-				</article>
-				<article class="quote">
-					<p>“Night show execution was world-class. The entire destination feels like a living story engine.”</p>
-					<span>— Industry Analyst</span>
-				</article>
-				<div class="slider-dots">
-					<button class="dot is-active" type="button" aria-label="Slide 1"></button>
-					<button class="dot" type="button" aria-label="Slide 2"></button>
-					<button class="dot" type="button" aria-label="Slide 3"></button>
-				</div>
+		<section class="night-show" id="show">
+			<img src="assets/img/show.jpg" width="2000" height="1100" alt="Fireworks in five colours bursting above the castle." loading="lazy" />
+			<div class="wrap show-copy" data-reveal>
+				<p class="over">Nightly at 9:30 pm</p>
+				<h2>Constellation</h2>
+				<p>Fourteen minutes of fireworks, drones and music over Crystal Lake. Add it to your plan and we’ll remind you when to walk over.</p>
+				<a class="btn btn-glass" href="#plan">Remind me</a>
 			</div>
 		</section>
+	</main>
 
-		<footer class="site-footer">
-			<p>Starlight Kingdom concept case · Crafted for Yonder Case Library · 2026</p>
-		</footer>
-	</div>
-	<script src="assets/main.js"></script>
-	<script src="../_effects/effects.js"></script>
+	<footer class="foot">
+		<div class="wrap foot-inner">
+			<span class="brand">Starlight Kingdom</span>
+			<span>A design concept by <a href="../../../en/index.html" target="_top">Yonder Tech</a> · <a href="project.html">Case study</a></span>
+		</div>
+	</footer>
+	<script src="../_shared/concept.js"></script>
 </body>
 </html>

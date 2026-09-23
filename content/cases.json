@@ -434,8 +434,9 @@
       "Brand"
     ],
     "year": "2026",
-    "thumb": "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop",
-    "hero": "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop",
+    "thumb": "/cases/library/luna-bloom/assets/thumb.jpg",
+    "hero": "/cases/library/luna-bloom/assets/hero.jpg",
+    "colorHero": true,
     "figure": {
       "en": "12",
       "zh": "12"
@@ -576,8 +577,9 @@
       "Product"
     ],
     "year": "2026",
-    "thumb": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
-    "hero": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop",
+    "thumb": "/cases/library/ion-forge/assets/thumb.jpg",
+    "hero": "/cases/library/ion-forge/assets/hero.jpg",
+    "colorHero": true,
     "figure": {
       "en": "74",
       "zh": "74"
@@ -718,8 +720,9 @@
       "Brand"
     ],
     "year": "2026",
-    "thumb": "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop",
-    "hero": "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2000&auto=format&fit=crop",
+    "thumb": "/cases/library/velvet-atelier/assets/thumb.jpg",
+    "hero": "/cases/library/velvet-atelier/assets/hero.jpg",
+    "colorHero": true,
     "figure": {
       "en": "64",
       "zh": "64"
@@ -860,8 +863,9 @@
       "Brand"
     ],
     "year": "2026",
-    "thumb": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=800&auto=format&fit=crop",
-    "hero": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=2000&auto=format&fit=crop",
+    "thumb": "/cases/library/ishq-escape/assets/thumb.jpg",
+    "hero": "/cases/library/ishq-escape/assets/hero.jpg",
+    "colorHero": true,
     "figure": {
       "en": "64",
       "zh": "64"
@@ -1003,8 +1007,9 @@
       "Product"
     ],
     "year": "2026",
-    "thumb": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop",
-    "hero": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2000&auto=format&fit=crop",
+    "thumb": "/cases/library/starlight-kingdom/assets/thumb.jpg",
+    "hero": "/cases/library/starlight-kingdom/assets/hero.jpg",
+    "colorHero": true,
     "figure": {
       "en": "3",
       "zh": "3"
@@ -1145,8 +1150,9 @@
       "Brand"
     ],
     "year": "2026",
-    "thumb": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=800&auto=format&fit=crop",
-    "hero": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=2000&auto=format&fit=crop",
+    "thumb": "/cases/library/aurora/assets/thumb.jpg",
+    "hero": "/cases/library/aurora/assets/hero.jpg",
+    "colorHero": true,
     "figure": {
       "en": "3",
       "zh": "3"
@@ -1286,8 +1292,9 @@
       "UI"
     ],
     "year": "2026",
-    "thumb": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop",
-    "hero": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=2000&auto=format&fit=crop",
+    "thumb": "/cases/library/tech-disruption/assets/thumb.jpg",
+    "hero": "/cases/library/tech-disruption/assets/hero.jpg",
+    "colorHero": true,
     "figure": {
       "en": "9",
       "zh": "9"
@@ -1428,8 +1435,9 @@
       "Product"
     ],
     "year": "2026",
-    "thumb": "https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=800&auto=format&fit=crop",
-    "hero": "https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=2000&auto=format&fit=crop",
+    "thumb": "/cases/library/lumen-stream/assets/thumb.jpg",
+    "hero": "/cases/library/lumen-stream/assets/hero.jpg",
+    "colorHero": true,
     "figure": {
       "en": "6 wks",
       "zh": "6 周"
@@ -1569,8 +1577,9 @@
       "UI"
     ],
     "year": "2026",
-    "thumb": "https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=800&auto=format&fit=crop",
-    "hero": "https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=2000&auto=format&fit=crop",
+    "thumb": "/cases/library/atlas/assets/thumb.jpg",
+    "hero": "/cases/library/atlas/assets/hero.jpg",
+    "colorHero": true,
     "figure": {
       "en": "8 wks",
       "zh": "8 周"

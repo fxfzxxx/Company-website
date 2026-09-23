@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="robots" content="noindex" />
+	<title>Case art · contact sheet</title>
+	<style>
+		body { margin: 0; padding: 32px; background: #111; color: #ddd; font: 13px/1.4 system-ui, sans-serif; }
+		.sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+		figure { margin: 0; }
+		canvas { width: 100%; height: auto; display: block; background: #222; }
+		figcaption { margin-top: 6px; color: #999; }
+	</style>
+</head>
+<body>
+	<h1>Case art</h1>
+	<p>Every image in the case library concepts, painted from seeded noise by <code>art.js</code>. Render to JPEG with <code>node tools/render-case-art.mjs</code>.</p>
+	<div class="sheet" id="sheet"></div>
+	<script src="art.js"></script>
+	<script>
+		/* ?only=slug limits the sheet; the render script calls CASE_ART directly. */
+		if (!new URLSearchParams(location.search).has("headless")) {
+			const only = new URLSearchParams(location.search).get("only");
+			const sheet = document.getElementById("sheet");
+			CASE_ART.manifest
+				.filter((e) => !only || e.piece.startsWith(only))
+				.forEach((e, i) => {
+					const fig = document.createElement("figure");
+					const c = document.createElement("canvas");
+					const cap = document.createElement("figcaption");
+					cap.textContent = `${e.piece} · ${e.w}×${e.h}`;
+					fig.append(c, cap);
+					sheet.append(fig);
+					setTimeout(() => CASE_ART.paint(c, e), i * 10);
+				});
+		}
+	</script>
+</body>
+</html>
