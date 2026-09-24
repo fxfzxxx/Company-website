@@ -125,17 +125,16 @@ ${home.method.steps
 						<span class="yt-eyebrow">${esc(home.insights.eyebrow)}</span>
 						<h2 class="yt-h2 yt-h2-sub">${esc(home.insights.heading)}</h2>
 					</div>
-					<a class="yt-link yt-link-nowrap hv1" href="${root}insights/index.html" data-no-spa>${esc(home.insights.link)} <span class="yt-arrow" aria-hidden="true">→</span></a>
 				</div>
 				<div class="yt-cards">
 ${home.insights.cards
 	.map(
-		(card) => `					<a class="card" href="${root}${esc(card.href)}" data-no-spa>
+		(card) => `					<article class="card">
 						<div class="card-kicker">${esc(card.kicker)}</div>
 						<h3 class="card-title">${esc(card.title)}</h3>
 						<p class="card-body">${esc(card.body)}</p>
 						<div class="card-meta">${esc(card.meta)}</div>
-					</a>`
+					</article>`
 	)
 	.join("\n")}
 				</div>

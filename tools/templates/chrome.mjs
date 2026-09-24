@@ -199,10 +199,12 @@ export const contact = (ctx, { lines, body, withForm }) => {
    the only route from here to the rest of the site (services, insights,
    about, news), which the six-item nav no longer carries. */
 export const footer = (ctx) => {
-	const { home, root, libraryHref, altHref } = ctx;
+	const { home, root, homeHref, libraryHref, altHref } = ctx;
 	const f = home.footer;
 	const resolve = (href) => {
 		if (href === "@library") return libraryHref;
+		// "#section" is a section of this locale's homepage
+		if (href.startsWith("#")) return homeHref === "index.html" ? href : `${homeHref}${href}`;
 		if (/^(mailto:|tel:|https?:)/.test(href)) return href;
 		return `${root}${href}`;
 	};

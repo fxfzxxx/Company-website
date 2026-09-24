@@ -1,0 +1,16 @@
+# Old-style pages removed in favour of the one-page site. Netlify reads this
+# file; permanent redirects keep old links and bookmarks landing somewhere.
+/cases/index.html          /en/cases/index.html          301
+/cases/viewer.html         /en/cases/index.html          301
+/cases                     /en/cases/index.html          301
+/about/*                   /en/index.html                301
+/services/*                /en/index.html#capabilities   301
+/capabilities/*            /en/index.html#capabilities   301
+/methodology/*             /en/index.html#method         301
+/insights/*                /en/index.html#insights       301
+/contact/*                 /en/index.html#contact        301
+/events/*                  /en/index.html                301
+/news/*                    /en/index.html                301
+/automation/*              /en/index.html                301
+/trends/*                  /en/index.html                301
+/letter/*                  /en/index.html                301

@@ -140,28 +140,24 @@
   "insights": {
     "eyebrow": "洞察",
     "heading": "写给签字的那个人。",
-    "link": "全部洞察",
     "cards": [
       {
         "kicker": "IT 战略",
         "title": "技术路线图应当回答董事会什么",
         "body": "值得上会的路线图必须先回答三个问题：什么停掉、什么开始、判断错了要付多少代价。",
-        "meta": "8 分钟 · 2026 年 3 月",
-        "href": "insights/it-strategy.html"
+        "meta": "8 分钟 · 2026 年 3 月"
       },
       {
         "kicker": "系统集成",
         "title": "先别急着换掉你的 ERP",
         "body": "多数集成上的痛，其实是流程的痛套了一层技术外衣。在决定迁移之前，如何分清两者。",
-        "meta": "6 分钟 · 2026 年 2 月",
-        "href": "insights/enterprise-architecture.html"
+        "meta": "6 分钟 · 2026 年 2 月"
       },
       {
         "kicker": "数据与 AI",
         "title": "先有指标，再谈模型",
         "body": "第一个自动化项目往往是最不适合做演示的那个，以及后面的顺序该怎么排。",
-        "meta": "7 分钟 · 2026 年 1 月",
-        "href": "insights/data-intelligence.html"
+        "meta": "7 分钟 · 2026 年 1 月"
       }
     ]
   },
@@ -190,40 +186,19 @@
   "footer": {
     "columns": [
       {
-        "title": "关于",
+        "title": "工作室",
         "links": [
           {
-            "label": "公司简介",
-            "href": "about/company.html"
+            "label": "精选案例",
+            "href": "#work"
           },
           {
-            "label": "管理团队",
-            "href": "about/leadership.html"
+            "label": "能力",
+            "href": "#capabilities"
           },
           {
-            "label": "可持续发展",
-            "href": "about/sustainability.html"
-          }
-        ]
-      },
-      {
-        "title": "服务",
-        "links": [
-          {
-            "label": "IT 战略",
-            "href": "services/it-strategy.html"
-          },
-          {
-            "label": "系统集成",
-            "href": "services/system-integration.html"
-          },
-          {
-            "label": "数据与 AI",
-            "href": "services/data-ai.html"
-          },
-          {
-            "label": "托管运维",
-            "href": "services/index.html"
+            "label": "方法",
+            "href": "#method"
           }
         ]
       },
@@ -231,20 +206,12 @@
         "title": "资源",
         "links": [
           {
-            "label": "洞察",
-            "href": "insights/index.html"
-          },
-          {
             "label": "案例库",
             "href": "@library"
           },
           {
-            "label": "活动",
-            "href": "events/index.html"
-          },
-          {
-            "label": "新闻",
-            "href": "news/index.html"
+            "label": "洞察",
+            "href": "#insights"
           }
         ]
       },
@@ -256,12 +223,8 @@
             "href": "mailto:admin@yondertech.co.nz"
           },
           {
-            "label": "联系我们",
-            "href": "contact/index.html"
-          },
-          {
-            "label": "加入我们",
-            "href": "contact/careers.html"
+            "label": "开始合作",
+            "href": "#contact"
           }
         ]
       }

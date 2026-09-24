@@ -16,9 +16,7 @@ Any static server rooted at the repository:
 python3 -m http.server 8000
 ```
 
-Then open `/cases/library/movement/`, or the library viewer at
-`/cases/viewer.html?case=cases/library/movement/index.html`. Modules and the
-import map need a real origin; `file://` will not work.
+Then open `/cases/library/movement/`. Modules and the import map need a real origin; `file://` will not work.
 
 ## Files
 

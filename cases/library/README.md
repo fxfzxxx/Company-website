@@ -11,15 +11,12 @@ Recommended structure:
     - styles.css (tokens on :root, then the concept's own styles)
     - img/ (generated, see Images below)
 
-Then add a new card to cases/index.html that links to:
-
-viewer.html?case=cases/library/<case-slug>/index.html
-
-Tags are set with data-tags on the card.
+Then add an entry to content/cases.json and run `node tools/build.mjs`; the
+case page, the library row and the sitemap entry are generated from it.
 
 Conventions:
 - project.html uses the same assets/styles.css as the concept so the case study feels native.
-- Links back to the main site must go three levels up (e.g. ../../../contact/index.html).
+- Links back to the main site must go three levels up (e.g. ../../../en/cases/index.html).
 - Avoid javascript:void(0); use in-page anchors or project.html for demo nav links.
 
 ## Shared files
