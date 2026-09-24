@@ -181,7 +181,10 @@ const legacy = existing
 		const loc = /<loc>([^<]+)<\/loc>/.exec(line);
 		if (!loc) return false;
 		const rel = loc[1].replace(`${SITE}/`, "");
-		return rel !== "index.html" && !rel.startsWith("en/") && !rel.startsWith("zh/");
+		if (rel === "index.html" || rel.startsWith("en/") || rel.startsWith("zh/")) return false;
+		// pages deleted from the repository drop out of the sitemap
+		const file = rel === "" || rel.endsWith("/") ? `${rel}index.html` : rel;
+		return fs.existsSync(path.join(ROOT, file));
 	});
 
 const today = new Date().toISOString().slice(0, 10);

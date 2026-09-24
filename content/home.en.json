@@ -141,28 +141,24 @@
   "insights": {
     "eyebrow": "Insights",
     "heading": "Written for the person signing the invoice.",
-    "link": "All insights",
     "cards": [
       {
         "kicker": "IT strategy",
         "title": "What a technology roadmap owes the board",
         "body": "Three questions a roadmap has to answer before it is worth presenting: what stops, what starts, and what it costs to be wrong.",
-        "meta": "8 min read · March 2026",
-        "href": "insights/it-strategy.html"
+        "meta": "8 min read · March 2026"
       },
       {
         "kicker": "Integration",
         "title": "The case against replacing your ERP",
         "body": "Most integration pain is process pain wearing a technical costume. How to tell the difference before committing to a migration.",
-        "meta": "6 min read · February 2026",
-        "href": "insights/enterprise-architecture.html"
+        "meta": "6 min read · February 2026"
       },
       {
         "kicker": "Data & AI",
         "title": "Metrics before models",
         "body": "Why the first automation project should be the one nobody wants to demo, and how to sequence the rest behind it.",
-        "meta": "7 min read · January 2026",
-        "href": "insights/data-intelligence.html"
+        "meta": "7 min read · January 2026"
       }
     ]
   },
@@ -192,40 +188,19 @@
   "footer": {
     "columns": [
       {
-        "title": "About",
+        "title": "Studio",
         "links": [
           {
-            "label": "Company profile",
-            "href": "about/company.html"
+            "label": "Selected work",
+            "href": "#work"
           },
           {
-            "label": "Leadership",
-            "href": "about/leadership.html"
+            "label": "Capabilities",
+            "href": "#capabilities"
           },
           {
-            "label": "Sustainability",
-            "href": "about/sustainability.html"
-          }
-        ]
-      },
-      {
-        "title": "Services",
-        "links": [
-          {
-            "label": "IT strategy",
-            "href": "services/it-strategy.html"
-          },
-          {
-            "label": "System integration",
-            "href": "services/system-integration.html"
-          },
-          {
-            "label": "Data & AI",
-            "href": "services/data-ai.html"
-          },
-          {
-            "label": "Managed operations",
-            "href": "services/index.html"
+            "label": "Method",
+            "href": "#method"
           }
         ]
       },
@@ -233,20 +208,12 @@
         "title": "Resources",
         "links": [
           {
-            "label": "Insights",
-            "href": "insights/index.html"
-          },
-          {
             "label": "Case library",
             "href": "@library"
           },
           {
-            "label": "Events",
-            "href": "events/index.html"
-          },
-          {
-            "label": "Newsroom",
-            "href": "news/index.html"
+            "label": "Insights",
+            "href": "#insights"
           }
         ]
       },
@@ -258,12 +225,8 @@
             "href": "mailto:admin@yondertech.co.nz"
           },
           {
-            "label": "Contact us",
-            "href": "contact/index.html"
-          },
-          {
-            "label": "Careers",
-            "href": "contact/careers.html"
+            "label": "Start a project",
+            "href": "#contact"
           }
         ]
       }
