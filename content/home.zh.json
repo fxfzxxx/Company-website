@@ -23,12 +23,22 @@
   },
   "work": {
     "eyebrow": "精选案例",
-    "heading": "十三个概念，先看四个。",
-    "lede": "自主设计的概念作品。每条记录都包含课题、关键决策，以及最终交付的设计系统。",
+    "heading": "十四个项目，先看四个。",
+    "lede": "一个已上线的产品，以及围绕它的概念作品。每条记录都包含课题、关键决策和交付结果。",
     "link": "完整案例库",
     "rows": [
       {
         "num": "01",
+        "slug": "testandtag",
+        "meta": "现场服务产品 · 已上线",
+        "title": "Test & Tag 现场应用、后台与 API",
+        "body": "一款面向检测贴标技师的离线优先 React Native 应用、一个办公室后台和共用的一套 API——共享同一个领域包，三者永远不会对不上。",
+        "figure": "190",
+        "measure": "项测试全部通过",
+        "alt": "Test & Tag 现场应用与后台"
+      },
+      {
+        "num": "02",
         "slug": "luna-bloom",
         "meta": "社区平台 · 概念作品",
         "title": "Luna Bloom Society 母婴社区",
@@ -38,7 +48,7 @@
         "alt": "Luna Bloom Society 母婴社区概念"
       },
       {
-        "num": "02",
+        "num": "03",
         "slug": "ion-forge",
         "meta": "产品发布 · 概念作品",
         "title": "Ion Forge X9 产品发布系统",
@@ -48,7 +58,7 @@
         "alt": "Ion Forge X9 产品发布概念"
       },
       {
-        "num": "03",
+        "num": "04",
         "slug": "tech-disruption",
         "meta": "研究平台 · 概念作品",
         "title": "Northbridge Capital 研究平台",
@@ -56,19 +66,9 @@
         "figure": "9",
         "measure": "同屏承载的内容条数",
         "alt": "Northbridge Capital 研究平台概念"
-      },
-      {
-        "num": "04",
-        "slug": "atlas",
-        "meta": "机构金融 · 概念作品",
-        "title": "Atlas Capital 机构级体验",
-        "body": "一句明确主张，一个标注截止日期的经审计数字，以及用管理层访谈模块替代图库配图。",
-        "figure": "8 周",
-        "measure": "概念到 UI 套件",
-        "alt": "Atlas Capital 机构级体验概念"
       }
     ],
-    "note": "以上为自主设计的概念项目，非客户委托项目。文中数字描述的是交付的设计系统本身，不代表商业业绩。"
+    "note": "Test & Tag 为已上线的产品；其余为自主设计的概念项目，非客户委托项目。概念作品中的数字描述的是交付的设计系统本身，不代表商业业绩。"
   },
   "stats": [
     {

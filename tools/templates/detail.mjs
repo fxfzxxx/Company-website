@@ -98,17 +98,17 @@ ${c.specs
 	)
 	.join("\n")}
 				</div>
-				<p class="yt-note">${esc(t.note)}</p>
+				<p class="yt-note">${esc(c.note ?? t.note)}</p>
 			</section>
 
 			<section class="yt-wrap yt-live">
 				<div class="yt-live-inner">
 					<div class="yt-live-col">
-						<h2 class="yt-live-title">${esc(t.liveTitle)}</h2>
-						<p class="yt-live-body">${esc(t.liveBody)}</p>
+						<h2 class="yt-live-title">${esc(c.liveTitle ?? t.liveTitle)}</h2>
+						<p class="yt-live-body">${esc(c.liveBody ?? t.liveBody)}</p>
 					</div>
 					<a class="yt-btn-solid yt-btn-solid-lg hv6" href="${root}cases/library/${esc(item.slug)}/index.html"
-						data-no-spa target="_blank" rel="noopener">${esc(t.openLive)}</a>
+						data-no-spa target="_blank" rel="noopener">${esc(c.openLive ?? t.openLive)}</a>
 				</div>
 			</section>
 

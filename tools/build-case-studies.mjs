@@ -1,4 +1,4 @@
-/* Writes cases/library/<slug>/project.html for the nine web concepts from
+/* Writes cases/library/<slug>/project.html for the web cases listed below from
    content/cases.json, so the in-concept case study always says what the
    site's case page says. Each page wears its concept's own tokens
    (assets/styles.css) over the shared layout in _shared/base.css.
@@ -14,6 +14,7 @@ const cases = JSON.parse(fs.readFileSync(path.join(ROOT, "content/cases.json"), 
 
 /* The concept's brand name and the fonts its stylesheet expects. */
 export const CONCEPTS = {
+	testandtag: { name: "Test & Tag", theme: "#f3f2f2", fonts: "Archivo:wght@400;500;600;800" },
 	"luna-bloom": { name: "Luna Bloom", theme: "#f7efe9", fonts: "Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=DM+Sans:wght@400;500;600" },
 	"ion-forge": { name: "Ion Forge", theme: "#07080a", fonts: "Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500" },
 	"velvet-atelier": { name: "Velvet Atelier", theme: "#120708", fonts: "Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Manrope:wght@400;500;600" },
@@ -34,6 +35,11 @@ const page = (item, next) => {
 	const d = item.det.en;
 	const url = `https://yondertech.co.nz/cases/library/${item.slug}/project.html`;
 	const desc = `${d.title} ${d.lede}`;
+	// a shipped product carries its own wording; concepts use the defaults
+	const product = Boolean(d.openLive);
+	const liveNav = product ? "Showcase" : "Live concept";
+	const note = d.note ?? "A concept project designed in-house by Yonder Tech, not a client engagement. Figures describe the delivered design system, not commercial results.";
+	const openLive = (d.openLive ?? "Open the live concept →").replace(/\s*→$/, "");
 	return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +67,7 @@ const page = (item, next) => {
 	<header class="cs-bar">
 		<strong>${esc(cfg.name)}</strong>
 		<nav aria-label="Case">
-			<a href="index.html">Live concept</a>
+			<a href="index.html">${liveNav}</a>
 			<a href="project.html" aria-current="page">Case study</a>
 			<a href="../../../en/cases/index.html" target="_top">Case library</a>
 		</nav>
@@ -75,7 +81,7 @@ const page = (item, next) => {
 		</header>
 
 		<figure class="cs-shot" data-reveal>
-			<img src="assets/hero.jpg" width="2000" height="1333" alt="The ${esc(cfg.name)} concept homepage." />
+			<img src="assets/hero.jpg" width="2000" height="1333" alt="The ${esc(cfg.name)} ${product ? "product showcase" : "concept homepage"}." />
 		</figure>
 
 		<dl class="cs-facts">
@@ -106,11 +112,11 @@ ${d.decisions.map((x) => `				<li>${esc(x)}</li>`).join("\n")}
 ${d.specs.map((s) => `			<div><strong>${esc(s.figure)}</strong><span>${esc(s.label)}</span><small>${esc(s.note)}</small></div>`).join("\n")}
 		</div>
 
-		<p class="cs-note">A concept project designed in-house by Yonder Tech, not a client engagement. Figures describe the delivered design system, not commercial results.</p>
+		<p class="cs-note">${esc(note)}</p>
 
 		<section class="cs-end" data-reveal>
 			<h2>See it working, not described.</h2>
-			<a href="index.html">Open the live concept <span aria-hidden="true">→</span></a>
+			<a href="index.html">${esc(openLive)} <span aria-hidden="true">→</span></a>
 		</section>
 
 		<footer class="cs-foot">

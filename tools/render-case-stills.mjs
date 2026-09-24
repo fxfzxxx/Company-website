@@ -6,6 +6,7 @@
 
    Run after changing a concept's index.html or styles. */
 
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { launch, routeFonts, serve } from "./lib/browser.mjs";
@@ -31,7 +32,9 @@ for (const slug of Object.keys(CONCEPTS).filter((s) => !only || s === only)) {
 		});
 		await routeFonts(context);
 		const page = await context.newPage();
-		await page.goto(`${origin}/cases/library/${slug}/index.html`, { waitUntil: "networkidle" });
+		// a case may supply its own composition (still.html) instead of its homepage
+		const still = fs.existsSync(path.join(ROOT, "cases/library", slug, "still.html")) ? "still.html" : "index.html";
+		await page.goto(`${origin}/cases/library/${slug}/${still}`, { waitUntil: "networkidle" });
 		await page.evaluate(() => document.fonts.ready);
 		await page.waitForTimeout(300);
 		const out = path.join(ROOT, "cases/library", slug, "assets", shot.file);

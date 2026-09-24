@@ -24,12 +24,22 @@
   },
   "work": {
     "eyebrow": "Selected work",
-    "heading": "Thirteen concepts. Four to start with.",
-    "lede": "Self-directed concept work. Each entry carries its brief, the decisions that shaped it, and the design system it delivered.",
+    "heading": "Fourteen projects. Four to start with.",
+    "lede": "One shipped product and the concept work around it. Each entry carries its brief, the decisions that shaped it, and what it delivered.",
     "link": "Full case library",
     "rows": [
       {
         "num": "01",
+        "slug": "testandtag",
+        "meta": "Field-service product · Shipped",
+        "title": "Test & Tag field app, console and API",
+        "body": "An offline-first React Native app for test-and-tag technicians, an office console and one API behind both — sharing one domain package so they can never disagree.",
+        "figure": "190",
+        "measure": "Tests passing",
+        "alt": "Test & Tag field app and console"
+      },
+      {
+        "num": "02",
         "slug": "luna-bloom",
         "meta": "Community platform · Concept",
         "title": "Luna Bloom Society maternity community",
@@ -39,7 +49,7 @@
         "alt": "Luna Bloom Society maternity community concept"
       },
       {
-        "num": "02",
+        "num": "03",
         "slug": "ion-forge",
         "meta": "Product launch · Concept",
         "title": "Ion Forge X9 product launch system",
@@ -49,7 +59,7 @@
         "alt": "Ion Forge X9 product launch concept"
       },
       {
-        "num": "03",
+        "num": "04",
         "slug": "tech-disruption",
         "meta": "Research hub · Concept",
         "title": "Northbridge Capital research hub",
@@ -57,19 +67,9 @@
         "figure": "9",
         "measure": "Stories held in one view",
         "alt": "Northbridge Capital research hub concept"
-      },
-      {
-        "num": "04",
-        "slug": "atlas",
-        "meta": "Institutional finance · Concept",
-        "title": "Atlas Capital institutional experience",
-        "body": "One confident statement, one audited number stated with its as-of date, and a leadership interview module in place of stock photography.",
-        "figure": "8 wks",
-        "measure": "Concept to UI kit",
-        "alt": "Atlas Capital institutional experience concept"
       }
     ],
-    "note": "Concept projects designed in-house, not client engagements. Figures describe the delivered design system, not commercial results."
+    "note": "Test & Tag is a shipped product; the others are concept projects designed in-house, not client engagements. Concept figures describe the delivered design system, not commercial results."
   },
   "stats": [
     {

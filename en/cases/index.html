@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Self-directed concept work. Each entry carries the brief, the decisions that shaped it, and what it delivered — the live concept and the case study are both open to read." />
+	<meta name="description" content="One shipped product and the self-directed concept work around it. Each entry carries the brief, the decisions that shaped it, and what it delivered — the live build and the case study are both open to read." />
 	<link rel="canonical" href="https://yondertech.co.nz/en/cases/index.html" />
 	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/cases/index.html" />
 	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/cases/index.html" />
@@ -13,15 +13,15 @@
 	<meta name="theme-color" content="#192231" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Case library — Yonder Tech" />
-	<meta property="og:description" content="Self-directed concept work. Each entry carries the brief, the decisions that shaped it, and what it delivered — the live concept and the case study are both open to read." />
+	<meta property="og:description" content="One shipped product and the self-directed concept work around it. Each entry carries the brief, the decisions that shaped it, and what it delivered — the live build and the case study are both open to read." />
 	<meta property="og:url" content="https://yondertech.co.nz/en/cases/index.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="/cases/library/earth/assets/hero.jpg" />
+	<meta property="og:image" content="/cases/library/testandtag/assets/hero.jpg" />
 	<meta property="og:locale" content="en_NZ" />
 	<meta property="og:locale:alternate" content="zh_CN" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="Case library — Yonder Tech" />
-	<meta name="twitter:description" content="Self-directed concept work. Each entry carries the brief, the decisions that shaped it, and what it delivered — the live concept and the case study are both open to read." />
+	<meta name="twitter:description" content="One shipped product and the self-directed concept work around it. Each entry carries the brief, the decisions that shaped it, and what it delivered — the live build and the case study are both open to read." />
 	<title>Case library — Yonder Tech</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,8 +60,8 @@
 		<header class="yt-wrap yt-lib-head">
 			<span class="yt-eyebrow">Case library</span>
 			<div class="yt-lib-title-row">
-				<h1 class="yt-lib-h1"><span>Thirteen design concepts,</span><span>documented in full.</span></h1>
-				<p class="yt-lib-lede">Self-directed concept work. Each entry carries the brief, the decisions that shaped it, and what it delivered — the live concept and the case study are both open to read.</p>
+				<h1 class="yt-lib-h1"><span>Fourteen projects,</span><span>documented in full.</span></h1>
+				<p class="yt-lib-lede">One shipped product and the self-directed concept work around it. Each entry carries the brief, the decisions that shaped it, and what it delivered — the live build and the case study are both open to read.</p>
 			</div>
 		</header>
 
@@ -75,17 +75,67 @@
 					<button class="yt-chip hv4" type="button" data-tag="Brand" aria-pressed="false">Brand</button>
 					<button class="yt-chip hv4" type="button" data-tag="Product" aria-pressed="false">Product</button>
 				</div>
-				<div class="yt-count" data-count data-count-all="{total} concepts" data-count-some="{n} of {total} concepts"
-					role="status" aria-live="polite">13 concepts</div>
+				<div class="yt-count" data-count data-count-all="{total} projects" data-count-some="{n} of {total} projects"
+					role="status" aria-live="polite">14 projects</div>
 			</div>
 		</section>
 
 		<section class="yt-wrap yt-lib-list">
 			<div data-cases>
+				<div class="yt-lib-item" data-tags="Web,UI,Product">
+					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
+						aria-controls="panel-testandtag">
+						<span class="yt-row-num">01</span>
+						<span class="yt-lib-thumb">
+							<img src="/cases/library/testandtag/assets/thumb.jpg" alt="Test &amp; Tag field app, console and API" loading="lazy" width="800" height="600" />
+						</span>
+						<span class="yt-lib-body">
+							<span class="yt-meta">Field-service product · Shipped · Web / UI / Product</span>
+							<span class="yt-lib-title">Test &amp; Tag field app, console and API</span>
+						</span>
+						<span class="yt-lib-metric">
+							<span class="yt-lib-metric-figure">190</span>
+							<span class="yt-metric-label">Tests passing across three apps</span>
+						</span>
+						<span class="yt-lib-sign" data-sign aria-hidden="true">+</span>
+					</button>
+					<div class="yt-lib-panel" id="panel-testandtag" data-panel hidden>
+						<div>
+							<div class="yt-panel-label">Brief</div>
+							<p class="yt-panel-text">Electrical test and tag runs on clipboards, hand-kept spreadsheets and memory. Test &amp; Tag replaces that with an offline-first phone app for the technician, a console for the office and one API behind both.</p>
+						</div>
+						<div>
+							<div class="yt-panel-label">Approach</div>
+							<div class="yt-decisions">
+								<div class="yt-decision">
+									<span class="yt-decision-num">01</span>
+									<span class="yt-decision-text">One shared domain package — tag logic, ID ranges, the register parser, even the colour palette — so phone, console and server cannot disagree.</span>
+								</div>
+								<div class="yt-decision">
+									<span class="yt-decision-num">02</span>
+									<span class="yt-decision-text">Offline first: records and failure photos queue on the device, and syncing twice is harmless.</span>
+								</div>
+								<div class="yt-decision">
+									<span class="yt-decision-num">03</span>
+									<span class="yt-decision-text">An Excel import that reads client registers the way a person would, and turns one sheet into the asset register, the last inspection and the next visit.</span>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="yt-panel-label">Outcome</div>
+							<p class="yt-panel-text">A shipped React Native app for iOS, Android and the web, an installable admin console and a Fastify API with PDF reporting — covered by 190 passing tests, including a full workflow run over HTTP.</p>
+							<div class="yt-panel-actions">
+								<a class="yt-btn-solid hv6" href="testandtag.html">Open the case study</a>
+								<a class="yt-link-accent" href="../../cases/library/testandtag/index.html" data-no-spa
+									target="_blank" rel="noopener">Open the product showcase →</a>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="yt-lib-item" data-tags="Web,UI">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-earth">
-						<span class="yt-row-num">01</span>
+						<span class="yt-row-num">02</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/earth/assets/thumb.jpg" alt="Terra 01 globe study" loading="lazy" width="800" height="600" />
 						</span>
@@ -135,7 +185,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-movement">
-						<span class="yt-row-num">02</span>
+						<span class="yt-row-num">03</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/movement/assets/thumb.jpg" alt="Movement 01 instrument study" loading="lazy" width="800" height="600" />
 						</span>
@@ -185,7 +235,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-specimen">
-						<span class="yt-row-num">03</span>
+						<span class="yt-row-num">04</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/specimen/assets/thumb.jpg" alt="Specimen 03 dispersive study" loading="lazy" width="800" height="600" />
 						</span>
@@ -235,7 +285,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI,Brand">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-luna-bloom">
-						<span class="yt-row-num">04</span>
+						<span class="yt-row-num">05</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/luna-bloom/assets/thumb.jpg" alt="Luna Bloom Society maternity community" loading="lazy" width="800" height="600" />
 						</span>
@@ -285,7 +335,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI,Product">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-ion-forge">
-						<span class="yt-row-num">05</span>
+						<span class="yt-row-num">06</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/ion-forge/assets/thumb.jpg" alt="Ion Forge X9 product launch system" loading="lazy" width="800" height="600" />
 						</span>
@@ -335,7 +385,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI,Brand">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-velvet-atelier">
-						<span class="yt-row-num">06</span>
+						<span class="yt-row-num">07</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/velvet-atelier/assets/thumb.jpg" alt="Velvet Atelier commerce blueprint" loading="lazy" width="800" height="600" />
 						</span>
@@ -385,7 +435,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI,Brand">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-ishq-escape">
-						<span class="yt-row-num">07</span>
+						<span class="yt-row-num">08</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/ishq-escape/assets/thumb.jpg" alt="Ishq Escape private villa booking" loading="lazy" width="800" height="600" />
 						</span>
@@ -435,7 +485,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI,Brand,Product">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-starlight-kingdom">
-						<span class="yt-row-num">08</span>
+						<span class="yt-row-num">09</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/starlight-kingdom/assets/thumb.jpg" alt="Starlight Kingdom destination planner" loading="lazy" width="800" height="600" />
 						</span>
@@ -485,7 +535,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI,Brand">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-aurora">
-						<span class="yt-row-num">09</span>
+						<span class="yt-row-num">10</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/aurora/assets/thumb.jpg" alt="Aurora Studio employer brand experience" loading="lazy" width="800" height="600" />
 						</span>
@@ -535,7 +585,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-tech-disruption">
-						<span class="yt-row-num">10</span>
+						<span class="yt-row-num">11</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/tech-disruption/assets/thumb.jpg" alt="Northbridge Capital research hub" loading="lazy" width="800" height="600" />
 						</span>
@@ -585,7 +635,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI,Product">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-lumen-stream">
-						<span class="yt-row-num">11</span>
+						<span class="yt-row-num">12</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/lumen-stream/assets/thumb.jpg" alt="Lumen Stream entertainment hub" loading="lazy" width="800" height="600" />
 						</span>
@@ -635,7 +685,7 @@
 				<div class="yt-lib-item" data-tags="Product,UI">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-atlas">
-						<span class="yt-row-num">12</span>
+						<span class="yt-row-num">13</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/atlas/assets/thumb.jpg" alt="Atlas Capital institutional experience" loading="lazy" width="800" height="600" />
 						</span>
@@ -685,7 +735,7 @@
 				<div class="yt-lib-item" data-tags="Web,UI,Product">
 					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-fieldnote">
-						<span class="yt-row-num">13</span>
+						<span class="yt-row-num">14</span>
 						<span class="yt-lib-thumb">
 							<img src="/cases/library/fieldnote/assets/thumb.jpg" alt="Fieldnote customer-research workspace" loading="lazy" width="800" height="600" />
 						</span>
@@ -734,7 +784,7 @@
 				</div>
 			</div>
 			<div class="yt-rule"></div>
-			<p class="yt-note">These are concept projects designed in-house, not client engagements. Figures describe the delivered design system — components, screens and build duration — not commercial results.</p>
+			<p class="yt-note">Test &amp; Tag is a shipped product. The others are concept projects designed in-house, not client engagements; their figures describe the delivered design system — components, screens and build duration — not commercial results.</p>
 		</section>
 
 		<section class="yt-contact" id="contact">

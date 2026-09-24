@@ -1,7 +1,160 @@
 [
   {
-    "slug": "earth",
+    "slug": "testandtag",
     "num": "01",
+    "tags": [
+      "Web",
+      "UI",
+      "Product"
+    ],
+    "year": "2026",
+    "thumb": "/cases/library/testandtag/assets/thumb.jpg",
+    "hero": "/cases/library/testandtag/assets/hero.jpg",
+    "colorHero": true,
+    "figure": {
+      "en": "190",
+      "zh": "190"
+    },
+    "measure": {
+      "en": "Tests passing across three apps",
+      "zh": "项测试全部通过，覆盖三个应用"
+    },
+    "lib": {
+      "en": {
+        "meta": "Field-service product · Shipped",
+        "title": "Test & Tag field app, console and API",
+        "brief": "Electrical test and tag runs on clipboards, hand-kept spreadsheets and memory. Test & Tag replaces that with an offline-first phone app for the technician, a console for the office and one API behind both.",
+        "decisions": [
+          "One shared domain package — tag logic, ID ranges, the register parser, even the colour palette — so phone, console and server cannot disagree.",
+          "Offline first: records and failure photos queue on the device, and syncing twice is harmless.",
+          "An Excel import that reads client registers the way a person would, and turns one sheet into the asset register, the last inspection and the next visit."
+        ],
+        "outcome": "A shipped React Native app for iOS, Android and the web, an installable admin console and a Fastify API with PDF reporting — covered by 190 passing tests, including a full workflow run over HTTP.",
+        "openLive": "Open the product showcase →"
+      },
+      "zh": {
+        "meta": "现场服务产品 · 已上线",
+        "title": "Test & Tag 现场应用、后台与 API",
+        "brief": "电器检测贴标这门生意，一直靠纸板夹、客户手工维护的表格和技师的记忆在运转。Test & Tag 用一款离线优先的技师手机应用、一个办公室后台和一套共用的 API 取代了这一切。",
+        "decisions": [
+          "一个共享的领域包——贴标逻辑、编号区间、表格解析器，连配色都在里面——让手机、后台和服务器不可能对不上。",
+          "离线优先：检测记录和故障照片先存在设备上，重复同步也不会出错。",
+          "Excel 导入按人读表的方式理解客户的登记表，一张表同时生成资产登记、上次检测记录和下一次上门任务。"
+        ],
+        "outcome": "一款上线的 React Native 应用（iOS、Android 与网页）、一个可安装的管理后台和一套带 PDF 报告的 Fastify API——190 项测试全部通过，其中包括一次通过 HTTP 跑完整个业务流程的测试。",
+        "openLive": "打开产品展示 →"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "01 — Field-service product",
+        "title": "Test and tag, end to end.",
+        "lede": "An offline-first phone app for the technician, a console for the office, and one API behind both — designed and built by Yonder Tech.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Product · designed and built in-house"
+          },
+          {
+            "label": "Platforms",
+            "value": "iOS · Android · Web"
+          },
+          {
+            "label": "Stack",
+            "value": "Expo / React Native · React · Fastify · Prisma"
+          },
+          {
+            "label": "Scale",
+            "value": "3 apps · 54 API endpoints"
+          }
+        ],
+        "brief": "Electrical test and tag is compliance work: every appliance on a site is tested, tagged and recorded, and the client needs a report they can stand behind. In practice it runs on clipboards, a spreadsheet the client keeps by hand, and whatever the technician remembers from last time.",
+        "briefTwo": "The brief was one system from the plant room to the report: an app a technician can use one-handed with no signal, a console the office can run the business from, and records that mean exactly the same thing in both.",
+        "decisions": [
+          "A shared package holds the domain — ID-range expansion, run collapsing, area grouping, retest arithmetic, the Excel parser and the design tokens — so the phone, the console and the server cannot disagree about what a record means.",
+          "The phone is offline first. Records and failure photos queue on the device and sync when there is signal; syncing the same records twice is harmless, and a failure cannot be saved without a reason and a photo.",
+          "Nothing is imported blind. A client’s register is parsed and shown first — areas inferred from blank cells, verdicts read from free-text comments — and only then committed as the asset register, the last inspection and the next job."
+        ],
+        "outcome": "Shipped as an Expo app for iOS, Android and the web, an installable React console and a Fastify + Prisma API that issues archived PDF reports. Postgres runs in production and the same schema on SQLite in development; 190 tests pass, including one that runs the whole business through HTTP.",
+        "specs": [
+          {
+            "figure": "190",
+            "label": "Tests passing",
+            "note": "Domain, app and a full workflow run."
+          },
+          {
+            "figure": "54",
+            "label": "API endpoints",
+            "note": "One API for the phone and the console."
+          },
+          {
+            "figure": "3",
+            "label": "Platforms",
+            "note": "iOS, Android and web from one codebase."
+          }
+        ],
+        "note": "A product designed and built by Yonder Tech. Screens show demonstration data; figures describe the software itself.",
+        "liveTitle": "See the product up close.",
+        "liveBody": "The showcase opens in a new tab: the field app screen by screen, the office console, and how it is built.",
+        "openLive": "Open the product showcase →"
+      },
+      "zh": {
+        "crumb": "01 — 现场服务产品",
+        "title": "检测贴标，从头到尾。",
+        "lede": "一款离线优先的技师手机应用、一个办公室后台，以及支撑两者的同一套 API——由 Yonder Tech 设计并开发。",
+        "facts": [
+          {
+            "label": "类型",
+            "value": "产品 · 自主设计与开发"
+          },
+          {
+            "label": "平台",
+            "value": "iOS · Android · 网页"
+          },
+          {
+            "label": "技术栈",
+            "value": "Expo / React Native · React · Fastify · Prisma"
+          },
+          {
+            "label": "规模",
+            "value": "3 个应用 · 54 个 API 接口"
+          }
+        ],
+        "brief": "电器检测贴标是合规工作：现场每一件电器都要检测、贴标、记录，客户需要一份经得起检查的报告。现实中它靠的是纸板夹、客户手工维护的表格，以及技师对上一次的记忆。",
+        "briefTwo": "需求是一套从机房一直贯通到报告的系统：技师在没信号的地方单手就能用的应用，办公室能用来运营整个业务的后台，以及在两边含义完全一致的记录。",
+        "decisions": [
+          "一个共享包承载全部领域逻辑——编号区间展开、连续记录合并、区域分组、复检周期计算、Excel 解析器和设计令牌——让手机、后台和服务器对“一条记录是什么”不可能有分歧。",
+          "手机端离线优先。检测记录和故障照片先排队存在设备上，有信号再同步；同一批记录同步两次也不会出错，而且没有原因和照片，故障就无法保存。",
+          "绝不盲目导入。客户的登记表先解析、先展示——从空白单元格推断区域，从自由文本备注里读出结论——确认后才写入资产登记、上次检测记录和下一次任务。"
+        ],
+        "outcome": "已上线：一款支持 iOS、Android 和网页的 Expo 应用，一个可安装的 React 后台，以及一套能出具并归档 PDF 报告的 Fastify + Prisma API。生产环境用 Postgres，开发环境在 SQLite 上跑同一套表结构；190 项测试全部通过，其中一项通过 HTTP 跑完整个业务流程。",
+        "specs": [
+          {
+            "figure": "190",
+            "label": "测试通过",
+            "note": "领域逻辑、应用和完整业务流程。"
+          },
+          {
+            "figure": "54",
+            "label": "API 接口",
+            "note": "手机和后台共用一套 API。"
+          },
+          {
+            "figure": "3",
+            "label": "平台",
+            "note": "一套代码覆盖 iOS、Android 与网页。"
+          }
+        ],
+        "note": "本项目为 Yonder Tech 自主设计并开发的产品。界面截图使用演示数据；文中数字描述的是软件本身。",
+        "liveTitle": "近距离看看这个产品。",
+        "liveBody": "产品展示页将在新标签打开：逐屏展示现场应用、办公室后台，以及它是怎么构建的。",
+        "openLive": "打开产品展示 →"
+      }
+    }
+  },
+  {
+    "slug": "earth",
+    "num": "02",
     "tags": [
       "Web",
       "UI"
@@ -44,7 +197,7 @@
     },
     "det": {
       "en": {
-        "crumb": "01 — Real-time 3D",
+        "crumb": "02 — Real-time 3D",
         "title": "A planet has to be recognisable.",
         "lede": "A lit globe with weather, night cities and traffic, built from two public data files and a great deal of arithmetic.",
         "facts": [
@@ -92,7 +245,7 @@
         ]
       },
       "zh": {
-        "crumb": "01 — 实时 3D",
+        "crumb": "02 — 实时 3D",
         "title": "行星必须认得出来。",
         "lede": "一颗带天气、夜间城市与航路的地球，由两份公开数据和大量运算构成。",
         "facts": [
@@ -143,7 +296,7 @@
   },
   {
     "slug": "movement",
-    "num": "02",
+    "num": "03",
     "tags": [
       "Web",
       "UI"
@@ -186,7 +339,7 @@
     },
     "det": {
       "en": {
-        "crumb": "02 — Real-time 3D",
+        "crumb": "03 — Real-time 3D",
         "title": "Precision that was made by people.",
         "lede": "An instrument generated at load, where every industrial quality in it is there because a person decided it should be.",
         "facts": [
@@ -234,7 +387,7 @@
         ]
       },
       "zh": {
-        "crumb": "02 — 实时 3D",
+        "crumb": "03 — 实时 3D",
         "title": "由人做出来的精密。",
         "lede": "一件在加载时生成的仪器——它身上每一处工业属性，都是因为某个人决定它该如此。",
         "facts": [
@@ -285,7 +438,7 @@
   },
   {
     "slug": "specimen",
-    "num": "03",
+    "num": "04",
     "tags": [
       "Web",
       "UI"
@@ -328,7 +481,7 @@
     },
     "det": {
       "en": {
-        "crumb": "03 — Real-time 3D",
+        "crumb": "04 — Real-time 3D",
         "title": "Light is the model.",
         "lede": "A dispersive glass specimen rebuilt as a live scene, where the spectrum comes out of refraction instead of a picture of it.",
         "facts": [
@@ -376,7 +529,7 @@
         ]
       },
       "zh": {
-        "crumb": "03 — 实时 3D",
+        "crumb": "04 — 实时 3D",
         "title": "光才是模型。",
         "lede": "把一颗色散玻璃标本重建为实时场景：光谱来自折射本身，而不是折射的照片。",
         "facts": [
@@ -427,7 +580,7 @@
   },
   {
     "slug": "luna-bloom",
-    "num": "04",
+    "num": "05",
     "tags": [
       "Web",
       "UI",
@@ -471,7 +624,7 @@
     },
     "det": {
       "en": {
-        "crumb": "04 — Community platform",
+        "crumb": "05 — Community platform",
         "title": "Softness as a design system.",
         "lede": "A maternity community concept built to hold long-form editorial and peer conversation without the pull of an endless feed.",
         "facts": [
@@ -519,7 +672,7 @@
         ]
       },
       "zh": {
-        "crumb": "04 — 社区平台",
+        "crumb": "05 — 社区平台",
         "title": "把「柔和」做成一套系统。",
         "lede": "母婴社区概念，要在没有无限信息流的前提下同时容纳长文内容和用户交流。",
         "facts": [
@@ -570,7 +723,7 @@
   },
   {
     "slug": "ion-forge",
-    "num": "05",
+    "num": "06",
     "tags": [
       "Web",
       "UI",
@@ -614,7 +767,7 @@
     },
     "det": {
       "en": {
-        "crumb": "05 — Product launch",
+        "crumb": "06 — Product launch",
         "title": "From industrial design to kinetic product storytelling.",
         "lede": "A hardware launch system carrying industrial design, spec detail and motion in one view, and repeating across twelve markets.",
         "facts": [
@@ -662,7 +815,7 @@
         ]
       },
       "zh": {
-        "crumb": "05 — 产品发布",
+        "crumb": "06 — 产品发布",
         "title": "从工业设计到动态产品叙事。",
         "lede": "硬件发布系统，在同一屏内承载工业设计、参数与动效，并复用于十二个市场。",
         "facts": [
@@ -713,7 +866,7 @@
   },
   {
     "slug": "velvet-atelier",
-    "num": "06",
+    "num": "07",
     "tags": [
       "Web",
       "UI",
@@ -757,7 +910,7 @@
     },
     "det": {
       "en": {
-        "crumb": "06 — Luxury commerce",
+        "crumb": "07 — Luxury commerce",
         "title": "A luxury commerce experience blueprint.",
         "lede": "The maison journey mapped across editorial, commerce, concierge and aftercare as one system rather than four.",
         "facts": [
@@ -805,7 +958,7 @@
         ]
       },
       "zh": {
-        "crumb": "06 — 高端零售",
+        "crumb": "07 — 高端零售",
         "title": "高端零售体验蓝图。",
         "lede": "把内容、电商、专属服务和售后四段旅程画成一套系统，而不是四套。",
         "facts": [
@@ -856,7 +1009,7 @@
   },
   {
     "slug": "ishq-escape",
-    "num": "07",
+    "num": "08",
     "tags": [
       "Web",
       "UI",
@@ -900,7 +1053,7 @@
     },
     "det": {
       "en": {
-        "crumb": "07 — Hospitality booking",
+        "crumb": "08 — Hospitality booking",
         "title": "Luxury booking with concierge-led conversion.",
         "lede": "A full-funnel villa booking concept balancing discovery, private enquiry and confirmation in one flow.",
         "facts": [
@@ -948,7 +1101,7 @@
         ]
       },
       "zh": {
-        "crumb": "07 — 酒店预订",
+        "crumb": "08 — 酒店预订",
         "title": "以专属服务驱动转化的高端预订。",
         "lede": "全漏斗别墅预订概念，把浏览、私下咨询与最终确认放进同一条动线。",
         "facts": [
@@ -999,7 +1152,7 @@
   },
   {
     "slug": "starlight-kingdom",
-    "num": "08",
+    "num": "09",
     "tags": [
       "Web",
       "UI",
@@ -1044,7 +1197,7 @@
     },
     "det": {
       "en": {
-        "crumb": "08 — Destination experience",
+        "crumb": "09 — Destination experience",
         "title": "A destination page that also plans the day.",
         "lede": "A cinematic landing concept and a queue-aware itinerary planner sharing one visual system.",
         "facts": [
@@ -1092,7 +1245,7 @@
         ]
       },
       "zh": {
-        "crumb": "08 — 目的地体验",
+        "crumb": "09 — 目的地体验",
         "title": "既做目的地展示，也做当日行程。",
         "lede": "影院感落地页与考虑排队时长的行程规划工作台共用一套视觉系统。",
         "facts": [
@@ -1143,7 +1296,7 @@
   },
   {
     "slug": "aurora",
-    "num": "09",
+    "num": "10",
     "tags": [
       "Web",
       "UI",
@@ -1187,7 +1340,7 @@
     },
     "det": {
       "en": {
-        "crumb": "09 — Employer brand",
+        "crumb": "10 — Employer brand",
         "title": "A careers site that is not a job list.",
         "lede": "Teams, mission and location given equal standing beside role search, in one employer brand system.",
         "facts": [
@@ -1235,7 +1388,7 @@
         ]
       },
       "zh": {
-        "crumb": "09 — 雇主品牌",
+        "crumb": "10 — 雇主品牌",
         "title": "招聘站不该只是一份职位列表。",
         "lede": "团队、使命与地点和职位搜索并列，统一在一套雇主品牌系统里。",
         "facts": [
@@ -1286,7 +1439,7 @@
   },
   {
     "slug": "tech-disruption",
-    "num": "10",
+    "num": "11",
     "tags": [
       "Web",
       "UI"
@@ -1329,7 +1482,7 @@
     },
     "det": {
       "en": {
-        "crumb": "10 — Research hub",
+        "crumb": "11 — Research hub",
         "title": "Making dense research feel effortless.",
         "lede": "A daily-publishing research hub that absorbs editorial volume without reading as a link dump.",
         "facts": [
@@ -1377,7 +1530,7 @@
         ]
       },
       "zh": {
-        "crumb": "10 — 研究平台",
+        "crumb": "11 — 研究平台",
         "title": "让高密度研究读起来不费力。",
         "lede": "每日更新的研究平台，要承载发布量，又不能变成一堆链接。",
         "facts": [
@@ -1428,7 +1581,7 @@
   },
   {
     "slug": "lumen-stream",
-    "num": "11",
+    "num": "12",
     "tags": [
       "Web",
       "UI",
@@ -1472,7 +1625,7 @@
     },
     "det": {
       "en": {
-        "crumb": "11 — Streaming platform",
+        "crumb": "12 — Streaming platform",
         "title": "A streaming homepage that serves discovery and sign-up.",
         "lede": "A cinematic entertainment hub concept where browsing depth and a single sign-up route stop competing.",
         "facts": [
@@ -1520,7 +1673,7 @@
         ]
       },
       "zh": {
-        "crumb": "11 — 流媒体平台",
+        "crumb": "12 — 流媒体平台",
         "title": "同时服务内容发现与注册的流媒体首页。",
         "lede": "影院感娱乐平台概念，让浏览深度与唯一注册路径不再互相挤占。",
         "facts": [
@@ -1571,7 +1724,7 @@
   },
   {
     "slug": "atlas",
-    "num": "12",
+    "num": "13",
     "tags": [
       "Product",
       "UI"
@@ -1614,7 +1767,7 @@
     },
     "det": {
       "en": {
-        "crumb": "12 — Institutional finance",
+        "crumb": "13 — Institutional finance",
         "title": "Designing institutional confidence.",
         "lede": "An investor-facing experience carrying the weight of a large asset manager without decoration for decoration’s sake.",
         "facts": [
@@ -1662,7 +1815,7 @@
         ]
       },
       "zh": {
-        "crumb": "12 — 机构金融",
+        "crumb": "13 — 机构金融",
         "title": "设计出机构级的信任感。",
         "lede": "面向投资者的体验，要撑得起大型资产管理机构的分量，同时不做任何为装饰而装饰的处理。",
         "facts": [
@@ -1713,7 +1866,7 @@
   },
   {
     "slug": "fieldnote",
-    "num": "13",
+    "num": "14",
     "tags": [
       "Web",
       "UI",
@@ -1757,7 +1910,7 @@
     },
     "det": {
       "en": {
-        "crumb": "13 — Research platform",
+        "crumb": "14 — Research platform",
         "title": "Quiet type, loud evidence.",
         "lede": "A customer-research workspace in a warm editorial system, where every insight stays tied to the moment a customer said it.",
         "facts": [
@@ -1805,7 +1958,7 @@
         ]
       },
       "zh": {
-        "crumb": "13 — 研究平台",
+        "crumb": "14 — 研究平台",
         "title": "字体轻声，证据响亮。",
         "lede": "一个采用温暖编辑风格的用户研究工作台，每一条洞察都连着客户说出它的那一刻。",
         "facts": [
