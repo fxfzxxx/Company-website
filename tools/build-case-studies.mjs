@@ -23,6 +23,7 @@ export const CONCEPTS = {
 	"tech-disruption": { name: "Northbridge Capital", theme: "#f4f1ea", fonts: "Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600" },
 	"lumen-stream": { name: "Lumen Stream", theme: "#07070c", fonts: "Sora:wght@400;500;600;700&family=Inter:wght@400;500" },
 	atlas: { name: "Atlas Capital", theme: "#f3efe6", fonts: "Playfair+Display:wght@400;500;600&family=Inter:wght@400;500;600" },
+	fieldnote: { name: "Fieldnote", theme: "#faf9f6", fonts: "Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300" },
 };
 
 const esc = (s) =>

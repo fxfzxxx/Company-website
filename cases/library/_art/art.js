@@ -1442,6 +1442,25 @@
 		"atlas/interview": F(bokehRoom, { sky: [[0, "#1c2330"], [0.6, "#3a4250"], [1, "#6a6358"]], lights: ["#ffd9a0", "#ffe9cc", "#9fc3ff", "#ffb88a"], count: 160, frame: "#0e1116" }, { grain: 10, vignette: 0.45 }),
 		"atlas/report": (ctx, w, h, r) => editorial(ctx, w, h, r, { motif: "waves", paper: "#f3efe6", ink: "#1f2a37", accent: "#9b7a3c" }),
 		"atlas/markets": (ctx, w, h, r) => editorial(ctx, w, h, r, { motif: "bars", paper: "#f3efe6", ink: "#1f2a37", accent: "#9b7a3c" }),
+
+		/* Fieldnote — warm cream editorial: ink on paper, violet used once. */
+		...Object.fromEntries(
+			[
+				["strip-1", "contours", "#f1eee9"],
+				["strip-2", "orbit", "#d3cec6", true],
+				["strip-3", "waves", "#faf9f6"],
+				["strip-4", "nodes", "#f1eee9"],
+				["strip-5", "rings", "#d3cec6"],
+				["strip-6", "halftone", "#faf9f6"],
+				["feature-1", "waves", "#f1eee9", true],
+				["feature-2", "contours", "#d3cec6"],
+				["feature-3", "nodes", "#f1eee9"],
+			].map(([name, motif, paper, violet]) => [
+				`fieldnote/${name}`,
+				(ctx, w, h, r) =>
+					editorial(ctx, w, h, r, { motif, paper, ink: "#111111", accent: violet ? "#0007cb" : "#111111" }),
+			])
+		),
 	};
 
 	/* Where each piece goes and how big it is. Paths are relative to
@@ -1490,6 +1509,10 @@
 		S("atlas", "interview", 1600, 900),
 		S("atlas", "report", 1200, 800),
 		S("atlas", "markets", 1200, 800),
+		...[1, 2, 3, 4, 5, 6].map((i) => S("fieldnote", `strip-${i}`, 800, 800)),
+		S("fieldnote", "feature-1", 1400, 1100),
+		S("fieldnote", "feature-2", 1400, 1100),
+		S("fieldnote", "feature-3", 1400, 1100),
 	];
 
 	const hash = (s) => [...s].reduce((a, c) => (Math.imul(a, 31) + c.charCodeAt(0)) | 0, 7);
