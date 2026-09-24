@@ -55,15 +55,16 @@ const metaLine = (a, t, loc) =>
 /* — index —————————————————————————————————————————————————————————— */
 
 export const renderInsightsIndex = (ctx, articles) => {
-	const { ui, loc } = ctx;
+	const { ui, loc, root } = ctx;
 	const t = ui.ins;
 
 	const chip = (key) =>
 		`					<button class="yt-chip hv4" type="button" data-tag="${key}" aria-pressed="${key === "All"}">${esc(key === "All" ? t.all : t.categories[key])}</button>`;
 
 	const row = (a) => `				<a class="yt-ins-row hv5" href="${esc(a.slug)}.html" data-tags="${esc(a.category)}">
-					<span class="yt-ins-date">${esc(formatDate(a.date, loc))}</span>
+					<span class="yt-ins-thumb"><img src="${root}${esc(a.cover)}" alt="" loading="lazy" width="1600" height="900" /></span>
 					<span class="yt-ins-body">
+						<span class="yt-ins-date">${esc(formatDate(a.date, loc))}</span>
 						<span class="yt-meta">${esc(t.categories[a.category])}</span>
 						<span class="yt-ins-title">${esc(a.title)}</span>
 						<span class="yt-ins-dek">${esc(a.dek)}</span>
@@ -116,7 +117,7 @@ ${scripts(ctx)}
 /* — article ————————————————————————————————————————————————————————— */
 
 export const renderArticle = (ctx, articles, index) => {
-	const { ui, loc, path } = ctx;
+	const { ui, loc, path, root } = ctx;
 	const t = ui.ins;
 	const a = articles[index];
 
@@ -130,13 +131,23 @@ export const renderArticle = (ctx, articles, index) => {
 		headline: a.title,
 		description: a.dek,
 		datePublished: a.date,
+		image: [`${SITE}/${a.cover}`, `${SITE}/${a.figure.src}`],
 		inLanguage: loc === "zh" ? "zh-Hans" : "en-NZ",
 		mainEntityOfPage: `${SITE}/${path}`,
 		author: { "@type": "Organization", name: "Yonder Tech", url: `${SITE}/` },
 		publisher: { "@type": "Organization", name: "Yonder Tech", logo: { "@type": "ImageObject", url: `${SITE}/assets/brand/lockup.svg` } },
 	};
 
-	return `${head({ ctx, title: `${a.title} — Yonder Tech`, description: a.dek, image: t.image })}
+	// the diagram goes before the second section heading, closing the first section
+	const figure = `<figure class="yt-prose-figure">
+	<a href="${root}${esc(a.figure.src)}" target="_blank" rel="noopener"><img src="${root}${esc(a.figure.src)}" alt="${esc(a.figure.title)}" loading="lazy" width="${a.figure.width}" height="${a.figure.height}" /></a>
+	<figcaption>${esc(a.figure.caption)}</figcaption>
+</figure>`;
+	const h2s = [...a.html.matchAll(/^<h2>/gm)];
+	const at = h2s.length > 1 ? h2s[1].index : a.html.length;
+	const body = `${a.html.slice(0, at)}${figure}\n${a.html.slice(at)}`;
+
+	return `${head({ ctx, title: `${a.title} — Yonder Tech`, description: a.dek, image: `${SITE}/${a.cover}` })}
 
 <body>
 ${header(ctx, "insights")}
@@ -157,9 +168,13 @@ ${header(ctx, "insights")}
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="${root}${esc(a.cover)}" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
-${a.html
+${body
 	.split("\n")
 	.map((l) => `					${l}`)
 	.join("\n")}

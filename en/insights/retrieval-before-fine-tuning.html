@@ -16,7 +16,7 @@
 	<meta property="og:description" content="When a model doesn&#39;t know your business, the instinct is to train it. Nine times in ten, the better answer is to hand it the right documents at the right moment." />
 	<meta property="og:url" content="https://yondertech.co.nz/en/insights/retrieval-before-fine-tuning.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/retrieval-before-fine-tuning/cover.jpg" />
 	<meta property="og:locale" content="en_NZ" />
 	<meta property="og:locale:alternate" content="zh_CN" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/retrieval-before-fine-tuning/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>A general-purpose language model knows a great deal about the world and nothing about your pricing policy, your product catalogue or last month&#39;s board minutes. When teams notice this, the first idea is usually fine-tuning: take the model, feed it the company&#39;s documents, and teach it the business.</p>
@@ -79,6 +83,10 @@
 					<h2>What each technique is actually for</h2>
 					<p>Fine-tuning changes how a model behaves. It is good at teaching style, format and narrow skills: always answer in this structure, classify these tickets into our twelve categories, write in our house voice. It is poor at teaching facts, and worse at teaching facts that change. A fine-tuned model that learned your price list in March will confidently quote March prices in September.</p>
 					<p>Retrieval changes what a model knows at the moment it answers. The facts live in your documents and databases, where they already are and where people already maintain them. Update the source, and the next answer reflects it. No retraining, no new model version, no drift between what the business knows and what the model believes.</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/retrieval-before-fine-tuning/figure-en.png" target="_blank" rel="noopener"><img src="../../assets/insights/retrieval-before-fine-tuning/figure-en.png" alt="A retrieval pipeline" loading="lazy" width="1600" height="654" /></a>
+						<figcaption>Most retrieval failures are search failures. Measure whether the right passage was found before judging the model&#39;s answer.</figcaption>
+					</figure>
 					<h2>Why retrieval wins first</h2>
 					<ul>
 						<li><strong>Freshness.</strong> Knowledge stays in the systems of record. The model reads the current version every time.</li>
@@ -148,6 +156,10 @@
 		"headline": "Retrieval before fine-tuning",
 		"description": "When a model doesn't know your business, the instinct is to train it. Nine times in ten, the better answer is to hand it the right documents at the right moment.",
 		"datePublished": "2026-03-04",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/retrieval-before-fine-tuning/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/retrieval-before-fine-tuning/figure-en.png"
+		],
 		"inLanguage": "en-NZ",
 		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/retrieval-before-fine-tuning.html",
 		"author": {

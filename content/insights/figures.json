@@ -1,0 +1,1818 @@
+{
+ "model-choice-is-procurement": {
+  "cover": "bars",
+  "figure": {
+   "type": "compare",
+   "en": {
+    "title": "Two ways to pick a model",
+    "caption": "A public leaderboard and a bake-off on your own work answer different questions. Only one of them tells you what the model will cost you.",
+    "cols": [
+     "Leaderboard",
+     "Bake-off on your work"
+    ],
+    "rows": [
+     {
+      "k": "What it measures",
+      "a": "General capability on general tasks",
+      "b": "Accuracy on 50–100 of your real cases"
+     },
+     {
+      "k": "Cost",
+      "a": "Price per token",
+      "b": "Cost per correct answer, retries included"
+     },
+     {
+      "k": "Latency",
+      "a": "Not measured",
+      "b": "Measured at your volume"
+     },
+     {
+      "k": "Data terms",
+      "a": "Not considered",
+      "b": "Retention and region checked"
+     },
+     {
+      "k": "Exit",
+      "a": "Not considered",
+      "b": "Eval set survives a switch"
+     }
+    ]
+   },
+   "zh": {
+    "title": "选模型的两种方式",
+    "caption": "公开排行榜和用你自己的工作做的对比测试，回答的是不同的问题。只有后者能告诉你这个模型会让你花多少钱。",
+    "cols": [
+     "排行榜",
+     "用你的工作做对比测试"
+    ],
+    "rows": [
+     {
+      "k": "衡量什么",
+      "a": "通用任务上的通用能力",
+      "b": "在 50–100 个真实案例上的准确率"
+     },
+     {
+      "k": "成本",
+      "a": "每 token 价格",
+      "b": "每个正确答案的成本，含重试"
+     },
+     {
+      "k": "延迟",
+      "a": "不测",
+      "b": "按你的调用量实测"
+     },
+     {
+      "k": "数据条款",
+      "a": "不考虑",
+      "b": "核查保留期与处理区域"
+     },
+     {
+      "k": "退出",
+      "a": "不考虑",
+      "b": "评测集在换模型后依然可用"
+     }
+    ]
+   }
+  }
+ },
+ "boring-stack": {
+  "cover": "blocks",
+  "figure": {
+   "type": "layers",
+   "en": {
+    "title": "Our default stack",
+    "caption": "Every departure from this default has to be argued for in writing, with the cost of running it included.",
+    "highlight": 2,
+    "items": [
+     {
+      "t": "Server-rendered pages",
+      "n": "Interactivity added only where it earns its place"
+     },
+     {
+      "t": "One application",
+      "n": "One repository, one deployable, one pipeline"
+     },
+     {
+      "t": "One Postgres database",
+      "n": "Relational core, JSON, search and vectors in one place"
+     },
+     {
+      "t": "Managed hosting",
+      "n": "One cloud, used for its plainest services"
+     }
+    ]
+   },
+   "zh": {
+    "title": "我们的默认技术栈",
+    "caption": "任何偏离这个默认方案的决定，都要书面论证，并算上运行成本。",
+    "highlight": 2,
+    "items": [
+     {
+      "t": "服务端渲染页面",
+      "n": "只在值得的地方加交互"
+     },
+     {
+      "t": "一个应用",
+      "n": "一个仓库、一个可部署单元、一条流水线"
+     },
+     {
+      "t": "一个 Postgres 数据库",
+      "n": "关系核心、JSON、搜索和向量都在一处"
+     },
+     {
+      "t": "托管式部署",
+      "n": "一家云，只用它最朴素的服务"
+     }
+    ]
+   }
+  }
+ },
+ "design-tokens-contract": {
+  "cover": "grid",
+  "figure": {
+   "type": "flow",
+   "en": {
+    "title": "Three layers of tokens",
+    "caption": "The contract lives in the middle layer: designers may re-point a semantic token, engineers may rely on its name and guarantee.",
+    "highlight": 1,
+    "steps": [
+     {
+      "t": "Primitive",
+      "n": "What exists. blue-600, space-4, size-18. Never referenced by components."
+     },
+     {
+      "t": "Semantic",
+      "n": "What it is for. text-primary, surface-raised, danger. The contract, with contrast checked in the build."
+     },
+     {
+      "t": "Component",
+      "n": "Rare exceptions. button-bg-pressed. Each one prompts a question."
+     }
+    ]
+   },
+   "zh": {
+    "title": "令牌的三层结构",
+    "caption": "契约住在中间一层：设计师可以改变语义令牌指向谁，工程师可以依赖它的名字和保证。",
+    "highlight": 1,
+    "steps": [
+     {
+      "t": "基础令牌",
+      "n": "有什么。blue-600、space-4、size-18。组件从不直接引用。"
+     },
+     {
+      "t": "语义令牌",
+      "n": "用来做什么。text-primary、surface-raised、danger。契约本身，对比度在构建时检查。"
+     },
+     {
+      "t": "组件令牌",
+      "n": "少见的例外。button-bg-pressed。每一个都该引出一个问题。"
+     }
+    ]
+   }
+  }
+ },
+ "metrics-before-models": {
+  "cover": "waves",
+  "figure": {
+   "type": "flow",
+   "en": {
+    "title": "Measure first, then automate",
+    "caption": "The first project builds the measure. Every later project is judged against it.",
+    "highlight": 0,
+    "steps": [
+     {
+      "t": "Define the outcome",
+      "n": "Agree in writing what a good result looks like."
+     },
+     {
+      "t": "Capture a baseline",
+      "n": "Four to six weeks of the real number, from existing systems."
+     },
+     {
+      "t": "Automate the worst step",
+      "n": "Highest volume, lowest baseline."
+     },
+     {
+      "t": "Scale or stop",
+      "n": "Same measure. If it moved, grow it. If not, stop."
+     }
+    ]
+   },
+   "zh": {
+    "title": "先测量，再自动化",
+    "caption": "第一个项目建立衡量标准，之后每个项目都用它来评判。",
+    "highlight": 0,
+    "steps": [
+     {
+      "t": "定义结果",
+      "n": "书面约定好的结果长什么样。"
+     },
+     {
+      "t": "建立基线",
+      "n": "用四到六周，从现有系统里取得真实数字。"
+     },
+     {
+      "t": "自动化最差的环节",
+      "n": "量最大、基线最差的那一步。"
+     },
+     {
+      "t": "扩大或停止",
+      "n": "用同一个指标衡量。动了就扩大，没动就停。"
+     }
+    ]
+   }
+  }
+ },
+ "retrieval-before-fine-tuning": {
+  "cover": "nodes",
+  "figure": {
+   "type": "flow",
+   "en": {
+    "title": "A retrieval pipeline",
+    "caption": "Most retrieval failures are search failures. Measure whether the right passage was found before judging the model's answer.",
+    "highlight": 1,
+    "steps": [
+     {
+      "t": "Question",
+      "n": "From a user, with who they are and what they may read."
+     },
+     {
+      "t": "Search",
+      "n": "Keyword and vector together, filtered by permission and date."
+     },
+     {
+      "t": "Top passages",
+      "n": "A handful of chunks from the current source documents."
+     },
+     {
+      "t": "Answer with sources",
+      "n": "The model answers from the passages and cites them."
+     }
+    ]
+   },
+   "zh": {
+    "title": "一条检索管线",
+    "caption": "大多数检索失败其实是搜索失败。在评判模型回答之前，先衡量有没有找到正确段落。",
+    "highlight": 1,
+    "steps": [
+     {
+      "t": "问题",
+      "n": "来自用户，并附带他是谁、有权读什么。"
+     },
+     {
+      "t": "搜索",
+      "n": "关键词与向量结合，按权限和日期过滤。"
+     },
+     {
+      "t": "最相关段落",
+      "n": "从当前源文档中取出的少量片段。"
+     },
+     {
+      "t": "带来源的回答",
+      "n": "模型基于段落作答，并给出引用。"
+     }
+    ]
+   }
+  }
+ },
+ "technology-roadmap-board": {
+  "cover": "rings",
+  "figure": {
+   "type": "cards",
+   "en": {
+    "title": "What a roadmap owes the board",
+    "caption": "A roadmap earns its place on the agenda only when it answers all three.",
+    "items": [
+     {
+      "t": "What stops?",
+      "n": "Systems retired, processes removed, contracts not renewed — with dates."
+     },
+     {
+      "t": "What starts, and how will we know?",
+      "n": "An outcome for every initiative, today's value, and the target."
+     },
+     {
+      "t": "What does it cost to be wrong?",
+      "n": "The first checkpoint, what will be known by then, and what will have been spent."
+     }
+    ]
+   },
+   "zh": {
+    "title": "路线图欠董事会的三个答案",
+    "caption": "只有三个问题都回答了，路线图才配占用董事会议程。",
+    "items": [
+     {
+      "t": "停掉什么？",
+      "n": "要退役的系统、要取消的流程、不再续签的合同——附日期。"
+     },
+     {
+      "t": "开始什么，怎么知道成了？",
+      "n": "每个项目的结果指标、今天的数值和目标。"
+     },
+     {
+      "t": "错了要付出多大代价？",
+      "n": "第一个检查点、届时会知道什么、那时已花了多少钱。"
+     }
+    ]
+   }
+  }
+ },
+ "quiet-interface": {
+  "cover": "halftone",
+  "figure": {
+   "type": "cards",
+   "en": {
+    "title": "Four rules for a quiet interface",
+    "caption": "Restraint is a system: each rule protects the emphasis budget for the moment something really needs attention.",
+    "items": [
+     {
+      "t": "One accent, one job",
+      "n": "Usually the primary action or the current selection."
+     },
+     {
+      "t": "Type and space, not boxes",
+      "n": "Hierarchy from size, weight and whitespace."
+     },
+     {
+      "t": "Status colours for status",
+      "n": "Red means wrong. Nothing else may use it."
+     },
+     {
+      "t": "Motion that explains",
+      "n": "Movement shows where things came from and went."
+     }
+    ]
+   },
+   "zh": {
+    "title": "安静界面的四条规则",
+    "caption": "克制是一套体系：每条规则都在为真正需要注意的那一刻保留强调的预算。",
+    "items": [
+     {
+      "t": "一个强调色，只做一件事",
+      "n": "通常是主操作或当前选中项。"
+     },
+     {
+      "t": "用字体和留白，而不是方框",
+      "n": "层级来自字号、字重和空白。"
+     },
+     {
+      "t": "状态色只留给状态",
+      "n": "红色意味着出错，别处都不许用。"
+     },
+     {
+      "t": "会解释的动效",
+      "n": "动效说明元素从哪来、到哪去。"
+     }
+    ]
+   }
+  }
+ },
+ "typescript-where-it-stops-paying": {
+  "cover": "blocks",
+  "figure": {
+   "type": "flow",
+   "en": {
+    "title": "Strict at the edges, plain in the middle",
+    "caption": "Types earn most at boundaries. Inside the application, simple named types that anyone can read beat clever ones.",
+    "highlight": 0,
+    "steps": [
+     {
+      "t": "Data coming in",
+      "n": "Validated at runtime. Precise types generated from the schema or API definition."
+     },
+     {
+      "t": "Application core",
+      "n": "Plain, named interfaces and unions a junior developer can read aloud."
+     },
+     {
+      "t": "Data going out",
+      "n": "The same generated types, so every consumer agrees with the producer."
+     }
+    ]
+   },
+   "zh": {
+    "title": "边缘严格，中间朴素",
+    "caption": "类型在边界处回报最高。应用内部，人人读得懂的简单命名类型胜过巧妙的类型。",
+    "highlight": 0,
+    "steps": [
+     {
+      "t": "流入的数据",
+      "n": "运行时校验。精确类型从表结构或 API 定义生成。"
+     },
+     {
+      "t": "应用核心",
+      "n": "朴素、有名字的接口和联合类型，初级开发者也念得出来。"
+     },
+     {
+      "t": "流出的数据",
+      "n": "使用同一套生成类型，让每个消费者与生产者一致。"
+     }
+    ]
+   }
+  }
+ },
+ "evals-are-unit-tests": {
+  "cover": "contours",
+  "figure": {
+   "type": "cycle",
+   "en": {
+    "title": "The evaluation loop",
+    "caption": "Every bad answer becomes a case in the suite, so the suite grows toward the ways the feature actually fails.",
+    "center": "Eval suite in the repository",
+    "highlight": 1,
+    "items": [
+     {
+      "t": "Change a prompt or model"
+     },
+     {
+      "t": "Run the suite in CI"
+     },
+     {
+      "t": "Score against tolerance"
+     },
+     {
+      "t": "Ship, or block the merge"
+     },
+     {
+      "t": "Bad answers become new cases"
+     }
+    ]
+   },
+   "zh": {
+    "title": "评测循环",
+    "caption": "每一个糟糕的回答都会变成评测集里的一个用例，评测集因此朝着功能真实的失败方式生长。",
+    "center": "放在仓库里的评测集",
+    "highlight": 1,
+    "items": [
+     {
+      "t": "修改提示词或模型"
+     },
+     {
+      "t": "在 CI 中运行评测"
+     },
+     {
+      "t": "与容差比较打分"
+     },
+     {
+      "t": "上线，或禁止合并"
+     },
+     {
+      "t": "坏答案变成新用例"
+     }
+    ]
+   }
+  }
+ },
+ "case-against-replacing-erp": {
+  "cover": "blocks",
+  "figure": {
+   "type": "compare",
+   "en": {
+    "title": "Replace first, or fix first",
+    "caption": "If most root causes are data and process, fixing them first pays back sooner — and makes any later migration shorter.",
+    "cols": [
+     "Replace first",
+     "Fix, then decide"
+    ],
+    "rows": [
+     {
+      "k": "First benefit",
+      "a": "After go-live, often 18 months or more",
+      "b": "Within three to six months"
+     },
+     {
+      "k": "Data migrated",
+      "a": "As it is today",
+      "b": "Cleaned and reconciled"
+     },
+     {
+      "k": "Processes",
+      "a": "Customised to match the old ones",
+      "b": "Simplified before any move"
+     },
+     {
+      "k": "If you stop halfway",
+      "a": "Nothing works yet",
+      "b": "Every improvement is kept"
+     }
+    ]
+   },
+   "zh": {
+    "title": "先换，还是先修",
+    "caption": "如果大多数根因在数据和流程，先修好它们回报更快——日后真要迁移也会更短。",
+    "cols": [
+     "先更换",
+     "先修复，再决定"
+    ],
+    "rows": [
+     {
+      "k": "首次见效",
+      "a": "上线之后，往往 18 个月以上",
+      "b": "三到六个月内"
+     },
+     {
+      "k": "迁移的数据",
+      "a": "保持今天的样子",
+      "b": "清理并对账之后"
+     },
+     {
+      "k": "流程",
+      "a": "定制成旧流程的样子",
+      "b": "迁移前先简化"
+     },
+     {
+      "k": "中途停下",
+      "a": "什么都还不能用",
+      "b": "每一项改进都保留下来"
+     }
+    ]
+   }
+  }
+ },
+ "back-office-agents": {
+  "cover": "nodes",
+  "figure": {
+   "type": "flow",
+   "en": {
+    "title": "How a reconciliation agent works",
+    "caption": "Rules first, model second, person last: the agent's job is to hand people only the cases that need judgement.",
+    "highlight": 3,
+    "steps": [
+     {
+      "t": "Unmatched items",
+      "n": "Bank lines, invoices and remittances left after the period closes."
+     },
+     {
+      "t": "Deterministic rules",
+      "n": "Exact amounts, references and known supplier aliases."
+     },
+     {
+      "t": "Model for fuzzy cases",
+      "n": "Reads remittance emails, spots split payments and name variants."
+     },
+     {
+      "t": "Three buckets",
+      "n": "Confident match · needs a glance · unresolved, for a person."
+     }
+    ]
+   },
+   "zh": {
+    "title": "对账智能体如何工作",
+    "caption": "先规则、后模型、最后是人：智能体的任务，是只把需要判断的案例交给人。",
+    "highlight": 3,
+    "steps": [
+     {
+      "t": "未匹配条目",
+      "n": "期末关账后剩下的银行流水、发票和汇款。"
+     },
+     {
+      "t": "确定性规则",
+      "n": "金额完全一致、参考编号、已知供应商别名。"
+     },
+     {
+      "t": "模型处理模糊情况",
+      "n": "读汇款邮件，识别拆分付款和名称变体。"
+     },
+     {
+      "t": "三个桶",
+      "n": "高置信匹配 · 需看一眼 · 无法解决，交给人。"
+     }
+    ]
+   }
+  }
+ },
+ "ai-attack-surface": {
+  "cover": "orbit",
+  "figure": {
+   "type": "matrix",
+   "en": {
+    "title": "Where to spend AI security effort",
+    "caption": "The dangerous combination is a feature that reads content outsiders can write and can act or send data out.",
+    "xLabel": "Reads untrusted content",
+    "yLabel": "Can act or send data out",
+    "x": [
+     "No",
+     "Yes"
+    ],
+    "y": [
+     "No",
+     "Yes"
+    ],
+    "hot": 1,
+    "q": [
+     {
+      "t": "Contained",
+      "n": "Trusted inputs, real powers. Standard access control applies."
+     },
+     {
+      "t": "Highest risk",
+      "n": "Injected instructions can cause harm. Least privilege, human approval, guarded exits."
+     },
+     {
+      "t": "Low risk",
+      "n": "Internal drafting and summarising of trusted material."
+     },
+     {
+      "t": "Watch the output",
+      "n": "Untrusted inputs, no powers. Keep answers from leaking between users."
+     }
+    ]
+   },
+   "zh": {
+    "title": "AI 安全投入应该花在哪里",
+    "caption": "危险的组合，是一个既读取外人可写的内容、又能执行操作或向外发送数据的功能。",
+    "xLabel": "读取不可信内容",
+    "yLabel": "能执行操作或向外发数据",
+    "x": [
+     "否",
+     "是"
+    ],
+    "y": [
+     "否",
+     "是"
+    ],
+    "hot": 1,
+    "q": [
+     {
+      "t": "可控",
+      "n": "输入可信，权限真实。常规访问控制即可。"
+     },
+     {
+      "t": "风险最高",
+      "n": "注入的指令能造成伤害。最小权限、人工批准、守住出口。"
+     },
+     {
+      "t": "低风险",
+      "n": "对可信材料做内部起草和总结。"
+     },
+     {
+      "t": "盯住输出",
+      "n": "输入不可信，但没有权限。防止回答在用户之间泄漏。"
+     }
+    ]
+   }
+  }
+ },
+ "postgres-default": {
+  "cover": "rings",
+  "figure": {
+   "type": "hub",
+   "en": {
+    "title": "One Postgres, six jobs",
+    "caption": "Each job used to need its own product. Keeping them in one well-run database removes copies, sync jobs and a second permission model.",
+    "center": "Postgres",
+    "centerNote": "one database to run well",
+    "items": [
+     {
+      "t": "Relational core",
+      "n": "Transactions, constraints"
+     },
+     {
+      "t": "Documents",
+      "n": "JSONB"
+     },
+     {
+      "t": "Search",
+      "n": "Full-text, ranked"
+     },
+     {
+      "t": "Vectors",
+      "n": "pgvector for retrieval"
+     },
+     {
+      "t": "Job queue",
+      "n": "SKIP LOCKED"
+     },
+     {
+      "t": "Analytics",
+      "n": "Partitions, views"
+     }
+    ]
+   },
+   "zh": {
+    "title": "一个 Postgres，六份工作",
+    "caption": "这些工作过去各需一个产品。放进一个运行良好的数据库，就省掉了数据副本、同步任务和第二套权限模型。",
+    "center": "Postgres",
+    "centerNote": "一个要运行好的数据库",
+    "items": [
+     {
+      "t": "关系核心",
+      "n": "事务、约束"
+     },
+     {
+      "t": "文档",
+      "n": "JSONB"
+     },
+     {
+      "t": "搜索",
+      "n": "全文检索、排序"
+     },
+     {
+      "t": "向量",
+      "n": "pgvector 检索"
+     },
+     {
+      "t": "任务队列",
+      "n": "SKIP LOCKED"
+     },
+     {
+      "t": "分析",
+      "n": "分区、物化视图"
+     }
+    ]
+   }
+  }
+ },
+ "type-does-the-heavy-lifting": {
+  "cover": "halftone",
+  "figure": {
+   "type": "typescale",
+   "en": {
+    "title": "A scale with real contrast",
+    "caption": "Each step is 1.33 times the one below it, so headings carry authority without needing boxes or colour to rescue the hierarchy.",
+    "base": 17,
+    "ratio": 1.333,
+    "rows": [
+     {
+      "label": "Display",
+      "sample": "Type does the work"
+     },
+     {
+      "label": "Heading",
+      "sample": "A scale with real contrast"
+     },
+     {
+      "label": "Subhead",
+      "sample": "Hierarchy without boxes"
+     },
+     {
+      "label": "Lead",
+      "sample": "A text face built for long reading",
+      "weight": 500
+     },
+     {
+      "label": "Body",
+      "sample": "Body copy at 17 pixels, 60 to 75 characters a line, with generous leading.",
+      "weight": 400
+     }
+    ]
+   },
+   "zh": {
+    "title": "一个有真实对比的字号阶梯",
+    "caption": "每一级都是下一级的 1.33 倍，标题因此自带分量，不需要方框或颜色来挽救层级。",
+    "base": 17,
+    "ratio": 1.333,
+    "rows": [
+     {
+      "label": "Display",
+      "sample": "让字体扛起重担"
+     },
+     {
+      "label": "Heading",
+      "sample": "有真实对比的字号阶梯"
+     },
+     {
+      "label": "Subhead",
+      "sample": "不靠方框建立层级"
+     },
+     {
+      "label": "Lead",
+      "sample": "一款为长时间阅读而生的正文字体",
+      "weight": 500
+     },
+     {
+      "label": "Body",
+      "sample": "正文 17 像素，每行约 30 到 40 个汉字，行距宽裕。",
+      "weight": 400
+     }
+    ]
+   }
+  }
+ },
+ "webgpu-rich-web": {
+  "cover": "waves",
+  "figure": {
+   "type": "flow",
+   "en": {
+    "title": "Loading a rich layer responsibly",
+    "caption": "The page is useful before any graphics load, and the 3D layer costs nothing when it is not on screen.",
+    "highlight": 2,
+    "steps": [
+     {
+      "t": "Content first",
+      "n": "Text and images render and are readable straight away."
+     },
+     {
+      "t": "Check the device",
+      "n": "Weak GPU or reduced motion? Serve the lighter tier."
+     },
+     {
+      "t": "Load on view",
+      "n": "The 3D module is imported only when it scrolls into view."
+     },
+     {
+      "t": "Dispose when hidden",
+      "n": "Release the GPU when the section leaves or the tab is hidden."
+     }
+    ]
+   },
+   "zh": {
+    "title": "负责任地加载富图形层",
+    "caption": "在任何图形加载之前页面就已可用，3D 层不在屏幕上时不产生任何开销。",
+    "highlight": 2,
+    "steps": [
+     {
+      "t": "内容优先",
+      "n": "文字和图片立即渲染、可读。"
+     },
+     {
+      "t": "检查设备",
+      "n": "GPU 较弱或偏好减少动效？提供轻量版。"
+     },
+     {
+      "t": "进入视野再加载",
+      "n": "3D 模块只在滚动进入视野时才导入。"
+     },
+     {
+      "t": "隐藏时释放",
+      "n": "区块离开或标签页隐藏时释放 GPU。"
+     }
+    ]
+   }
+  }
+ },
+ "small-models-local-data": {
+  "cover": "grid",
+  "figure": {
+   "type": "compare",
+   "en": {
+    "title": "Large hosted model or small model you run",
+    "caption": "Neither wins everywhere. Small models win on narrow, high-volume, privacy-sensitive work; large ones on open-ended tasks.",
+    "cols": [
+     "Large hosted model",
+     "Small model you run"
+    ],
+    "rows": [
+     {
+      "k": "Breadth",
+      "a": "Open-ended reasoning, broad knowledge",
+      "b": "One narrow, well-defined task"
+     },
+     {
+      "k": "Cost at high volume",
+      "a": "Rises with every call",
+      "b": "Mostly fixed hosting cost"
+     },
+     {
+      "k": "Latency",
+      "a": "Seconds",
+      "b": "Tens of milliseconds"
+     },
+     {
+      "k": "Where data goes",
+      "a": "To the provider, under their terms",
+      "b": "Stays in your environment"
+     },
+     {
+      "k": "Who runs it",
+      "a": "The provider",
+      "b": "You: hosting, patching, monitoring"
+     }
+    ]
+   },
+   "zh": {
+    "title": "大型托管模型，还是自己运行的小模型",
+    "caption": "没有哪一种处处占优。窄任务、大调用量、隐私敏感的工作，小模型胜出；开放式任务，大模型胜出。",
+    "cols": [
+     "大型托管模型",
+     "自己运行的小模型"
+    ],
+    "rows": [
+     {
+      "k": "能力广度",
+      "a": "开放式推理、广泛知识",
+      "b": "一项窄而明确的任务"
+     },
+     {
+      "k": "大调用量下的成本",
+      "a": "随每次调用上涨",
+      "b": "主要是固定托管成本"
+     },
+     {
+      "k": "延迟",
+      "a": "秒级",
+      "b": "几十毫秒"
+     },
+     {
+      "k": "数据去向",
+      "a": "发给供应商，按其条款",
+      "b": "留在你的环境里"
+     },
+     {
+      "k": "谁来运行",
+      "a": "供应商",
+      "b": "你：托管、补丁、监控"
+     }
+    ]
+   }
+  }
+ },
+ "two-weeks-to-a-decision": {
+  "cover": "bars",
+  "figure": {
+   "type": "timeline",
+   "en": {
+    "title": "The two-week diagnostic",
+    "caption": "Fixed fee, fixed length, and a plan that stands on its own whether or not we are hired again.",
+    "highlight": 3,
+    "points": [
+     {
+      "k": "Days 1–3",
+      "t": "Facts",
+      "n": "Systems, data, invoices and the work as people describe it."
+     },
+     {
+      "k": "Days 4–5",
+      "t": "Three constraints",
+      "n": "One technical, one organisational, one financial."
+     },
+     {
+      "k": "Days 6–8",
+      "t": "Costed sequence",
+      "n": "Steps that each pay off on their own, with measures."
+     },
+     {
+      "k": "Days 9–10",
+      "t": "Decision",
+      "n": "A recommendation, including 'change nothing yet'."
+     }
+    ]
+   },
+   "zh": {
+    "title": "两周诊断",
+    "caption": "固定费用、固定周期，产出的计划无论之后是否找我们，都能独立成立。",
+    "highlight": 3,
+    "points": [
+     {
+      "k": "第 1–3 天",
+      "t": "事实",
+      "n": "系统、数据、发票，以及一线人员描述的工作。"
+     },
+     {
+      "k": "第 4–5 天",
+      "t": "三个约束",
+      "n": "一个技术、一个组织、一个财务。"
+     },
+     {
+      "k": "第 6–8 天",
+      "t": "算清成本的顺序",
+      "n": "每一步都能独立见效，并附衡量标准。"
+     },
+     {
+      "k": "第 9–10 天",
+      "t": "决定",
+      "n": "一个建议，包括“先什么都别动”。"
+     }
+    ]
+   }
+  }
+ },
+ "data-contracts": {
+  "cover": "contours",
+  "figure": {
+   "type": "compare",
+   "en": {
+    "title": "Where the break is caught",
+    "caption": "A contract moves the check to the producer's build, so a breaking change fails their pull request instead of someone else's dashboard.",
+    "cols": [
+     "Without a contract",
+     "With a contract"
+    ],
+    "rows": [
+     {
+      "k": "Where it's checked",
+      "a": "Downstream, in the data pipeline",
+      "b": "In the producer's own build"
+     },
+     {
+      "k": "Who notices",
+      "a": "A report reader, days later",
+      "b": "The engineer making the change"
+     },
+     {
+      "k": "When",
+      "a": "After the numbers are wrong",
+      "b": "Before the change ships"
+     },
+     {
+      "k": "Changing a field",
+      "a": "Silent",
+      "b": "New version, notice, overlap period"
+     }
+    ]
+   },
+   "zh": {
+    "title": "故障在哪里被发现",
+    "caption": "契约把检查移到生产方的构建里，破坏性改动会让他们自己的合并请求失败，而不是让别人的看板出错。",
+    "cols": [
+     "没有契约",
+     "有契约"
+    ],
+    "rows": [
+     {
+      "k": "在哪里检查",
+      "a": "下游的数据管道里",
+      "b": "生产方自己的构建里"
+     },
+     {
+      "k": "谁先发现",
+      "a": "几天后某个看报表的人",
+      "b": "正在改代码的工程师"
+     },
+     {
+      "k": "什么时候",
+      "a": "数字已经错了之后",
+      "b": "改动发布之前"
+     },
+     {
+      "k": "修改字段",
+      "a": "悄无声息",
+      "b": "新版本、通知、过渡期"
+     }
+    ]
+   }
+  }
+ },
+ "motion-with-a-job": {
+  "cover": "waves",
+  "figure": {
+   "type": "bars",
+   "en": {
+    "title": "How long motion should take",
+    "caption": "Guideline durations. Most transitions land between 150 and 250 milliseconds; beyond about 400, users read motion as slowness.",
+    "max": 500,
+    "note": "Milliseconds · guideline values",
+    "highlight": 2,
+    "items": [
+     {
+      "t": "Press feedback",
+      "v": 100,
+      "label": "≈100 ms"
+     },
+     {
+      "t": "Hover and focus",
+      "v": 150,
+      "label": "150 ms"
+     },
+     {
+      "t": "Panels and menus",
+      "v": 230,
+      "label": "200–250 ms"
+     },
+     {
+      "t": "Page-level change",
+      "v": 320,
+      "label": "≈300 ms"
+     },
+     {
+      "t": "Felt as slow",
+      "v": 450,
+      "label": "400+ ms"
+     }
+    ]
+   },
+   "zh": {
+    "title": "动效应该持续多久",
+    "caption": "参考时长。大多数过渡落在 150 到 250 毫秒之间；超过约 400 毫秒，用户会把动效当成慢。",
+    "max": 500,
+    "note": "单位：毫秒 · 参考值",
+    "highlight": 2,
+    "items": [
+     {
+      "t": "按下反馈",
+      "v": 100,
+      "label": "约 100 毫秒"
+     },
+     {
+      "t": "悬停与聚焦",
+      "v": 150,
+      "label": "150 毫秒"
+     },
+     {
+      "t": "面板与菜单",
+      "v": 230,
+      "label": "200–250 毫秒"
+     },
+     {
+      "t": "页面级切换",
+      "v": 320,
+      "label": "约 300 毫秒"
+     },
+     {
+      "t": "被感知为慢",
+      "v": 450,
+      "label": "400 毫秒以上"
+     }
+    ]
+   }
+  }
+ },
+ "real-cost-of-an-ai-feature": {
+  "cover": "bars",
+  "figure": {
+   "type": "bars",
+   "en": {
+    "title": "Where an AI feature's first-year budget goes",
+    "caption": "An illustrative split from the pattern we see: inference is usually one of the smallest lines, and review and change dominate early on.",
+    "max": 32,
+    "note": "Illustrative share of first-year cost, %",
+    "items": [
+     {
+      "t": "Human review",
+      "v": 28,
+      "label": "28%"
+     },
+     {
+      "t": "Change and upkeep",
+      "v": 20,
+      "label": "20%"
+     },
+     {
+      "t": "Integration and monitoring",
+      "v": 17,
+      "label": "17%"
+     },
+     {
+      "t": "Evaluation",
+      "v": 14,
+      "label": "14%"
+     },
+     {
+      "t": "Adoption and training",
+      "v": 12,
+      "label": "12%"
+     },
+     {
+      "t": "Inference",
+      "v": 9,
+      "label": "9%",
+      "hot": true
+     }
+    ]
+   },
+   "zh": {
+    "title": "一个 AI 功能第一年的预算花在哪里",
+    "caption": "根据我们观察到的规律给出的示意比例：推理通常是最小的几项之一，早期占大头的是人工复核和变更。",
+    "max": 32,
+    "note": "第一年成本的示意占比（%）",
+    "items": [
+     {
+      "t": "人工复核",
+      "v": 28,
+      "label": "28%"
+     },
+     {
+      "t": "变更与维护",
+      "v": 20,
+      "label": "20%"
+     },
+     {
+      "t": "集成与监控",
+      "v": 17,
+      "label": "17%"
+     },
+     {
+      "t": "评测",
+      "v": 14,
+      "label": "14%"
+     },
+     {
+      "t": "推广与培训",
+      "v": 12,
+      "label": "12%"
+     },
+     {
+      "t": "推理",
+      "v": 9,
+      "label": "9%",
+      "hot": true
+     }
+    ]
+   }
+  }
+ },
+ "static-first": {
+  "cover": "grid",
+  "figure": {
+   "type": "flow",
+   "en": {
+    "title": "How this site is built",
+    "caption": "The work is done once at build time, not on every visit. Nothing runs on a server when a page is read.",
+    "highlight": 1,
+    "steps": [
+     {
+      "t": "Content",
+      "n": "JSON and Markdown, in English and Chinese."
+     },
+     {
+      "t": "Build",
+      "n": "About a second. Refuses to finish if a translation is missing."
+     },
+     {
+      "t": "Plain HTML files",
+      "n": "Every page written ahead of time, plus the sitemap."
+     },
+     {
+      "t": "Edge network",
+      "n": "Served from close to the reader, with nothing to compute."
+     }
+    ]
+   },
+   "zh": {
+    "title": "这个网站是怎么构建的",
+    "caption": "工作在构建时做一次，而不是每次访问都做。读者打开页面时，服务器上什么都不运行。",
+    "highlight": 1,
+    "steps": [
+     {
+      "t": "内容",
+      "n": "JSON 与 Markdown，中英文各一份。"
+     },
+     {
+      "t": "构建",
+      "n": "约一秒。缺任何一篇翻译就拒绝完成。"
+     },
+     {
+      "t": "普通 HTML 文件",
+      "n": "每个页面都提前写好，外加站点地图。"
+     },
+     {
+      "t": "边缘网络",
+      "n": "从离读者最近的地方发出，无需计算。"
+     }
+    ]
+   }
+  }
+ },
+ "passkeys-ready": {
+  "cover": "rings",
+  "figure": {
+   "type": "timeline",
+   "en": {
+    "title": "A passkey migration that strands no one",
+    "caption": "Staff go first because they are the highest-value targets and the easiest group to support.",
+    "highlight": 2,
+    "points": [
+     {
+      "k": "Stage 1",
+      "t": "Add alongside",
+      "n": "Offer a passkey after sign-in. Measure uptake."
+     },
+     {
+      "k": "Stage 2",
+      "t": "Default for new",
+      "n": "New accounts start with a passkey; password is the fallback."
+     },
+     {
+      "k": "Stage 3",
+      "t": "Require for staff",
+      "n": "Admins and staff with customer-data access."
+     },
+     {
+      "k": "Stage 4",
+      "t": "Retire per account",
+      "n": "Two working passkeys? Offer to remove the password."
+     }
+    ]
+   },
+   "zh": {
+    "title": "一次不让任何人掉队的通行密钥迁移",
+    "caption": "员工先行，因为他们是价值最高的攻击目标，也是最容易提供支持的人群。",
+    "highlight": 2,
+    "points": [
+     {
+      "k": "阶段 1",
+      "t": "与密码并存",
+      "n": "登录后提供创建入口，衡量采用率。"
+     },
+     {
+      "k": "阶段 2",
+      "t": "新账户默认",
+      "n": "新账户从通行密钥开始，密码作后备。"
+     },
+     {
+      "k": "阶段 3",
+      "t": "员工强制",
+      "n": "管理员和能访问客户数据的员工。"
+     },
+     {
+      "k": "阶段 4",
+      "t": "按账户退役",
+      "n": "有两个可用密钥？提出移除密码。"
+     }
+    ]
+   }
+  }
+ },
+ "observability-teams-of-five": {
+  "cover": "waves",
+  "figure": {
+   "type": "cards",
+   "en": {
+    "title": "The four signals, per service",
+    "caption": "Put all four for every service on one screen. It is the dashboard the team opens when someone says the site feels slow.",
+    "items": [
+     {
+      "t": "Traffic",
+      "n": "Requests per minute. A sudden drop is often the first sign of an outage."
+     },
+     {
+      "t": "Errors",
+      "n": "The share of requests that fail. Watch the rate, not the count."
+     },
+     {
+      "t": "Latency",
+      "n": "The slow end — the 95th percentile — not the average."
+     },
+     {
+      "t": "Saturation",
+      "n": "How close the busiest resource is to its limit."
+     }
+    ]
+   },
+   "zh": {
+    "title": "每个服务的四个信号",
+    "caption": "把每个服务的四个信号放在同一块屏幕上。有人说网站有点慢时，团队打开的就是它。",
+    "items": [
+     {
+      "t": "流量",
+      "n": "每分钟请求数。突然下降往往是故障的第一个信号。"
+     },
+     {
+      "t": "错误",
+      "n": "失败请求的比例。看比率，不看次数。"
+     },
+     {
+      "t": "延迟",
+      "n": "看慢的一端——第 95 百分位——而不是平均值。"
+     },
+     {
+      "t": "饱和度",
+      "n": "最繁忙的资源离上限还有多远。"
+     }
+    ]
+   }
+  }
+ },
+ "prompts-as-specifications": {
+  "cover": "blocks",
+  "figure": {
+   "type": "layers",
+   "en": {
+    "title": "Anatomy of a prompt that holds up",
+    "caption": "Read it aloud as if briefing a new colleague. If a thoughtful person would know exactly what to do, the specification is good.",
+    "highlight": 5,
+    "items": [
+     {
+      "t": "Task",
+      "n": "One sentence: what the model is asked to do."
+     },
+     {
+      "t": "Context",
+      "n": "Who the output is for and what they will do with it."
+     },
+     {
+      "t": "Inputs, delimited",
+      "n": "Question and documents clearly marked as material."
+     },
+     {
+      "t": "Output format",
+      "n": "Exact fields and values where software reads it."
+     },
+     {
+      "t": "Examples",
+      "n": "Two or three short examples of excellent output."
+     },
+     {
+      "t": "When unsure",
+      "n": "Ask, say it doesn't know, or hand to a person."
+     },
+     {
+      "t": "Boundaries",
+      "n": "Topics to decline, actions never to take."
+     }
+    ]
+   },
+   "zh": {
+    "title": "一个站得住的提示词的结构",
+    "caption": "像给新同事做交代一样把它读出来。如果一个认真的人能准确知道该做什么，这份规格说明就是好的。",
+    "highlight": 5,
+    "items": [
+     {
+      "t": "任务",
+      "n": "一句话：要模型做什么。"
+     },
+     {
+      "t": "背景",
+      "n": "输出给谁看，他们会拿它做什么。"
+     },
+     {
+      "t": "输入（分隔清楚）",
+      "n": "问题和文档明确标记为材料。"
+     },
+     {
+      "t": "输出格式",
+      "n": "由软件读取时，给出精确字段和取值。"
+     },
+     {
+      "t": "示例",
+      "n": "两三个优秀输出的简短示例。"
+     },
+     {
+      "t": "不确定时",
+      "n": "提问、说不知道，或交给人。"
+     },
+     {
+      "t": "边界",
+      "n": "要婉拒的话题、绝不执行的操作。"
+     }
+    ]
+   }
+  }
+ },
+ "design-systems-without-design-team": {
+  "cover": "grid",
+  "figure": {
+   "type": "layers",
+   "en": {
+    "title": "A design system sized for a small team",
+    "caption": "A component enters the system only when a second screen needs it. That rule keeps it small enough to maintain part-time.",
+    "highlight": 2,
+    "items": [
+     {
+      "t": "One page of rules",
+      "n": "Dialog or new page, how errors are written, what each colour means."
+     },
+     {
+      "t": "Three page templates",
+      "n": "List, detail and form. Most new screens are one of these."
+     },
+     {
+      "t": "Fifteen components",
+      "n": "Button, input, table, dialog, tabs, empty state and the rest."
+     },
+     {
+      "t": "Tokens",
+      "n": "Colour, spacing, type, radius and motion as named values."
+     },
+     {
+      "t": "An accessible base library",
+      "n": "Keyboard, focus and screen-reader behaviour you don't build yourself."
+     }
+    ]
+   },
+   "zh": {
+    "title": "为小团队定制的设计系统",
+    "caption": "只有当第二个屏幕需要某个组件时，它才进入系统。这条规则让系统小到可以兼职维护。",
+    "highlight": 2,
+    "items": [
+     {
+      "t": "一页规则",
+      "n": "对话框还是新页面、错误信息怎么写、每种颜色代表什么。"
+     },
+     {
+      "t": "三个页面模板",
+      "n": "列表、详情和表单。大多数新屏幕都是其中之一。"
+     },
+     {
+      "t": "十五个组件",
+      "n": "按钮、输入框、表格、对话框、标签页、空状态等。"
+     },
+     {
+      "t": "令牌",
+      "n": "颜色、间距、字体、圆角和动效，都是有名字的值。"
+     },
+     {
+      "t": "具备无障碍能力的基础库",
+      "n": "键盘、焦点和读屏行为，不必自己从头做。"
+     }
+    ]
+   }
+  }
+ },
+ "legacy-modernisation-no-big-bang": {
+  "cover": "contours",
+  "figure": {
+   "type": "split",
+   "en": {
+    "title": "Replacing a system one slice at a time",
+    "caption": "Each slice moves behind the routing layer when the new version agrees with the old. The old system shrinks until it can be switched off.",
+    "a": "Old system",
+    "b": "New system",
+    "rows": [
+     {
+      "t": "Month 1: gateway in place",
+      "v": 0.0
+     },
+     {
+      "t": "Month 3: first slice live",
+      "v": 0.12
+     },
+     {
+      "t": "Month 8",
+      "v": 0.4
+     },
+     {
+      "t": "Month 14",
+      "v": 0.75
+     },
+     {
+      "t": "Old system switched off",
+      "v": 1.0
+     }
+    ]
+   },
+   "zh": {
+    "title": "一块一块地替换一个系统",
+    "caption": "当某一块的新版本与旧版本结果一致，它就被切到路由层之后。旧系统不断缩小，直到可以关掉。",
+    "a": "旧系统",
+    "b": "新系统",
+    "rows": [
+     {
+      "t": "第 1 个月：网关就位",
+      "v": 0.0
+     },
+     {
+      "t": "第 3 个月：第一块上线",
+      "v": 0.12
+     },
+     {
+      "t": "第 8 个月",
+      "v": 0.4
+     },
+     {
+      "t": "第 14 个月",
+      "v": 0.75
+     },
+     {
+      "t": "旧系统关闭",
+      "v": 1.0
+     }
+    ]
+   }
+  }
+ },
+ "governing-ai-use": {
+  "cover": "halftone",
+  "figure": {
+   "type": "cards",
+   "en": {
+    "title": "Match the controls to the risk",
+    "caption": "Three tiers keep everyday use easy and put scrutiny where it matters: customer data and decisions about people.",
+    "shade": true,
+    "items": [
+     {
+      "k": "Low risk",
+      "t": "Drafting and brainstorming",
+      "n": "Approved tools. No further review."
+     },
+     {
+      "k": "Medium risk",
+      "t": "Internal documents and analysis",
+      "n": "Business data terms. A person reviews the output."
+     },
+     {
+      "k": "High risk",
+      "t": "Customer data, decisions about people",
+      "n": "Assessment before use, logging and a named owner."
+     }
+    ]
+   },
+   "zh": {
+    "title": "按风险匹配管控",
+    "caption": "三个层级让日常使用保持简单，把审查放在真正要紧的地方：客户数据和关于人的决定。",
+    "shade": true,
+    "items": [
+     {
+      "k": "低风险",
+      "t": "起草与头脑风暴",
+      "n": "使用批准的工具，无需进一步审查。"
+     },
+     {
+      "k": "中风险",
+      "t": "内部文件与分析",
+      "n": "企业数据条款，输出由人复核。"
+     },
+     {
+      "k": "高风险",
+      "t": "客户数据、关于人的决定",
+      "n": "使用前评估，保留日志，指定负责人。"
+     }
+    ]
+   }
+  }
+ },
+ "interfaces-for-uncertainty": {
+  "cover": "nodes",
+  "figure": {
+   "type": "compare",
+   "en": {
+    "title": "Carrying uncertainty in the interface",
+    "caption": "The model sounds equally sure when it is right and when it is wrong, so the interface has to show which is which.",
+    "cols": [
+     "Hide it",
+     "Show it"
+    ],
+    "rows": [
+     {
+      "k": "Where it came from",
+      "a": "A confident paragraph",
+      "b": "Each point linked to its source passage"
+     },
+     {
+      "k": "Confidence",
+      "a": "A score like '82%'",
+      "b": "Sorted into 'sure' and 'take a look'"
+     },
+     {
+      "k": "Unknowns",
+      "a": "A plausible guess",
+      "b": "An empty field marked 'couldn't find this'"
+     },
+     {
+      "k": "Consequential actions",
+      "a": "One 'Approve' button",
+      "b": "Draft shown, changes highlighted, easy to edit"
+     },
+     {
+      "k": "Corrections",
+      "a": "Disappear",
+      "b": "Captured and fed back as new cases"
+     }
+    ]
+   },
+   "zh": {
+    "title": "让界面承载不确定性",
+    "caption": "模型对的时候和错的时候听起来一样有把握，所以界面必须把两者区分出来。",
+    "cols": [
+     "藏起来",
+     "展示出来"
+    ],
+    "rows": [
+     {
+      "k": "答案从哪来",
+      "a": "一段自信的文字",
+      "b": "每一点都链接到来源段落"
+     },
+     {
+      "k": "置信度",
+      "a": "一个“82%”的分数",
+      "b": "分成“有把握”和“需要看一眼”"
+     },
+     {
+      "k": "不知道的",
+      "a": "一个看似合理的猜测",
+      "b": "空字段，标注“没找到”"
+     },
+     {
+      "k": "重要操作",
+      "a": "一个“批准”按钮",
+      "b": "展示草稿、高亮改动、易于编辑"
+     },
+     {
+      "k": "纠正",
+      "a": "消失无踪",
+      "b": "被记录下来，变成新用例"
+     }
+    ]
+   }
+  }
+ },
+ "frontend-framework-is-a-team": {
+  "cover": "orbit",
+  "figure": {
+   "type": "matrix",
+   "en": {
+    "title": "How much frontend do you need?",
+    "caption": "Most business websites sit on the left. Only the top right genuinely needs a full client-side application.",
+    "xLabel": "Interactivity",
+    "yLabel": "Personalised, live data",
+    "x": [
+     "Low",
+     "High"
+    ],
+    "y": [
+     "No",
+     "Yes"
+    ],
+    "hot": 2,
+    "q": [
+     {
+      "t": "Server-rendered app",
+      "n": "Portals and account pages. HTML from the server, light scripting."
+     },
+     {
+      "t": "Full client application",
+      "n": "Live dashboards, editors, complex tools."
+     },
+     {
+      "t": "Static site",
+      "n": "Content and marketing pages, pre-built and served from the edge."
+     },
+     {
+      "t": "Static with islands",
+      "n": "Mostly content, with a calculator or configurator where needed."
+     }
+    ]
+   },
+   "zh": {
+    "title": "你到底需要多少前端？",
+    "caption": "大多数企业网站落在左边。只有右上角真正需要一个完整的客户端应用。",
+    "xLabel": "交互程度",
+    "yLabel": "个性化、实时数据",
+    "x": [
+     "低",
+     "高"
+    ],
+    "y": [
+     "否",
+     "是"
+    ],
+    "hot": 2,
+    "q": [
+     {
+      "t": "服务端渲染应用",
+      "n": "门户和账户页面。服务端出 HTML，少量脚本。"
+     },
+     {
+      "t": "完整客户端应用",
+      "n": "实时看板、编辑器、复杂工具。"
+     },
+     {
+      "t": "静态网站",
+      "n": "内容和营销页面，预先构建，从边缘网络发出。"
+     },
+     {
+      "t": "静态加交互岛",
+      "n": "以内容为主，需要的地方加计算器或配置器。"
+     }
+    ]
+   }
+  }
+ },
+ "software-cheap-to-write": {
+  "cover": "halftone",
+  "figure": {
+   "type": "lists",
+   "en": {
+    "title": "What AI coding tools changed",
+    "caption": "Producing code got cheaper. Deciding what to build, checking it and running it for years did not — and that is where the value has moved.",
+    "good": 1,
+    "cols": [
+     {
+      "h": "Got cheaper",
+      "items": [
+       "First drafts and boilerplate",
+       "Understanding unfamiliar code",
+       "Routine changes and upgrades",
+       "Prototypes the same afternoon"
+      ]
+     },
+     {
+      "h": "Did not",
+      "items": [
+       "Knowing what to build",
+       "Reviewing and verifying",
+       "Running it for years",
+       "Untangling real-world data and rules"
+      ]
+     }
+    ]
+   },
+   "zh": {
+    "title": "AI 编程工具改变了什么",
+    "caption": "产出代码变便宜了。决定做什么、检验它、运行它很多年并没有——价值正是移到了这里。",
+    "good": 1,
+    "cols": [
+     {
+      "h": "变便宜了",
+      "items": [
+       "初稿和样板代码",
+       "理解陌生代码",
+       "常规改动和升级",
+       "当天下午就有原型"
+      ]
+     },
+     {
+      "h": "没有变便宜",
+      "items": [
+       "知道该做什么",
+       "评审与验证",
+       "把它运行很多年",
+       "理清真实世界的数据和规则"
+      ]
+     }
+    ]
+   }
+  }
+ }
+}

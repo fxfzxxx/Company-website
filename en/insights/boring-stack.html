@@ -16,7 +16,7 @@
 	<meta property="og:description" content="A relational database, server-rendered pages and one well-understood cloud. The most reliable systems we saw last year were built from parts nobody would put on a conference slide." />
 	<meta property="og:url" content="https://yondertech.co.nz/en/insights/boring-stack.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/boring-stack/cover.jpg" />
 	<meta property="og:locale" content="en_NZ" />
 	<meta property="og:locale:alternate" content="zh_CN" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/boring-stack/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>Every few years the industry rediscovers that the simplest architecture that could possibly work usually does. We are in one of those years. Across the systems we reviewed for clients in the last twelve months, the ones that were cheapest to run, easiest to hand over and quickest to change shared a family resemblance: they were boring.</p>
@@ -79,6 +83,10 @@
 					<h2>Why the pendulum swung back</h2>
 					<p>The last decade gave us an enormous toolkit for problems of scale: microservices, event streaming, polyglot persistence, client-side everything. These are real tools for real problems. The trouble is that most New Zealand businesses do not have those problems. A company with forty thousand customers and a dozen developers does not have a Netflix problem; it has a hiring problem, a handover problem and a budget problem.</p>
 					<p>Complexity has a running cost that rarely appears in the original business case. Every additional service is something to monitor, patch, secure and explain. Every additional data store is another place for records to disagree. When the team that built it moves on, the architecture diagram becomes an archaeological artefact.</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/boring-stack/figure-en.png" target="_blank" rel="noopener"><img src="../../assets/insights/boring-stack/figure-en.png" alt="Our default stack" loading="lazy" width="1600" height="936" /></a>
+						<figcaption>Every departure from this default has to be argued for in writing, with the cost of running it included.</figcaption>
+					</figure>
 					<h2>What boring buys you</h2>
 					<ul>
 						<li><strong>Fewer ways to fail.</strong> A monolith talking to one database has a handful of failure modes, all of them well documented. A distributed system has combinations.</li>
@@ -148,6 +156,10 @@
 		"headline": "The boring stack is winning, and that is good news",
 		"description": "A relational database, server-rendered pages and one well-understood cloud. The most reliable systems we saw last year were built from parts nobody would put on a conference slide.",
 		"datePublished": "2026-02-11",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/boring-stack/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/boring-stack/figure-en.png"
+		],
 		"inLanguage": "en-NZ",
 		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/boring-stack.html",
 		"author": {

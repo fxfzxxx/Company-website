@@ -16,7 +16,7 @@
 	<meta property="og:description" content="文档、搜索、队列、用于 AI 检索的向量——一个运行良好的 Postgres，如今就能覆盖过去需要四个产品才能完成的工作。再加一个数据库的理由，比以前少多了。" />
 	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/postgres-default.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/postgres-default/cover.jpg" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:locale:alternate" content="en_NZ" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/postgres-default/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>开始一个新系统时，数据库问题通常一句话就定了：用 Postgres，除非有具体理由不用。这句话一年比一年好写，因为“具体理由”的清单越来越短。</p>
@@ -85,6 +89,10 @@
 						<li><strong>队列与任务。</strong> 一张配合 <code>SKIP LOCKED</code> 的表，就是一个每分钟处理数千任务都游刃有余的任务队列，而且有一个巨大优势：入队这个动作，可以和触发它的数据变更处于同一个事务里。</li>
 						<li><strong>中等规模的时序与分析</strong>，借助分区和物化视图。</li>
 					</ul>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/postgres-default/figure-zh.png" target="_blank" rel="noopener"><img src="../../assets/insights/postgres-default/figure-zh.png" alt="一个 Postgres，六份工作" loading="lazy" width="1600" height="1008" /></a>
+						<figcaption>这些工作过去各需一个产品。放进一个运行良好的数据库，就省掉了数据副本、同步任务和第二套权限模型。</figcaption>
+					</figure>
 					<h2>为什么对 AI 工作更重要</h2>
 					<p>当检索成为 AI 功能的核心，选择 Postgres 的理由变得更充分了。单独的向量数据库意味着要把数据从记录系统里复制出去、让两个存储保持同步、在第二个存储里重新实现一遍权限控制。向量放在 Postgres 里，一条检索查询就能在按相似度排序的同时，按租户、权限和日期过滤。删除一个客户的数据，他的向量也一并删除。</p>
 					<p>在超大规模下——数亿向量、严苛的延迟目标——专用引擎也许值得它的运维成本。大多数企业离那条线还差好几个数量级。</p>
@@ -153,6 +161,10 @@
 		"headline": "Postgres 是默认数据库，也理应如此",
 		"description": "文档、搜索、队列、用于 AI 检索的向量——一个运行良好的 Postgres，如今就能覆盖过去需要四个产品才能完成的工作。再加一个数据库的理由，比以前少多了。",
 		"datePublished": "2026-04-29",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/postgres-default/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/postgres-default/figure-zh.png"
+		],
 		"inLanguage": "zh-Hans",
 		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/postgres-default.html",
 		"author": {

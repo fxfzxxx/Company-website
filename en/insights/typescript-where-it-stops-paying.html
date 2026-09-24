@@ -16,7 +16,7 @@
 	<meta property="og:description" content="Types across the whole stack have been one of the best trades in software this decade. But there is a point where the type system becomes the product, and the product suffers." />
 	<meta property="og:url" content="https://yondertech.co.nz/en/insights/typescript-where-it-stops-paying.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/typescript-where-it-stops-paying/cover.jpg" />
 	<meta property="og:locale" content="en_NZ" />
 	<meta property="og:locale:alternate" content="zh_CN" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/typescript-where-it-stops-paying/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>It is hard to overstate how much TypeScript has changed the day-to-day of building web software. On the projects we run, a shared type between the database layer, the API and the interface catches a whole category of bugs before they exist. Refactors that used to take a nervous week take an afternoon. New developers find their way around a codebase by following types rather than asking.</p>
@@ -82,6 +86,10 @@
 						<li><strong>In shared domain code.</strong> Money, dates, identifiers and statuses modelled as distinct types stop a customer ID being passed where an order ID was expected. These bugs are embarrassing, frequent and invisible to tests.</li>
 						<li><strong>During change.</strong> Types are a map of what will break. The larger and older the codebase, the more that map is worth.</li>
 					</ul>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/typescript-where-it-stops-paying/figure-en.png" target="_blank" rel="noopener"><img src="../../assets/insights/typescript-where-it-stops-paying/figure-en.png" alt="Strict at the edges, plain in the middle" loading="lazy" width="1600" height="730" /></a>
+						<figcaption>Types earn most at boundaries. Inside the application, simple named types that anyone can read beat clever ones.</figcaption>
+					</figure>
 					<h2>Where it stops paying</h2>
 					<p>The returns start to fall when the type system is asked to prove things the business does not need proven.</p>
 					<p>We regularly inherit codebases with generic utility types several screens long, conditional types that take the compiler seconds to resolve, and components whose props are so abstract that no one can read the error messages they produce. Each piece was clever. Together they make the code slower to change than the plain JavaScript it replaced — which was the opposite of the point.</p>
@@ -152,6 +160,10 @@
 		"headline": "TypeScript everywhere, and where it stops paying",
 		"description": "Types across the whole stack have been one of the best trades in software this decade. But there is a point where the type system becomes the product, and the product suffers.",
 		"datePublished": "2026-03-25",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/typescript-where-it-stops-paying/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/typescript-where-it-stops-paying/figure-en.png"
+		],
 		"inLanguage": "en-NZ",
 		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/typescript-where-it-stops-paying.html",
 		"author": {

@@ -16,7 +16,7 @@
 	<meta property="og:description" content="Most token files we inherit are a list of colours with clever names. The useful ones are agreements between design and engineering about what may change, and what must not." />
 	<meta property="og:url" content="https://yondertech.co.nz/en/insights/design-tokens-contract.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/design-tokens-contract/cover.jpg" />
 	<meta property="og:locale" content="en_NZ" />
 	<meta property="og:locale:alternate" content="zh_CN" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/design-tokens-contract/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>Design tokens arrived with a promise: define your colours, spacing and type once, and every product, platform and team will stay consistent. In practice, the token files we inherit on client projects tend to be one of two things. Either a flat list of every colour anyone ever used, each with a name like <code>blue-500-alt</code>, or an elaborate hierarchy so abstract that nobody can say which token to use for a table border.</p>
@@ -84,6 +88,10 @@
 						<li><strong>Component tokens</strong> describe exceptions: the one place a button needs a colour that is not in the semantic set. They should be rare, and each one should be a small embarrassment that prompts a question.</li>
 					</ul>
 					<p>The contract lives in the middle layer. Designers may change which primitive a semantic token points to — that is what a rebrand is. Engineers may rely on the semantic name never disappearing and never breaking its guarantee.</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/design-tokens-contract/figure-en.png" target="_blank" rel="noopener"><img src="../../assets/insights/design-tokens-contract/figure-en.png" alt="Three layers of tokens" loading="lazy" width="1600" height="771" /></a>
+						<figcaption>The contract lives in the middle layer: designers may re-point a semantic token, engineers may rely on its name and guarantee.</figcaption>
+					</figure>
 					<h2>Write the guarantees down</h2>
 					<p>A semantic token is only a contract if its guarantee is written somewhere a machine can check. For colour, that means contrast: every text token paired with the surfaces it may sit on, and a minimum ratio for each pair. For spacing, it means the scale is closed — no arbitrary values in components. For type, it means each role has a size, weight and line height that travel together.</p>
 					<p>We put these rules into the build. A pull request that pairs <code>text-muted</code> with <code>surface-sunken</code> below 4.5:1 fails, the same way a failing unit test would. That single check has prevented more accessibility regressions on our projects than any audit.</p>
@@ -149,6 +157,10 @@
 		"headline": "Design tokens are a contract, not a palette",
 		"description": "Most token files we inherit are a list of colours with clever names. The useful ones are agreements between design and engineering about what may change, and what must not.",
 		"datePublished": "2026-02-18",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/design-tokens-contract/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/design-tokens-contract/figure-en.png"
+		],
 		"inLanguage": "en-NZ",
 		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/design-tokens-contract.html",
 		"author": {

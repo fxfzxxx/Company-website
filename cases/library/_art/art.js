@@ -1501,5 +1501,7 @@
 		pieces[entry.piece](ctx, entry.w, entry.h, mulberry(hash(entry.piece)));
 	};
 
-	window.CASE_ART = { manifest, paint, pieces };
+	/* editorial, mulberry and hash are also used by tools/render-insight-figures.mjs
+	   for the Insights covers. */
+	window.CASE_ART = { manifest, paint, pieces, editorial, mulberry, hash };
 })();

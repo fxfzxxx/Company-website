@@ -16,7 +16,7 @@
 	<meta property="og:description" content="想知道软件在生产环境里在干什么，并不需要一个平台团队。四个信号、一块看板、一条关于告警的规则，就能覆盖小团队的大部分需求。" />
 	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/observability-teams-of-five.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/observability-teams-of-five/cover.jpg" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:locale:alternate" content="en_NZ" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/observability-teams-of-five/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>可观测性行业是为大型工程组织打造的：横跨数百个服务的分布式追踪、以 PB 计的日志、专门运营这一切的团队。小团队看着那个世界，认定那与自己无关，结果什么都没有——直到客户打电话来说网站从中午起就打不开了。</p>
@@ -85,6 +89,10 @@
 						<li><strong>饱和度。</strong> 最繁忙的资源离上限还有多远：数据库连接、内存、磁盘、队列深度。</li>
 					</ul>
 					<p>这四个信号有时被称为“黄金信号”，它们回答任何事故中的第一个问题：是不是坏了、对谁坏了、从什么时候开始。</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/observability-teams-of-five/figure-zh.png" target="_blank" rel="noopener"><img src="../../assets/insights/observability-teams-of-five/figure-zh.png" alt="每个服务的四个信号" loading="lazy" width="1600" height="651" /></a>
+						<figcaption>把每个服务的四个信号放在同一块屏幕上。有人说网站有点慢时，团队打开的就是它。</figcaption>
+					</figure>
 					<h2>能回答问题的日志</h2>
 					<p>大多数小团队的日志，是写给写这段代码的开发者自己看的非结构化文本。把它们结构化——每个事件一个 JSON 对象，带着一致的字段，比如请求 ID、用户或租户、路由和耗时。把它们发到同一个地方，保留期限根据需求和预算来定。出问题时，你应该能通过一次搜索，找到某个失败请求的全部日志。</p>
 					<p>当请求跨越超过两三个服务时，就值得加上链路追踪。OpenTelemetry 这样的开放标准意味着，你现在加的埋点，将来换任何工具都能继续用。</p>
@@ -151,6 +159,10 @@
 		"headline": "五人团队的可观测性",
 		"description": "想知道软件在生产环境里在干什么，并不需要一个平台团队。四个信号、一块看板、一条关于告警的规则，就能覆盖小团队的大部分需求。",
 		"datePublished": "2026-07-08",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/observability-teams-of-five/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/observability-teams-of-five/figure-zh.png"
+		],
 		"inLanguage": "zh-Hans",
 		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/observability-teams-of-five.html",
 		"author": {

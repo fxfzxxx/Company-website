@@ -16,7 +16,7 @@
 	<meta property="og:description" content="全栈类型化是这十年软件行业最划算的交易之一。但到了某个点，类型系统本身变成了产品，而真正的产品开始受损。" />
 	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/typescript-where-it-stops-paying.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/typescript-where-it-stops-paying/cover.jpg" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:locale:alternate" content="en_NZ" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/typescript-where-it-stops-paying/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>TypeScript 对 Web 软件日常开发的改变之大，怎么说都不为过。在我们的项目里，从数据库层、API 到界面共享同一套类型，能在一整类 bug 出现之前就把它们挡住。过去要提心吊胆一周的重构，现在一个下午完成。新同事顺着类型就能摸清代码库，而不必四处问人。</p>
@@ -82,6 +86,10 @@
 						<li><strong>在共享的领域代码里。</strong> 把金额、日期、标识符和状态建模为不同的类型，就不会在需要订单 ID 的地方传进客户 ID。这类 bug 令人尴尬、频繁出现，而且测试看不见。</li>
 						<li><strong>在变更时。</strong> 类型是一张“哪里会坏”的地图。代码库越大、越老，这张地图越值钱。</li>
 					</ul>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/typescript-where-it-stops-paying/figure-zh.png" target="_blank" rel="noopener"><img src="../../assets/insights/typescript-where-it-stops-paying/figure-zh.png" alt="边缘严格，中间朴素" loading="lazy" width="1600" height="629" /></a>
+						<figcaption>类型在边界处回报最高。应用内部，人人读得懂的简单命名类型胜过巧妙的类型。</figcaption>
+					</figure>
 					<h2>它在哪里不再划算</h2>
 					<p>当类型系统被要求证明业务并不需要证明的东西时，回报就开始下降。</p>
 					<p>我们经常接手这样的代码库：泛型工具类型长达好几屏；条件类型让编译器要花好几秒才能解析；组件的 props 抽象到没人能读懂它们产生的报错。每一块单看都很巧妙，合在一起却让代码比它替代的纯 JavaScript 更难改——这恰恰违背了初衷。</p>
@@ -152,6 +160,10 @@
 		"headline": "处处 TypeScript，以及它在哪里不再划算",
 		"description": "全栈类型化是这十年软件行业最划算的交易之一。但到了某个点，类型系统本身变成了产品，而真正的产品开始受损。",
 		"datePublished": "2026-03-25",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/typescript-where-it-stops-paying/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/typescript-where-it-stops-paying/figure-zh.png"
+		],
 		"inLanguage": "zh-Hans",
 		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/typescript-where-it-stops-paying.html",
 		"author": {
