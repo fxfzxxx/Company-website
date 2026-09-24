@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Test and tag, end to end. An offline-first phone app for the technician, a console for the office, and one API behind both — designed and built by Yonder Tech." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/testandtag/project.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#f3f2f2" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Test &amp; Tag · Case study" />
+	<meta property="og:description" content="Test and tag, end to end. An offline-first phone app for the technician, a console for the office, and one API behind both — designed and built by Yonder Tech." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/testandtag/project.html" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/testandtag/assets/hero.jpg" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<title>Test &amp; Tag · Case study</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&display=swap" />
+	<link rel="stylesheet" href="../_shared/base.css" />
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="study">
+	<header class="cs-bar">
+		<strong>Test &amp; Tag</strong>
+		<nav aria-label="Case">
+			<a href="index.html">Showcase</a>
+			<a href="project.html" aria-current="page">Case study</a>
+			<a href="../../../en/cases/index.html" target="_top">Case library</a>
+		</nav>
+	</header>
+
+	<main class="wrap">
+		<header class="cs-head">
+			<p class="cs-kicker">01 — Field-service product</p>
+			<h1 class="cs-title">Test and tag, end to end.</h1>
+			<p class="cs-lede">An offline-first phone app for the technician, a console for the office, and one API behind both — designed and built by Yonder Tech.</p>
+		</header>
+
+		<figure class="cs-shot" data-reveal>
+			<img src="assets/hero.jpg" width="2000" height="1333" alt="The Test &amp; Tag product showcase." />
+		</figure>
+
+		<dl class="cs-facts">
+			<div><dt>Type</dt><dd>Product · designed and built in-house</dd></div>
+			<div><dt>Platforms</dt><dd>iOS · Android · Web</dd></div>
+			<div><dt>Stack</dt><dd>Expo / React Native · React · Fastify · Prisma</dd></div>
+			<div><dt>Scale</dt><dd>3 apps · 54 API endpoints</dd></div>
+		</dl>
+
+		<section class="cs-section" data-reveal>
+			<h2><span>01</span>The brief</h2>
+			<div>
+				<p>Electrical test and tag is compliance work: every appliance on a site is tested, tagged and recorded, and the client needs a report they can stand behind. In practice it runs on clipboards, a spreadsheet the client keeps by hand, and whatever the technician remembers from last time.</p>
+				<p>The brief was one system from the plant room to the report: an app a technician can use one-handed with no signal, a console the office can run the business from, and records that mean exactly the same thing in both.</p>
+			</div>
+		</section>
+
+		<section class="cs-section" data-reveal>
+			<h2><span>02</span>Design decisions</h2>
+			<ol class="cs-decisions">
+				<li>A shared package holds the domain — ID-range expansion, run collapsing, area grouping, retest arithmetic, the Excel parser and the design tokens — so the phone, the console and the server cannot disagree about what a record means.</li>
+				<li>The phone is offline first. Records and failure photos queue on the device and sync when there is signal; syncing the same records twice is harmless, and a failure cannot be saved without a reason and a photo.</li>
+				<li>Nothing is imported blind. A client’s register is parsed and shown first — areas inferred from blank cells, verdicts read from free-text comments — and only then committed as the asset register, the last inspection and the next job.</li>
+			</ol>
+		</section>
+
+		<section class="cs-section" data-reveal>
+			<h2><span>03</span>Outcome</h2>
+			<div><p>Shipped as an Expo app for iOS, Android and the web, an installable React console and a Fastify + Prisma API that issues archived PDF reports. Postgres runs in production and the same schema on SQLite in development; 190 tests pass, including one that runs the whole business through HTTP.</p></div>
+		</section>
+
+		<div class="cs-specs" data-stagger>
+			<div><strong>190</strong><span>Tests passing</span><small>Domain, app and a full workflow run.</small></div>
+			<div><strong>54</strong><span>API endpoints</span><small>One API for the phone and the console.</small></div>
+			<div><strong>3</strong><span>Platforms</span><small>iOS, Android and web from one codebase.</small></div>
+		</div>
+
+		<p class="cs-note">A product designed and built by Yonder Tech. Screens show demonstration data; figures describe the software itself.</p>
+
+		<section class="cs-end" data-reveal>
+			<h2>See it working, not described.</h2>
+			<a href="index.html">Open the product showcase <span aria-hidden="true">→</span></a>
+		</section>
+
+		<footer class="cs-foot">
+			<span>Designed by <a href="../../../en/index.html" target="_top">Yonder Tech</a> · 2026</span>
+			<span>Next: <a href="../luna-bloom/project.html">Luna Bloom</a></span>
+		</footer>
+	</main>
+	<script src="../_shared/concept.js"></script>
+</body>
+</html>

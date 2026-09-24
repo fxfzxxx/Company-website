@@ -55,7 +55,7 @@ ${body.decisions
 							<div class="yt-panel-actions">
 								<a class="yt-btn-solid hv6" href="${esc(c.slug)}.html">${esc(t.openCase)}</a>
 								<a class="yt-link-accent" href="${root}cases/library/${esc(c.slug)}/index.html" data-no-spa
-									target="_blank" rel="noopener">${esc(t.openLive)}</a>
+									target="_blank" rel="noopener">${esc(body.openLive ?? t.openLive)}</a>
 							</div>
 						</div>
 					</div>

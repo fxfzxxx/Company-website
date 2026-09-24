@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="robots" content="noindex" />
+	<title>Test &amp; Tag — still</title>
+	<!-- The case library still: console and phones together. Rendered by
+	     tools/render-case-stills.mjs in place of index.html. -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&display=swap" />
+	<style>
+		html, body { margin: 0; height: 100%; }
+		body { background: #201e1d; overflow: hidden; font-family: Archivo, sans-serif; position: relative; }
+		.mark { position: absolute; left: 5.5%; top: 7%; color: #f8f4f4; font-weight: 800; letter-spacing: 0.2em; font-size: 2.1vw; display: flex; align-items: center; gap: 0.7vw; }
+		.mark i { width: 1.1vw; height: 1.1vw; background: #ec3013; display: inline-block; }
+		.tag { position: absolute; left: 5.5%; top: 13%; color: rgba(248, 244, 244, 0.6); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.95vw; }
+		.console { position: absolute; left: 5.5%; top: 22%; width: 58%; border: 3px solid #f8f4f4; background: #f8f4f4; }
+		.console .bar { height: 1.8vw; background: #2d2a29; display: flex; align-items: center; gap: 0.5vw; padding: 0 0.9vw; }
+		.console .bar i { width: 0.6vw; height: 0.6vw; border-radius: 50%; background: rgba(248, 244, 244, 0.3); }
+		.console img { display: block; width: 100%; height: 34vw; object-fit: cover; object-position: top; }
+		.phone { position: absolute; width: 17%; border: 0.55vw solid #0d0c0c; border-radius: 2.4vw; overflow: hidden; background: #0d0c0c; box-shadow: 0 2vw 4vw rgba(0, 0, 0, 0.55); }
+		.phone img { display: block; width: 100%; border-radius: 1.8vw; }
+		.p1 { left: 50%; top: 16%; z-index: 2; }
+		.p2 { left: 64%; top: 9%; z-index: 3; }
+		.p3 { left: 77.5%; top: 19%; z-index: 1; }
+		.rule { position: absolute; left: 5.5%; right: 5.5%; bottom: 6%; height: 3px; background: #ec3013; width: 12%; }
+	</style>
+</head>
+<body>
+	<div class="mark">Test&amp;Tag <i></i></div>
+	<div class="tag">Field app · Console · API</div>
+	<div class="console"><div class="bar"><i></i><i></i><i></i></div><img src="assets/shots/console-job.jpg" alt="" /></div>
+	<div class="phone p1"><img src="assets/shots/phone-today.jpg" alt="" /></div>
+	<div class="phone p2"><img src="assets/shots/phone-tag.jpg" alt="" /></div>
+	<div class="phone p3"><img src="assets/shots/phone-fail.jpg" alt="" /></div>
+	<div class="rule"></div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Test & Tag: an offline-first React Native app for electrical test-and-tag technicians, an admin console and one API behind both — a product built by Yonder Tech." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/testandtag/index.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#f3f2f2" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Test & Tag — field app, console and API" />
+	<meta property="og:description" content="Electrical test-and-tag, end to end: an offline-first phone app, an admin console and one API behind both." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/testandtag/index.html" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/testandtag/assets/hero.jpg" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<title>Test &amp; Tag — a product by Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&display=swap" />
+	<link rel="stylesheet" href="../_shared/base.css" />
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+	<header class="bar" data-header>
+		<div class="wrap bar-inner">
+			<a class="mark" href="#top">Test&amp;Tag <i aria-hidden="true"></i></a>
+			<nav aria-label="Sections">
+				<a href="#field">Field app</a>
+				<a href="#console">Console</a>
+				<a href="#import">Import</a>
+				<a href="#build">How it’s built</a>
+				<a href="project.html">Case study</a>
+			</nav>
+			<span class="by caps">A Yonder Tech product</span>
+		</div>
+	</header>
+
+	<main id="top">
+		<section class="hero">
+			<div class="wrap hero-grid">
+				<div class="hero-copy" data-stagger>
+					<p class="caps accent">Shipped product · iOS, Android, web</p>
+					<h1>Test and tag, end to end.</h1>
+					<p class="lede">An offline-first phone app the technician carries round a site, an admin console the office runs the business from, and one API behind both. Every tag, failure and photo ends up in a report a client can rely on.</p>
+					<div class="actions">
+						<a class="btn btn-accent" href="#field">See the field app</a>
+						<a class="btn btn-line" href="project.html">Read the case study</a>
+					</div>
+				</div>
+				<div class="hero-phones" data-reveal>
+					<figure class="phone p-back"><img src="assets/shots/phone-today.jpg" width="786" height="1703" alt="Today's tasks on the phone: one site assigned, 0 of 10 tagged." /></figure>
+					<figure class="phone p-front"><img src="assets/shots/phone-tag.jpg" width="786" height="1703" alt="The Tag screen: asset ID range readout, item chips, quantity, location, and Pass and Fail actions." /></figure>
+					<figure class="phone p-side"><img src="assets/shots/phone-fail.jpg" width="786" height="1703" alt="Recording a failure: reason, required photo and a note." /></figure>
+				</div>
+			</div>
+			<div class="wrap">
+				<dl class="readout" data-stagger>
+					<div><dt class="caps">Apps</dt><dd>3</dd><span>Phone, console, API</span></div>
+					<div><dt class="caps">Shared domain package</dt><dd>1</dd><span>So they can’t disagree</span></div>
+					<div><dt class="caps">API endpoints</dt><dd>54</dd><span>Fastify + Prisma</span></div>
+					<div><dt class="caps">Tests passing</dt><dd>190</dd><span>Domain, app and a full workflow run</span></div>
+				</dl>
+			</div>
+		</section>
+
+		<section class="field" id="field">
+			<div class="wrap">
+				<div class="head" data-reveal>
+					<p class="caps accent">01 — The field app</p>
+					<h2>Built for a technician with a tester in one hand.</h2>
+					<p class="sub">Expo and React Native, one codebase for iOS, Android and the web. Big targets, hold-to-confirm on anything that commits, and a dark instrument readout that stays legible in a plant room.</p>
+				</div>
+			</div>
+			<ol class="screens" data-stagger>
+				<li><img src="assets/shots/phone-signin.jpg" width="786" height="1703" alt="Sign in with technician code and a four-digit PIN." loading="lazy" /><h3><span>01</span>Sign in with a PIN</h3><p>Technician code and four digits. Anything already on the device stays queued while signed out.</p></li>
+				<li><img src="assets/shots/phone-today.jpg" width="786" height="1703" alt="" loading="lazy" /><h3><span>02</span>Today’s sites</h3><p>Only published jobs reach the phone — publishing is a separate, deliberate act in the console.</p></li>
+				<li><img src="assets/shots/phone-job.jpg" width="786" height="1703" alt="" loading="lazy" /><h3><span>03</span>The job brief</h3><p>Window, contact, floor plan and the previous work at this address, before a single tag is written.</p></li>
+				<li><img src="assets/shots/phone-tag.jpg" width="786" height="1703" alt="" loading="lazy" /><h3><span>04</span>Tag in ranges</h3><p>A barcode range, an item, a room. Ten identical leads are one action, not ten.</p></li>
+				<li><img src="assets/shots/phone-fail.jpg" width="786" height="1703" alt="" loading="lazy" /><h3><span>05</span>Fail with evidence</h3><p>A reason and a photo are required, so every failure in a report can be shown, not just stated.</p></li>
+				<li><img src="assets/shots/phone-records.jpg" width="786" height="1703" alt="" loading="lazy" /><h3><span>06</span>Records by room</h3><p>The day grouped by area, runs collapsed, failures and photos marked at a glance.</p></li>
+				<li><img src="assets/shots/phone-sync.jpg" width="786" height="1703" alt="" loading="lazy" /><h3><span>07</span>Sync when there’s signal</h3><p>Records and photos wait on the device. Syncing twice is harmless; nothing is lost if the app closes.</p></li>
+			</ol>
+		</section>
+
+		<section class="console" id="console" data-tabs>
+			<div class="wrap">
+				<div class="head" data-reveal>
+					<p class="caps accent">02 — The office console</p>
+					<h2>The business, run from one screen.</h2>
+					<p class="sub">Vite and React, installable as a PWA. Schedule and publish jobs, import client registers, watch records arrive, and issue reports that are archived rather than regenerated.</p>
+				</div>
+				<div class="tabs" role="tablist" aria-label="Console screens">
+					<button role="tab" data-tab="overview" aria-selected="true">Overview</button>
+					<button role="tab" data-tab="job">Job detail</button>
+					<button role="tab" data-tab="site">Site register</button>
+					<button role="tab" data-tab="import">Import</button>
+				</div>
+				<figure class="browser" data-panel="overview"><div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>admin.testandtag</span></div><img src="assets/shots/console-overview.jpg" width="1440" height="900" alt="Console overview: scheduled today, under way, unpublished drafts, sites overdue, today's jobs and recent imports." loading="lazy" /><figcaption>What needs doing today: jobs under way, drafts not yet published, and sites that are overdue for a retest.</figcaption></figure>
+				<figure class="browser" data-panel="job" hidden><div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>admin.testandtag</span></div><img src="assets/shots/console-job.jpg" width="1440" height="1404" alt="A completed job: 10 of 10 tagged, one failure for a damaged plug, with every record listed." loading="lazy" /><figcaption>A job as it syncs in: every record with its area, result, technician and time — and the one failure with its reason.</figcaption></figure>
+				<figure class="browser" data-panel="site" hidden><div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>admin.testandtag</span></div><img src="assets/shots/console-site.jpg" width="1440" height="1053" alt="A site register: assets, failures, visits and next due dates." loading="lazy" /><figcaption>The site register: every asset, its last result and when it is next due.</figcaption></figure>
+				<figure class="browser" data-panel="import" hidden><div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>admin.testandtag</span></div><img src="assets/shots/console-import.jpg" width="1440" height="560" alt="Import: drop the client's .xlsx; nothing is saved until you have seen the parse." loading="lazy" /><figcaption>Nothing is written until someone has looked at the parse and said what it means.</figcaption></figure>
+			</div>
+		</section>
+
+		<section class="import" id="import">
+			<div class="wrap import-grid">
+				<div data-reveal>
+					<p class="caps accent">03 — Registers as they really are</p>
+					<h2>A parser built for the spreadsheet clients actually send.</h2>
+					<p class="sub">Client registers are kept by hand. Reading them literally loses most of the information, so the import reads them the way a person would — and one sheet becomes the asset register, the last inspection and the next visit at once.</p>
+				</div>
+				<ul class="quirks" data-stagger>
+					<li><b class="caps">Header block</b>The table starts several rows down, under a heading block.</li>
+					<li><b class="caps">Blank means “same”</b>The Location column is only filled in when the area changes; a blank means the room above.</li>
+					<li><b class="caps">No pass/fail column</b>The verdict is prose in Comments — “Fail - Cracked case” — and a blank comment means it passed.</li>
+					<li><b class="caps">Merged headings</b>Headings are merged across the table, so a naive reader sees the site name once per column.</li>
+					<li><b class="caps">Two dates, one line</b>“Checked date … Recheck date …” sits in a single cell.</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="build" id="build">
+			<div class="wrap">
+				<div class="head" data-reveal>
+					<p class="caps accent">04 — How it’s built</p>
+					<h2>One monorepo, one domain, three front doors.</h2>
+					<p class="sub">ID-range expansion, run collapsing, area grouping, retest arithmetic and the Excel parser all live in one shared package — down to the colour palette — so the phone, the console and the server cannot disagree about what a record means.</p>
+				</div>
+				<div class="arch" data-reveal>
+					<div class="node"><span class="caps">apps/mobile</span><strong>Field app</strong><em>Expo · React Native · offline queue</em></div>
+					<div class="node"><span class="caps">apps/admin</span><strong>Console</strong><em>Vite · React · installable PWA</em></div>
+					<div class="node node-dark"><span class="caps">apps/api</span><strong>One API</strong><em>Fastify · Prisma · PDF reports</em></div>
+					<div class="node node-accent"><span class="caps">packages/shared</span><strong>Shared domain</strong><em>Types · tag logic · register parser · design tokens</em></div>
+					<div class="store"><span class="caps">Data</span>Postgres in production, the same schema on SQLite for development and tests</div>
+					<div class="store"><span class="caps">Hosting</span>Console on Netlify · API in a container on Fly or Railway, with a volume for photos and issued reports</div>
+				</div>
+				<ul class="facts" data-stagger>
+					<li><strong>190</strong><span>tests passing, including one that drives the whole business through HTTP — sign in, import, publish, sync twice, report.</span></li>
+					<li><strong>1</strong><span>schema on two databases, so nobody needs a database server to work on it.</span></li>
+					<li><strong>3</strong><span>platforms from one React Native codebase: iOS, Android and the web.</span></li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="end">
+			<div class="wrap end-inner" data-reveal>
+				<h2>Need something like this for your field team?</h2>
+				<div class="actions">
+					<a class="btn btn-accent" href="../../../en/index.html#contact" target="_top">Talk to Yonder Tech</a>
+					<a class="btn btn-line-light" href="project.html">Read the case study</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="foot">
+		<div class="wrap foot-inner">
+			<span class="mark">Test&amp;Tag <i aria-hidden="true"></i></span>
+			<span>Designed and built by <a href="../../../en/index.html" target="_top">Yonder Tech</a>. Screens show demonstration data.</span>
+		</div>
+	</footer>
+	<script src="../_shared/concept.js"></script>
+</body>
+</html>
