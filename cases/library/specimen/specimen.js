@@ -29,17 +29,20 @@ import { makeNoise3D, mulberry32, fbm, ridged } from "../../../assets/lib/noise.
 const DEG = Math.PI / 180;
 
 /* — pulse ——————————————————————————————————————————————————————
-   A rhythm that never repeats: three sines at frequencies with no common
-   period, so no two swells crest at the same height or fall to the same
-   depth. Crests are sharpened and troughs kept shallow, which reads as a
-   breath drawn in and let go rather than a metronome. Returns about -1..1. */
+   A rhythm that never repeats: sines at frequencies with no common period,
+   so no two swells crest at the same height or fall to the same depth, and
+   a faster, smaller one on top for flutter between the big beats. Crests
+   are sharpened and pushed past 1, troughs kept shallower, which reads as
+   a breath drawn in hard and let go rather than a metronome. Returns about
+   -0.8..1.6. */
 
 function pulse(time, seed) {
 	const s =
-		0.55 * Math.sin(time * 0.83 + seed * 1.7) +
+		0.5 * Math.sin(time * 0.83 + seed * 1.7) +
 		0.3 * Math.sin(time * 1.41 + seed * 4.3) +
-		0.25 * Math.sin(time * 0.37 + seed * 2.9);
-	return s > 0 ? Math.pow(s / 1.1, 1.4) * 1.1 : s * 0.6;
+		0.22 * Math.sin(time * 0.37 + seed * 2.9) +
+		0.14 * Math.sin(time * 3.1 + seed * 0.7);
+	return s > 0 ? Math.pow(s / 1.16, 1.7) * 1.6 : s * 0.7;
 }
 /* — art direction ——————————————————————————————————————————————
    Everything an art director would want to reach for. Seeds are stable: the
@@ -75,6 +78,11 @@ export const DEFAULTS = {
 	rings: { count: 5, inner: 1.45, outer: 2.5, tube: 0.0052 },
 	/* flare is the share of motes that get a cross-shaped glint */
 	motes: { count: 220, spread: 2.6, size: 1.15, brightness: 1.6, flare: 0.18 },
+	/* Shallow depth of field, focused on the body. Everything nearer than
+	   focus (in shell radii in front of the centre) stays sharp; behind it
+	   the blur grows over range units to blur, a fraction of the frame
+	   height. */
+	focus: { at: 0.35, range: 2.0, blur: 0.017 },
 
 	/* drag: 1 moves the body's surface exactly with the pointer. damping is
 	   per 60th of a second once it is let go; pitch is the most it will tip.
@@ -86,9 +94,9 @@ export const DEFAULTS = {
 		drag: 0.8,
 		damping: 0.94,
 		pitch: 0.6,
-		breath: 0.045,
-		lobes: 0.11,
-		rhythm: 1,
+		breath: 0.09,
+		lobes: 0.24,
+		rhythm: 2.6,
 	},
 
 	camera: { fov: 30, distance: 8.0 },
@@ -267,6 +275,89 @@ const GradeShader = {
 		}
 	`,
 };
+
+/* — focus ——————————————————————————————————————————————————————
+   Depth of field from the scene's own depth buffer, straight after the
+   render so bloom and grade work on the result. Each pixel gathers a disc
+   of neighbours as wide as its own blur; a neighbour only counts if its
+   blur also reaches this far, which keeps the out-of-focus background from
+   smearing over the sharp edge of the body in front of it. */
+
+const FocusShader = {
+	defines: { TAPS: 48 },
+	uniforms: {
+		tDiffuse: { value: null },
+		tDepth: { value: null },
+		uNear: { value: 0.1 },
+		uFar: { value: 60 },
+		uFocus: { value: 7 },
+		uRange: { value: 2.4 },
+		uMaxBlur: { value: 8 },
+		uTexel: { value: new THREE.Vector2() },
+	},
+	vertexShader: /* glsl */ `
+		varying vec2 vUv;
+		void main() {
+			vUv = uv;
+			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+		}
+	`,
+	fragmentShader: /* glsl */ `
+		#include <packing>
+		uniform sampler2D tDiffuse;
+		uniform sampler2D tDepth;
+		uniform float uNear;
+		uniform float uFar;
+		uniform float uFocus;
+		uniform float uRange;
+		uniform float uMaxBlur;
+		uniform vec2 uTexel;
+		varying vec2 vUv;
+
+		float blurAt( vec2 uv ) {
+			float distance = -perspectiveDepthToViewZ( texture2D( tDepth, uv ).x, uNear, uFar );
+			return clamp( ( distance - uFocus ) / uRange, 0.0, 1.0 ) * uMaxBlur;
+		}
+
+		/* the spiral is turned by a different angle at every pixel, so its
+		   taps read as fine noise (which the grain then hides) instead of a
+		   dotted pattern inside each out-of-focus highlight */
+		float hash( vec2 p ) {
+			p = fract( p * vec2( 443.8975, 397.2973 ) );
+			p += dot( p, p.yx + 19.19 );
+			return fract( ( p.x + p.y ) * p.x );
+		}
+
+		void main() {
+			vec4 centre = texture2D( tDiffuse, vUv );
+			float own = blurAt( vUv );
+			if ( own < 0.5 ) {
+				gl_FragColor = centre;
+				return;
+			}
+			vec3 sum = centre.rgb;
+			float weight = 1.0;
+			float turn = hash( gl_FragCoord.xy ) * 6.2831853;
+			for ( int i = 0; i < TAPS; i++ ) {
+				float t = ( float( i ) + 0.5 ) / float( TAPS );
+				float radius = sqrt( t ) * own;
+				float angle = float( i ) * 2.39996323 + turn;
+				vec2 uv = vUv + vec2( cos( angle ), sin( angle ) ) * radius * uTexel;
+				float reach = smoothstep( radius - 1.0, radius + 1.0, blurAt( uv ) );
+				sum += texture2D( tDiffuse, uv ).rgb * reach;
+				weight += reach;
+			}
+			gl_FragColor = vec4( sum / weight, centre.a );
+		}
+	`,
+};
+
+class FocusPass extends ShaderPass {
+	render(renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
+		this.uniforms.tDepth.value = readBuffer.depthTexture;
+		super.render(renderer, writeBuffer, readBuffer, deltaTime, maskActive);
+	}
+}
 
 /* — assembly ———————————————————————————————————————————————————— */
 
@@ -580,8 +671,17 @@ export function createSpecimen(container, overrides = {}) {
 	scene.add(motes);
 
 	/* — post chain ———————————————————————————————————————————— */
-	const composer = new EffectComposer(renderer);
+	/* The composer's own buffers carry a depth texture, so the focus pass
+	   reads the depth of exactly the frame it is blurring. */
+	const sceneTarget = new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType });
+	sceneTarget.depthTexture = new THREE.DepthTexture(1, 1);
+	const composer = new EffectComposer(renderer, sceneTarget);
 	composer.addPass(new RenderPass(scene, camera));
+	const focus = new FocusPass(FocusShader);
+	if (compact) focus.material.defines.TAPS = 24;
+	focus.uniforms.uNear.value = camera.near;
+	focus.uniforms.uFar.value = camera.far;
+	composer.addPass(focus);
 	const bloom = new UnrealBloomPass(
 		new THREE.Vector2(1, 1),
 		config.post.bloom,
@@ -672,9 +772,21 @@ export function createSpecimen(container, overrides = {}) {
 		renderer.setSize(width, height, false);
 		composer.setSize(width, height);
 		bloom.setSize(width, height);
+		/* keep each buffer's depth texture the size of its colour */
+		for (const target of [composer.renderTarget1, composer.renderTarget2]) {
+			const { width: w, height: h } = target;
+			if (target.depthTexture && (target.depthTexture.image.width !== w || target.depthTexture.image.height !== h)) {
+				target.depthTexture.dispose();
+				target.depthTexture = new THREE.DepthTexture(w, h);
+			}
+		}
+		const pixels = height * renderer.getPixelRatio();
+		focus.uniforms.uTexel.value.set(1 / (width * renderer.getPixelRatio()), 1 / pixels);
+
 		/* point sprites are sized in device pixels */
-		moteUniforms.uScale.value =
-			(height * renderer.getPixelRatio() * config.motes.size) / (2 * Math.tan((camera.fov * DEG) / 2));
+		const pixelsPerUnit = (height * renderer.getPixelRatio()) / (2 * Math.tan((camera.fov * DEG) / 2));
+		moteUniforms.uScale.value = pixelsPerUnit * config.motes.size;
+
 	};
 	const observer = new ResizeObserver(resize);
 	observer.observe(container);
@@ -717,9 +829,10 @@ export function createSpecimen(container, overrides = {}) {
 				breathUniforms.uLobePulse.value[i] =
 					pulse(beat * (0.8 + (i % 3) * 0.17), i + 1) * config.motion.lobes * config.shell.radius;
 			});
-			/* the core follows the body's breath, lagging and smaller, so the
-			   glass visibly moves around it */
-			coreGroup.scale.setScalar(1 + pulse(beat - 0.35, 0) * config.motion.breath * 0.45);
+			/* the core follows the body's breath, a beat late and a little
+			   smaller, so the glass visibly moves around it without the
+			   stone breaking through at the bottom of a trough */
+			coreGroup.scale.setScalar(1 + pulse(beat - 0.12, 0) * config.motion.breath * 0.8);
 			moteUniforms.uTime.value = time;
 
 			for (const ring of rings) {
@@ -731,6 +844,10 @@ export function createSpecimen(container, overrides = {}) {
 			grade.uniforms.uTime.value = time;
 		}
 
+		/* focus follows the camera, which pulls back on portrait screens */
+		focus.uniforms.uFocus.value = camera.position.z - config.shell.radius * config.focus.at;
+		focus.uniforms.uRange.value = config.focus.range;
+		focus.uniforms.uMaxBlur.value = renderer.domElement.height * config.focus.blur;
 		composer.render();
 	};
 	tick();
@@ -754,7 +871,7 @@ export function createSpecimen(container, overrides = {}) {
 		camera,
 		specimen,
 		materials: { glass, ring: ringMaterial, core: core.material },
-		post: { bloom, grade },
+		post: { bloom, grade, focus },
 		motion: config.motion,
 		motes: moteUniforms,
 		dispose() {
