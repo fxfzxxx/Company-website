@@ -159,7 +159,7 @@ ${footer(ctx)}
 						background: 0x05070d,
 						stars: true,
 						starField: { brightness: 3, size: 1.6 },
-						offset: { x: 0.16, minWidth: 861 },
+						offset: { x: 0.2, minWidth: 861 },
 						arcs: 26,
 						spin: 0.036,
 						mapSize: 1024,

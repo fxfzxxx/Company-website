@@ -161,10 +161,12 @@ button {
 	overflow: hidden;
 }
 
+/* The canvas spans the whole band, so it has no edge to show against the
+   band's own background; the globe is placed right of centre by the camera
+   (offset in the page script), not by the box. */
 .yt-hero-globe {
 	position: absolute;
-	inset: 0 0 0 auto;
-	width: min(96vw, 1180px);
+	inset: 0;
 	z-index: -2;
 	/* Until the module has drawn, the band is simply a dark field. */
 	opacity: 0;
