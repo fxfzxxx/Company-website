@@ -16,7 +16,7 @@
 	<meta property="og:description" content="Most broken dashboards were broken upstream, by a change nobody announced. A data contract makes the producer of the data responsible for its shape — and makes the break loud instead of silent." />
 	<meta property="og:url" content="https://yondertech.co.nz/en/insights/data-contracts.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/data-contracts/cover.jpg" />
 	<meta property="og:locale" content="en_NZ" />
 	<meta property="og:locale:alternate" content="zh_CN" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/data-contracts/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>Every data team knows the Monday morning message: the revenue dashboard is wrong. Someone traces it back through the pipeline and finds that, on Friday, an application team renamed a field, changed a status value from <code>closed</code> to <code>complete</code>, or started sending amounts in cents instead of dollars. Nothing errored. The data kept flowing. It was just wrong.</p>
@@ -86,6 +90,10 @@
 						<li><strong>Ownership.</strong> The team responsible for the dataset, and how to reach them.</li>
 					</ul>
 					<p>The contract lives in version control alongside the producing system&#39;s code. It is not a document in a wiki; it is something the build checks.</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/data-contracts/figure-en.png" target="_blank" rel="noopener"><img src="../../assets/insights/data-contracts/figure-en.png" alt="Where the break is caught" loading="lazy" width="1600" height="956" /></a>
+						<figcaption>A contract moves the check to the producer&#39;s build, so a breaking change fails their pull request instead of someone else&#39;s dashboard.</figcaption>
+					</figure>
 					<h2>Moving the check upstream</h2>
 					<p>The important shift is where the check happens. Without contracts, validation lives in the data pipeline, far downstream, and fails after the damage is done — if it fails at all. With contracts, the producing team&#39;s own build verifies that what they are about to ship still matches the contract. A breaking change fails their pull request, not someone else&#39;s dashboard.</p>
 					<p>That does not mean the producer can never change the data. It means changes are deliberate. Adding a field is fine. Renaming or removing one requires a new version of the contract, a notice to consumers, and a period in which both versions are available.</p>
@@ -155,6 +163,10 @@
 		"headline": "Data contracts: stop fixing pipelines downstream",
 		"description": "Most broken dashboards were broken upstream, by a change nobody announced. A data contract makes the producer of the data responsible for its shape — and makes the break loud instead of silent.",
 		"datePublished": "2026-06-03",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/data-contracts/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/data-contracts/figure-en.png"
+		],
 		"inLanguage": "en-NZ",
 		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/data-contracts.html",
 		"author": {

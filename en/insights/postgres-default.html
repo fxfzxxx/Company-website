@@ -16,7 +16,7 @@
 	<meta property="og:description" content="Documents, search, queues, vectors for AI retrieval — one well-run Postgres now covers what used to take four products. The reasons to add a second database are fewer than they were." />
 	<meta property="og:url" content="https://yondertech.co.nz/en/insights/postgres-default.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/postgres-default/cover.jpg" />
 	<meta property="og:locale" content="en_NZ" />
 	<meta property="og:locale:alternate" content="zh_CN" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/postgres-default/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>When we start a new system, the database question is usually settled in one line: Postgres, unless there is a specific reason otherwise. That line has become easier to write every year, because the list of specific reasons keeps getting shorter.</p>
@@ -85,6 +89,10 @@
 						<li><strong>Queues and jobs.</strong> A table with <code>SKIP LOCKED</code> makes a perfectly serviceable job queue for thousands of jobs a minute, with the huge advantage that enqueuing a job can be part of the same transaction as the data change that caused it.</li>
 						<li><strong>Time-series and analytics</strong> at moderate volume, using partitioning and materialised views.</li>
 					</ul>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/postgres-default/figure-en.png" target="_blank" rel="noopener"><img src="../../assets/insights/postgres-default/figure-en.png" alt="One Postgres, six jobs" loading="lazy" width="1600" height="1008" /></a>
+						<figcaption>Each job used to need its own product. Keeping them in one well-run database removes copies, sync jobs and a second permission model.</figcaption>
+					</figure>
 					<h2>Why it matters more for AI work</h2>
 					<p>The case for Postgres got stronger when retrieval became central to AI features. A separate vector database means copying data out of the system of record, keeping two stores in sync, and re-implementing access control in the second one. With vectors in Postgres, a retrieval query can filter by tenant, permission and date in the same statement that ranks by similarity. Deleting a customer&#39;s data deletes their embeddings too.</p>
 					<p>At very large scale — hundreds of millions of vectors with tight latency targets — a specialised engine may be worth its operational cost. Most businesses are several orders of magnitude away from that line.</p>
@@ -153,6 +161,10 @@
 		"headline": "Postgres is the default database, and it should be",
 		"description": "Documents, search, queues, vectors for AI retrieval — one well-run Postgres now covers what used to take four products. The reasons to add a second database are fewer than they were.",
 		"datePublished": "2026-04-29",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/postgres-default/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/postgres-default/figure-en.png"
+		],
 		"inLanguage": "en-NZ",
 		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/postgres-default.html",
 		"author": {

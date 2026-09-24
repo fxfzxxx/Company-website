@@ -63,6 +63,26 @@ const readArticles = (loc) => {
 };
 const articles = { en: readArticles("en"), zh: readArticles("zh") };
 
+/* Each article's two images: a cover and a diagram, rendered by
+   tools/render-insight-figures.mjs from content/insights/figures.json. */
+const figures = read("content/insights/figures.json");
+// width and height straight from the PNG header, for the img attributes
+const pngSize = (rel) => {
+	const file = path.join(ROOT, rel);
+	if (!fs.existsSync(file)) return { width: 1600, height: 1000 };
+	const b = fs.readFileSync(file);
+	return { width: b.readUInt32BE(16), height: b.readUInt32BE(20) };
+};
+for (const loc of LOCALES) {
+	for (const a of articles[loc]) {
+		const f = figures[a.slug];
+		if (!f) continue;
+		a.cover = `assets/insights/${a.slug}/cover.jpg`;
+		const src = `assets/insights/${a.slug}/figure-${loc}.png`;
+		a.figure = { src, title: f.figure[loc].title, caption: f.figure[loc].caption, ...pngSize(src) };
+	}
+}
+
 /* — validation ——————————————————————————————————————————————————
    The copy was written independently in each language and must transfer
    whole. A missing decision or an empty string is a build failure, not
@@ -107,6 +127,16 @@ for (const a of articles.en) {
 		["title", "dek", "date"].forEach((k) => require(x[k], `insights/${x.slug}.${k}`));
 		if (!CATEGORIES.includes(x.category)) problems.push(`insights/${x.slug}: unknown category "${x.category}"`);
 		if (!/^\d{4}-\d{2}-\d{2}$/.test(x.date || "")) problems.push(`insights/${x.slug}: date must be YYYY-MM-DD`);
+	}
+}
+for (const a of articles.en) {
+	if (!figures[a.slug]) {
+		problems.push(`insights/${a.slug}: no entry in content/insights/figures.json`);
+		continue;
+	}
+	for (const file of ["cover.jpg", "figure-en.png", "figure-zh.png"]) {
+		if (!fs.existsSync(path.join(ROOT, "assets/insights", a.slug, file)))
+			problems.push(`insights/${a.slug}: assets/insights/${a.slug}/${file} missing — run tools/render-insight-figures.mjs`);
 	}
 }
 if (articles.zh.length !== articles.en.length) problems.push("insights: the two locales have different article counts");

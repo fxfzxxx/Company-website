@@ -16,7 +16,7 @@
 	<meta property="og:description" content="模型不懂你的业务时，第一反应往往是去训练它。十次里有九次，更好的办法是在对的时刻把对的文档递给它。" />
 	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/retrieval-before-fine-tuning.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/retrieval-before-fine-tuning/cover.jpg" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:locale:alternate" content="en_NZ" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/retrieval-before-fine-tuning/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>通用大语言模型对世界了解很多，对你的定价政策、产品目录和上个月的董事会纪要却一无所知。团队意识到这一点时，第一个想法通常是微调：拿来模型，喂进公司文档，教会它懂业务。</p>
@@ -79,6 +83,10 @@
 					<h2>两种技术各自擅长什么</h2>
 					<p>微调改变的是模型的行为方式。它擅长教风格、格式和窄技能：永远按这个结构回答、把工单分进我们的十二个类别、用我们的品牌语气写作。它不擅长教事实，更不擅长教会变化的事实。一个在三月学会了你价目表的微调模型，到了九月依然会自信地报出三月的价格。</p>
 					<p>检索改变的是模型在作答那一刻知道什么。事实留在你的文档和数据库里——它们本来就在那里，也本来就有人维护。更新源头，下一个回答就会反映出来。不需要重新训练，不需要新的模型版本，企业知道的和模型相信的之间也不会出现漂移。</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/retrieval-before-fine-tuning/figure-zh.png" target="_blank" rel="noopener"><img src="../../assets/insights/retrieval-before-fine-tuning/figure-zh.png" alt="一条检索管线" loading="lazy" width="1600" height="606" /></a>
+						<figcaption>大多数检索失败其实是搜索失败。在评判模型回答之前，先衡量有没有找到正确段落。</figcaption>
+					</figure>
 					<h2>为什么检索应该先做</h2>
 					<ul>
 						<li><strong>新鲜。</strong> 知识留在记录系统里，模型每次读到的都是当前版本。</li>
@@ -148,6 +156,10 @@
 		"headline": "先做检索，再谈微调",
 		"description": "模型不懂你的业务时，第一反应往往是去训练它。十次里有九次，更好的办法是在对的时刻把对的文档递给它。",
 		"datePublished": "2026-03-04",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/retrieval-before-fine-tuning/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/retrieval-before-fine-tuning/figure-zh.png"
+		],
 		"inLanguage": "zh-Hans",
 		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/retrieval-before-fine-tuning.html",
 		"author": {

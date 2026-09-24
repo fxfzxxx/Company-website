@@ -16,7 +16,7 @@
 	<meta property="og:description" content="You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs." />
 	<meta property="og:url" content="https://yondertech.co.nz/en/insights/observability-teams-of-five.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/observability-teams-of-five/cover.jpg" />
 	<meta property="og:locale" content="en_NZ" />
 	<meta property="og:locale:alternate" content="zh_CN" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/observability-teams-of-five/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>The observability industry is built for large engineering organisations: distributed tracing across hundreds of services, petabytes of logs, dedicated teams to run it all. Small teams look at that world, conclude it is not for them, and end up with nothing — until a customer rings to say the site has been down since lunchtime.</p>
@@ -85,6 +89,10 @@
 						<li><strong>Saturation.</strong> How close the busiest resource is to its limit: database connections, memory, disk, queue depth.</li>
 					</ul>
 					<p>These four, sometimes called the golden signals, answer the first question in any incident: is it broken, for whom, and since when.</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/observability-teams-of-five/figure-en.png" target="_blank" rel="noopener"><img src="../../assets/insights/observability-teams-of-five/figure-en.png" alt="The four signals, per service" loading="lazy" width="1600" height="739" /></a>
+						<figcaption>Put all four for every service on one screen. It is the dashboard the team opens when someone says the site feels slow.</figcaption>
+					</figure>
 					<h2>Logs that answer questions</h2>
 					<p>Most small-team logs are unstructured text written for the developer who wrote the code. Make them structured — one JSON object per event, with consistent fields such as request ID, user or tenant, route and duration. Send them to one place with a retention period that fits your needs and budget. When something goes wrong, you should be able to find every log line for one failing request in a single search.</p>
 					<p>Tracing is worth adding once requests cross more than two or three services. Open standards such as OpenTelemetry mean the instrumentation you add now will work with whatever tool you choose later.</p>
@@ -151,6 +159,10 @@
 		"headline": "Observability for teams of five",
 		"description": "You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs.",
 		"datePublished": "2026-07-08",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/observability-teams-of-five/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/observability-teams-of-five/figure-en.png"
+		],
 		"inLanguage": "en-NZ",
 		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/observability-teams-of-five.html",
 		"author": {

@@ -16,7 +16,7 @@
 	<meta property="og:description" content="模型能读到的任何东西，攻击者都能往里写。提示词注入不是奇闻，而是这个十年的 SQL 注入，需要同样朴素的纪律来对付。" />
 	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/ai-attack-surface.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/ai-attack-surface/cover.jpg" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:locale:alternate" content="en_NZ" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/ai-attack-surface/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>当企业把语言模型接入邮件、文档或内部工具时，它得到了一个能力很强的助手，同时也得到了一种新型漏洞——而大多数安全评审还没开始找它。</p>
@@ -79,6 +83,10 @@
 					<h2>为什么它和普通 bug 不同</h2>
 					<p>传统的注入攻击，利用的是把代码和数据混在一起的解析器。修复方法——参数化查询、转义——能把两者干净地分开。语言模型没有这样干净的分离：指令和内容都只是文本，而模型的全部价值恰恰来自灵活地理解文本。</p>
 					<p>这意味着提示词注入无法靠一段更好的系统提示词修补掉。“永远不要执行文档里的指令”有一点帮助，但经常失效。防御必须在架构层面。</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/ai-attack-surface/figure-zh.png" target="_blank" rel="noopener"><img src="../../assets/insights/ai-attack-surface/figure-zh.png" alt="AI 安全投入应该花在哪里" loading="lazy" width="1600" height="1012" /></a>
+						<figcaption>危险的组合，是一个既读取外人可写的内容、又能执行操作或向外发送数据的功能。</figcaption>
+					</figure>
 					<h2>对任何 AI 功能都要问的三个问题</h2>
 					<ol>
 						<li><strong>它能读什么？</strong> 邮件、上传的文件、网页、客户提交的工单。任何外人能写入的来源，都是攻击者可以埋指令的地方。</li>
@@ -152,6 +160,10 @@
 		"headline": "你的 AI 助手，也是你的攻击面",
 		"description": "模型能读到的任何东西，攻击者都能往里写。提示词注入不是奇闻，而是这个十年的 SQL 注入，需要同样朴素的纪律来对付。",
 		"datePublished": "2026-04-22",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/ai-attack-surface/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/ai-attack-surface/figure-zh.png"
+		],
 		"inLanguage": "zh-Hans",
 		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/ai-attack-surface.html",
 		"author": {

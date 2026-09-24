@@ -16,7 +16,7 @@
 	<meta property="og:description" content="大多数坏掉的报表，都是在上游被一个没人通知的改动弄坏的。数据契约让数据的生产者为数据的形态负责——并让故障大声地暴露出来，而不是悄无声息。" />
 	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/data-contracts.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/data-contracts/cover.jpg" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:locale:alternate" content="en_NZ" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/data-contracts/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>每个数据团队都熟悉周一早上的那条消息：营收看板不对。有人沿着管道一路往回查，发现周五时某个应用团队改了一个字段名，把状态值从 <code>closed</code> 改成了 <code>complete</code>，或者开始用分而不是元来传金额。没有任何报错，数据照常流动，只是错了。</p>
@@ -86,6 +90,10 @@
 						<li><strong>归属。</strong> 负责这个数据集的团队，以及如何联系他们。</li>
 					</ul>
 					<p>契约和生产系统的代码一起放在版本控制里。它不是维基上的一篇文档，而是构建流程会检查的东西。</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/data-contracts/figure-zh.png" target="_blank" rel="noopener"><img src="../../assets/insights/data-contracts/figure-zh.png" alt="故障在哪里被发现" loading="lazy" width="1600" height="956" /></a>
+						<figcaption>契约把检查移到生产方的构建里，破坏性改动会让他们自己的合并请求失败，而不是让别人的看板出错。</figcaption>
+					</figure>
 					<h2>把检查移到上游</h2>
 					<p>关键的变化在于检查发生在哪里。没有契约时，校验位于远在下游的数据管道里，在损害已经造成之后才失败——如果它还会失败的话。有了契约，生产团队自己的构建会验证即将发布的数据是否仍然符合契约。一个破坏性改动，会让他们自己的合并请求失败，而不是让别人的看板出错。</p>
 					<p>这并不意味着生产者永远不能改数据，而是意味着改动是有意识的。新增字段没问题；重命名或删除字段，则需要一个新版本的契约、通知消费者，以及一段新旧两个版本同时可用的过渡期。</p>
@@ -155,6 +163,10 @@
 		"headline": "数据契约：别再在下游修管道",
 		"description": "大多数坏掉的报表，都是在上游被一个没人通知的改动弄坏的。数据契约让数据的生产者为数据的形态负责——并让故障大声地暴露出来，而不是悄无声息。",
 		"datePublished": "2026-06-03",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/data-contracts/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/data-contracts/figure-zh.png"
+		],
 		"inLanguage": "zh-Hans",
 		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/data-contracts.html",
 		"author": {

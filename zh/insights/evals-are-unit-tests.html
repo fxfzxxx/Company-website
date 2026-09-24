@@ -16,7 +16,7 @@
 	<meta property="og:description" content="一个没有评测集的 AI 功能，是一个无法安全修改的功能。像对待测试代码一样对待评测集，上线的恐惧就会消掉一大半。" />
 	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/evals-are-unit-tests.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/evals-are-unit-tests/cover.jpg" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:locale:alternate" content="en_NZ" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/evals-are-unit-tests/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>问一个团队怎么知道他们的 AI 功能是好的，诚实的回答往往是：我们试了很多次，感觉还不错。在单元测试普及之前，软件就是这样测试的。它对演示有效，却会在第一次有人改提示词、升级模型、往知识库里加文档时失效——没人说得清效果是变好了还是变差了。</p>
@@ -79,6 +83,10 @@
 					<h2>评测集是什么</h2>
 					<p>最简单的评测集，就是一个文件，里面是输入以及“好的输出长什么样”。对客服助手来说，可能是两百个真实客户问题，配上资深客服会给出的答案；对文档抽取器来说，是一百张发票及其正确字段；对分类器来说，是几千条带标签的样本。</p>
 					<p>每个样本都要打分。有些分数是确定的：类别选对没有、金额抽对没有、该拒绝时拒绝了没有。有些需要判断：这个回答是否忠实于原文、是否包含关键事实。后一类可以让另一个模型按评分细则打分，前提是你先抽样核对过它的打分与人工判断是否一致。</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/evals-are-unit-tests/figure-zh.png" target="_blank" rel="noopener"><img src="../../assets/insights/evals-are-unit-tests/figure-zh.png" alt="评测循环" loading="lazy" width="1600" height="955" /></a>
+						<figcaption>每一个糟糕的回答都会变成评测集里的一个用例，评测集因此朝着功能真实的失败方式生长。</figcaption>
+					</figure>
 					<h2>像对待代码一样对待它</h2>
 					<ul>
 						<li><strong>放进代码仓库。</strong> 评测集和它所测试的提示词、代码一起版本化。任何一方改动，都要跑一遍。</li>
@@ -148,6 +156,10 @@
 		"headline": "评测集，就是新时代的单元测试",
 		"description": "一个没有评测集的 AI 功能，是一个无法安全修改的功能。像对待测试代码一样对待评测集，上线的恐惧就会消掉一大半。",
 		"datePublished": "2026-04-01",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/evals-are-unit-tests/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/evals-are-unit-tests/figure-zh.png"
+		],
 		"inLanguage": "zh-Hans",
 		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/evals-are-unit-tests.html",
 		"author": {

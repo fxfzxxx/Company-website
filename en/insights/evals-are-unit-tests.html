@@ -16,7 +16,7 @@
 	<meta property="og:description" content="An AI feature without an evaluation suite is a feature you cannot change safely. Treat the eval set like test code, and most of the fear goes out of shipping." />
 	<meta property="og:url" content="https://yondertech.co.nz/en/insights/evals-are-unit-tests.html" />
 	<meta property="og:site_name" content="Yonder Tech" />
-	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:image" content="https://yondertech.co.nz/assets/insights/evals-are-unit-tests/cover.jpg" />
 	<meta property="og:locale" content="en_NZ" />
 	<meta property="og:locale:alternate" content="zh_CN" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -72,6 +72,10 @@
 				</div>
 			</header>
 
+			<figure class="yt-wrap yt-article-cover">
+				<img src="../../assets/insights/evals-are-unit-tests/cover.jpg" alt="" width="1600" height="900" />
+			</figure>
+
 			<div class="yt-wrap">
 				<div class="yt-prose">
 					<p>Ask a team how they know their AI feature works and the honest answer is often: we tried it a lot, and it seemed good. That is how software was tested before unit tests became normal. It works for a demo. It fails the first time someone changes a prompt, upgrades a model or adds a document to the knowledge base, and nobody can say whether things got better or worse.</p>
@@ -79,6 +83,10 @@
 					<h2>What an evaluation set is</h2>
 					<p>At its simplest, an eval set is a file of inputs paired with what a good output looks like. For a support assistant, that might be two hundred real customer questions with the answer a senior agent would give. For a document extractor, a hundred invoices with the correct fields. For a classifier, a few thousand labelled examples.</p>
 					<p>Each example is scored. Some scores are exact: did it pick the right category, extract the right amount, refuse when it should. Some need judgement: is this answer faithful to the source, does it contain the key fact. For those, a second model can grade against a rubric, provided you check its grading against human judgement on a sample first.</p>
+					<figure class="yt-prose-figure">
+						<a href="../../assets/insights/evals-are-unit-tests/figure-en.png" target="_blank" rel="noopener"><img src="../../assets/insights/evals-are-unit-tests/figure-en.png" alt="The evaluation loop" loading="lazy" width="1600" height="955" /></a>
+						<figcaption>Every bad answer becomes a case in the suite, so the suite grows toward the ways the feature actually fails.</figcaption>
+					</figure>
 					<h2>Treat it like code</h2>
 					<ul>
 						<li><strong>Keep it in the repository.</strong> The eval set is versioned with the prompts and code it tests. A change to either runs the suite.</li>
@@ -148,6 +156,10 @@
 		"headline": "Evaluations are the new unit tests",
 		"description": "An AI feature without an evaluation suite is a feature you cannot change safely. Treat the eval set like test code, and most of the fear goes out of shipping.",
 		"datePublished": "2026-04-01",
+		"image": [
+			"https://yondertech.co.nz/assets/insights/evals-are-unit-tests/cover.jpg",
+			"https://yondertech.co.nz/assets/insights/evals-are-unit-tests/figure-en.png"
+		],
 		"inLanguage": "en-NZ",
 		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/evals-are-unit-tests.html",
 		"author": {
