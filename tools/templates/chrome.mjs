@@ -98,7 +98,8 @@ export const orgJsonLd = () => `	<script type="application/ld+json">
 
 /* The nav is six items. Anchors resolve against this locale's homepage, so
    they work from the library and detail pages too. On a phone or tablet the
-   links fold into a panel behind the menu button, and the lockup sits centred. */
+   links fold into a panel behind the menu button, with the language
+   switch at its foot, and the lockup sits centred. */
 export const header = (ctx, current) => {
 	const { home, homeHref, libraryHref, insightsHref, loc, altHref, root } = ctx;
 	const n = home.nav;
@@ -117,6 +118,14 @@ export const header = (ctx, current) => {
 			? `<a class="is-active${className}" href="#" aria-current="true">${esc(label)}</a>`
 			: `<a class="${className.trim()}" href="${altHref}" hreflang="${HREFLANG[target]}">${esc(label)}</a>`;
 
+	// in the bar on desktop, at the foot of the menu on a phone or tablet;
+	// CSS shows one at a time
+	const lang = `<span class="yt-lang">
+					${langLink("en", "EN", "")}
+					<span aria-hidden="true">/</span>
+					${langLink("zh", "中文", " yt-zh")}
+				</span>`;
+
 	return `		<div class="yt-header">
 			<nav class="nav yt-nav" aria-label="${loc === "zh" ? "主导航" : "Main"}">
 				<button class="yt-menu-btn" type="button" aria-controls="yt-menu" aria-expanded="false"
@@ -133,12 +142,12 @@ ${links
 			`					<a href="${l.href}"${l.key === current ? ' aria-current="page"' : ""}>${esc(l.label)}</a>`
 	)
 	.join("\n")}
+					<span class="yt-menu-lang">
+						<span class="yt-menu-lang-label">${loc === "zh" ? "语言" : "Language"}</span>
+						${lang}
+					</span>
 				</span>
-				<span class="yt-lang">
-					${langLink("en", "EN", "")}
-					<span aria-hidden="true">/</span>
-					${langLink("zh", "中文", " yt-zh")}
-				</span>
+				${lang}
 			</nav>
 		</div>`;
 };
