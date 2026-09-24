@@ -267,11 +267,19 @@ button {
 
 /* — header ———————————————————————————————————————————————————— */
 
+/* A dark bar with the light lockup. Links sit at 60% bone and come up to
+   full on hover, while a bone rule on the bar's bottom edge draws in from
+   the left and leaves to the right. The current page is full bone with a
+   small square ahead of it, so "here" never reads as "hovering". */
 .yt-header {
+	--nav-ink: #f2f0ec;
+	--nav-dim: rgba(242, 240, 236, 0.6);
+	--nav-line: rgba(242, 240, 236, 0.1);
 	position: sticky;
 	top: 0;
 	z-index: 60;
-	background: var(--color-bg);
+	background: var(--color-text);
+	color: var(--nav-ink);
 	transition: transform 260ms ease;
 	will-change: transform;
 }
@@ -281,11 +289,14 @@ button {
 }
 
 .yt-nav {
+	padding-block: 0;
 	padding-inline: clamp(20px, 5vw, 64px);
+	min-height: 64px;
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	gap: clamp(16px, 3vw, 40px);
 	flex-wrap: nowrap;
+	border-bottom: 1px solid var(--nav-line);
 }
 
 .yt-nav .yt-brand {
@@ -305,13 +316,13 @@ button {
    specificity and the two marks stack. */
 .yt-nav .yt-brand .yt-brand-lockup {
 	display: block;
-	height: 36px;
+	height: 34px;
 	width: auto;
 }
 
 .yt-nav .yt-brand .yt-brand-mark {
 	display: none;
-	height: 30px;
+	height: 28px;
 	width: auto;
 }
 
@@ -320,47 +331,131 @@ button {
 	.yt-nav .yt-brand .yt-brand-mark { display: block; }
 }
 
+/* safe center: centred while it fits, start-aligned once it scrolls, so
+   the first link is never cut off on a narrow screen */
 .yt-nav-links {
 	display: flex;
-	gap: clamp(14px, 2.2vw, 28px);
+	align-items: stretch;
+	gap: clamp(4px, 1vw, 12px);
 	flex: 1 1 auto;
 	min-width: 0;
 	overflow-x: auto;
 	scrollbar-width: none;
 	white-space: nowrap;
 	font-size: 14px;
-	justify-content: center;
+	justify-content: safe center;
 }
 
 .yt-nav-links::-webkit-scrollbar {
 	display: none;
 }
 
-.yt-nav-links a[aria-current="page"] {
-	color: var(--yt-accent-ink);
-}
-
-.yt-lang {
-	margin-left: auto;
+.yt-nav .yt-nav-links a {
+	position: relative;
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	padding-inline: clamp(8px, 1vw, 14px);
+	color: var(--nav-dim);
+	letter-spacing: 0.01em;
+	transition: color 180ms ease;
+}
+
+.yt-nav-links a::after {
+	content: "";
+	position: absolute;
+	left: clamp(8px, 1vw, 14px);
+	right: clamp(8px, 1vw, 14px);
+	bottom: -1px;
+	height: 2px;
+	background: var(--nav-ink);
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 320ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.yt-nav .yt-nav-links a:hover,
+.yt-nav .yt-nav-links a:focus-visible,
+.yt-nav .yt-nav-links a[aria-current="page"] {
+	color: var(--nav-ink);
+}
+
+.yt-nav-links a[aria-current="page"]::before {
+	content: "";
+	width: 5px;
+	height: 5px;
+	margin-right: 9px;
+	background: var(--nav-ink);
+}
+
+.yt-nav-links a:hover::after,
+.yt-nav-links a:focus-visible::after {
+	transform: scaleX(1);
+	transform-origin: left;
+}
+
+.yt-nav a:focus-visible {
+	outline: 2px solid var(--nav-ink);
+	outline-offset: -2px;
+}
+
+/* the language switch is a two-part segmented control */
+.yt-lang {
+	margin-left: auto;
+	align-self: center;
+	display: flex;
+	align-items: stretch;
 	flex: 0 0 auto;
-	font-size: 12.5px;
-	letter-spacing: 0.06em;
+	font-size: 12px;
+	letter-spacing: 0.08em;
+	border: 1px solid rgba(242, 240, 236, 0.28);
+	border-radius: 999px;
+	padding: 2px;
 }
 
 .yt-lang a {
 	font-weight: 600;
-	color: var(--color-neutral-600);
+	color: var(--nav-dim);
+	padding: 4px 11px;
+	border-radius: 999px;
+	transition: color 180ms ease, background-color 180ms ease;
+}
+
+.yt-lang a:hover {
+	color: var(--nav-ink);
 }
 
 .yt-lang a.is-active {
 	color: var(--color-text);
+	background: var(--nav-ink);
 }
 
 .yt-lang span {
-	color: var(--color-neutral-400);
+	display: none;
+}
+
+/* on a phone the links scroll sideways; fade the edge so they read as
+   more to come rather than cut off */
+@media (max-width: 720px) {
+	.yt-nav {
+		min-height: 56px;
+		gap: 12px;
+	}
+
+	.yt-nav-links {
+		-webkit-mask-image: linear-gradient(to right, #000 82%, transparent);
+		mask-image: linear-gradient(to right, #000 82%, transparent);
+		padding-right: 24px;
+	}
+
+	.yt-lang a {
+		padding: 3px 8px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.yt-nav-links a::after {
+		transition: none;
+	}
 }
 
 /* — shared type ———————————————————————————————————————————————— */
