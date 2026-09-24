@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="文档、搜索、队列、用于 AI 检索的向量——一个运行良好的 Postgres，如今就能覆盖过去需要四个产品才能完成的工作。再加一个数据库的理由，比以前少多了。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/postgres-default.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/postgres-default.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/postgres-default.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/postgres-default.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Postgres 是默认数据库，也理应如此 — Yonder Tech" />
+	<meta property="og:description" content="文档、搜索、队列、用于 AI 检索的向量——一个运行良好的 Postgres，如今就能覆盖过去需要四个产品才能完成的工作。再加一个数据库的理由，比以前少多了。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/postgres-default.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Postgres 是默认数据库，也理应如此 — Yonder Tech" />
+	<meta name="twitter:description" content="文档、搜索、队列、用于 AI 检索的向量——一个运行良好的 Postgres，如今就能覆盖过去需要四个产品才能完成的工作。再加一个数据库的理由，比以前少多了。" />
+	<title>Postgres 是默认数据库，也理应如此 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/postgres-default.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">技术栈</span>
+				</div>
+				<h1 class="yt-article-h1">Postgres 是默认数据库，也理应如此</h1>
+				<p class="yt-article-dek">文档、搜索、队列、用于 AI 检索的向量——一个运行良好的 Postgres，如今就能覆盖过去需要四个产品才能完成的工作。再加一个数据库的理由，比以前少多了。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-04-29">2026 年 4 月 29 日</time> · 3 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>开始一个新系统时，数据库问题通常一句话就定了：用 Postgres，除非有具体理由不用。这句话一年比一年好写，因为“具体理由”的清单越来越短。</p>
+					<p>这不是品牌忠诚，而是对运维成本的判断。系统里每多一个数据存储，就多一样要备份、加固、监控、升级、并与其他存储保持一致的东西。对我们主要服务的这类规模的组织来说，最便宜的架构通常就是活动部件最少的那个，而 Postgres 已经悄悄接下了许多过去需要单独产品才能完成的工作。</p>
+					<h2>一个数据库现在能做什么</h2>
+					<ul>
+						<li><strong>关系型数据</strong>，这是自然，有事务、约束和成熟的查询规划器，是其他一切的基础。</li>
+						<li><strong>文档。</strong> JSONB 列对半结构化数据的存储和索引已经足够好，很少有理由再单独上一个文档数据库。把结构化的核心放在列里，把可变部分放进 JSON。</li>
+						<li><strong>搜索。</strong> 内置全文检索能处理大多数应用内搜索——产品目录、知识库、客服工单——支持排序和按语言的词干处理。</li>
+						<li><strong>向量。</strong> pgvector 扩展把嵌入向量存在它所描述的数据行旁边，并在那里做相似度搜索。对企业规模的 AI 检索来说，把向量和源记录放在一起，权限、关联和新鲜度都是白送的。</li>
+						<li><strong>队列与任务。</strong> 一张配合 <code>SKIP LOCKED</code> 的表，就是一个每分钟处理数千任务都游刃有余的任务队列，而且有一个巨大优势：入队这个动作，可以和触发它的数据变更处于同一个事务里。</li>
+						<li><strong>中等规模的时序与分析</strong>，借助分区和物化视图。</li>
+					</ul>
+					<h2>为什么对 AI 工作更重要</h2>
+					<p>当检索成为 AI 功能的核心，选择 Postgres 的理由变得更充分了。单独的向量数据库意味着要把数据从记录系统里复制出去、让两个存储保持同步、在第二个存储里重新实现一遍权限控制。向量放在 Postgres 里，一条检索查询就能在按相似度排序的同时，按租户、权限和日期过滤。删除一个客户的数据，他的向量也一并删除。</p>
+					<p>在超大规模下——数亿向量、严苛的延迟目标——专用引擎也许值得它的运维成本。大多数企业离那条线还差好几个数量级。</p>
+					<h2>什么时候再加别的</h2>
+					<p>只有当以下某一条成立、并且能被证明（而不是被预期）时，我们才会加第二个数据存储：</p>
+					<ul>
+						<li>调优良好、配有只读副本的 Postgres，确实扛不住的读写量。</li>
+						<li>访问模式根本不同的负载，比如跨越数年事件的大规模分析，列式数仓要高效得多。</li>
+						<li>一个简单的内存缓存比数据库调优更便宜就能解决的缓存需求。</li>
+					</ul>
+					<h2>把它运行好</h2>
+					<p>依赖单一数据库的另一面，是它必须被运行好。除非有充分理由，否则用托管服务。要测试恢复，而不只是测试备份。每周看一次慢查询。迁移脚本放进版本控制，像代码一样评审。一个运行良好的 Postgres，是现代软件里最可靠的组件之一；一个被忽视的 Postgres，则是单点故障。区别在于纪律，而不在于技术。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="frontend-framework-is-a-team.html">
+						<div class="card-kicker">技术栈</div>
+						<h3 class="card-title">选前端框架，主要是在选团队</h3>
+						<p class="card-body">主流框架之间的技术差异已经缩小。真正还不同的，是你能招到谁、代码能被支持多久，以及你实际需要多少框架。</p>
+						<div class="card-meta">2026 年 9 月 2 日 · 2 分钟阅读</div>
+					</a>
+					<a class="card" href="observability-teams-of-five.html">
+						<div class="card-kicker">技术栈</div>
+						<h3 class="card-title">五人团队的可观测性</h3>
+						<p class="card-body">想知道软件在生产环境里在干什么，并不需要一个平台团队。四个信号、一块看板、一条关于告警的规则，就能覆盖小团队的大部分需求。</p>
+						<div class="card-meta">2026 年 7 月 8 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="static-first.html">
+						<div class="card-kicker">技术栈</div>
+						<h3 class="card-title">静态优先：为什么我们自己的网站就是一堆普通文件</h3>
+						<p class="card-body">没有服务器、没有数据库、没有框架运行时——页面在你眨完眼之前就加载好了。对大多数企业网站来说，静态生成是最被低估的架构。</p>
+						<div class="card-meta">2026 年 6 月 24 日 · 3 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Postgres 是默认数据库，也理应如此",
+		"description": "文档、搜索、队列、用于 AI 检索的向量——一个运行良好的 Postgres，如今就能覆盖过去需要四个产品才能完成的工作。再加一个数据库的理由，比以前少多了。",
+		"datePublished": "2026-04-29",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/postgres-default.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/postgres-default.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

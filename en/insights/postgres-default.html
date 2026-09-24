@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Documents, search, queues, vectors for AI retrieval — one well-run Postgres now covers what used to take four products. The reasons to add a second database are fewer than they were." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/postgres-default.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/postgres-default.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/postgres-default.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/postgres-default.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Postgres is the default database, and it should be — Yonder Tech" />
+	<meta property="og:description" content="Documents, search, queues, vectors for AI retrieval — one well-run Postgres now covers what used to take four products. The reasons to add a second database are fewer than they were." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/postgres-default.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Postgres is the default database, and it should be — Yonder Tech" />
+	<meta name="twitter:description" content="Documents, search, queues, vectors for AI retrieval — one well-run Postgres now covers what used to take four products. The reasons to add a second database are fewer than they were." />
+	<title>Postgres is the default database, and it should be — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/postgres-default.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">Tech stack</span>
+				</div>
+				<h1 class="yt-article-h1">Postgres is the default database, and it should be</h1>
+				<p class="yt-article-dek">Documents, search, queues, vectors for AI retrieval — one well-run Postgres now covers what used to take four products. The reasons to add a second database are fewer than they were.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-04-29">29 April 2026</time> · 3 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>When we start a new system, the database question is usually settled in one line: Postgres, unless there is a specific reason otherwise. That line has become easier to write every year, because the list of specific reasons keeps getting shorter.</p>
+					<p>This is not brand loyalty. It is a judgement about operational cost. Every additional data store in a system is another thing to back up, secure, monitor, upgrade and keep consistent with the others. For the size of organisations we mostly work with, the cheapest architecture is usually the one with the fewest moving parts, and Postgres has quietly absorbed a remarkable number of jobs that used to need a separate product.</p>
+					<h2>What one database can now do</h2>
+					<ul>
+						<li><strong>Relational data</strong>, obviously, with transactions, constraints and a mature query planner. The foundation everything else rests on.</li>
+						<li><strong>Documents.</strong> JSONB columns store and index semi-structured data well enough that a separate document database is rarely justified. Keep the structured core in columns and the variable parts in JSON.</li>
+						<li><strong>Search.</strong> Built-in full-text search handles most in-application search — product catalogues, knowledge bases, support tickets — with ranking and language-aware stemming.</li>
+						<li><strong>Vectors.</strong> The pgvector extension stores embeddings and runs similarity search next to the rows they describe. For AI retrieval at business scale, keeping vectors beside the source records means permissions, joins and freshness come for free.</li>
+						<li><strong>Queues and jobs.</strong> A table with <code>SKIP LOCKED</code> makes a perfectly serviceable job queue for thousands of jobs a minute, with the huge advantage that enqueuing a job can be part of the same transaction as the data change that caused it.</li>
+						<li><strong>Time-series and analytics</strong> at moderate volume, using partitioning and materialised views.</li>
+					</ul>
+					<h2>Why it matters more for AI work</h2>
+					<p>The case for Postgres got stronger when retrieval became central to AI features. A separate vector database means copying data out of the system of record, keeping two stores in sync, and re-implementing access control in the second one. With vectors in Postgres, a retrieval query can filter by tenant, permission and date in the same statement that ranks by similarity. Deleting a customer&#39;s data deletes their embeddings too.</p>
+					<p>At very large scale — hundreds of millions of vectors with tight latency targets — a specialised engine may be worth its operational cost. Most businesses are several orders of magnitude away from that line.</p>
+					<h2>When to add something else</h2>
+					<p>We add a second data store when one of these is true and can be demonstrated, not anticipated:</p>
+					<ul>
+						<li>Write or read volume that a well-tuned Postgres, with read replicas, genuinely cannot handle.</li>
+						<li>A workload with fundamentally different access patterns, such as large-scale analytics over years of events, where a columnar warehouse is far more efficient.</li>
+						<li>A caching need that a simple in-memory store solves more cheaply than database tuning.</li>
+					</ul>
+					<h2>Run it properly</h2>
+					<p>The flip side of relying on one database is that it has to be run well. Use a managed service unless you have a strong reason not to. Test restores, not just backups. Watch slow queries weekly. Keep migrations in version control and review them like code. A single, well-run Postgres is one of the most reliable components in modern software. A neglected one is a single point of failure. The difference is discipline, not technology.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="frontend-framework-is-a-team.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Choosing a frontend framework is mostly choosing a team</h3>
+						<p class="card-body">The technical differences between mainstream frameworks have narrowed. What still differs is who you can hire, how long the code will be supported, and how much of it you actually need.</p>
+						<div class="card-meta">2 September 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="observability-teams-of-five.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Observability for teams of five</h3>
+						<p class="card-body">You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs.</p>
+						<div class="card-meta">8 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="static-first.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Static first: why our own site ships as plain files</h3>
+						<p class="card-body">No server, no database, no framework runtime — and pages that load before you finish blinking. Static generation is the most underrated architecture for most business websites.</p>
+						<div class="card-meta">24 June 2026 · 2 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Postgres is the default database, and it should be",
+		"description": "Documents, search, queues, vectors for AI retrieval — one well-run Postgres now covers what used to take four products. The reasons to add a second database are fewer than they were.",
+		"datePublished": "2026-04-29",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/postgres-default.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/postgres-default.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

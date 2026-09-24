@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="动画要么在解释什么，要么在碍事。一份简短指南：哪些动效配得上它占用的毫秒，哪些应该删掉。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/motion-with-a-job.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/motion-with-a-job.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/motion-with-a-job.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/motion-with-a-job.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="有任务的动效 — Yonder Tech" />
+	<meta property="og:description" content="动画要么在解释什么，要么在碍事。一份简短指南：哪些动效配得上它占用的毫秒，哪些应该删掉。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/motion-with-a-job.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="有任务的动效 — Yonder Tech" />
+	<meta name="twitter:description" content="动画要么在解释什么，要么在碍事。一份简短指南：哪些动效配得上它占用的毫秒，哪些应该删掉。" />
+	<title>有任务的动效 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/motion-with-a-job.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">设计语言</span>
+				</div>
+				<h1 class="yt-article-h1">有任务的动效</h1>
+				<p class="yt-article-dek">动画要么在解释什么，要么在碍事。一份简短指南：哪些动效配得上它占用的毫秒，哪些应该删掉。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-06-10">2026 年 6 月 10 日</time> · 2 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>界面里的动效往往分两波到来。第一波在项目早期，设计师给原型加上过渡，让它显得有生气。第二波在项目后期，有人觉得产品需要更多“惊喜”，于是加上弹跳、视差和动画插画。第一波通常有用，第二波通常没用。</p>
+					<p>区别在于动效有没有任务。好的界面动画，解释的是用户本来需要自己琢磨的东西：一个元素从哪里来、到哪里去了、刚刚什么变了、什么还在进行。没有任务的动效就是装饰，而会动的装饰，就是会拖慢人的装饰。</p>
+					<h2>值得做的四种任务</h2>
+					<ul>
+						<li><strong>连续性。</strong> 面板从右边滑进来，用户就知道它住在右边，也会回到右边。卡片展开成详情页，用户就知道这些详情属于那张卡片。这是动效最有价值的用途，也是最常被做坏的。</li>
+						<li><strong>反馈。</strong> 按下即时响应的按钮、保存后短暂高亮的一行、输入无效时轻轻晃动的输入框。它们确认了一个操作已被接收。</li>
+						<li><strong>引导注意。</strong> 在一个静止的屏幕上，只有一个元素在动，就能可靠地吸引视线。节制地使用——一条新通知、一个变化了的合计——它能把用户引向重要的东西。</li>
+						<li><strong>等待。</strong> 进度指示和骨架屏告诉用户工作正在进行、大概还剩多少。它们让等待显得更短，更重要的是，让等待显得是有意安排的。</li>
+					</ul>
+					<h2>我们坚持的规则</h2>
+					<ul>
+						<li><strong>快。</strong> 大多数界面过渡应该在 150 到 250 毫秒内完成。超过 400 毫秒，用户感受到的是慢，而不是顺滑。</li>
+						<li><strong>可打断。</strong> 用户永远不应该等动画播完才能操作。如果他们在过渡中点击，界面应该立刻响应。</li>
+						<li><strong>一致。</strong> 像定义颜色一样，把一小组时长和缓动曲线定义为令牌。当每个组件都以同样的节奏运动，产品就显得浑然一体。</li>
+						<li><strong>体贴。</strong> 尊重操作系统的“减少动态效果”设置。对一些用户来说，视差和大幅运动会引起真实的不适。为他们提供一个元素直接出现的版本。</li>
+						<li><strong>渲染便宜。</strong> 只对 opacity 和 transform 做动画，浏览器可以把它们交给显卡处理。对布局属性做动画，会让页面在普通手机上卡顿。</li>
+					</ul>
+					<h2>该删掉什么</h2>
+					<p>删掉每次加载页面都要播放一遍的动效、在用户阅读时循环播放的动效、仅仅因为某个库让它很容易实现而存在的动效。删掉那些把内容藏起来、直到用户滚动到恰好某个位置才出现的滚动触发动画。删掉任何让用户必须先看完、才能开始做事的东西。</p>
+					<p>一个界面动画能得到的最高赞誉，是没有人提起它。用户只是觉得这个产品很好跟上——却从未注意到，正是动效让它如此。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="interfaces-for-uncertainty.html">
+						<div class="card-kicker">设计语言</div>
+						<h3 class="card-title">为可能出错的答案设计界面</h3>
+						<p class="card-body">传统软件要么正确，要么坏了。AI 功能通常是对的，有时是错的，而且听起来总是很自信。模型不肯承载的不确定性，界面必须承载起来。</p>
+						<div class="card-meta">2026 年 8 月 19 日 · 2 分钟阅读</div>
+					</a>
+					<a class="card" href="design-systems-without-design-team.html">
+						<div class="card-kicker">设计语言</div>
+						<h3 class="card-title">没有设计团队的团队，也能有设计系统</h3>
+						<p class="card-body">大多数需要一致性的组织，都负担不起一个专职的设计系统小组。一套小而有主见的组件包——以及让它保持小的纪律——就能走完大部分路。</p>
+						<div class="card-meta">2026 年 7 月 22 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="type-does-the-heavy-lifting.html">
+						<div class="card-kicker">设计语言</div>
+						<h3 class="card-title">让字体扛起重担</h3>
+						<p class="card-body">插画预算在缩水，图库照片千篇一律。字体是唯一出现在每一屏上的品牌资产，而大多数设计系统仍然把它当成事后才想起的东西。</p>
+						<div class="card-meta">2026 年 5 月 6 日 · 3 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "有任务的动效",
+		"description": "动画要么在解释什么，要么在碍事。一份简短指南：哪些动效配得上它占用的毫秒，哪些应该删掉。",
+		"datePublished": "2026-06-10",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/motion-with-a-job.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/motion-with-a-job.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

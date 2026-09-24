@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="实时 3D、大规模可视化、端侧 AI，现在都能在一个普通浏览器标签页里运行。问题不再是网页能不能做到，而是你的内容配不配得上。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/webgpu-rich-web.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/webgpu-rich-web.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/webgpu-rich-web.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/webgpu-rich-web.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="WebGPU 与富网页的回归 — Yonder Tech" />
+	<meta property="og:description" content="实时 3D、大规模可视化、端侧 AI，现在都能在一个普通浏览器标签页里运行。问题不再是网页能不能做到，而是你的内容配不配得上。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/webgpu-rich-web.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="WebGPU 与富网页的回归 — Yonder Tech" />
+	<meta name="twitter:description" content="实时 3D、大规模可视化、端侧 AI，现在都能在一个普通浏览器标签页里运行。问题不再是网页能不能做到，而是你的内容配不配得上。" />
+	<title>WebGPU 与富网页的回归 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/webgpu-rich-web.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">技术趋势</span>
+				</div>
+				<h1 class="yt-article-h1">WebGPU 与富网页的回归</h1>
+				<p class="yt-article-dek">实时 3D、大规模可视化、端侧 AI，现在都能在一个普通浏览器标签页里运行。问题不再是网页能不能做到，而是你的内容配不配得上。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-05-13">2026 年 5 月 13 日</time> · 2 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>过去十年的大部分时间里，“富”网页体验意味着一个沉重的 JavaScript 包和一个加载转圈。严肃的图形留在原生应用和游戏引擎里，浏览器负责文档和表单。</p>
+					<p>这条边界已经移动了。主流浏览器已支持的 WebGPU，让网页能以现代方式直接访问显卡——和原生应用拥有的访问方式同一类。加上成熟的 WebGL 生态，实时 3D、大规模交互式数据可视化，甚至在用户自己的设备上运行 AI 模型，都成了浏览器的日常能力，而不再是实验。</p>
+					<h2>它让什么变得可行</h2>
+					<ul>
+						<li><strong>产品可视化。</strong> 加载快、在中端笔记本和手机上运行流畅的配置器和 3D 产品展示，无需安装应用。</li>
+						<li><strong>大规模数据。</strong> 交互式地绘制数百万个数据点——传感器数据、交易、地理记录——拖动时筛选结果即时响应。</li>
+						<li><strong>端侧推理。</strong> 用于转写、图像分类或文本嵌入等任务的小型 AI 模型，可以在用户的 GPU 上运行。数据从不离开设备，这对隐私敏感的工作很重要。</li>
+						<li><strong>品牌时刻。</strong> 首页上一个令人难忘的交互作品，过去它可能只会是一段视频。</li>
+					</ul>
+					<p>我们自己案例库里有三个概念作品——一颗被照亮的地球、一个机械机芯、一块玻璃标本——就是这样做的：由代码和很小的数据文件在浏览器里生成，不下载任何模型或贴图。它们是一次刻意的测试：看看一个普通网页如今能走多远。</p>
+					<h2>它需要的纪律</h2>
+					<p>能力不等于合适。让精美产品展示成为可能的同一种力量，也很容易让你发布一个耗光手机电量、把第一句话的出现推迟四秒的首页。</p>
+					<p>我们遵循的规则：</p>
+					<ul>
+						<li><strong>内容优先，图形其次。</strong> 在任何 3D 加载之前，页面必须可读、可用。富图形层只在滚动进入视野时加载，离开时释放。</li>
+						<li><strong>按设备设预算。</strong> 在一台三年前的中端手机上测试。设备较弱或用户偏好减少动效时，自动提供更轻的版本。</li>
+						<li><strong>生成，而不是下载。</strong> 加载时计算出的程序化几何和纹理，往往比它们所替代的素材更小。</li>
+						<li><strong>测量。</strong> 像对待任何其他性能指标一样，认真追踪加载时间、帧率和电量消耗。</li>
+					</ul>
+					<h2>什么时候值得</h2>
+					<p>一个有用的检验是：这个交互能否教会用户一张静态图片教不会的东西。旋转产品能看出它是怎么造的；拖动时间轴能看出数据里的规律；拖动地球找到一座城市，比读一张列表更快。如果 3D 只是为了显得厉害，一张做得好的图片会更好地服务用户，成本也低得多。</p>
+					<p>网页现在几乎什么都能做。手艺在于决定它应该做什么。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="software-cheap-to-write.html">
+						<div class="card-kicker">技术趋势</div>
+						<h3 class="card-title">当写软件变得便宜，什么会改变</h3>
+						<p class="card-body">AI 编程工具让产出代码快了很多，却没有让“决定做什么”、“确认它能用”以及“运行它很多年”变得更便宜——而这改变了价值所在的位置。</p>
+						<div class="card-meta">2026 年 9 月 16 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="legacy-modernisation-no-big-bang.html">
+						<div class="card-kicker">技术趋势</div>
+						<h3 class="card-title">不靠“大爆炸”的遗留系统改造</h3>
+						<p class="card-body">一次性替换一切的重写，是浪费两年最可靠的方式。一次替换一条路由，说起来慢，做完却快得多。</p>
+						<div class="card-meta">2026 年 7 月 29 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="passkeys-ready.html">
+						<div class="card-kicker">技术趋势</div>
+						<h3 class="card-title">通行密钥已经就绪，你的登录页大概还没有</h3>
+						<p class="card-body">抗钓鱼的登录方式，如今已经能在客户手里现有的设备上通用。技术已经完成，剩下的是产品设计和一个合理的迁移计划。</p>
+						<div class="card-meta">2026 年 7 月 1 日 · 2 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "WebGPU 与富网页的回归",
+		"description": "实时 3D、大规模可视化、端侧 AI，现在都能在一个普通浏览器标签页里运行。问题不再是网页能不能做到，而是你的内容配不配得上。",
+		"datePublished": "2026-05-13",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/webgpu-rich-web.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/webgpu-rich-web.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

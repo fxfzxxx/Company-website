@@ -58,5 +58,28 @@
     "UI": "界面",
     "Brand": "品牌",
     "Product": "产品"
+  },
+  "ins": {
+    "kicker": "洞察",
+    "h1a": "来自一线的笔记，",
+    "h1b": "写给要做决定的人。",
+    "lede": "关于 AI 模型、技术趋势、技术栈和设计语言的短文。每一篇都写给最终要拍板的那个人。",
+    "topic": "主题",
+    "all": "全部",
+    "countAll": "共 {total} 篇",
+    "countSome": "{total} 篇中的 {n} 篇",
+    "minutes": "{n} 分钟阅读",
+    "by": "Yonder Tech 撰文",
+    "related": "继续阅读",
+    "allLink": "全部洞察",
+    "image": "https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg",
+    "categories": {
+      "ai": "AI 与模型",
+      "stack": "技术栈",
+      "design": "设计语言",
+      "trends": "技术趋势",
+      "data": "数据",
+      "strategy": "战略与交付"
+    }
   }
 }

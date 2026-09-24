@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/observability-teams-of-five.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/observability-teams-of-five.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/observability-teams-of-five.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/observability-teams-of-five.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Observability for teams of five — Yonder Tech" />
+	<meta property="og:description" content="You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/observability-teams-of-five.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Observability for teams of five — Yonder Tech" />
+	<meta name="twitter:description" content="You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs." />
+	<title>Observability for teams of five — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/observability-teams-of-five.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">Tech stack</span>
+				</div>
+				<h1 class="yt-article-h1">Observability for teams of five</h1>
+				<p class="yt-article-dek">You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-07-08">8 July 2026</time> · 2 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>The observability industry is built for large engineering organisations: distributed tracing across hundreds of services, petabytes of logs, dedicated teams to run it all. Small teams look at that world, conclude it is not for them, and end up with nothing — until a customer rings to say the site has been down since lunchtime.</p>
+					<p>There is a sensible middle. A team of five developers running a handful of applications can know, within a minute or two, when something is wrong and roughly where, for a modest monthly cost and a few days of setup. It comes down to four signals, one dashboard, and discipline about what is allowed to wake people up.</p>
+					<h2>The four signals</h2>
+					<p>For every user-facing service, measure:</p>
+					<ul>
+						<li><strong>Traffic.</strong> Requests per minute. A sudden drop is often the first sign of an outage that nothing else caught.</li>
+						<li><strong>Errors.</strong> The share of requests that fail. Watch the rate, not the count.</li>
+						<li><strong>Latency.</strong> How long requests take — the slow end, not the average. The 95th percentile is where users feel pain.</li>
+						<li><strong>Saturation.</strong> How close the busiest resource is to its limit: database connections, memory, disk, queue depth.</li>
+					</ul>
+					<p>These four, sometimes called the golden signals, answer the first question in any incident: is it broken, for whom, and since when.</p>
+					<h2>Logs that answer questions</h2>
+					<p>Most small-team logs are unstructured text written for the developer who wrote the code. Make them structured — one JSON object per event, with consistent fields such as request ID, user or tenant, route and duration. Send them to one place with a retention period that fits your needs and budget. When something goes wrong, you should be able to find every log line for one failing request in a single search.</p>
+					<p>Tracing is worth adding once requests cross more than two or three services. Open standards such as OpenTelemetry mean the instrumentation you add now will work with whatever tool you choose later.</p>
+					<h2>One dashboard, and alerts that mean something</h2>
+					<p>Put the four signals for every service on a single screen. That is the dashboard the team opens when someone says &quot;the site feels slow&quot;.</p>
+					<p>Then be ruthless about alerts. The rule we use: an alert that pages a person must mean a customer is affected now, and must say what to check first. Everything else — a disk at 70 percent, a slow background job — goes to a channel people read during working hours. Teams that page on everything learn to ignore pages, which is worse than having none.</p>
+					<h2>Also measure from outside</h2>
+					<p>Add a simple external check that loads your key pages and completes one important journey — sign in, search, submit a form — every few minutes from outside your own infrastructure. It will catch the failures that your internal metrics cannot see: an expired certificate, a DNS mistake, a broken third-party script.</p>
+					<h2>Start with the next incident</h2>
+					<p>If you have none of this today, don&#39;t try to build it all at once. After the next incident, write down which question took longest to answer, and instrument that first. Within a few months the gaps close themselves, guided by the problems you actually have.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="frontend-framework-is-a-team.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Choosing a frontend framework is mostly choosing a team</h3>
+						<p class="card-body">The technical differences between mainstream frameworks have narrowed. What still differs is who you can hire, how long the code will be supported, and how much of it you actually need.</p>
+						<div class="card-meta">2 September 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="static-first.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Static first: why our own site ships as plain files</h3>
+						<p class="card-body">No server, no database, no framework runtime — and pages that load before you finish blinking. Static generation is the most underrated architecture for most business websites.</p>
+						<div class="card-meta">24 June 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="postgres-default.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Postgres is the default database, and it should be</h3>
+						<p class="card-body">Documents, search, queues, vectors for AI retrieval — one well-run Postgres now covers what used to take four products. The reasons to add a second database are fewer than they were.</p>
+						<div class="card-meta">29 April 2026 · 3 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Observability for teams of five",
+		"description": "You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs.",
+		"datePublished": "2026-07-08",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/observability-teams-of-five.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/observability-teams-of-five.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

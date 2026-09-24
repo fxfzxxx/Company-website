@@ -13,8 +13,9 @@ export const esc = (value) => String(value).replace(/[&<>"']/g, (c) => ENTITIES[
    root      — hops back to the repository root, for legacy links and assets
    homeHref  — this locale's homepage
    altHref   — the same page in the other locale
-   path      — path from the site root, used for canonical and hreflang  */
-export const context = ({ loc, ui, home, depth, path, altPath }) => {
+   path      — path from the site root, used for canonical and hreflang
+   section   — "cases" or "insights" for pages one level down  */
+export const context = ({ loc, ui, home, depth, path, altPath, section }) => {
 	const other = loc === "en" ? "zh" : "en";
 	const root = "../".repeat(depth);
 	return {
@@ -26,7 +27,8 @@ export const context = ({ loc, ui, home, depth, path, altPath }) => {
 		path,
 		altPath,
 		homeHref: depth === 1 ? "index.html" : `${"../".repeat(depth - 1)}index.html`,
-		libraryHref: depth === 1 ? "cases/index.html" : "index.html",
+		libraryHref: depth === 1 ? "cases/index.html" : section === "cases" ? "index.html" : "../cases/index.html",
+		insightsHref: depth === 1 ? "insights/index.html" : section === "insights" ? "index.html" : "../insights/index.html",
 		altHref: `${root}${altPath}`,
 		canonical: `${SITE}/${path}`,
 	};
@@ -97,7 +99,7 @@ export const orgJsonLd = () => `	<script type="application/ld+json">
 /* The nav is six items. Anchors resolve against this locale's homepage, so
    they work from the library and detail pages too. */
 export const header = (ctx, current) => {
-	const { home, homeHref, libraryHref, loc, altHref, root } = ctx;
+	const { home, homeHref, libraryHref, insightsHref, loc, altHref, root } = ctx;
 	const n = home.nav;
 	const anchor = (id) => (homeHref === "index.html" ? `#${id}` : `${homeHref}#${id}`);
 	const links = [
@@ -105,7 +107,7 @@ export const header = (ctx, current) => {
 		{ label: n.library, href: libraryHref, key: "library" },
 		{ label: n.capabilities, href: anchor("capabilities"), key: "capabilities" },
 		{ label: n.method, href: anchor("method"), key: "method" },
-		{ label: n.insights, href: anchor("insights"), key: "insights" },
+		{ label: n.insights, href: insightsHref, key: "insights" },
 		{ label: n.contact, href: "#contact", key: "contact" },
 	];
 
@@ -199,10 +201,11 @@ export const contact = (ctx, { lines, body, withForm }) => {
    the only route from here to the rest of the site (services, insights,
    about, news), which the six-item nav no longer carries. */
 export const footer = (ctx) => {
-	const { home, root, homeHref, libraryHref, altHref } = ctx;
+	const { home, root, homeHref, libraryHref, insightsHref, altHref } = ctx;
 	const f = home.footer;
 	const resolve = (href) => {
 		if (href === "@library") return libraryHref;
+		if (href === "@insights") return insightsHref;
 		// "#section" is a section of this locale's homepage
 		if (href.startsWith("#")) return homeHref === "index.html" ? href : `${homeHref}${href}`;
 		if (/^(mailto:|tel:|https?:)/.test(href)) return href;

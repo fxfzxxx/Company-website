@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="想知道软件在生产环境里在干什么，并不需要一个平台团队。四个信号、一块看板、一条关于告警的规则，就能覆盖小团队的大部分需求。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/observability-teams-of-five.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/observability-teams-of-five.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/observability-teams-of-five.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/observability-teams-of-five.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="五人团队的可观测性 — Yonder Tech" />
+	<meta property="og:description" content="想知道软件在生产环境里在干什么，并不需要一个平台团队。四个信号、一块看板、一条关于告警的规则，就能覆盖小团队的大部分需求。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/observability-teams-of-five.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="五人团队的可观测性 — Yonder Tech" />
+	<meta name="twitter:description" content="想知道软件在生产环境里在干什么，并不需要一个平台团队。四个信号、一块看板、一条关于告警的规则，就能覆盖小团队的大部分需求。" />
+	<title>五人团队的可观测性 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/observability-teams-of-five.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">技术栈</span>
+				</div>
+				<h1 class="yt-article-h1">五人团队的可观测性</h1>
+				<p class="yt-article-dek">想知道软件在生产环境里在干什么，并不需要一个平台团队。四个信号、一块看板、一条关于告警的规则，就能覆盖小团队的大部分需求。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-07-08">2026 年 7 月 8 日</time> · 3 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>可观测性行业是为大型工程组织打造的：横跨数百个服务的分布式追踪、以 PB 计的日志、专门运营这一切的团队。小团队看着那个世界，认定那与自己无关，结果什么都没有——直到客户打电话来说网站从中午起就打不开了。</p>
+					<p>其实有一个合理的中间地带。一个五人开发团队运行着几个应用，完全可以在一两分钟内知道哪里出了问题、大概在哪里，花费适中的月费和几天的搭建时间。关键就在于四个信号、一块看板，以及关于“什么事情可以把人叫醒”的纪律。</p>
+					<h2>四个信号</h2>
+					<p>对每一个面向用户的服务，测量：</p>
+					<ul>
+						<li><strong>流量。</strong> 每分钟请求数。突然下降，往往是其他任何手段都没发现的故障的第一个信号。</li>
+						<li><strong>错误。</strong> 失败请求的比例。看比率，不看次数。</li>
+						<li><strong>延迟。</strong> 请求耗时——看慢的那一端，而不是平均值。第 95 百分位，才是用户感到痛苦的地方。</li>
+						<li><strong>饱和度。</strong> 最繁忙的资源离上限还有多远：数据库连接、内存、磁盘、队列深度。</li>
+					</ul>
+					<p>这四个信号有时被称为“黄金信号”，它们回答任何事故中的第一个问题：是不是坏了、对谁坏了、从什么时候开始。</p>
+					<h2>能回答问题的日志</h2>
+					<p>大多数小团队的日志，是写给写这段代码的开发者自己看的非结构化文本。把它们结构化——每个事件一个 JSON 对象，带着一致的字段，比如请求 ID、用户或租户、路由和耗时。把它们发到同一个地方，保留期限根据需求和预算来定。出问题时，你应该能通过一次搜索，找到某个失败请求的全部日志。</p>
+					<p>当请求跨越超过两三个服务时，就值得加上链路追踪。OpenTelemetry 这样的开放标准意味着，你现在加的埋点，将来换任何工具都能继续用。</p>
+					<h2>一块看板，以及有意义的告警</h2>
+					<p>把每个服务的四个信号放在同一块屏幕上。当有人说“网站感觉有点慢”时，团队打开的就是这块看板。</p>
+					<p>然后对告警毫不留情。我们的规则是：会把人叫醒的告警，必须意味着此刻有客户受到影响，并且必须写明先检查什么。其他一切——磁盘用了 70%、某个后台任务变慢——都发到一个大家在工作时间查看的频道。什么都报警的团队会学会忽略报警，这比根本没有报警更糟。</p>
+					<h2>也要从外部测量</h2>
+					<p>加一个简单的外部检查：每隔几分钟，从你自己的基础设施之外加载关键页面，并走完一段重要流程——登录、搜索、提交表单。它能抓到内部指标看不见的故障：过期的证书、DNS 配置错误、坏掉的第三方脚本。</p>
+					<h2>从下一次事故开始</h2>
+					<p>如果你今天什么都没有，不要试图一次建好。下一次事故之后，写下哪个问题花了最长时间才回答出来，先给它加上监测。几个月之内，在你真实遇到的问题指引下，缺口会自己慢慢补上。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="frontend-framework-is-a-team.html">
+						<div class="card-kicker">技术栈</div>
+						<h3 class="card-title">选前端框架，主要是在选团队</h3>
+						<p class="card-body">主流框架之间的技术差异已经缩小。真正还不同的，是你能招到谁、代码能被支持多久，以及你实际需要多少框架。</p>
+						<div class="card-meta">2026 年 9 月 2 日 · 2 分钟阅读</div>
+					</a>
+					<a class="card" href="static-first.html">
+						<div class="card-kicker">技术栈</div>
+						<h3 class="card-title">静态优先：为什么我们自己的网站就是一堆普通文件</h3>
+						<p class="card-body">没有服务器、没有数据库、没有框架运行时——页面在你眨完眼之前就加载好了。对大多数企业网站来说，静态生成是最被低估的架构。</p>
+						<div class="card-meta">2026 年 6 月 24 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="postgres-default.html">
+						<div class="card-kicker">技术栈</div>
+						<h3 class="card-title">Postgres 是默认数据库，也理应如此</h3>
+						<p class="card-body">文档、搜索、队列、用于 AI 检索的向量——一个运行良好的 Postgres，如今就能覆盖过去需要四个产品才能完成的工作。再加一个数据库的理由，比以前少多了。</p>
+						<div class="card-meta">2026 年 4 月 29 日 · 3 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "五人团队的可观测性",
+		"description": "想知道软件在生产环境里在干什么，并不需要一个平台团队。四个信号、一块看板、一条关于告警的规则，就能覆盖小团队的大部分需求。",
+		"datePublished": "2026-07-08",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/observability-teams-of-five.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/observability-teams-of-five.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

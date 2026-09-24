@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Traditional software is either right or broken. AI features are usually right, sometimes wrong, and always confident-sounding. The interface has to carry the uncertainty the model won&#39;t." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/interfaces-for-uncertainty.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/interfaces-for-uncertainty.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/interfaces-for-uncertainty.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/interfaces-for-uncertainty.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Designing interfaces for answers that might be wrong — Yonder Tech" />
+	<meta property="og:description" content="Traditional software is either right or broken. AI features are usually right, sometimes wrong, and always confident-sounding. The interface has to carry the uncertainty the model won&#39;t." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/interfaces-for-uncertainty.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Designing interfaces for answers that might be wrong — Yonder Tech" />
+	<meta name="twitter:description" content="Traditional software is either right or broken. AI features are usually right, sometimes wrong, and always confident-sounding. The interface has to carry the uncertainty the model won&#39;t." />
+	<title>Designing interfaces for answers that might be wrong — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/interfaces-for-uncertainty.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">Design language</span>
+				</div>
+				<h1 class="yt-article-h1">Designing interfaces for answers that might be wrong</h1>
+				<p class="yt-article-dek">Traditional software is either right or broken. AI features are usually right, sometimes wrong, and always confident-sounding. The interface has to carry the uncertainty the model won&#39;t.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-08-19">19 August 2026</time> · 2 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>For most of the history of software, interface design could assume that the system was correct. A calculator shows the total; a booking system shows the booking. If the answer was wrong, that was a bug, and bugs were fixed. Users learned to trust what the screen said.</p>
+					<p>AI features break that assumption. A summary can leave out the one sentence that mattered. An extracted invoice total can be read from the wrong line. A suggested reply can be fluent, polite and factually wrong. The model delivers all of these in the same confident tone as its correct answers, so the interface is the only place left where uncertainty can be made visible.</p>
+					<p>This is now one of the most important design problems in business software, and most products are still handling it badly — either hiding the uncertainty entirely or smothering every answer in disclaimers nobody reads.</p>
+					<h2>Show the source, not a warning</h2>
+					<p>The most effective single pattern is to show where an answer came from. A summary with each point linked to the passage it was drawn from. An extracted amount highlighted on the original document. A recommendation with the three records that support it.</p>
+					<p>Sources do what disclaimers cannot. They let users check quickly, at the moment of doubt, without leaving the flow. And they calibrate trust naturally: after a few checks that confirm the answer, users rely on it more; after one that doesn&#39;t, they know to look.</p>
+					<h2>Make review the default for consequential actions</h2>
+					<p>Where an AI output will trigger something that matters — sending an email, approving a payment, updating a customer record — design the flow around review rather than confirmation. Show the draft, highlight what was generated or changed, and make editing as easy as accepting. A single &quot;Approve&quot; button with the output hidden behind a fold invites rubber-stamping.</p>
+					<h2>Express confidence in the user&#39;s terms</h2>
+					<p>Numeric confidence scores are rarely helpful; &quot;82%&quot; means little to most people and invites false precision. Better approaches:</p>
+					<ul>
+						<li><strong>Sort by confidence</strong> instead of labelling it: items the system is sure about in one group, items that need a look in another.</li>
+						<li><strong>Mark specific fields,</strong> not whole results: the date was read clearly, the amount was ambiguous.</li>
+						<li><strong>Let the system say it doesn&#39;t know.</strong> An empty field marked &quot;couldn&#39;t find this&quot; is far more useful than a plausible guess.</li>
+					</ul>
+					<h2>Make correction feed back</h2>
+					<p>When a user corrects an AI output, capture it. The correction improves the next answer, becomes an evaluation case, and — shown back to the user later — builds confidence that the system learns. An interface where fixing a mistake disappears into nothing teaches users that fixing mistakes is pointless.</p>
+					<h2>Keep the AI visually honest</h2>
+					<p>Mark AI-generated content consistently, in a quiet way, so users always know what was written by a person and what was not. Avoid the sparkle-and-gradient styling that presents AI output as special. It should look like any other content — just clearly labelled, and always one click from its source.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="design-systems-without-design-team.html">
+						<div class="card-kicker">Design language</div>
+						<h3 class="card-title">A design system for teams without a design team</h3>
+						<p class="card-body">Most organisations that need consistency cannot justify a dedicated design-system group. A small, opinionated kit — and the discipline to keep it small — gets them most of the way.</p>
+						<div class="card-meta">22 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="motion-with-a-job.html">
+						<div class="card-kicker">Design language</div>
+						<h3 class="card-title">Motion with a job to do</h3>
+						<p class="card-body">Animation is either explaining something or getting in the way. A short guide to the motion that earns its milliseconds, and the kind that should be cut.</p>
+						<div class="card-meta">10 June 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="type-does-the-heavy-lifting.html">
+						<div class="card-kicker">Design language</div>
+						<h3 class="card-title">Let the type do the heavy lifting</h3>
+						<p class="card-body">Illustration budgets shrink and stock photography all looks the same. Typography is the one brand asset that appears on every screen — and most design systems still treat it as an afterthought.</p>
+						<div class="card-meta">6 May 2026 · 2 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Designing interfaces for answers that might be wrong",
+		"description": "Traditional software is either right or broken. AI features are usually right, sometimes wrong, and always confident-sounding. The interface has to carry the uncertainty the model won't.",
+		"datePublished": "2026-08-19",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/interfaces-for-uncertainty.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/interfaces-for-uncertainty.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="一个没有评测集的 AI 功能，是一个无法安全修改的功能。像对待测试代码一样对待评测集，上线的恐惧就会消掉一大半。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/evals-are-unit-tests.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/evals-are-unit-tests.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/evals-are-unit-tests.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/evals-are-unit-tests.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="评测集，就是新时代的单元测试 — Yonder Tech" />
+	<meta property="og:description" content="一个没有评测集的 AI 功能，是一个无法安全修改的功能。像对待测试代码一样对待评测集，上线的恐惧就会消掉一大半。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/evals-are-unit-tests.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="评测集，就是新时代的单元测试 — Yonder Tech" />
+	<meta name="twitter:description" content="一个没有评测集的 AI 功能，是一个无法安全修改的功能。像对待测试代码一样对待评测集，上线的恐惧就会消掉一大半。" />
+	<title>评测集，就是新时代的单元测试 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/evals-are-unit-tests.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">AI 与模型</span>
+				</div>
+				<h1 class="yt-article-h1">评测集，就是新时代的单元测试</h1>
+				<p class="yt-article-dek">一个没有评测集的 AI 功能，是一个无法安全修改的功能。像对待测试代码一样对待评测集，上线的恐惧就会消掉一大半。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-04-01">2026 年 4 月 1 日</time> · 3 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>问一个团队怎么知道他们的 AI 功能是好的，诚实的回答往往是：我们试了很多次，感觉还不错。在单元测试普及之前，软件就是这样测试的。它对演示有效，却会在第一次有人改提示词、升级模型、往知识库里加文档时失效——没人说得清效果是变好了还是变差了。</p>
+					<p>解决办法和二十年前软件工程找到的一样：把检查写下来，自动运行，检查不通过就不上线。对 AI 功能来说，这些检查叫做评测（evaluations），它们在代码库里理应享有和测试同等的地位。</p>
+					<h2>评测集是什么</h2>
+					<p>最简单的评测集，就是一个文件，里面是输入以及“好的输出长什么样”。对客服助手来说，可能是两百个真实客户问题，配上资深客服会给出的答案；对文档抽取器来说，是一百张发票及其正确字段；对分类器来说，是几千条带标签的样本。</p>
+					<p>每个样本都要打分。有些分数是确定的：类别选对没有、金额抽对没有、该拒绝时拒绝了没有。有些需要判断：这个回答是否忠实于原文、是否包含关键事实。后一类可以让另一个模型按评分细则打分，前提是你先抽样核对过它的打分与人工判断是否一致。</p>
+					<h2>像对待代码一样对待它</h2>
+					<ul>
+						<li><strong>放进代码仓库。</strong> 评测集和它所测试的提示词、代码一起版本化。任何一方改动，都要跑一遍。</li>
+						<li><strong>在 CI 里运行。</strong> 每个涉及提示词、检索设置或模型版本的合并请求都会得到一个分数。下降超过设定阈值，就禁止合并。</li>
+						<li><strong>每个 bug 都变成一个用例。</strong> 用户报告了一个糟糕的回答，它先成为评测样本，再去修复。评测集会朝着你的功能真实的失败方式生长。</li>
+						<li><strong>长期追踪分数。</strong> 一张按版本列出准确率、成本和延迟的图表，是你能给项目发起人看的最有说服力的文件。</li>
+					</ul>
+					<h2>分部件测，而不只测整体</h2>
+					<p>端到端分数告诉你出了问题，部件分数告诉你问题在哪。对基于检索的助手，要在衡量回答之前，单独衡量检索——有没有找到正确段落。我们排查过的大多数退化，最后都是检索改动导致的，而不是模型改动；单独的检索分数能在几分钟而不是几天内找到它们。</p>
+					<h2>它带来的改变</h2>
+					<p>好的评测集的实际效果，是让改动重新变得便宜。新模型发布时，跑一遍评测集，一小时内就知道它对你来说是否更好、代价几何。为某个棘手用例调整提示词时，立刻就能看到有没有弄坏另外三个。项目发起人问功能是否在变好时，你有一个数字可以回答。</p>
+					<p>没有评测集，每次改动都是一场赌博，最安全的做法就是什么都不碰——而对一项进步如此之快的技术来说，这本身就是一种失败。</p>
+					<blockquote><p>如果你无法衡量一次改动是否让结果更好，你就不是在迭代，而是在生产环境里瞎猜。</p></blockquote>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="governing-ai-use.html">
+						<div class="card-kicker">AI 与模型</div>
+						<h3 class="card-title">管住 AI 的使用，而不是禁止它</h3>
+						<p class="card-body">员工已经在用 AI 工具了，不管有没有被批准。一份简短实用的政策，加上大家真正愿意用的工具，比一纸没人遵守的禁令更能保护企业。</p>
+						<div class="card-meta">2026 年 8 月 5 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="prompts-as-specifications.html">
+						<div class="card-kicker">AI 与模型</div>
+						<h3 class="card-title">像写规格说明一样写提示词</h3>
+						<p class="card-body">能在生产环境里站得住的提示词，读起来不像巧妙的咒语，而像写给一位新同事的清晰简报。把它们当代码对待：版本化、要评审、要测试。</p>
+						<div class="card-meta">2026 年 7 月 15 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="real-cost-of-an-ai-feature.html">
+						<div class="card-kicker">AI 与模型</div>
+						<h3 class="card-title">一个 AI 功能的真实成本</h3>
+						<p class="card-body">token 账单是预算里最小的那一行。评测、人工复核、支持和变更管理，才是 AI 功能真正花钱的地方——也是商业论证应该最先看的地方。</p>
+						<div class="card-meta">2026 年 6 月 17 日 · 3 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "评测集，就是新时代的单元测试",
+		"description": "一个没有评测集的 AI 功能，是一个无法安全修改的功能。像对待测试代码一样对待评测集，上线的恐惧就会消掉一大半。",
+		"datePublished": "2026-04-01",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/evals-are-unit-tests.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/evals-are-unit-tests.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="An AI feature without an evaluation suite is a feature you cannot change safely. Treat the eval set like test code, and most of the fear goes out of shipping." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/evals-are-unit-tests.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/evals-are-unit-tests.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/evals-are-unit-tests.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/evals-are-unit-tests.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Evaluations are the new unit tests — Yonder Tech" />
+	<meta property="og:description" content="An AI feature without an evaluation suite is a feature you cannot change safely. Treat the eval set like test code, and most of the fear goes out of shipping." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/evals-are-unit-tests.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Evaluations are the new unit tests — Yonder Tech" />
+	<meta name="twitter:description" content="An AI feature without an evaluation suite is a feature you cannot change safely. Treat the eval set like test code, and most of the fear goes out of shipping." />
+	<title>Evaluations are the new unit tests — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/evals-are-unit-tests.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">AI &amp; models</span>
+				</div>
+				<h1 class="yt-article-h1">Evaluations are the new unit tests</h1>
+				<p class="yt-article-dek">An AI feature without an evaluation suite is a feature you cannot change safely. Treat the eval set like test code, and most of the fear goes out of shipping.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-04-01">1 April 2026</time> · 3 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>Ask a team how they know their AI feature works and the honest answer is often: we tried it a lot, and it seemed good. That is how software was tested before unit tests became normal. It works for a demo. It fails the first time someone changes a prompt, upgrades a model or adds a document to the knowledge base, and nobody can say whether things got better or worse.</p>
+					<p>The fix is the same one software engineering found twenty years ago. Write the checks down, run them automatically, and refuse to ship when they fail. For AI features, those checks are called evaluations, and they deserve the same status in the codebase as tests.</p>
+					<h2>What an evaluation set is</h2>
+					<p>At its simplest, an eval set is a file of inputs paired with what a good output looks like. For a support assistant, that might be two hundred real customer questions with the answer a senior agent would give. For a document extractor, a hundred invoices with the correct fields. For a classifier, a few thousand labelled examples.</p>
+					<p>Each example is scored. Some scores are exact: did it pick the right category, extract the right amount, refuse when it should. Some need judgement: is this answer faithful to the source, does it contain the key fact. For those, a second model can grade against a rubric, provided you check its grading against human judgement on a sample first.</p>
+					<h2>Treat it like code</h2>
+					<ul>
+						<li><strong>Keep it in the repository.</strong> The eval set is versioned with the prompts and code it tests. A change to either runs the suite.</li>
+						<li><strong>Run it in CI.</strong> Every pull request that touches a prompt, a retrieval setting or a model version gets a score. A drop beyond a set tolerance blocks the merge.</li>
+						<li><strong>Add a case for every bug.</strong> When a user reports a bad answer, it becomes an eval example before it becomes a fix. The suite grows toward the ways your feature actually fails.</li>
+						<li><strong>Track the score over time.</strong> A chart of accuracy, cost and latency per release is the most persuasive document you can show a sponsor.</li>
+					</ul>
+					<h2>Test the parts, not just the whole</h2>
+					<p>End-to-end scores tell you something is wrong; component scores tell you where. For a retrieval-based assistant, measure retrieval separately — was the right passage found — before measuring the answer. Most regressions we investigate turn out to be retrieval changes, not model changes, and a separate score finds them in minutes rather than days.</p>
+					<h2>What it changes</h2>
+					<p>The practical effect of a good eval suite is that change becomes cheap again. When a new model is released, you run the suite and know within an hour whether it is better for you, and at what cost. When a prompt needs adjusting for one awkward case, you can see immediately whether you broke three others. When a stakeholder asks whether the feature is getting better, you have a number.</p>
+					<p>Without one, every change is a gamble and the safest course is to never touch anything — which, for a technology improving as quickly as this one, is its own kind of failure.</p>
+					<blockquote><p>If you cannot measure whether a change made it better, you are not iterating. You are guessing in production.</p></blockquote>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="governing-ai-use.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Governing AI use without banning it</h3>
+						<p class="card-body">Staff are already using AI tools, approved or not. A short, practical policy — backed by tools people actually want to use — protects the business better than a prohibition nobody follows.</p>
+						<div class="card-meta">5 August 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="prompts-as-specifications.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Write prompts like specifications</h3>
+						<p class="card-body">The prompts that hold up in production read less like clever incantations and more like a well-written brief for a new colleague. Treat them as code: versioned, reviewed and tested.</p>
+						<div class="card-meta">15 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="real-cost-of-an-ai-feature.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">The real cost of an AI feature</h3>
+						<p class="card-body">The token bill is the smallest line in the budget. Evaluation, review, support and change management are where AI features actually cost money — and where the business case should look first.</p>
+						<div class="card-meta">17 June 2026 · 3 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Evaluations are the new unit tests",
+		"description": "An AI feature without an evaluation suite is a feature you cannot change safely. Treat the eval set like test code, and most of the fear goes out of shipping.",
+		"datePublished": "2026-04-01",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/evals-are-unit-tests.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/evals-are-unit-tests.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

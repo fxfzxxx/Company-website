@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="A relational database, server-rendered pages and one well-understood cloud. The most reliable systems we saw last year were built from parts nobody would put on a conference slide." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/boring-stack.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/boring-stack.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/boring-stack.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/boring-stack.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="The boring stack is winning, and that is good news — Yonder Tech" />
+	<meta property="og:description" content="A relational database, server-rendered pages and one well-understood cloud. The most reliable systems we saw last year were built from parts nobody would put on a conference slide." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/boring-stack.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="The boring stack is winning, and that is good news — Yonder Tech" />
+	<meta name="twitter:description" content="A relational database, server-rendered pages and one well-understood cloud. The most reliable systems we saw last year were built from parts nobody would put on a conference slide." />
+	<title>The boring stack is winning, and that is good news — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/boring-stack.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">Tech stack</span>
+				</div>
+				<h1 class="yt-article-h1">The boring stack is winning, and that is good news</h1>
+				<p class="yt-article-dek">A relational database, server-rendered pages and one well-understood cloud. The most reliable systems we saw last year were built from parts nobody would put on a conference slide.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-02-11">11 February 2026</time> · 2 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>Every few years the industry rediscovers that the simplest architecture that could possibly work usually does. We are in one of those years. Across the systems we reviewed for clients in the last twelve months, the ones that were cheapest to run, easiest to hand over and quickest to change shared a family resemblance: they were boring.</p>
+					<p>By boring we mean something specific. A single relational database, usually Postgres. An application that renders most of its pages on the server. One cloud provider, used mostly for its plainest services. A queue where a queue is genuinely needed, and nowhere else. A deploy that a new developer can understand on their first afternoon.</p>
+					<h2>Why the pendulum swung back</h2>
+					<p>The last decade gave us an enormous toolkit for problems of scale: microservices, event streaming, polyglot persistence, client-side everything. These are real tools for real problems. The trouble is that most New Zealand businesses do not have those problems. A company with forty thousand customers and a dozen developers does not have a Netflix problem; it has a hiring problem, a handover problem and a budget problem.</p>
+					<p>Complexity has a running cost that rarely appears in the original business case. Every additional service is something to monitor, patch, secure and explain. Every additional data store is another place for records to disagree. When the team that built it moves on, the architecture diagram becomes an archaeological artefact.</p>
+					<h2>What boring buys you</h2>
+					<ul>
+						<li><strong>Fewer ways to fail.</strong> A monolith talking to one database has a handful of failure modes, all of them well documented. A distributed system has combinations.</li>
+						<li><strong>Cheaper people.</strong> Postgres, a mainstream web framework and a standard cloud are skills you can hire for in Auckland or Christchurch without a recruiter&#39;s premium.</li>
+						<li><strong>Faster change.</strong> When a feature touches one codebase and one schema, it ships in a day. When it touches four services, it ships after a meeting.</li>
+						<li><strong>Honest costs.</strong> A single database server and a handful of application instances produce a bill you can predict to within a few percent.</li>
+					</ul>
+					<h2>Boring is not the same as old</h2>
+					<p>This is not an argument against new technology. Modern Postgres does things that used to need three separate products: JSON documents, full-text search, vector similarity for AI retrieval, logical replication. Modern server-rendered frameworks deliver interactive pages without shipping a megabyte of JavaScript. Choosing boring means choosing the current version of well-understood tools, not freezing in 2012.</p>
+					<p>It also does not mean never splitting things up. When a part of the system genuinely has different scaling, security or release needs — a payment integration, a heavy batch job, a public API with its own customers — carve it out. The test is whether you can name the specific pressure that justifies the boundary.</p>
+					<h2>A useful default</h2>
+					<p>When we start a new build, the default is one repository, one deployable application, one Postgres database, server-rendered pages with interactivity added where it earns its place, and managed hosting. Every departure from that default has to be argued for in writing, with the cost of running it included.</p>
+					<p>Most projects never need to depart from it. The ones that do are better for having had to say why.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="frontend-framework-is-a-team.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Choosing a frontend framework is mostly choosing a team</h3>
+						<p class="card-body">The technical differences between mainstream frameworks have narrowed. What still differs is who you can hire, how long the code will be supported, and how much of it you actually need.</p>
+						<div class="card-meta">2 September 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="observability-teams-of-five.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Observability for teams of five</h3>
+						<p class="card-body">You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs.</p>
+						<div class="card-meta">8 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="static-first.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Static first: why our own site ships as plain files</h3>
+						<p class="card-body">No server, no database, no framework runtime — and pages that load before you finish blinking. Static generation is the most underrated architecture for most business websites.</p>
+						<div class="card-meta">24 June 2026 · 2 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "The boring stack is winning, and that is good news",
+		"description": "A relational database, server-rendered pages and one well-understood cloud. The most reliable systems we saw last year were built from parts nobody would put on a conference slide.",
+		"datePublished": "2026-02-11",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/boring-stack.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/boring-stack.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

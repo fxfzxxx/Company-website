@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="The rewrite that replaces everything at once is the most reliable way to lose two years. Replacing a system one route at a time is slower to describe and much faster to finish." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/legacy-modernisation-no-big-bang.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/legacy-modernisation-no-big-bang.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/legacy-modernisation-no-big-bang.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/legacy-modernisation-no-big-bang.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Legacy modernisation without the big bang — Yonder Tech" />
+	<meta property="og:description" content="The rewrite that replaces everything at once is the most reliable way to lose two years. Replacing a system one route at a time is slower to describe and much faster to finish." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/legacy-modernisation-no-big-bang.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Legacy modernisation without the big bang — Yonder Tech" />
+	<meta name="twitter:description" content="The rewrite that replaces everything at once is the most reliable way to lose two years. Replacing a system one route at a time is slower to describe and much faster to finish." />
+	<title>Legacy modernisation without the big bang — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/legacy-modernisation-no-big-bang.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">Technology trends</span>
+				</div>
+				<h1 class="yt-article-h1">Legacy modernisation without the big bang</h1>
+				<p class="yt-article-dek">The rewrite that replaces everything at once is the most reliable way to lose two years. Replacing a system one route at a time is slower to describe and much faster to finish.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-07-29">29 July 2026</time> · 2 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>Every organisation with a system more than ten years old has had the conversation. The code is hard to change, the people who understood it have left, the technology is out of support, and the obvious answer seems to be a clean rewrite: build the new system alongside, switch over on a chosen weekend, retire the old one.</p>
+					<p>The obvious answer has a poor record. Big-bang rewrites routinely run far over time and budget, because the old system turns out to contain years of undocumented rules that nobody remembers until the new one gets them wrong. Meanwhile the business still needs changes, which now have to be made twice. Many such projects are cancelled after years of spending, leaving the old system in place and less maintained than before.</p>
+					<h2>Replace it one piece at a time</h2>
+					<p>The alternative has been known for decades and is often called the strangler pattern, after a vine that grows around a tree until it can stand alone. Instead of replacing the whole system at once, you put a routing layer in front of it and move functionality across piece by piece.</p>
+					<ol>
+						<li><strong>Put a front door in place.</strong> A proxy or gateway that receives every request and, at first, sends all of them to the old system. Nothing changes for users.</li>
+						<li><strong>Pick one slice.</strong> A single screen, a single report, one API endpoint — ideally something valuable, self-contained and painful in the current system.</li>
+						<li><strong>Build it new, and route to it.</strong> The gateway sends that slice to the new implementation. Everything else still goes to the old system.</li>
+						<li><strong>Compare, then commit.</strong> For a while, run both and check that they agree. When they do, retire the old version of that slice.</li>
+						<li><strong>Repeat.</strong> Each slice makes the old system smaller and the new one more complete, until the old system handles nothing and can be switched off.</li>
+					</ol>
+					<h2>Why it works better</h2>
+					<ul>
+						<li><strong>Value arrives early.</strong> The first improved screen can be live within weeks, not at the end of a multi-year programme.</li>
+						<li><strong>Risk is contained.</strong> Each switch affects one slice and can be reversed by changing a route.</li>
+						<li><strong>Hidden rules surface gradually.</strong> When the new version of a slice disagrees with the old one, you have found an undocumented rule — one at a time, with a working reference to compare against.</li>
+						<li><strong>The business keeps moving.</strong> New features go into the new system from the start, so nothing is built twice for long.</li>
+						<li><strong>You can stop.</strong> If priorities change halfway, you are left with a partly modernised system that works, not a half-finished rewrite that doesn&#39;t.</li>
+					</ul>
+					<h2>The hard parts</h2>
+					<p>Data is the difficult bit. Old and new implementations usually need to share a database for a while, or keep two in sync, and that needs careful design. The gateway becomes important infrastructure and must be treated as such. And the approach requires patience from sponsors, because progress is steady rather than dramatic.</p>
+					<p>But steady is the point. A modernisation that delivers something useful every month is one the business will keep funding. One that promises everything on a single weekend two years away rarely gets there.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="software-cheap-to-write.html">
+						<div class="card-kicker">Technology trends</div>
+						<h3 class="card-title">What changes when software is cheap to write</h3>
+						<p class="card-body">AI coding tools have made producing code dramatically faster. They have not made deciding what to build, checking that it works or running it for years any cheaper — and that shifts where the value is.</p>
+						<div class="card-meta">16 September 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="passkeys-ready.html">
+						<div class="card-kicker">Technology trends</div>
+						<h3 class="card-title">Passkeys are ready. Your login page probably isn&#39;t.</h3>
+						<p class="card-body">Phishing-resistant sign-in now works across the devices your customers already own. The technology is done; what remains is product design and a sensible migration plan.</p>
+						<div class="card-meta">1 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="webgpu-rich-web.html">
+						<div class="card-kicker">Technology trends</div>
+						<h3 class="card-title">WebGPU and the return of the rich web</h3>
+						<p class="card-body">Real-time 3D, large visualisations and on-device AI now run in an ordinary browser tab. The question is no longer whether the web can do it, but whether your content deserves it.</p>
+						<div class="card-meta">13 May 2026 · 2 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Legacy modernisation without the big bang",
+		"description": "The rewrite that replaces everything at once is the most reliable way to lose two years. Replacing a system one route at a time is slower to describe and much faster to finish.",
+		"datePublished": "2026-07-29",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/legacy-modernisation-no-big-bang.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/legacy-modernisation-no-big-bang.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

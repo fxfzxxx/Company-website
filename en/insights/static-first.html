@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="No server, no database, no framework runtime — and pages that load before you finish blinking. Static generation is the most underrated architecture for most business websites." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/static-first.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/static-first.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/static-first.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/static-first.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Static first: why our own site ships as plain files — Yonder Tech" />
+	<meta property="og:description" content="No server, no database, no framework runtime — and pages that load before you finish blinking. Static generation is the most underrated architecture for most business websites." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/static-first.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Static first: why our own site ships as plain files — Yonder Tech" />
+	<meta name="twitter:description" content="No server, no database, no framework runtime — and pages that load before you finish blinking. Static generation is the most underrated architecture for most business websites." />
+	<title>Static first: why our own site ships as plain files — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/static-first.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">Tech stack</span>
+				</div>
+				<h1 class="yt-article-h1">Static first: why our own site ships as plain files</h1>
+				<p class="yt-article-dek">No server, no database, no framework runtime — and pages that load before you finish blinking. Static generation is the most underrated architecture for most business websites.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-06-24">24 June 2026</time> · 2 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>The website you are reading is a folder of plain HTML files. A small script reads our content — case studies, these articles, the homepage copy in two languages — and writes out every page ahead of time. There is no application server, no database and no framework running in the visitor&#39;s browser. The whole build takes about a second.</p>
+					<p>We chose this deliberately, and we recommend the same approach to many clients whose websites are, like ours, mostly content that changes a few times a week rather than a few times a second.</p>
+					<h2>What static buys you</h2>
+					<ul>
+						<li><strong>Speed.</strong> A pre-built page is served straight from a content delivery network close to the visitor. There is nothing to compute, so the first byte arrives almost immediately and the page is readable before any script runs.</li>
+						<li><strong>Security.</strong> With no server-side code and no database behind the site, most common attack paths simply do not exist. There is nothing to inject into and nothing to patch on a Tuesday night.</li>
+						<li><strong>Cost.</strong> Hosting static files costs little or nothing at typical business traffic levels, and it does not rise sharply when a post is shared widely.</li>
+						<li><strong>Reliability.</strong> A static site keeps working when an API is down, when a plugin is abandoned, or when the developer who built it has moved on.</li>
+						<li><strong>Longevity.</strong> HTML written today will open in a browser in twenty years. Very few application frameworks can promise the same.</li>
+					</ul>
+					<h2>&quot;But we need…&quot;</h2>
+					<p>Most of the features people assume require a dynamic site do not.</p>
+					<ul>
+						<li><strong>Forms</strong> can post to a hosting platform&#39;s form handler or a small serverless function.</li>
+						<li><strong>Search</strong> across a few hundred pages can run in the browser from a pre-built index.</li>
+						<li><strong>Multilingual content</strong> is simply two sets of generated pages with the right <code>hreflang</code> links between them.</li>
+						<li><strong>Editing by non-developers</strong> works well with a headless content system that triggers a rebuild on publish, or — for small teams — with content in structured files and a simple review process.</li>
+						<li><strong>Interactive pieces</strong>, such as calculators, configurators or even real-time 3D, can be added to specific pages without making the whole site dynamic.</li>
+					</ul>
+					<h2>When static is the wrong answer</h2>
+					<p>If the content is personalised per visitor, changes by the second, or depends on who is logged in — a customer portal, a live dashboard, a shop with real-time stock — you need a server. Even then, the marketing and content pages around the application are usually better built statically and kept separate.</p>
+					<h2>How we build them</h2>
+					<p>Our own generator is a few hundred lines with no dependencies: content in JSON and Markdown, templates as plain functions, a validation step that refuses to build if a translation is missing, and a sitemap written on every run. It is deliberately boring. Anyone who can read JavaScript can change it, and there is nothing to upgrade.</p>
+					<p>For larger sites we use an established static site generator instead. The principle is the same: do the work once, at build time, rather than on every visit. Most business websites are read far more often than they are written, and their architecture should reflect that.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="frontend-framework-is-a-team.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Choosing a frontend framework is mostly choosing a team</h3>
+						<p class="card-body">The technical differences between mainstream frameworks have narrowed. What still differs is who you can hire, how long the code will be supported, and how much of it you actually need.</p>
+						<div class="card-meta">2 September 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="observability-teams-of-five.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Observability for teams of five</h3>
+						<p class="card-body">You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs.</p>
+						<div class="card-meta">8 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="postgres-default.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Postgres is the default database, and it should be</h3>
+						<p class="card-body">Documents, search, queues, vectors for AI retrieval — one well-run Postgres now covers what used to take four products. The reasons to add a second database are fewer than they were.</p>
+						<div class="card-meta">29 April 2026 · 3 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Static first: why our own site ships as plain files",
+		"description": "No server, no database, no framework runtime — and pages that load before you finish blinking. Static generation is the most underrated architecture for most business websites.",
+		"datePublished": "2026-06-24",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/static-first.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/static-first.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

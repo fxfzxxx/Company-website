@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="When a model doesn&#39;t know your business, the instinct is to train it. Nine times in ten, the better answer is to hand it the right documents at the right moment." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/retrieval-before-fine-tuning.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/retrieval-before-fine-tuning.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/retrieval-before-fine-tuning.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/retrieval-before-fine-tuning.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Retrieval before fine-tuning — Yonder Tech" />
+	<meta property="og:description" content="When a model doesn&#39;t know your business, the instinct is to train it. Nine times in ten, the better answer is to hand it the right documents at the right moment." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/retrieval-before-fine-tuning.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Retrieval before fine-tuning — Yonder Tech" />
+	<meta name="twitter:description" content="When a model doesn&#39;t know your business, the instinct is to train it. Nine times in ten, the better answer is to hand it the right documents at the right moment." />
+	<title>Retrieval before fine-tuning — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/retrieval-before-fine-tuning.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">AI &amp; models</span>
+				</div>
+				<h1 class="yt-article-h1">Retrieval before fine-tuning</h1>
+				<p class="yt-article-dek">When a model doesn&#39;t know your business, the instinct is to train it. Nine times in ten, the better answer is to hand it the right documents at the right moment.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-03-04">4 March 2026</time> · 3 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>A general-purpose language model knows a great deal about the world and nothing about your pricing policy, your product catalogue or last month&#39;s board minutes. When teams notice this, the first idea is usually fine-tuning: take the model, feed it the company&#39;s documents, and teach it the business.</p>
+					<p>It is an understandable instinct and, for most business problems, the wrong first move. The better starting point is retrieval — finding the handful of relevant passages for each question and placing them in front of the model as it answers.</p>
+					<h2>What each technique is actually for</h2>
+					<p>Fine-tuning changes how a model behaves. It is good at teaching style, format and narrow skills: always answer in this structure, classify these tickets into our twelve categories, write in our house voice. It is poor at teaching facts, and worse at teaching facts that change. A fine-tuned model that learned your price list in March will confidently quote March prices in September.</p>
+					<p>Retrieval changes what a model knows at the moment it answers. The facts live in your documents and databases, where they already are and where people already maintain them. Update the source, and the next answer reflects it. No retraining, no new model version, no drift between what the business knows and what the model believes.</p>
+					<h2>Why retrieval wins first</h2>
+					<ul>
+						<li><strong>Freshness.</strong> Knowledge stays in the systems of record. The model reads the current version every time.</li>
+						<li><strong>Citations.</strong> Because the model is answering from specific passages, it can show them. Users can check the source, and wrong answers can be traced to a wrong or missing document.</li>
+						<li><strong>Permissions.</strong> Retrieval can respect who is asking. A staff member sees answers drawn from documents they are allowed to read; a customer sees only public material. A fine-tuned model has no such boundary — whatever it learned, it may repeat to anyone.</li>
+						<li><strong>Cost and reversibility.</strong> A retrieval pipeline is ordinary software: an index, a search step, a prompt. It can be changed in an afternoon. A fine-tuning run is a training job, an evaluation cycle and a new artefact to manage.</li>
+					</ul>
+					<h2>Where retrieval projects actually go wrong</h2>
+					<p>Most retrieval systems that disappoint do so for boring reasons, not clever ones. The documents are out of date, duplicated or contradictory. Chunks are cut in the middle of a table, so the answer is on one side and the heading on the other. The search step finds passages that share words with the question but not meaning. Nobody measured whether the right passage was retrieved at all, so every failure was blamed on the model.</p>
+					<p>The fix is to treat retrieval as a search problem first. Build a small set of real questions with the passages that answer them, and measure whether the pipeline finds those passages before you measure anything about the model&#39;s prose. Hybrid search — combining keyword matching with vector similarity — is usually worth the small extra effort. Clean the source documents; it is the least glamorous and most effective step in the whole project.</p>
+					<h2>When fine-tuning earns its place</h2>
+					<p>Fine-tuning becomes worthwhile once retrieval is working and a specific, stable behaviour is still wrong: output that must follow a strict schema, a classification task with thousands of labelled examples, or a smaller, cheaper model that needs to match a larger one on a narrow job. Even then, the two combine well. A fine-tuned model that has learned how to read and cite your documents, fed by a good retrieval pipeline, is often the strongest design of all.</p>
+					<p>But start with retrieval. It is cheaper, safer and honest about where its answers come from.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="governing-ai-use.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Governing AI use without banning it</h3>
+						<p class="card-body">Staff are already using AI tools, approved or not. A short, practical policy — backed by tools people actually want to use — protects the business better than a prohibition nobody follows.</p>
+						<div class="card-meta">5 August 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="prompts-as-specifications.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Write prompts like specifications</h3>
+						<p class="card-body">The prompts that hold up in production read less like clever incantations and more like a well-written brief for a new colleague. Treat them as code: versioned, reviewed and tested.</p>
+						<div class="card-meta">15 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="real-cost-of-an-ai-feature.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">The real cost of an AI feature</h3>
+						<p class="card-body">The token bill is the smallest line in the budget. Evaluation, review, support and change management are where AI features actually cost money — and where the business case should look first.</p>
+						<div class="card-meta">17 June 2026 · 3 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Retrieval before fine-tuning",
+		"description": "When a model doesn't know your business, the instinct is to train it. Nine times in ten, the better answer is to hand it the right documents at the right moment.",
+		"datePublished": "2026-03-04",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/retrieval-before-fine-tuning.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/retrieval-before-fine-tuning.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="The most useful AI agents we have deployed this year do not talk to customers. They match invoices, chase exceptions and hand a person the three cases that actually need judgement." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/back-office-agents.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/back-office-agents.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/back-office-agents.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/back-office-agents.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Agents in the back office start with reconciliation — Yonder Tech" />
+	<meta property="og:description" content="The most useful AI agents we have deployed this year do not talk to customers. They match invoices, chase exceptions and hand a person the three cases that actually need judgement." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/back-office-agents.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Agents in the back office start with reconciliation — Yonder Tech" />
+	<meta name="twitter:description" content="The most useful AI agents we have deployed this year do not talk to customers. They match invoices, chase exceptions and hand a person the three cases that actually need judgement." />
+	<title>Agents in the back office start with reconciliation — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/back-office-agents.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">AI &amp; models</span>
+				</div>
+				<h1 class="yt-article-h1">Agents in the back office start with reconciliation</h1>
+				<p class="yt-article-dek">The most useful AI agents we have deployed this year do not talk to customers. They match invoices, chase exceptions and hand a person the three cases that actually need judgement.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-04-15">15 April 2026</time> · 2 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>&quot;Agent&quot; has become one of the most stretched words in technology. It can mean anything from a chatbot with a search tool to a system that plans and executes multi-step work across several applications with little supervision. The demos tend toward the dramatic end: an agent that books travel, negotiates with suppliers, runs a marketing campaign.</p>
+					<p>The deployments that are quietly paying for themselves look very different. They sit in finance and operations, they do narrow, repetitive work that already has clear rules, and they are designed around the moment where a person takes over.</p>
+					<h2>Why reconciliation is the ideal first job</h2>
+					<p>Reconciliation — matching one set of records against another and explaining the differences — has almost every property you want in a first agent project.</p>
+					<ul>
+						<li><strong>High volume, low variety.</strong> Hundreds or thousands of similar items a month, most of which match cleanly.</li>
+						<li><strong>Clear definition of done.</strong> A line either reconciles or it does not. The agent&#39;s success can be measured without debate.</li>
+						<li><strong>Existing rules.</strong> Finance teams already know why things fail to match: timing differences, partial payments, rounding, a supplier who invoices under two names.</li>
+						<li><strong>Contained blast radius.</strong> The agent proposes matches and drafts explanations; nothing leaves the building without a person approving it.</li>
+						<li><strong>Painful today.</strong> It is work people dislike, which makes adoption far easier than automating work people enjoy.</li>
+					</ul>
+					<h2>How the good ones are built</h2>
+					<p>The pattern we use is deliberately unambitious. The agent takes the unmatched items, applies deterministic rules first — exact amounts, reference numbers, known supplier aliases — and only then uses a language model for the fuzzy cases: reading a remittance email, recognising that &quot;ACME Ltd&quot; and &quot;Acme Holdings&quot; are the same payer, spotting that three payments sum to one invoice.</p>
+					<p>Every proposed match carries its reasoning and its evidence. Items are sorted into three buckets: matched with high confidence, matched but needs a glance, and genuinely unresolved. The person&#39;s job shifts from doing the matching to reviewing the second bucket and resolving the third.</p>
+					<p>Crucially, every human decision is recorded. When someone corrects a proposed match, that becomes a new rule or a new evaluation example. The agent gets better at this business&#39;s quirks month by month, in a way anyone can audit.</p>
+					<h2>What to measure</h2>
+					<ul>
+						<li>The share of items auto-matched, and the error rate in that share, checked by sampling.</li>
+						<li>Time from period close to reconciliation complete.</li>
+						<li>Hours of staff time per month on the task, before and after.</li>
+						<li>The number of exceptions that reach a person, and how long each takes.</li>
+					</ul>
+					<p>On the projects we have run, the headline result is rarely headcount. It is that month-end finishes days earlier, and the people who used to do the matching now spend their time on the exceptions that were always the valuable part of the job.</p>
+					<h2>The broader lesson</h2>
+					<p>Start agents where the rules are known, the output is checkable and a person already owns the result. Customer-facing autonomy can come later, once you have learned — on work that forgives mistakes — how your agents fail.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="governing-ai-use.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Governing AI use without banning it</h3>
+						<p class="card-body">Staff are already using AI tools, approved or not. A short, practical policy — backed by tools people actually want to use — protects the business better than a prohibition nobody follows.</p>
+						<div class="card-meta">5 August 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="prompts-as-specifications.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Write prompts like specifications</h3>
+						<p class="card-body">The prompts that hold up in production read less like clever incantations and more like a well-written brief for a new colleague. Treat them as code: versioned, reviewed and tested.</p>
+						<div class="card-meta">15 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="real-cost-of-an-ai-feature.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">The real cost of an AI feature</h3>
+						<p class="card-body">The token bill is the smallest line in the budget. Evaluation, review, support and change management are where AI features actually cost money — and where the business case should look first.</p>
+						<div class="card-meta">17 June 2026 · 3 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Agents in the back office start with reconciliation",
+		"description": "The most useful AI agents we have deployed this year do not talk to customers. They match invoices, chase exceptions and hand a person the three cases that actually need judgement.",
+		"datePublished": "2026-04-15",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/back-office-agents.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/back-office-agents.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="The prompts that hold up in production read less like clever incantations and more like a well-written brief for a new colleague. Treat them as code: versioned, reviewed and tested." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/prompts-as-specifications.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/prompts-as-specifications.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/prompts-as-specifications.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/prompts-as-specifications.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Write prompts like specifications — Yonder Tech" />
+	<meta property="og:description" content="The prompts that hold up in production read less like clever incantations and more like a well-written brief for a new colleague. Treat them as code: versioned, reviewed and tested." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/prompts-as-specifications.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Write prompts like specifications — Yonder Tech" />
+	<meta name="twitter:description" content="The prompts that hold up in production read less like clever incantations and more like a well-written brief for a new colleague. Treat them as code: versioned, reviewed and tested." />
+	<title>Write prompts like specifications — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/prompts-as-specifications.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">AI &amp; models</span>
+				</div>
+				<h1 class="yt-article-h1">Write prompts like specifications</h1>
+				<p class="yt-article-dek">The prompts that hold up in production read less like clever incantations and more like a well-written brief for a new colleague. Treat them as code: versioned, reviewed and tested.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-07-15">15 July 2026</time> · 2 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>There was a period when prompt writing was treated as a dark art: magic phrases, capitalised warnings, elaborate role-play and tips passed around like recipes. Some of those tricks worked for a while on particular models. Very few survive a model upgrade.</p>
+					<p>The prompts that hold up in production look different. They read like a clear brief given to a capable new colleague who knows nothing about your business: what the task is, who it is for, what good looks like, what to do when unsure. In other words, they read like a specification. And they deserve the same engineering discipline as any other specification that drives software behaviour.</p>
+					<h2>What a good prompt specifies</h2>
+					<ul>
+						<li><strong>The task, in one sentence.</strong> Before anything else, state plainly what the model is being asked to do.</li>
+						<li><strong>The context.</strong> Who the output is for, what they already know, and what they will do with it.</li>
+						<li><strong>Inputs, clearly separated.</strong> Mark where the user&#39;s question, retrieved documents and other data begin and end, so the model can tell instructions from material.</li>
+						<li><strong>The output format.</strong> Exact structure where software will read the result — named fields, allowed values, length limits. Plain guidance where a person will.</li>
+						<li><strong>What good looks like.</strong> Two or three short examples of excellent output do more than paragraphs of adjectives.</li>
+						<li><strong>What to do when unsure.</strong> Whether to ask a question, say it doesn&#39;t know, or hand the case to a person. This one instruction prevents a large share of confident wrong answers.</li>
+						<li><strong>Boundaries.</strong> What the model must not do: topics to decline, actions to never take, information never to reveal.</li>
+					</ul>
+					<h2>Treat prompts as code</h2>
+					<p>A prompt is part of the program. Changing it changes behaviour for every user. So:</p>
+					<ul>
+						<li><strong>Keep prompts in version control,</strong> not in a dashboard or a database field someone edits by hand. Every change has an author, a date and a reason.</li>
+						<li><strong>Review changes</strong> the way you review code. A second reader catches ambiguity the author cannot see.</li>
+						<li><strong>Test every change</strong> against the evaluation set before it ships. A tweak that fixes one case and breaks four others should never reach users.</li>
+						<li><strong>Template, don&#39;t concatenate.</strong> Build prompts from named parts — instructions, examples, retrieved context — so each can be changed and tested independently.</li>
+					</ul>
+					<h2>Write for the next model, too</h2>
+					<p>The prompts that migrate best between models are the ones with the fewest tricks. Clear structure, explicit instructions and good examples work across providers and generations. Model-specific hacks tend to become liabilities the moment you switch.</p>
+					<p>A useful habit is to read the prompt aloud as if briefing a new staff member. If a thoughtful person would be confused, the model probably will be too — just more quietly. If a thoughtful person would know exactly what to do, you have written a good specification.</p>
+					<blockquote><p>The best prompt engineering we see is indistinguishable from good technical writing.</p></blockquote>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="governing-ai-use.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Governing AI use without banning it</h3>
+						<p class="card-body">Staff are already using AI tools, approved or not. A short, practical policy — backed by tools people actually want to use — protects the business better than a prohibition nobody follows.</p>
+						<div class="card-meta">5 August 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="real-cost-of-an-ai-feature.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">The real cost of an AI feature</h3>
+						<p class="card-body">The token bill is the smallest line in the budget. Evaluation, review, support and change management are where AI features actually cost money — and where the business case should look first.</p>
+						<div class="card-meta">17 June 2026 · 3 min read</div>
+					</a>
+					<a class="card" href="small-models-local-data.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Small models, local data</h3>
+						<p class="card-body">Not every AI task needs the largest model in the world. For privacy-sensitive, high-volume work, a small model you control is often cheaper, faster and easier to defend.</p>
+						<div class="card-meta">20 May 2026 · 2 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Write prompts like specifications",
+		"description": "The prompts that hold up in production read less like clever incantations and more like a well-written brief for a new colleague. Treat them as code: versioned, reviewed and tested.",
+		"datePublished": "2026-07-15",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/prompts-as-specifications.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/prompts-as-specifications.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

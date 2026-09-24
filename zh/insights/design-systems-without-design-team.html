@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="大多数需要一致性的组织，都负担不起一个专职的设计系统小组。一套小而有主见的组件包——以及让它保持小的纪律——就能走完大部分路。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/design-systems-without-design-team.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/design-systems-without-design-team.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/design-systems-without-design-team.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/design-systems-without-design-team.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="没有设计团队的团队，也能有设计系统 — Yonder Tech" />
+	<meta property="og:description" content="大多数需要一致性的组织，都负担不起一个专职的设计系统小组。一套小而有主见的组件包——以及让它保持小的纪律——就能走完大部分路。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/design-systems-without-design-team.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="没有设计团队的团队，也能有设计系统 — Yonder Tech" />
+	<meta name="twitter:description" content="大多数需要一致性的组织，都负担不起一个专职的设计系统小组。一套小而有主见的组件包——以及让它保持小的纪律——就能走完大部分路。" />
+	<title>没有设计团队的团队，也能有设计系统 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/design-systems-without-design-team.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">设计语言</span>
+				</div>
+				<h1 class="yt-article-h1">没有设计团队的团队，也能有设计系统</h1>
+				<p class="yt-article-dek">大多数需要一致性的组织，都负担不起一个专职的设计系统小组。一套小而有主见的组件包——以及让它保持小的纪律——就能走完大部分路。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-07-22">2026 年 7 月 22 日</time> · 3 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>人们谈起设计系统，通常举的是大公司的例子：几十个组件、一个文档站、一支全职维护它的设计师和工程师团队。对于一家只有三个开发者和一个兼职设计师的企业来说，这幅图景令人气馁，常见的反应是干脆不要系统。每个屏幕各自设计，每个开发者自己挑间距，两年后，产品看起来像几个产品缝在了一起。</p>
+					<p>有一种设计系统适合小团队。它更小、更有主见、离代码更近。而且它每小时带来的价值往往比大型系统更高，因为它瞄准的正是小团队真正面对的问题。</p>
+					<h2>放进去什么</h2>
+					<ul>
+						<li><strong>令牌优先。</strong> 颜色、间距、字号、圆角和动效，都作为有名字的值写进代码。仅此一项就能消除大部分不一致，而且只需几天，不需要几个月。</li>
+						<li><strong>十五个组件，而不是一百个。</strong> 按钮、输入框、下拉选择、复选框、表格、卡片、对话框、轻提示、标签页、导航、页面标题、空状态、表单布局、徽标，以及一个加载状态。这张清单覆盖了大多数企业软件中的绝大部分屏幕。</li>
+						<li><strong>三个页面模板。</strong> 列表页、详情页和表单页。大多数新屏幕都是其中之一的变体。</li>
+						<li><strong>一页规则。</strong> 什么时候用对话框、什么时候开新页面；错误信息怎么写；哪个颜色代表什么。短到大家真的会去读。</li>
+					</ul>
+					<h2>什么不放进去</h2>
+					<p>其他一切，直到它被需要第二次。最重要的一个习惯是：只有当第二个屏幕需要某个新组件时，它才进入系统。在那之前，它只是一个一次性的东西，尽可能用现有部件拼出来。这让系统小到无需任何人全职负责也能维护。</p>
+					<h2>站在某样东西上面</h2>
+					<p>小团队不应该从零开始构建基础组件。一个维护良好、具备无障碍能力的组件库——用你的令牌而不是它的默认样式来装扮——能给你键盘支持、焦点管理和屏幕阅读器行为，这些东西自己做要好几个月才能做对。你的系统则是其上薄薄一层、有主见的封装：你的令牌、按你的方式配置的十五个组件，以及你的规则。</p>
+					<h2>让它活着</h2>
+					<ul>
+						<li><strong>一位兼职负责人。</strong> 不是一个团队，而是一个有名有姓的人，负责评审新增内容，并且经常说“不”。</li>
+						<li><strong>一个活的参考页面</strong>，放在应用内部，用真实数据展示每一个组件。它同时也是一项视觉测试。</li>
+						<li><strong>自动检查</strong>最重要的规则：颜色对比度、令牌文件之外不出现原始颜色值、间距不偏离刻度。</li>
+					</ul>
+					<h2>它能换来什么</h2>
+					<p>回报不是为了精致而精致，而是速度和信任。新屏幕是拼装出来的，而不是从头设计。开发者不再争论边距。修好一个基础组件，无障碍体验就在所有地方同时提升。产品开始感觉像一个整体——而对客户来说，这正是“质量”这个词很大一部分的含义。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="interfaces-for-uncertainty.html">
+						<div class="card-kicker">设计语言</div>
+						<h3 class="card-title">为可能出错的答案设计界面</h3>
+						<p class="card-body">传统软件要么正确，要么坏了。AI 功能通常是对的，有时是错的，而且听起来总是很自信。模型不肯承载的不确定性，界面必须承载起来。</p>
+						<div class="card-meta">2026 年 8 月 19 日 · 2 分钟阅读</div>
+					</a>
+					<a class="card" href="motion-with-a-job.html">
+						<div class="card-kicker">设计语言</div>
+						<h3 class="card-title">有任务的动效</h3>
+						<p class="card-body">动画要么在解释什么，要么在碍事。一份简短指南：哪些动效配得上它占用的毫秒，哪些应该删掉。</p>
+						<div class="card-meta">2026 年 6 月 10 日 · 2 分钟阅读</div>
+					</a>
+					<a class="card" href="type-does-the-heavy-lifting.html">
+						<div class="card-kicker">设计语言</div>
+						<h3 class="card-title">让字体扛起重担</h3>
+						<p class="card-body">插画预算在缩水，图库照片千篇一律。字体是唯一出现在每一屏上的品牌资产，而大多数设计系统仍然把它当成事后才想起的东西。</p>
+						<div class="card-meta">2026 年 5 月 6 日 · 3 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "没有设计团队的团队，也能有设计系统",
+		"description": "大多数需要一致性的组织，都负担不起一个专职的设计系统小组。一套小而有主见的组件包——以及让它保持小的纪律——就能走完大部分路。",
+		"datePublished": "2026-07-22",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/design-systems-without-design-team.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/design-systems-without-design-team.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

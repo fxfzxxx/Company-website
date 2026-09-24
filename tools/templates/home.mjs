@@ -1,6 +1,7 @@
 import { esc, head, header, contact, footer, scripts, orgJsonLd } from "./chrome.mjs";
+import { latestCards } from "./insights.mjs";
 
-export const renderHome = (ctx, cases) => {
+export const renderHome = (ctx, cases, articles) => {
 	const { home, root, libraryHref } = ctx;
 	const thumbFor = (slug) => cases.find((c) => c.slug === slug);
 
@@ -125,18 +126,10 @@ ${home.method.steps
 						<span class="yt-eyebrow">${esc(home.insights.eyebrow)}</span>
 						<h2 class="yt-h2 yt-h2-sub">${esc(home.insights.heading)}</h2>
 					</div>
+					<a class="yt-link yt-link-nowrap hv1" href="insights/index.html">${esc(home.insights.link)} <span class="yt-arrow" aria-hidden="true">→</span></a>
 				</div>
 				<div class="yt-cards">
-${home.insights.cards
-	.map(
-		(card) => `					<article class="card">
-						<div class="card-kicker">${esc(card.kicker)}</div>
-						<h3 class="card-title">${esc(card.title)}</h3>
-						<p class="card-body">${esc(card.body)}</p>
-						<div class="card-meta">${esc(card.meta)}</div>
-					</article>`
-	)
-	.join("\n")}
+${latestCards(ctx, articles)}
 				</div>
 			</div>
 		</section>
