@@ -97,7 +97,8 @@ export const orgJsonLd = () => `	<script type="application/ld+json">
 	</script>`;
 
 /* The nav is six items. Anchors resolve against this locale's homepage, so
-   they work from the library and detail pages too. */
+   they work from the library and detail pages too. On a phone or tablet the
+   links fold into a panel behind the menu button, and the lockup sits centred. */
 export const header = (ctx, current) => {
 	const { home, homeHref, libraryHref, insightsHref, loc, altHref, root } = ctx;
 	const n = home.nav;
@@ -118,11 +119,14 @@ export const header = (ctx, current) => {
 
 	return `		<div class="yt-header">
 			<nav class="nav yt-nav" aria-label="${loc === "zh" ? "主导航" : "Main"}">
+				<button class="yt-menu-btn" type="button" aria-controls="yt-menu" aria-expanded="false"
+					data-label-open="${loc === "zh" ? "打开菜单" : "Open menu"}" data-label-close="${loc === "zh" ? "关闭菜单" : "Close menu"}"
+					aria-label="${loc === "zh" ? "打开菜单" : "Open menu"}"><span></span><span></span></button>
 				<a class="yt-brand" href="${homeHref}">
 					<img class="yt-brand-lockup" src="${root}assets/brand/lockup-light.svg" alt="Yonder Technology" width="163" height="36" />
 					<img class="yt-brand-mark" src="${root}assets/brand/mark-light.svg" alt="Yonder Technology" width="38" height="30" />
 				</a>
-				<span class="yt-nav-links">
+				<span class="yt-nav-links" id="yt-menu">
 ${links
 	.map(
 		(l) =>

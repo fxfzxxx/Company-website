@@ -57,11 +57,14 @@
 <body>
 		<div class="yt-header">
 			<nav class="nav yt-nav" aria-label="Main">
+				<button class="yt-menu-btn" type="button" aria-controls="yt-menu" aria-expanded="false"
+					data-label-open="Open menu" data-label-close="Close menu"
+					aria-label="Open menu"><span></span><span></span></button>
 				<a class="yt-brand" href="index.html">
 					<img class="yt-brand-lockup" src="../assets/brand/lockup-light.svg" alt="Yonder Technology" width="163" height="36" />
 					<img class="yt-brand-mark" src="../assets/brand/mark-light.svg" alt="Yonder Technology" width="38" height="30" />
 				</a>
-				<span class="yt-nav-links">
+				<span class="yt-nav-links" id="yt-menu">
 					<a href="#work" aria-current="page">Work</a>
 					<a href="cases/index.html">Case library</a>
 					<a href="#capabilities">Capabilities</a>
