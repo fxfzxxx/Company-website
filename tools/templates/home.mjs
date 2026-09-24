@@ -5,23 +5,24 @@ export const renderHome = (ctx, cases, articles) => {
 	const { home, root, libraryHref } = ctx;
 	const thumbFor = (slug) => cases.find((c) => c.slug === slug);
 
-	const workRow = (row, index, last) => {
+	/* The first case leads, image and copy side by side; the rest sit
+	   under it as a row of three. The whole card is the link. */
+	const workCard = (row, index) => {
 		const c = thumbFor(row.slug);
-		return `				<div class="yt-row">
-					<div class="yt-row-num">${esc(row.num)}</div>
-					<div class="yt-thumb">
+		return `				<a class="yt-case${index === 0 ? " yt-case-lead" : ""}" href="cases/${esc(row.slug)}.html">
+					<div class="yt-case-media">
 						<img src="${esc(c.thumb)}" alt="${esc(row.alt)}" loading="lazy" width="800" height="600" />
 					</div>
-					<div class="yt-row-body">
-						<div class="yt-meta">${esc(row.meta)}</div>
-						<h3 class="yt-h3"><a href="cases/${esc(row.slug)}.html">${esc(row.title)}</a></h3>
-						<p class="yt-row-text">${esc(row.body)}</p>
+					<div class="yt-case-body">
+						<div class="yt-meta"><span class="yt-case-num">${esc(row.num)}</span>${esc(row.meta)}</div>
+						<h3 class="yt-h3 yt-case-title">${esc(row.title)}</h3>
+						<p class="yt-case-text">${esc(row.body)}</p>
+						<div class="yt-case-metric">
+							<span class="yt-case-figure">${esc(row.figure)}</span>
+							<span class="yt-case-measure">${esc(row.measure)}</span>
+						</div>
 					</div>
-					<div class="yt-metric">
-						<div class="yt-metric-figure">${esc(row.figure)}</div>
-						<div class="yt-metric-label">${esc(row.measure)}</div>
-					</div>
-				</div>`;
+				</a>`;
 	};
 
 	return `${head({
@@ -50,7 +51,7 @@ ${header(ctx, "work")}
 			</div>
 		</section>
 
-		<section class="yt-wrap yt-rule yt-work" id="work">
+		<section class="yt-wrap yt-work" id="work">
 			<div class="yt-head-row">
 				<div>
 					<span class="yt-eyebrow">${esc(home.work.eyebrow)}</span>
@@ -60,13 +61,15 @@ ${header(ctx, "work")}
 				<a class="yt-link yt-link-nowrap hv1" href="${libraryHref}">${esc(home.work.link)} <span class="yt-arrow" aria-hidden="true">→</span></a>
 			</div>
 
-${home.work.rows.map((row, i) => workRow(row, i, i === home.work.rows.length - 1)).join("\n\n")}
+			<div class="yt-case-grid">
+${home.work.rows.map((row, i) => workCard(row, i)).join("\n")}
+			</div>
 
 			<p class="yt-note">${esc(home.work.note)}</p>
 		</section>
 
-		<section class="yt-wrap">
-			<div class="yt-stats">
+		<section class="yt-stats-band">
+			<div class="yt-wrap yt-stats">
 ${home.stats
 	.map(
 		(s) => `				<div>
@@ -78,9 +81,11 @@ ${home.stats
 			</div>
 		</section>
 
-		<section class="yt-wrap yt-rule yt-section" id="capabilities">
-			<span class="yt-eyebrow">${esc(home.capabilities.eyebrow)}</span>
-			<h2 class="yt-h2 yt-cap-heading">${esc(home.capabilities.heading)}</h2>
+		<section class="yt-wrap yt-section yt-cap-section" id="capabilities">
+			<div class="yt-cap-intro">
+				<span class="yt-eyebrow">${esc(home.capabilities.eyebrow)}</span>
+				<h2 class="yt-h2 yt-cap-heading">${esc(home.capabilities.heading)}</h2>
+			</div>
 			<div class="yt-cap-grid">
 ${home.capabilities.items
 	.map(
@@ -94,7 +99,7 @@ ${home.capabilities.items
 			</div>
 		</section>
 
-		<section class="yt-rule" id="method">
+		<section class="yt-method-band" id="method">
 			<div class="yt-wrap yt-section yt-method">
 				<div class="yt-method-col">
 					<span class="yt-eyebrow">${esc(home.method.eyebrow)}</span>
@@ -119,7 +124,7 @@ ${home.method.steps
 			</div>
 		</section>
 
-		<section class="yt-rule" id="insights">
+		<section id="insights">
 			<div class="yt-wrap yt-section">
 				<div class="yt-head-row">
 					<div>

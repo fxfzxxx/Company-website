@@ -212,9 +212,77 @@
 		});
 	};
 
+	/* — motion: reveal on scroll, and figures that count up ————————————
+	   Opt-in from here rather than in the markup: if this never runs, or
+	   the visitor prefers reduced motion, nothing is ever hidden. */
+	const REVEAL = [
+		".yt-head-row",
+		".yt-case",
+		".yt-stats > div",
+		".yt-cap-intro",
+		".yt-cap",
+		".yt-method-col",
+		".yt-method-figure",
+		".yt-cards .card",
+		".yt-lib-head",
+		".yt-filter-bar",
+		".yt-lib-item",
+		".yt-contact .yt-wrap > *",
+	].join(",");
+
+	const countUp = (el) => {
+		const match = /^(\d+)(.*)$/.exec(el.textContent.trim());
+		if (!match) return;
+		const target = Number(match[1]);
+		const suffix = match[2];
+		const start = performance.now();
+		const duration = 1400;
+		const step = (now) => {
+			const t = Math.min((now - start) / duration, 1);
+			const eased = 1 - Math.pow(1 - t, 3);
+			el.textContent = Math.round(target * eased) + suffix;
+			if (t < 1) window.requestAnimationFrame(step);
+		};
+		window.requestAnimationFrame(step);
+	};
+
+	const initReveal = () => {
+		if (!("IntersectionObserver" in window)) return;
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+		const targets = Array.from(document.querySelectorAll(REVEAL));
+		if (!targets.length) return;
+		document.documentElement.classList.add("yt-motion");
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					const el = entry.target;
+					observer.unobserve(el);
+					el.classList.add("is-in");
+					const figure = el.querySelector(".yt-stat-figure");
+					if (figure) countUp(figure);
+					/* hand the element back to its own hover transitions once
+					   it has landed, or they would inherit the stagger delay */
+					const delay = parseFloat(el.style.getPropertyValue("--reveal-i") || "0") * 90;
+					window.setTimeout(() => el.classList.remove("yt-reveal", "is-in"), 1000 + delay);
+				}
+			},
+			{ rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+		);
+
+		for (const el of targets) {
+			const siblings = Array.from(el.parentElement.children).filter((child) => child.matches(REVEAL));
+			el.style.setProperty("--reveal-i", String(Math.min(siblings.indexOf(el), 5)));
+			el.classList.add("yt-reveal");
+			observer.observe(el);
+		}
+	};
+
 	initHeader();
 	initMenu();
 	initFilter();
 	initAccordion();
 	initForm();
+	initReveal();
 })();

@@ -15,7 +15,7 @@ export const renderLibrary = (ctx, cases) => {
 		const body = c.lib[loc];
 		const tags = c.tags.map((tag) => ui.tags[tag]).join(" / ");
 		return `				<div class="yt-lib-item" data-tags="${esc(c.tags.join(","))}">
-					<button class="yt-lib-row hv5" type="button" data-toggle aria-expanded="false"
+					<button class="yt-lib-row" type="button" data-toggle aria-expanded="false"
 						aria-controls="panel-${esc(c.slug)}">
 						<span class="yt-row-num">${esc(c.num)}</span>
 						<span class="yt-lib-thumb">
@@ -54,7 +54,7 @@ ${body.decisions
 							<p class="yt-panel-text">${esc(body.outcome)}</p>
 							<div class="yt-panel-actions">
 								<a class="yt-btn-solid hv6" href="${esc(c.slug)}.html">${esc(t.openCase)}</a>
-								<a class="yt-link-accent" href="${root}cases/library/${esc(c.slug)}/index.html" data-no-spa
+								<a class="yt-btn-ghost" href="${root}cases/library/${esc(c.slug)}/index.html" data-no-spa
 									target="_blank" rel="noopener">${esc(body.openLive ?? t.openLive)}</a>
 							</div>
 						</div>
@@ -96,7 +96,6 @@ ${FILTERS.map(chip).join("\n")}
 			<div data-cases>
 ${cases.map(row).join("\n")}
 			</div>
-			<div class="yt-rule"></div>
 			<p class="yt-note">${esc(t.note)}</p>
 		</section>
 

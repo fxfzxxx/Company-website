@@ -56,6 +56,13 @@
 	/* The mark's own colours, for the reversed lockup on the accent field. */
 	--yt-bone: #ece8e3;
 	--yt-silver: #b8babb;
+
+	/* Depth. Layered, low and tinted toward the navy so a raised surface
+	   reads as lifted off the paper, not as a drop-shadowed box. */
+	--yt-shadow-sm: 0 1px 2px rgba(25, 34, 49, 0.06), 0 4px 14px rgba(25, 34, 49, 0.06);
+	--yt-shadow-md: 0 2px 4px rgba(25, 34, 49, 0.06), 0 12px 32px rgba(25, 34, 49, 0.1);
+	--yt-shadow-lg: 0 4px 8px rgba(25, 34, 49, 0.06), 0 24px 56px rgba(25, 34, 49, 0.16);
+	--yt-ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 html {
@@ -693,16 +700,50 @@ button {
 	margin-top: 40px;
 }
 
-.yt-btn-solid {
-	display: inline-block;
+.yt-btn-solid,
+.yt-btn-ghost {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
 	font-size: 13.5px;
 	letter-spacing: 0.04em;
 	font-weight: 600;
-	padding: 10px 16px;
+	padding: 11px 18px;
 	border: 2px solid var(--color-accent);
+	transition:
+		background 200ms ease,
+		border-color 200ms ease,
+		color 200ms ease,
+		transform 260ms var(--yt-ease-out),
+		box-shadow 260ms var(--yt-ease-out);
+}
+
+.yt-btn-solid {
 	background: var(--color-accent);
 	color: var(--color-bg);
-	transition: background 160ms ease, border-color 160ms ease;
+	box-shadow: var(--yt-shadow-sm);
+}
+
+.yt-btn-ghost {
+	background: transparent;
+	color: var(--color-accent);
+}
+
+.yt-btn-solid:hover,
+.yt-btn-ghost:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--yt-shadow-md);
+}
+
+.yt-btn-ghost:hover {
+	background: var(--color-accent);
+	color: var(--color-bg);
+}
+
+.yt-btn-solid:active,
+.yt-btn-ghost:active {
+	transform: translateY(0);
+	box-shadow: var(--yt-shadow-sm);
 }
 
 .yt-link-accent {
@@ -737,70 +778,173 @@ button {
 	max-width: 52ch;
 }
 
-/* — case rows (homepage) ——————————————————————————————————————— */
+/* — homepage rhythm ——————————————————————————————————————————————
+   Below the hero the page is carried by space, scale and a change of
+   ground rather than by rules: light work, a dark band of figures, light
+   capabilities, a stone band for the method, light insights, then the
+   navy close. No section needs a line to tell it from the next. */
+
+/* — selected work ——————————————————————————————————————————————— */
 
 .yt-work {
-	padding-block: clamp(32px, 4vw, 56px) clamp(24px, 4vw, 48px);
+	padding-block: clamp(64px, 9vw, 128px) clamp(56px, 7vw, 104px);
 }
 
-.yt-row {
+.yt-case-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(56px, 7vw, 104px) clamp(28px, 3.4vw, 48px);
+	margin-top: clamp(40px, 5vw, 64px);
+}
+
+/* the three after the lead are raised panels; the lead sits on the page */
+.yt-case {
 	display: flex;
-	gap: clamp(20px, 3vw, 44px);
-	flex-wrap: wrap;
-	align-items: flex-start;
-	padding: clamp(24px, 3vw, 36px) 0;
-	border-top: 2px solid var(--color-divider);
+	flex-direction: column;
+	color: inherit;
+	background: var(--color-neutral-100);
+	box-shadow: var(--yt-shadow-sm);
+	transition: transform 360ms var(--yt-ease-out), box-shadow 360ms var(--yt-ease-out);
 }
 
-.yt-row:last-of-type {
-	border-bottom: 2px solid var(--color-divider);
+.yt-case:hover {
+	color: inherit;
+	transform: translateY(-6px);
+	box-shadow: var(--yt-shadow-lg);
 }
 
-.yt-row-num {
-	flex: 0 0 44px;
-	font-family: var(--font-heading);
-	font-weight: 800;
-	font-size: 15px;
-	font-feature-settings: "tnum" 1;
+.yt-case-lead {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+	gap: clamp(28px, 5vw, 80px);
+	align-items: end;
+	background: transparent;
+	box-shadow: none;
 }
 
-.yt-thumb {
-	flex: 0 0 clamp(160px, 18vw, 224px);
+.yt-case-lead:hover {
+	transform: none;
+	box-shadow: none;
 }
 
-.yt-thumb img {
+.yt-case-lead .yt-case-media {
+	box-shadow: var(--yt-shadow-md);
+	transition: box-shadow 360ms var(--yt-ease-out), transform 360ms var(--yt-ease-out);
+}
+
+.yt-case-lead:hover .yt-case-media {
+	transform: translateY(-6px);
+	box-shadow: var(--yt-shadow-lg);
+}
+
+.yt-case-media {
+	overflow: hidden;
+	background: var(--color-surface);
+}
+
+.yt-case-media img {
 	display: block;
 	width: 100%;
 	height: auto;
 	aspect-ratio: 4 / 3;
 	object-fit: cover;
+	transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.yt-row-body {
-	flex: 1 1 300px;
-	min-width: 0;
+.yt-case:hover .yt-case-media img {
+	transform: scale(1.035);
 }
 
-.yt-row-text {
-	font-size: 15.5px;
+.yt-case-body {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	padding: clamp(22px, 2.4vw, 30px) clamp(22px, 2.4vw, 30px) clamp(24px, 2.6vw, 32px);
+}
+
+.yt-case-lead .yt-case-body {
+	padding: 0 0 clamp(4px, 1vw, 12px);
+}
+
+.yt-case-num {
+	color: var(--color-text);
+	font-weight: 700;
+	margin-right: 12px;
+}
+
+.yt-case-title {
+	transition: color 160ms ease;
+}
+
+.yt-case-lead .yt-case-title {
+	font-size: clamp(26px, 2.8vw, 38px);
+	line-height: 1.12;
+	letter-spacing: -0.02em;
+}
+
+.yt-case:hover .yt-case-title {
+	color: var(--yt-accent-ink);
+}
+
+.yt-case-text {
+	font-size: 15px;
 	line-height: 1.65;
-	margin: 12px 0 0;
+	margin: 14px 0 0;
 	color: var(--color-neutral-800);
-	max-width: 54ch;
+	max-width: 46ch;
 }
 
-.yt-metric {
-	flex: 1 1 180px;
-	border-top: 2px solid var(--color-accent);
-	padding-top: 14px;
+/* in the smaller cards the brief is a teaser: three lines, then the case */
+.yt-case:not(.yt-case-lead) .yt-case-text {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	line-clamp: 3;
+	overflow: hidden;
 }
 
-.yt-metric-figure {
+.yt-case-metric {
+	display: flex;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: 6px 12px;
+	margin-top: auto;
+	padding-top: 26px;
+}
+
+.yt-case-figure {
 	font-family: var(--font-heading);
 	font-weight: 800;
-	font-size: clamp(28px, 2.6vw, 36px);
+	font-size: clamp(28px, 2.6vw, 38px);
 	line-height: 1;
-	letter-spacing: -0.025em;
+	letter-spacing: -0.03em;
+	font-feature-settings: "tnum" 1;
+}
+
+.yt-case-lead .yt-case-figure {
+	font-size: clamp(56px, 6.4vw, 96px);
+	letter-spacing: -0.04em;
+}
+
+.yt-case-measure {
+	font-size: 12.5px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--color-neutral-700);
+	line-height: 1.4;
+}
+
+.yt-work .yt-note {
+	margin-top: clamp(40px, 5vw, 64px);
+}
+
+/* the case library still sets its rows with these two */
+.yt-row-num {
+	flex: 0 0 44px;
+	font-family: var(--font-heading);
+	font-weight: 800;
+	font-size: 15px;
 	font-feature-settings: "tnum" 1;
 }
 
@@ -813,53 +957,77 @@ button {
 	line-height: 1.4;
 }
 
-/* — stats band ————————————————————————————————————————————————— */
+/* — figures: a night band that picks the hero back up ——————————————— */
+
+.yt-stats-band {
+	background:
+		radial-gradient(70% 140% at 88% 0%, rgba(74, 118, 196, 0.2), transparent 62%),
+		radial-gradient(50% 120% at 6% 100%, rgba(196, 124, 74, 0.1), transparent 60%),
+		#080b12;
+	color: #ece8e3;
+}
 
 .yt-stats {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-	gap: clamp(24px, 4vw, 48px);
-	padding-block: clamp(36px, 5vw, 60px);
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: clamp(32px, 4vw, 56px);
+	padding-block: clamp(64px, 9vw, 120px);
 }
 
 .yt-stat-figure {
 	font-family: var(--font-heading);
 	font-weight: 800;
-	font-size: clamp(32px, 3.4vw, 46px);
-	line-height: 1;
-	letter-spacing: -0.03em;
-	color: var(--color-accent);
+	font-size: clamp(48px, 6.2vw, 92px);
+	line-height: 0.95;
+	letter-spacing: -0.04em;
+	color: #ece8e3;
 	font-feature-settings: "tnum" 1;
+	white-space: nowrap;
 }
 
 .yt-stat-label {
 	font-size: 12.5px;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
-	color: var(--color-neutral-700);
-	margin-top: 14px;
+	color: color-mix(in srgb, #ece8e3 62%, transparent);
+	margin-top: 18px;
 	line-height: 1.45;
 }
 
-/* — capabilities ——————————————————————————————————————————————— */
+/* — capabilities: heading holds its place while the list reads past ——— */
+
+.yt-cap-section {
+	display: grid;
+	grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+	gap: clamp(40px, 6vw, 104px);
+	padding-block: clamp(72px, 10vw, 144px);
+}
+
+.yt-cap-intro {
+	position: sticky;
+	top: 112px;
+	align-self: start;
+}
+
+.yt-cap-heading {
+	max-width: 14ch;
+}
 
 .yt-cap-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-	gap: 0;
-}
-
-.yt-cap {
-	border-top: 2px solid var(--color-divider);
-	padding: 24px clamp(0px, 3vw, 40px) 28px 0;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: clamp(44px, 5vw, 72px) clamp(28px, 3.5vw, 56px);
 }
 
 .yt-cap-num {
 	font-family: var(--font-heading);
 	font-weight: 800;
-	font-size: 13px;
-	color: var(--color-accent);
-	margin-bottom: 14px;
+	font-size: clamp(44px, 4.4vw, 64px);
+	line-height: 1;
+	letter-spacing: -0.04em;
+	color: var(--color-neutral-400);
+	margin-bottom: 20px;
+	font-feature-settings: "tnum" 1;
 }
 
 .yt-cap h3 {
@@ -878,18 +1046,18 @@ button {
 	color: var(--color-neutral-800);
 }
 
-.yt-cap-heading {
-	margin-bottom: clamp(28px, 4vw, 44px);
-	max-width: 22ch;
-}
+/* — method: on the stone ground ———————————————————————————————— */
 
-/* — method ————————————————————————————————————————————————————— */
+.yt-method-band {
+	background: var(--color-surface);
+}
 
 .yt-method {
 	display: flex;
-	gap: clamp(32px, 5vw, 80px);
+	gap: clamp(40px, 6vw, 96px);
 	flex-wrap: wrap;
 	align-items: center;
+	padding-block: clamp(72px, 10vw, 136px);
 }
 
 .yt-method-col {
@@ -902,34 +1070,31 @@ button {
 }
 
 .yt-steps {
-	margin-top: 32px;
+	margin-top: clamp(36px, 4vw, 52px);
 	display: grid;
-	gap: 0;
+	gap: clamp(26px, 3vw, 36px);
 }
 
 .yt-step {
-	border-top: 2px solid var(--color-divider);
-	padding: 18px 0;
-	display: flex;
-	gap: 20px;
-}
-
-.yt-step:last-child {
-	border-bottom: 2px solid var(--color-divider);
+	display: grid;
+	grid-template-columns: 64px minmax(0, 1fr);
+	align-items: baseline;
 }
 
 .yt-step-num {
-	flex: 0 0 40px;
 	font-family: var(--font-heading);
 	font-weight: 800;
-	font-size: 14px;
-	color: var(--color-accent);
+	font-size: 30px;
+	line-height: 1;
+	letter-spacing: -0.03em;
+	color: var(--color-neutral-500);
+	font-feature-settings: "tnum" 1;
 }
 
 .yt-step-title {
 	font-family: var(--font-heading);
 	font-weight: 800;
-	font-size: 17px;
+	font-size: 18px;
 }
 
 .yt-step p {
@@ -952,11 +1117,16 @@ button {
 	width: 100%;
 	height: auto;
 	aspect-ratio: 4 / 5;
-	max-height: 560px;
+	max-height: 580px;
 	object-fit: cover;
+	box-shadow: var(--yt-shadow-lg);
 }
 
 /* — insights ——————————————————————————————————————————————————— */
+
+#insights .yt-section {
+	padding-block: clamp(72px, 10vw, 136px);
+}
 
 .yt-cards {
 	display: grid;
@@ -964,16 +1134,121 @@ button {
 	gap: clamp(20px, 3vw, 32px);
 }
 
+.yt-cards a.card {
+	position: relative;
+	color: inherit;
+	gap: 12px;
+	padding: clamp(24px, 2.6vw, 32px);
+	min-height: 240px;
+	background: var(--color-neutral-100);
+	box-shadow: var(--yt-shadow-sm);
+	transition:
+		background 240ms ease,
+		transform 360ms var(--yt-ease-out),
+		box-shadow 360ms var(--yt-ease-out);
+}
+
+.yt-cards a.card:hover {
+	transform: translateY(-6px);
+	box-shadow: var(--yt-shadow-lg);
+}
+
+/* the way in: an arrow that slides into the corner on hover */
+.yt-cards a.card::after {
+	content: "→";
+	position: absolute;
+	right: clamp(24px, 2.6vw, 32px);
+	bottom: clamp(20px, 2.2vw, 28px);
+	font-family: var(--font-heading);
+	font-weight: 800;
+	font-size: 18px;
+	line-height: 1;
+	color: var(--yt-accent-ink);
+	opacity: 0;
+	transform: translateX(-8px);
+	transition: opacity 240ms ease, transform 320ms var(--yt-ease-out);
+}
+
+.yt-cards a.card:hover::after {
+	opacity: 1;
+	transform: none;
+}
+
 .yt-cards .card-title {
+	transition: color 200ms ease;
+}
+
+.yt-cards .card-title {
+	font-size: 20px;
 	letter-spacing: -0.015em;
 }
 
-.yt-cards a.card {
-	color: inherit;
+.yt-cards .card-body {
+	font-size: 14px;
+	line-height: 1.65;
 }
 
 .yt-cards a.card:hover .card-title {
 	color: var(--yt-accent-ink);
+}
+
+@media (max-width: 960px) {
+	.yt-case-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.yt-case-lead {
+		grid-template-columns: minmax(0, 1fr);
+		align-items: start;
+	}
+
+	.yt-case-lead .yt-case-body {
+		padding: 0;
+	}
+
+	/* two of the three after the lead would leave the third alone: it takes
+	   the full row, laid on its side so it is not twice as tall */
+	.yt-case-grid > .yt-case:last-child:nth-child(even) {
+		grid-column: 1 / -1;
+		flex-direction: row;
+	}
+
+	.yt-case-grid > .yt-case:last-child:nth-child(even) > * {
+		flex: 1 1 0;
+		min-width: 0;
+	}
+
+	.yt-stats {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.yt-cap-section {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.yt-cap-intro {
+		position: static;
+	}
+}
+
+@media (max-width: 640px) {
+	.yt-case-grid,
+	.yt-cap-grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.yt-case-grid > .yt-case:last-child:nth-child(even) {
+		grid-column: auto;
+		flex-direction: column;
+	}
+
+	.yt-step {
+		grid-template-columns: 48px minmax(0, 1fr);
+	}
+
+	.yt-step-num {
+		font-size: 24px;
+	}
 }
 
 /* — contact banner ————————————————————————————————————————————— */
@@ -1047,9 +1322,7 @@ button {
 /* — contact form (on the accent field) ————————————————————————— */
 
 .yt-form {
-	margin-top: clamp(40px, 6vw, 64px);
-	border-top: 2px solid var(--color-bg);
-	padding-top: clamp(26px, 4vw, 38px);
+	margin-top: clamp(48px, 6vw, 72px);
 	max-width: 720px;
 }
 
@@ -1086,12 +1359,12 @@ button {
 	font-size: 16px;
 	line-height: 1.5;
 	color: var(--color-bg);
-	background: transparent;
+	/* filled, not underlined: a form of four rules read as more lines */
+	background: color-mix(in srgb, #f2f0ec 7%, transparent);
 	border: 0;
-	border-bottom: 2px solid color-mix(in srgb, #f2f0ec 45%, transparent);
 	border-radius: 0;
-	padding: 8px 0;
-	transition: border-color 160ms ease;
+	padding: 12px 14px;
+	transition: background 160ms ease;
 	-webkit-appearance: none;
 	appearance: none;
 }
@@ -1102,7 +1375,7 @@ button {
 
 .yt-input:hover,
 .yt-input:focus {
-	border-bottom-color: var(--color-bg);
+	background: color-mix(in srgb, #f2f0ec 12%, transparent);
 	outline: none;
 }
 
@@ -1139,9 +1412,20 @@ textarea.yt-input {
 	transition: background 160ms ease, color 160ms ease;
 }
 
+.yt-submit {
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+	transition:
+		background 200ms ease,
+		color 200ms ease,
+		transform 260ms var(--yt-ease-out),
+		box-shadow 260ms var(--yt-ease-out);
+}
+
 .yt-submit:hover {
 	background: transparent;
 	color: var(--color-bg);
+	transform: translateY(-2px);
+	box-shadow: 0 14px 36px rgba(0, 0, 0, 0.34);
 }
 
 .yt-submit:disabled {
@@ -1186,9 +1470,7 @@ textarea.yt-input {
 }
 
 .yt-foot-bar {
-	height: 2px;
-	background: var(--color-divider);
-	margin: clamp(28px, 4vw, 44px) 0 20px;
+	margin: clamp(40px, 5vw, 64px) 0 0;
 }
 
 .yt-foot-legal {
@@ -1256,8 +1538,7 @@ textarea.yt-input {
 	flex-wrap: wrap;
 	align-items: baseline;
 	justify-content: space-between;
-	border-top: 2px solid var(--color-divider);
-	padding-top: 20px;
+	padding-top: 8px;
 }
 
 .yt-filters {
@@ -1279,19 +1560,27 @@ textarea.yt-input {
 	font-family: var(--font-body);
 	font-size: 13px;
 	letter-spacing: 0.04em;
-	padding: 7px 12px;
+	padding: 9px 14px;
 	cursor: pointer;
-	border: 2px solid var(--color-neutral-400);
-	background: transparent;
+	border: 0;
+	background: var(--color-neutral-200);
 	color: var(--color-text);
 	border-radius: 0;
-	transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+	transition:
+		background 180ms ease,
+		color 180ms ease,
+		transform 240ms var(--yt-ease-out),
+		box-shadow 240ms var(--yt-ease-out);
+}
+
+.yt-chip:hover {
+	background: var(--color-neutral-300);
 }
 
 .yt-chip[aria-pressed="true"] {
-	border-color: var(--color-accent);
 	background: var(--color-accent);
 	color: var(--color-bg);
+	box-shadow: var(--yt-shadow-sm);
 }
 
 .yt-count {
@@ -1301,11 +1590,39 @@ textarea.yt-input {
 }
 
 .yt-lib-list {
-	padding-block: clamp(8px, 2vw, 20px) clamp(40px, 5vw, 72px);
+	padding-block: clamp(24px, 3vw, 40px) clamp(56px, 7vw, 96px);
 }
 
+.yt-lib-list [data-cases] {
+	display: grid;
+	gap: clamp(14px, 1.6vw, 20px);
+}
+
+/* each case is its own raised card; open, it lifts a little further */
 .yt-lib-item {
-	border-top: 2px solid var(--color-divider);
+	background: var(--color-neutral-100);
+	box-shadow: var(--yt-shadow-sm);
+	padding-inline: clamp(16px, 2.4vw, 32px);
+	transition: transform 320ms var(--yt-ease-out), box-shadow 320ms var(--yt-ease-out), background 240ms ease;
+}
+
+.yt-lib-item:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--yt-shadow-md);
+}
+
+/* open: lifted further, and it stays put under the pointer */
+.yt-lib-item:has([aria-expanded="true"]) {
+	box-shadow: var(--yt-shadow-lg);
+	transform: none;
+}
+
+.yt-lib-title {
+	transition: color 200ms ease;
+}
+
+.yt-lib-item:hover .yt-lib-title {
+	color: var(--yt-accent-ink);
 }
 
 .yt-lib-item[hidden] {
@@ -1334,6 +1651,15 @@ textarea.yt-input {
 	display: block;
 	aspect-ratio: 4 / 3;
 	background: var(--color-neutral-300);
+	overflow: hidden;
+}
+
+.yt-lib-thumb img {
+	transition: transform 600ms var(--yt-ease-out);
+}
+
+.yt-lib-item:hover .yt-lib-thumb img {
+	transform: scale(1.05);
 }
 
 .yt-lib-thumb img {
@@ -1359,8 +1685,6 @@ textarea.yt-input {
 
 .yt-lib-metric {
 	flex: 1 1 170px;
-	border-top: 2px solid var(--color-accent);
-	padding-top: 12px;
 }
 
 .yt-lib-metric-figure {
@@ -1375,20 +1699,39 @@ textarea.yt-input {
 
 .yt-lib-sign {
 	flex: 0 0 34px;
-	text-align: right;
+	display: grid;
+	place-items: center;
+	width: 34px;
+	height: 34px;
+	margin-left: auto;
 	font-family: var(--font-heading);
 	font-weight: 800;
-	font-size: 19px;
+	font-size: 17px;
 	line-height: 1;
-	color: var(--yt-accent-ink);
+	color: var(--color-accent);
+	background: var(--color-neutral-200);
+	transition: background 220ms ease, color 220ms ease;
+}
+
+.yt-lib-item:hover .yt-lib-sign,
+[aria-expanded="true"] .yt-lib-sign {
+	background: var(--color-accent);
+	color: var(--color-bg);
 }
 
 .yt-lib-panel {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	gap: clamp(22px, 3vw, 44px);
-	border-top: 2px solid var(--color-neutral-300);
-	padding: clamp(24px, 3vw, 36px) 0 clamp(8px, 1vw, 14px);
+	padding: clamp(8px, 1.4vw, 16px) 0 clamp(28px, 3vw, 40px);
+	animation: yt-panel-in 420ms var(--yt-ease-out);
+}
+
+@keyframes yt-panel-in {
+	from {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
 }
 
 .yt-lib-panel[hidden] {
@@ -1440,10 +1783,10 @@ textarea.yt-input {
 
 .yt-panel-actions {
 	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	align-items: flex-start;
-	margin-top: 16px;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+	margin-top: 22px;
 }
 
 /* — case detail ———————————————————————————————————————————————— */
@@ -1767,6 +2110,7 @@ textarea.yt-input {
 
 .yt-cards .card-meta {
 	color: color-mix(in srgb, var(--color-text) 65%, transparent);
+	padding-right: 32px; /* room for the hover arrow in the corner */
 }
 
 /* — Insights: the article index and the article page ——————————————
@@ -1963,6 +2307,9 @@ textarea.yt-input {
 .yt-article-cover img {
 	display: block;
 	width: 100%;
+	/* the tag's height="900" would otherwise hold at 900px as the width
+	   shrinks, and the ratio below would never apply */
+	height: auto;
 	aspect-ratio: 16 / 9;
 	object-fit: cover;
 }
@@ -1986,4 +2333,49 @@ textarea.yt-input {
 	font-size: 14px;
 	line-height: 1.55;
 	color: var(--color-neutral-600);
+}
+
+/* — motion: content rises into place as it is reached ————————————————
+   site.js adds .yt-motion to the root only when the observer exists and
+   the visitor has not asked for reduced motion, so without it every
+   element simply shows. Siblings are staggered by --reveal-i. */
+
+.yt-motion .yt-reveal {
+	opacity: 0;
+	transform: translateY(28px);
+	transition:
+		opacity 800ms ease,
+		transform 900ms var(--yt-ease-out);
+	transition-delay: calc(var(--reveal-i, 0) * 90ms);
+}
+
+.yt-motion .yt-reveal.is-in {
+	opacity: 1;
+	transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.yt-case,
+	.yt-case-media,
+	.yt-cards a.card,
+	.yt-lib-item,
+	.yt-btn-solid,
+	.yt-btn-ghost,
+	.yt-submit {
+		transition: none;
+	}
+
+	.yt-case:hover,
+	.yt-case-lead:hover .yt-case-media,
+	.yt-cards a.card:hover,
+	.yt-lib-item:hover,
+	.yt-btn-solid:hover,
+	.yt-btn-ghost:hover,
+	.yt-submit:hover {
+		transform: none;
+	}
+
+	.yt-lib-panel {
+		animation: none;
+	}
 }

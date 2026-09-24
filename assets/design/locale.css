@@ -40,6 +40,7 @@
 
 :root[lang^="zh"] .yt-metric-label,
 :root[lang^="zh"] .yt-stat-label,
+:root[lang^="zh"] .yt-case-measure,
 :root[lang^="zh"] .yt-spec-label {
 	text-transform: none;
 	letter-spacing: 0;
@@ -99,7 +100,13 @@
 }
 
 :root[lang^="zh"] .yt-cap-heading {
-	max-width: 18ch;
+	max-width: 12ch;
+}
+
+:root[lang^="zh"] .yt-case-lead .yt-case-title {
+	font-size: clamp(24px, 2.6vw, 34px);
+	line-height: 1.35;
+	letter-spacing: 0;
 }
 
 :root[lang^="zh"] .yt-method-heading {
@@ -120,6 +127,7 @@
 	max-width: 34ch;
 }
 
+:root[lang^="zh"] .yt-case-text,
 :root[lang^="zh"] .yt-row-text {
 	font-size: 15px;
 	line-height: 1.85;
