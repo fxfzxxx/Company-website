@@ -329,6 +329,7 @@ button {
 	scrollbar-width: none;
 	white-space: nowrap;
 	font-size: 14px;
+	justify-content: center;
 }
 
 .yt-nav-links::-webkit-scrollbar {
