@@ -26,6 +26,21 @@ import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js"
 import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 import { makeNoise3D, mulberry32, fbm, ridged } from "../../../assets/lib/noise.js";
 
+const DEG = Math.PI / 180;
+
+/* — pulse ——————————————————————————————————————————————————————
+   A rhythm that never repeats: three sines at frequencies with no common
+   period, so no two swells crest at the same height or fall to the same
+   depth. Crests are sharpened and troughs kept shallow, which reads as a
+   breath drawn in and let go rather than a metronome. Returns about -1..1. */
+
+function pulse(time, seed) {
+	const s =
+		0.55 * Math.sin(time * 0.83 + seed * 1.7) +
+		0.3 * Math.sin(time * 1.41 + seed * 4.3) +
+		0.25 * Math.sin(time * 0.37 + seed * 2.9);
+	return s > 0 ? Math.pow(s / 1.1, 1.4) * 1.1 : s * 0.6;
+}
 /* — art direction ——————————————————————————————————————————————
    Everything an art director would want to reach for. Seeds are stable: the
    same numbers rebuild the same specimen. */
@@ -58,9 +73,23 @@ export const DEFAULTS = {
 	},
 
 	rings: { count: 5, inner: 1.45, outer: 2.5, tube: 0.0052 },
-	motes: { count: 150, spread: 2.6 },
+	/* flare is the share of motes that get a cross-shaped glint */
+	motes: { count: 220, spread: 2.6, size: 1.15, brightness: 1.6, flare: 0.18 },
 
-	motion: { spin: 0.055, tumble: 0.05, drag: 0.0042, damping: 0.92 },
+	/* drag: 1 moves the body's surface exactly with the pointer. damping is
+	   per 60th of a second once it is let go; pitch is the most it will tip.
+	   breath swells and settles the whole body, lobes each wing on its own;
+	   both are in units of the shell radius, and rhythm scales their tempo. */
+	motion: {
+		spin: 0.055,
+		tumble: 0.05,
+		drag: 0.8,
+		damping: 0.94,
+		pitch: 0.6,
+		breath: 0.045,
+		lobes: 0.11,
+		rhythm: 1,
+	},
 
 	camera: { fov: 30, distance: 8.0 },
 
@@ -301,6 +330,8 @@ export function createSpecimen(container, overrides = {}) {
 	const stone = new THREE.Color(0xd2d0c9);
 	const shadowStone = new THREE.Color(0x6b6b68);
 	const soot = new THREE.Color(0x141413);
+	const coreGroup = new THREE.Group();
+	specimen.add(coreGroup);
 	const coreGeometry = displacedSphere(config.core.detail, config.core.radius, coreField, (d, height, out) => {
 		const blotch = fbm(detailNoise, d.x * 1.7 - 5, d.y * 1.7, d.z * 1.7, 3);
 		const crevice = THREE.MathUtils.smoothstep(height, 0.86, 1.06);
@@ -311,7 +342,7 @@ export function createSpecimen(container, overrides = {}) {
 		coreGeometry,
 		new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.9, metalness: 0.05, envMapIntensity: 1.15 })
 	);
-	specimen.add(core);
+	coreGroup.add(core);
 
 	/* Ink veins: dark filaments lying on the core, read as fractures through
 	   the glass. Opaque for the same backdrop reason. */
@@ -334,7 +365,7 @@ export function createSpecimen(container, overrides = {}) {
 			new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), 90, 0.005 + (i % 3) * 0.0018, 6, false),
 			veinMaterial
 		);
-		specimen.add(vein);
+		coreGroup.add(vein);
 	}
 
 	/* — shell: the dispersive body. The wings are not separate objects — the
@@ -388,6 +419,45 @@ export function createSpecimen(container, overrides = {}) {
 		envMapIntensity: 1.25,
 		side: THREE.FrontSide,
 	});
+
+	/* The body breathes on the GPU: every vertex moves out along its own
+	   direction by a whole-body swell plus each lobe's, weighted by how far
+	   it lies inside that lobe. The lobes pulse out of step with one
+	   another, so the silhouette keeps changing shape, not just size. */
+	const lobeCount = Math.max(lobeAxes.length, 1);
+	const breathUniforms = {
+		uBreath: { value: 0 },
+		uLobeAxis: {
+			value: lobeAxes.length
+				? lobeAxes.map((l) => new THREE.Vector4(l.axis.x, l.axis.y, l.axis.z, l.sharpness))
+				: [new THREE.Vector4(0, 1, 0, 1)],
+		},
+		uLobePulse: { value: new Array(lobeCount).fill(0) },
+	};
+	glass.onBeforeCompile = (shader) => {
+		Object.assign(shader.uniforms, breathUniforms);
+		shader.vertexShader = shader.vertexShader
+			.replace(
+				"#include <common>",
+				`#include <common>
+				uniform float uBreath;
+				uniform vec4 uLobeAxis[${lobeCount}];
+				uniform float uLobePulse[${lobeCount}];`
+			)
+			.replace(
+				"#include <begin_vertex>",
+				`#include <begin_vertex>
+				vec3 breathDir = normalize(position);
+				float swell = uBreath;
+				for (int i = 0; i < ${lobeCount}; i++) {
+					float along = max(dot(breathDir, uLobeAxis[i].xyz), 0.0);
+					swell += pow(along, uLobeAxis[i].w) * uLobePulse[i];
+				}
+				transformed += breathDir * swell;`
+			);
+	};
+	glass.customProgramCacheKey = () => `specimen-breath-${lobeCount}`;
+
 	const shell = new THREE.Mesh(displacedSphere(config.shell.detail, config.shell.radius, shellField), glass);
 	specimen.add(shell);
 
@@ -418,26 +488,93 @@ export function createSpecimen(container, overrides = {}) {
 		rings.push({ pivot, rate: 0.05 + (i % 5) * 0.022, axis: i % 3 });
 	}
 
-	/* — motes: a thin dust field for depth. */
-	const motePositions = new Float32Array(config.motes.count * 3);
+	/* — motes: points of light around the body. Each is a hot core in a soft
+	     halo; a few are bright enough to throw a four-point glint, and those
+	     run hot enough that the bloom pass catches them too. Tints lean cool,
+	     with a few warm and a few spectral to echo the glass. */
+	const moteCount = config.motes.count;
+	const motePositions = new Float32Array(moteCount * 3);
+	const moteColours = new Float32Array(moteCount * 3);
+	const moteSizes = new Float32Array(moteCount);
+	const moteFlares = new Float32Array(moteCount);
+	const motePhases = new Float32Array(moteCount);
 	const random = mulberry32(config.seed * 977 + 13); // seeded, so the dust lands the same way twice
-	for (let i = 0; i < config.motes.count; i++) {
+	const moteTint = new THREE.Color();
+	for (let i = 0; i < moteCount; i++) {
 		const d = new THREE.Vector3(random() * 2 - 1, random() * 2 - 1, random() * 2 - 1).normalize();
 		d.multiplyScalar(1.6 + random() * config.motes.spread);
 		motePositions.set([d.x, d.y * 0.7, d.z], i * 3);
+
+		const pick = random();
+		if (pick < 0.62) moteTint.setHSL(0.58 + random() * 0.06, 0.35, 0.86);
+		else if (pick < 0.8) moteTint.setHSL(0.08 + random() * 0.04, 0.55, 0.8);
+		else moteTint.setHSL(random(), 0.75, 0.72);
+		moteColours.set([moteTint.r, moteTint.g, moteTint.b], i * 3);
+
+		const flare = random() < config.motes.flare;
+		moteFlares[i] = flare ? 1 : 0;
+		moteSizes[i] = flare ? 0.18 + random() * 0.14 : 0.025 + Math.pow(random(), 2.2) * 0.05;
+		motePhases[i] = random() * Math.PI * 2;
 	}
 	const moteGeometry = new THREE.BufferGeometry();
 	moteGeometry.setAttribute("position", new THREE.BufferAttribute(motePositions, 3));
+	moteGeometry.setAttribute("color", new THREE.BufferAttribute(moteColours, 3));
+	moteGeometry.setAttribute("aSize", new THREE.BufferAttribute(moteSizes, 1));
+	moteGeometry.setAttribute("aFlare", new THREE.BufferAttribute(moteFlares, 1));
+	moteGeometry.setAttribute("aPhase", new THREE.BufferAttribute(motePhases, 1));
+	const moteUniforms = {
+		uTime: { value: 0 },
+		uBrightness: { value: config.motes.brightness },
+		uScale: { value: 0 }, // device pixels per unit at unit depth, set on resize
+	};
 	const motes = new THREE.Points(
 		moteGeometry,
-		new THREE.PointsMaterial({
-			color: 0xdfe6f2,
-			size: 0.013,
-			sizeAttenuation: true,
+		new THREE.ShaderMaterial({
+			uniforms: moteUniforms,
+			vertexShader: /* glsl */ `
+				attribute float aSize;
+				attribute float aFlare;
+				attribute float aPhase;
+				uniform float uTime;
+				uniform float uScale;
+				varying vec3 vColour;
+				varying float vFlare;
+				varying float vTwinkle;
+				void main() {
+					vColour = color;
+					vFlare = aFlare;
+					/* two rates per mote, so the field shimmers instead of
+					   blinking in unison */
+					vTwinkle = 0.62 + 0.26 * sin(uTime * 1.3 + aPhase) + 0.12 * sin(uTime * 3.7 + aPhase * 2.3);
+					vec4 mv = modelViewMatrix * vec4(position, 1.0);
+					gl_PointSize = max(aSize * uScale / -mv.z, 2.0);
+					gl_Position = projectionMatrix * mv;
+				}
+			`,
+			fragmentShader: /* glsl */ `
+				uniform float uBrightness;
+				varying vec3 vColour;
+				varying float vFlare;
+				varying float vTwinkle;
+				void main() {
+					vec2 p = gl_PointCoord - 0.5;
+					float r = length(p);
+					float core = exp(-r * r * (180.0 + vFlare * 520.0));
+					float halo = exp(-r * 9.0) * 0.35;
+					/* the glint: two thin streaks, fading toward the sprite edge */
+					float streak = exp(-abs(p.y) * 90.0) * exp(-abs(p.x) * 5.0)
+						+ exp(-abs(p.x) * 90.0) * exp(-abs(p.y) * 5.0);
+					float edge = smoothstep(0.5, 0.3, max(abs(p.x), abs(p.y)));
+					float light = (core * (1.4 + vFlare * 1.6) + halo * (1.0 - vFlare * 0.5) + streak * vFlare * 1.5) * edge;
+					light *= vTwinkle * uBrightness;
+					vec3 colour = mix(vColour, vec3(1.0), core * 0.6);
+					gl_FragColor = vec4(colour * light, clamp(light, 0.0, 1.0));
+				}
+			`,
 			transparent: true,
-			opacity: 0.3,
 			depthWrite: false,
 			blending: THREE.AdditiveBlending,
+			vertexColors: true,
 		})
 	);
 	scene.add(motes);
@@ -459,28 +596,60 @@ export function createSpecimen(container, overrides = {}) {
 	grade.uniforms.uChroma.value = config.post.chroma;
 	composer.addPass(grade);
 
-	/* — interaction: drag to turn, with inertia that decays back into the
-	     idle spin. Pitch is clamped so the specimen never rolls over. */
-	const pointer = { active: false, x: 0, y: 0, id: null };
+	/* — interaction: the body follows the pointer directly — a pixel of drag
+	     turns it by the angle that moves its surface a pixel — and only the
+	     release speed carries on, decaying back into the idle spin. Pitch is
+	     clamped so the specimen never rolls over. Velocities are radians per
+	     60th of a second. */
+	const pointer = { active: false, x: 0, y: 0, id: null, t: 0 };
 	const spin = { yaw: 0, pitch: 0, yawVelocity: 0, pitchVelocity: 0 };
+	const MAX_VELOCITY = 0.06;
+
+	const radiansPerPixel = () => {
+		const halfView = camera.position.z * Math.tan((camera.fov * DEG) / 2);
+		const bodyPixels = (config.shell.radius / halfView) * (container.clientHeight / 2);
+		return config.motion.drag / Math.max(bodyPixels, 1);
+	};
+	const turn = (yaw, pitch) => {
+		const limit = config.motion.pitch;
+		spin.yaw += yaw;
+		spin.pitch = THREE.MathUtils.clamp(spin.pitch + pitch, -limit, limit);
+	};
 
 	const onPointerDown = (event) => {
 		pointer.active = true;
 		pointer.id = event.pointerId;
 		pointer.x = event.clientX;
 		pointer.y = event.clientY;
+		pointer.t = performance.now();
+		spin.yawVelocity = 0;
+		spin.pitchVelocity = 0;
 		renderer.domElement.setPointerCapture(event.pointerId);
 		container.classList.add("is-dragging");
 	};
 	const onPointerMove = (event) => {
 		if (!pointer.active || event.pointerId !== pointer.id) return;
-		spin.yawVelocity += (event.clientX - pointer.x) * config.motion.drag;
-		spin.pitchVelocity += (event.clientY - pointer.y) * config.motion.drag;
+		const scale = radiansPerPixel();
+		const yaw = (event.clientX - pointer.x) * scale;
+		const pitch = (event.clientY - pointer.y) * scale;
+		turn(yaw, pitch);
+
+		const now = performance.now();
+		const frames = Math.max((now - pointer.t) / (1000 / 60), 0.5);
+		const clampSpeed = (v) => THREE.MathUtils.clamp(v, -MAX_VELOCITY, MAX_VELOCITY);
+		spin.yawVelocity = clampSpeed(spin.yawVelocity * 0.4 + (yaw / frames) * 0.6);
+		spin.pitchVelocity = clampSpeed(spin.pitchVelocity * 0.4 + (pitch / frames) * 0.6);
 		pointer.x = event.clientX;
 		pointer.y = event.clientY;
+		pointer.t = now;
 	};
 	const onPointerUp = (event) => {
 		if (event.pointerId !== pointer.id) return;
+		/* Held still before letting go: stop, don't fling. */
+		if (performance.now() - pointer.t > 90) {
+			spin.yawVelocity = 0;
+			spin.pitchVelocity = 0;
+		}
 		pointer.active = false;
 		pointer.id = null;
 		renderer.domElement.releasePointerCapture(event.pointerId);
@@ -503,6 +672,9 @@ export function createSpecimen(container, overrides = {}) {
 		renderer.setSize(width, height, false);
 		composer.setSize(width, height);
 		bloom.setSize(width, height);
+		/* point sprites are sized in device pixels */
+		moteUniforms.uScale.value =
+			(height * renderer.getPixelRatio() * config.motes.size) / (2 * Math.tan((camera.fov * DEG) / 2));
 	};
 	const observer = new ResizeObserver(resize);
 	observer.observe(container);
@@ -520,17 +692,35 @@ export function createSpecimen(container, overrides = {}) {
 		const dt = Math.min(timer.getDelta(), 0.05);
 		const time = timer.getElapsed();
 
-		if (!reduceMotion) {
-			spin.yaw += spin.yawVelocity + dt * config.motion.spin;
-			spin.pitch += spin.pitchVelocity;
-			spin.yawVelocity *= config.motion.damping;
-			spin.pitchVelocity *= config.motion.damping;
-			spin.pitch = THREE.MathUtils.clamp(spin.pitch, -0.65, 0.65);
+		const frames = dt * 60;
 
-			specimen.rotation.y = spin.yaw;
-			specimen.rotation.x = spin.pitch + Math.sin(time * 0.31) * config.motion.tumble;
+		if (!pointer.active && !reduceMotion) {
+			turn(spin.yawVelocity * frames, spin.pitchVelocity * frames);
+			const decay = Math.pow(config.motion.damping, frames);
+			spin.yawVelocity *= decay;
+			spin.pitchVelocity *= decay;
+		}
+		if (!reduceMotion) spin.yaw += dt * config.motion.spin;
+
+		/* Dragging still works under reduced motion; only the drift stops. */
+		specimen.rotation.y = spin.yaw;
+		specimen.rotation.x = spin.pitch;
+
+		if (!reduceMotion) {
+			specimen.rotation.x += Math.sin(time * 0.31) * config.motion.tumble;
 			specimen.rotation.z = Math.sin(time * 0.23) * config.motion.tumble * 0.8;
 			specimen.position.y = Math.sin(time * 0.44) * 0.02;
+
+			const beat = time * config.motion.rhythm;
+			breathUniforms.uBreath.value = pulse(beat, 0) * config.motion.breath * config.shell.radius;
+			lobeAxes.forEach((lobe, i) => {
+				breathUniforms.uLobePulse.value[i] =
+					pulse(beat * (0.8 + (i % 3) * 0.17), i + 1) * config.motion.lobes * config.shell.radius;
+			});
+			/* the core follows the body's breath, lagging and smaller, so the
+			   glass visibly moves around it */
+			coreGroup.scale.setScalar(1 + pulse(beat - 0.35, 0) * config.motion.breath * 0.45);
+			moteUniforms.uTime.value = time;
 
 			for (const ring of rings) {
 				if (ring.axis === 0) ring.pivot.rotation.z += dt * ring.rate;
@@ -566,6 +756,7 @@ export function createSpecimen(container, overrides = {}) {
 		materials: { glass, ring: ringMaterial, core: core.material },
 		post: { bloom, grade },
 		motion: config.motion,
+		motes: moteUniforms,
 		dispose() {
 			cancelAnimationFrame(frame);
 			timer.dispose();

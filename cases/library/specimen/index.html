@@ -105,6 +105,10 @@
 				["Bloom", 0, 1.5, 0.01, () => api.post.bloom.strength, (v) => (api.post.bloom.strength = v)],
 				["Grain", 0, 0.16, 0.002, () => api.post.grade.uniforms.uGrain.value, (v) => (api.post.grade.uniforms.uGrain.value = v)],
 				["Spin", 0, 0.3, 0.005, () => api.motion.spin, (v) => (api.motion.spin = v)],
+				["Breath", 0, 0.12, 0.005, () => api.motion.breath, (v) => (api.motion.breath = v)],
+				["Lobe pulse", 0, 0.3, 0.005, () => api.motion.lobes, (v) => (api.motion.lobes = v)],
+				["Rhythm", 0.2, 3, 0.05, () => api.motion.rhythm, (v) => (api.motion.rhythm = v)],
+				["Motes", 0, 3, 0.05, () => api.motes.uBrightness.value, (v) => (api.motes.uBrightness.value = v)],
 			];
 
 			const panel = document.getElementById("panel");
