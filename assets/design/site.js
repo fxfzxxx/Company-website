@@ -19,7 +19,9 @@
 		const onScroll = () => {
 			const y = window.scrollY;
 			const delta = y - lastY;
-			if (y < 10) {
+			if (header.classList.contains("is-open")) {
+				// the open menu keeps the bar in place
+			} else if (y < 10) {
 				header.classList.remove("is-hidden");
 			} else if (delta > 5 && y > 120) {
 				header.classList.add("is-hidden");
@@ -39,6 +41,36 @@
 			},
 			{ passive: true }
 		);
+	};
+
+	/* — header: the phone menu ————————————————————————————————————
+	   Up to 1024px the links fold into a panel under the bar. The button
+	   toggles it; a link, Escape or widening the window closes it. */
+	const initMenu = () => {
+		const header = document.querySelector(".yt-header");
+		const button = header && header.querySelector(".yt-menu-btn");
+		const menu = document.getElementById("yt-menu");
+		if (!button || !menu) return;
+		const wide = window.matchMedia("(min-width: 1025px)");
+
+		const set = (open) => {
+			header.classList.toggle("is-open", open);
+			document.documentElement.classList.toggle("yt-menu-open", open);
+			button.setAttribute("aria-expanded", String(open));
+			button.setAttribute("aria-label", button.dataset[open ? "labelClose" : "labelOpen"]);
+		};
+
+		button.addEventListener("click", () => set(!header.classList.contains("is-open")));
+		menu.addEventListener("click", (e) => {
+			if (e.target.closest("a")) set(false);
+		});
+		document.addEventListener("keydown", (e) => {
+			if (e.key === "Escape" && header.classList.contains("is-open")) {
+				set(false);
+				button.focus();
+			}
+		});
+		wide.addEventListener("change", () => set(false));
 	};
 
 	/* — case library: single-select filter, reflected in the URL ————
@@ -181,6 +213,7 @@
 	};
 
 	initHeader();
+	initMenu();
 	initFilter();
 	initAccordion();
 	initForm();

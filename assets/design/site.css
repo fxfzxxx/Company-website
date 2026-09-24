@@ -308,12 +308,9 @@ button {
 
 /* height drives it; width follows the 4.442:1 lockup. The width/height
    attributes are the anti-shift hint, so height must stay auto or they
-   become presentational sizes and override this.
-
-   The six-link nav already overflows below ~720px; the full lockup would
-   take another 95px off it, so the mark stands in on its own there. Both
-   rules below are selected the same way, or the wider one wins on
-   specificity and the two marks stack. */
+   become presentational sizes and override this. The lockup shows at
+   every width (on a phone it sits centred); the mark is kept in the
+   markup but unused. */
 .yt-nav .yt-brand .yt-brand-lockup {
 	display: block;
 	height: 34px;
@@ -322,13 +319,10 @@ button {
 
 .yt-nav .yt-brand .yt-brand-mark {
 	display: none;
-	height: 28px;
-	width: auto;
 }
 
-@media (max-width: 720px) {
-	.yt-nav .yt-brand .yt-brand-lockup { display: none; }
-	.yt-nav .yt-brand .yt-brand-mark { display: block; }
+.yt-menu-btn {
+	display: none;
 }
 
 /* safe center: centred while it fits, start-aligned once it scrolls, so
@@ -433,22 +427,133 @@ button {
 	display: none;
 }
 
-/* on a phone the links scroll sideways; fade the edge so they read as
-   more to come rather than cut off */
-@media (max-width: 720px) {
+/* — header on a phone or tablet ————————————————————————————————————————
+   Menu button left, lockup centred, language switch right. The links
+   drop into a full-height panel under the bar, set large, one per row. */
+@media (max-width: 1024px) {
 	.yt-nav {
-		min-height: 56px;
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
 		gap: 12px;
+		min-height: 60px;
+		padding-inline: 16px;
 	}
 
-	.yt-nav-links {
-		-webkit-mask-image: linear-gradient(to right, #000 82%, transparent);
-		mask-image: linear-gradient(to right, #000 82%, transparent);
-		padding-right: 24px;
+	.yt-nav .yt-brand {
+		grid-column: 2;
+		justify-self: center;
+	}
+
+	.yt-nav .yt-brand .yt-brand-lockup {
+		height: 28px;
+	}
+
+	.yt-lang {
+		grid-column: 3;
+		justify-self: end;
+		margin-left: 0;
 	}
 
 	.yt-lang a {
 		padding: 3px 8px;
+	}
+
+	.yt-menu-btn {
+		grid-column: 1;
+		grid-row: 1;
+		justify-self: start;
+		display: grid;
+		place-content: center;
+		gap: 6px;
+		width: 44px;
+		height: 44px;
+		margin-left: -10px;
+		padding: 0;
+		border: 0;
+		background: none;
+		color: var(--nav-ink);
+		cursor: pointer;
+	}
+
+	.yt-menu-btn span {
+		display: block;
+		width: 22px;
+		height: 2px;
+		background: currentColor;
+		transition: transform 260ms cubic-bezier(0.65, 0, 0.35, 1);
+	}
+
+	.yt-header.is-open .yt-menu-btn span:first-child {
+		transform: translateY(4px) rotate(45deg);
+	}
+
+	.yt-header.is-open .yt-menu-btn span:last-child {
+		transform: translateY(-4px) rotate(-45deg);
+	}
+
+	.yt-menu-btn:focus-visible {
+		outline: 2px solid var(--nav-ink);
+		outline-offset: -2px;
+	}
+
+	.yt-nav-links {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		height: calc(100dvh - 60px);
+		flex-direction: column;
+		justify-content: flex-start;
+		gap: 0;
+		padding: 8px 16px 40px;
+		overflow-y: auto;
+		background: var(--color-text);
+		visibility: hidden;
+		opacity: 0;
+		transform: translateY(-8px);
+		transition: opacity 220ms ease, transform 220ms ease, visibility 0s linear 220ms;
+	}
+
+	.yt-header.is-open .yt-nav-links {
+		visibility: visible;
+		opacity: 1;
+		transform: none;
+		transition: opacity 220ms ease, transform 220ms ease;
+	}
+
+	.yt-nav .yt-nav-links a {
+		padding: 18px 0;
+		font-size: 26px;
+		letter-spacing: -0.01em;
+		border-bottom: 1px solid var(--nav-line);
+	}
+
+	/* the rule becomes an arrow at the row's end */
+	.yt-nav-links a::after {
+		content: "→";
+		position: static;
+		margin-left: auto;
+		height: auto;
+		background: none;
+		font-size: 20px;
+		transform: none;
+		transition: transform 220ms ease;
+	}
+
+	.yt-nav-links a:hover::after,
+	.yt-nav-links a:focus-visible::after {
+		transform: translateX(4px);
+	}
+
+	.yt-nav-links a[aria-current="page"]::before {
+		width: 7px;
+		height: 7px;
+		margin-right: 12px;
+	}
+
+	.yt-menu-open {
+		overflow: hidden;
 	}
 }
 
