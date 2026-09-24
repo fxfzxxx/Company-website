@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="大多数坏掉的报表，都是在上游被一个没人通知的改动弄坏的。数据契约让数据的生产者为数据的形态负责——并让故障大声地暴露出来，而不是悄无声息。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/data-contracts.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/data-contracts.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/data-contracts.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/data-contracts.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="数据契约：别再在下游修管道 — Yonder Tech" />
+	<meta property="og:description" content="大多数坏掉的报表，都是在上游被一个没人通知的改动弄坏的。数据契约让数据的生产者为数据的形态负责——并让故障大声地暴露出来，而不是悄无声息。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/data-contracts.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="数据契约：别再在下游修管道 — Yonder Tech" />
+	<meta name="twitter:description" content="大多数坏掉的报表，都是在上游被一个没人通知的改动弄坏的。数据契约让数据的生产者为数据的形态负责——并让故障大声地暴露出来，而不是悄无声息。" />
+	<title>数据契约：别再在下游修管道 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/data-contracts.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">数据</span>
+				</div>
+				<h1 class="yt-article-h1">数据契约：别再在下游修管道</h1>
+				<p class="yt-article-dek">大多数坏掉的报表，都是在上游被一个没人通知的改动弄坏的。数据契约让数据的生产者为数据的形态负责——并让故障大声地暴露出来，而不是悄无声息。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-06-03">2026 年 6 月 3 日</time> · 3 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>每个数据团队都熟悉周一早上的那条消息：营收看板不对。有人沿着管道一路往回查，发现周五时某个应用团队改了一个字段名，把状态值从 <code>closed</code> 改成了 <code>complete</code>，或者开始用分而不是元来传金额。没有任何报错，数据照常流动，只是错了。</p>
+					<p>这是企业数据中最常见的故障，而它几乎从来不是数据团队的失误，而是“约定”的缺失。生产数据的人在不知道谁依赖它的情况下改了它，消费数据的人则在数字看起来不对劲之前无从知晓。</p>
+					<h2>数据契约是什么</h2>
+					<p>数据契约，是一个系统向其他系统提供的数据集，关于其形态和含义的一份明确的、带版本的约定。它通常包括：</p>
+					<ul>
+						<li><strong>结构。</strong> 有哪些字段、各是什么类型、哪些必填。</li>
+						<li><strong>语义。</strong> 每个字段用文字说明它的含义。状态可以取哪些值。金额是否含 GST。时间戳是哪个时区。</li>
+						<li><strong>质量规则。</strong> 数据必须通过的检查：客户 ID 不能为空、合计必须对得上、日期不能在未来。</li>
+						<li><strong>新鲜度。</strong> 数据多久到一次，晚到什么程度算太晚。</li>
+						<li><strong>归属。</strong> 负责这个数据集的团队，以及如何联系他们。</li>
+					</ul>
+					<p>契约和生产系统的代码一起放在版本控制里。它不是维基上的一篇文档，而是构建流程会检查的东西。</p>
+					<h2>把检查移到上游</h2>
+					<p>关键的变化在于检查发生在哪里。没有契约时，校验位于远在下游的数据管道里，在损害已经造成之后才失败——如果它还会失败的话。有了契约，生产团队自己的构建会验证即将发布的数据是否仍然符合契约。一个破坏性改动，会让他们自己的合并请求失败，而不是让别人的看板出错。</p>
+					<p>这并不意味着生产者永远不能改数据，而是意味着改动是有意识的。新增字段没问题；重命名或删除字段，则需要一个新版本的契约、通知消费者，以及一段新旧两个版本同时可用的过渡期。</p>
+					<h2>从哪里开始</h2>
+					<p>契约不需要一次覆盖所有东西。行之有效的做法是：</p>
+					<ol>
+						<li>挑出三四个支撑管理层真正在看的报表的数据集。</li>
+						<li>让生产团队在场，为每一个数据集写契约。关于“这个字段到底是什么意思”的讨论，常常是最有价值的部分——它经常揭示出两个团队在用同一个词指代不同的东西。</li>
+						<li>先在生产方加自动检查，再在消费方加一道作为第二防线。</li>
+						<li>等某个数据集真的出了故障，再把契约扩展到它，而不是提前铺开。</li>
+					</ol>
+					<h2>它会带来什么</h2>
+					<p>直接的好处是坏掉的报表变少了。更大的好处是信任。当管理者知道眼前的数字来自有明确负责人、定义被强制执行的数据集时，他们就不再要求“再给我一份表格核对一下”。从那一刻起，数据才开始改变决策，而不只是装点决策。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="metrics-before-models.html">
+						<div class="card-kicker">数据</div>
+						<h3 class="card-title">先有指标，再谈模型</h3>
+						<p class="card-body">为什么第一个自动化项目，应该是那个没人愿意拿去演示的项目，以及后面的项目该怎么排序。</p>
+						<div class="card-meta">2026 年 2 月 25 日 · 2 分钟阅读</div>
+					</a>
+					<a class="card" href="software-cheap-to-write.html">
+						<div class="card-kicker">技术趋势</div>
+						<h3 class="card-title">当写软件变得便宜，什么会改变</h3>
+						<p class="card-body">AI 编程工具让产出代码快了很多，却没有让“决定做什么”、“确认它能用”以及“运行它很多年”变得更便宜——而这改变了价值所在的位置。</p>
+						<div class="card-meta">2026 年 9 月 16 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="frontend-framework-is-a-team.html">
+						<div class="card-kicker">技术栈</div>
+						<h3 class="card-title">选前端框架，主要是在选团队</h3>
+						<p class="card-body">主流框架之间的技术差异已经缩小。真正还不同的，是你能招到谁、代码能被支持多久，以及你实际需要多少框架。</p>
+						<div class="card-meta">2026 年 9 月 2 日 · 2 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "数据契约：别再在下游修管道",
+		"description": "大多数坏掉的报表，都是在上游被一个没人通知的改动弄坏的。数据契约让数据的生产者为数据的形态负责——并让故障大声地暴露出来，而不是悄无声息。",
+		"datePublished": "2026-06-03",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/data-contracts.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/data-contracts.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

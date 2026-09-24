@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Most token files we inherit are a list of colours with clever names. The useful ones are agreements between design and engineering about what may change, and what must not." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/design-tokens-contract.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/design-tokens-contract.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/design-tokens-contract.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/design-tokens-contract.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Design tokens are a contract, not a palette — Yonder Tech" />
+	<meta property="og:description" content="Most token files we inherit are a list of colours with clever names. The useful ones are agreements between design and engineering about what may change, and what must not." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/design-tokens-contract.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Design tokens are a contract, not a palette — Yonder Tech" />
+	<meta name="twitter:description" content="Most token files we inherit are a list of colours with clever names. The useful ones are agreements between design and engineering about what may change, and what must not." />
+	<title>Design tokens are a contract, not a palette — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/design-tokens-contract.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">Design language</span>
+				</div>
+				<h1 class="yt-article-h1">Design tokens are a contract, not a palette</h1>
+				<p class="yt-article-dek">Most token files we inherit are a list of colours with clever names. The useful ones are agreements between design and engineering about what may change, and what must not.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-02-18">18 February 2026</time> · 2 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>Design tokens arrived with a promise: define your colours, spacing and type once, and every product, platform and team will stay consistent. In practice, the token files we inherit on client projects tend to be one of two things. Either a flat list of every colour anyone ever used, each with a name like <code>blue-500-alt</code>, or an elaborate hierarchy so abstract that nobody can say which token to use for a table border.</p>
+					<p>Neither is a contract. And a contract is what tokens are for.</p>
+					<h2>Three layers, three kinds of promise</h2>
+					<p>The token systems that survive contact with a real organisation usually have three layers, and each makes a different promise.</p>
+					<ul>
+						<li><strong>Primitive tokens</strong> describe what exists: the brand&#39;s twelve blues, the spacing scale, the type sizes. They promise nothing about usage. Engineers should almost never reference them directly.</li>
+						<li><strong>Semantic tokens</strong> describe intent: <code>text-primary</code>, <code>surface-raised</code>, <code>border-subtle</code>, <code>danger</code>. These are the promise. A component that uses <code>text-primary</code> is guaranteed readable on <code>surface-default</code>, in light and dark themes, now and after the next rebrand.</li>
+						<li><strong>Component tokens</strong> describe exceptions: the one place a button needs a colour that is not in the semantic set. They should be rare, and each one should be a small embarrassment that prompts a question.</li>
+					</ul>
+					<p>The contract lives in the middle layer. Designers may change which primitive a semantic token points to — that is what a rebrand is. Engineers may rely on the semantic name never disappearing and never breaking its guarantee.</p>
+					<h2>Write the guarantees down</h2>
+					<p>A semantic token is only a contract if its guarantee is written somewhere a machine can check. For colour, that means contrast: every text token paired with the surfaces it may sit on, and a minimum ratio for each pair. For spacing, it means the scale is closed — no arbitrary values in components. For type, it means each role has a size, weight and line height that travel together.</p>
+					<p>We put these rules into the build. A pull request that pairs <code>text-muted</code> with <code>surface-sunken</code> below 4.5:1 fails, the same way a failing unit test would. That single check has prevented more accessibility regressions on our projects than any audit.</p>
+					<h2>Name for intent, not appearance</h2>
+					<p>The fastest way to break a token system is to name tokens after what they look like. <code>grey-light-border</code> is fine until the brand moves to warm neutrals, at which point every usage is a lie. <code>border-subtle</code> survives any palette.</p>
+					<p>A good test: could you swap the entire primitive palette for a different brand&#39;s and have every semantic name still make sense? If yes, the names are doing their job.</p>
+					<h2>Start smaller than you think</h2>
+					<p>The most successful token sets we have shipped started with fewer than forty semantic tokens. That is enough for text, surfaces, borders, a primary action, and four status colours in two themes. Everything else can be added when a real component needs it — and the conversation about whether it is truly needed is exactly the conversation the system exists to force.</p>
+					<p>Tokens are not a deliverable. They are an agreement, maintained by both sides, that lets a design language change without every screen having to be checked by hand.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="interfaces-for-uncertainty.html">
+						<div class="card-kicker">Design language</div>
+						<h3 class="card-title">Designing interfaces for answers that might be wrong</h3>
+						<p class="card-body">Traditional software is either right or broken. AI features are usually right, sometimes wrong, and always confident-sounding. The interface has to carry the uncertainty the model won&#39;t.</p>
+						<div class="card-meta">19 August 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="design-systems-without-design-team.html">
+						<div class="card-kicker">Design language</div>
+						<h3 class="card-title">A design system for teams without a design team</h3>
+						<p class="card-body">Most organisations that need consistency cannot justify a dedicated design-system group. A small, opinionated kit — and the discipline to keep it small — gets them most of the way.</p>
+						<div class="card-meta">22 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="motion-with-a-job.html">
+						<div class="card-kicker">Design language</div>
+						<h3 class="card-title">Motion with a job to do</h3>
+						<p class="card-body">Animation is either explaining something or getting in the way. A short guide to the motion that earns its milliseconds, and the kind that should be cut.</p>
+						<div class="card-meta">10 June 2026 · 2 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Design tokens are a contract, not a palette",
+		"description": "Most token files we inherit are a list of colours with clever names. The useful ones are agreements between design and engineering about what may change, and what must not.",
+		"datePublished": "2026-02-18",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/design-tokens-contract.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/design-tokens-contract.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

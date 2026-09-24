@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Most broken dashboards were broken upstream, by a change nobody announced. A data contract makes the producer of the data responsible for its shape — and makes the break loud instead of silent." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/data-contracts.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/data-contracts.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/data-contracts.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/data-contracts.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Data contracts: stop fixing pipelines downstream — Yonder Tech" />
+	<meta property="og:description" content="Most broken dashboards were broken upstream, by a change nobody announced. A data contract makes the producer of the data responsible for its shape — and makes the break loud instead of silent." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/data-contracts.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Data contracts: stop fixing pipelines downstream — Yonder Tech" />
+	<meta name="twitter:description" content="Most broken dashboards were broken upstream, by a change nobody announced. A data contract makes the producer of the data responsible for its shape — and makes the break loud instead of silent." />
+	<title>Data contracts: stop fixing pipelines downstream — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/data-contracts.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">Data</span>
+				</div>
+				<h1 class="yt-article-h1">Data contracts: stop fixing pipelines downstream</h1>
+				<p class="yt-article-dek">Most broken dashboards were broken upstream, by a change nobody announced. A data contract makes the producer of the data responsible for its shape — and makes the break loud instead of silent.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-06-03">3 June 2026</time> · 2 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>Every data team knows the Monday morning message: the revenue dashboard is wrong. Someone traces it back through the pipeline and finds that, on Friday, an application team renamed a field, changed a status value from <code>closed</code> to <code>complete</code>, or started sending amounts in cents instead of dollars. Nothing errored. The data kept flowing. It was just wrong.</p>
+					<p>This is the most common failure in business data, and it is almost never a failure of the data team. It is a failure of agreement. The people who produce the data changed it without knowing who depended on it, and the people who consume it had no way to find out until the numbers looked odd.</p>
+					<h2>What a data contract is</h2>
+					<p>A data contract is an explicit, versioned agreement about the shape and meaning of a dataset that one system provides to others. It typically covers:</p>
+					<ul>
+						<li><strong>Schema.</strong> The fields, their types and which are required.</li>
+						<li><strong>Semantics.</strong> What each field means, in words. What values a status can take. Whether an amount includes GST. Which timezone a timestamp is in.</li>
+						<li><strong>Quality rules.</strong> Checks the data must pass: no nulls in the customer ID, totals that sum correctly, dates that are not in the future.</li>
+						<li><strong>Freshness.</strong> How often the data arrives and how late is too late.</li>
+						<li><strong>Ownership.</strong> The team responsible for the dataset, and how to reach them.</li>
+					</ul>
+					<p>The contract lives in version control alongside the producing system&#39;s code. It is not a document in a wiki; it is something the build checks.</p>
+					<h2>Moving the check upstream</h2>
+					<p>The important shift is where the check happens. Without contracts, validation lives in the data pipeline, far downstream, and fails after the damage is done — if it fails at all. With contracts, the producing team&#39;s own build verifies that what they are about to ship still matches the contract. A breaking change fails their pull request, not someone else&#39;s dashboard.</p>
+					<p>That does not mean the producer can never change the data. It means changes are deliberate. Adding a field is fine. Renaming or removing one requires a new version of the contract, a notice to consumers, and a period in which both versions are available.</p>
+					<h2>Where to start</h2>
+					<p>Contracts do not need to cover everything at once. The approach that works:</p>
+					<ol>
+						<li>Pick the three or four datasets that feed the reports the leadership team actually reads.</li>
+						<li>Write the contract for each with the producing team in the room. The conversation about what a field means is often the most valuable part — it regularly uncovers two teams using the same word differently.</li>
+						<li>Add automated checks on the producer&#39;s side, then on the consumer&#39;s side as a second line.</li>
+						<li>Extend to other datasets when a break happens, not before.</li>
+					</ol>
+					<h2>What it changes</h2>
+					<p>The immediate benefit is fewer broken reports. The larger one is trust. When leaders know that the numbers in front of them come from datasets with named owners and enforced definitions, they stop asking for the spreadsheet version &quot;just to check&quot;. That is when data starts to change decisions rather than just decorate them.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="metrics-before-models.html">
+						<div class="card-kicker">Data</div>
+						<h3 class="card-title">Metrics before models</h3>
+						<p class="card-body">Why the first automation project should be the one nobody wants to demo, and how to sequence the rest behind it.</p>
+						<div class="card-meta">25 February 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="software-cheap-to-write.html">
+						<div class="card-kicker">Technology trends</div>
+						<h3 class="card-title">What changes when software is cheap to write</h3>
+						<p class="card-body">AI coding tools have made producing code dramatically faster. They have not made deciding what to build, checking that it works or running it for years any cheaper — and that shifts where the value is.</p>
+						<div class="card-meta">16 September 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="frontend-framework-is-a-team.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Choosing a frontend framework is mostly choosing a team</h3>
+						<p class="card-body">The technical differences between mainstream frameworks have narrowed. What still differs is who you can hire, how long the code will be supported, and how much of it you actually need.</p>
+						<div class="card-meta">2 September 2026 · 2 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Data contracts: stop fixing pipelines downstream",
+		"description": "Most broken dashboards were broken upstream, by a change nobody announced. A data contract makes the producer of the data responsible for its shape — and makes the break loud instead of silent.",
+		"datePublished": "2026-06-03",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/data-contracts.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/data-contracts.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

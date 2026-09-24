@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="我们接手的大多数令牌文件，只是一串起了花哨名字的颜色。真正有用的令牌，是设计和工程之间关于“什么可以改、什么绝不能变”的约定。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/design-tokens-contract.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/design-tokens-contract.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/design-tokens-contract.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/design-tokens-contract.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="设计令牌是一份契约，不是一块调色板 — Yonder Tech" />
+	<meta property="og:description" content="我们接手的大多数令牌文件，只是一串起了花哨名字的颜色。真正有用的令牌，是设计和工程之间关于“什么可以改、什么绝不能变”的约定。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/design-tokens-contract.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="设计令牌是一份契约，不是一块调色板 — Yonder Tech" />
+	<meta name="twitter:description" content="我们接手的大多数令牌文件，只是一串起了花哨名字的颜色。真正有用的令牌，是设计和工程之间关于“什么可以改、什么绝不能变”的约定。" />
+	<title>设计令牌是一份契约，不是一块调色板 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/design-tokens-contract.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">设计语言</span>
+				</div>
+				<h1 class="yt-article-h1">设计令牌是一份契约，不是一块调色板</h1>
+				<p class="yt-article-dek">我们接手的大多数令牌文件，只是一串起了花哨名字的颜色。真正有用的令牌，是设计和工程之间关于“什么可以改、什么绝不能变”的约定。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-02-18">2026 年 2 月 18 日</time> · 3 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>设计令牌（design tokens）出现时带着一个承诺：颜色、间距、字体只定义一次，所有产品、平台和团队就能保持一致。实际上，我们在客户项目里接手的令牌文件通常是两种之一：要么是一张平铺的列表，收录了所有人用过的所有颜色，名字叫 <code>blue-500-alt</code> 之类；要么是一套极度抽象的层级，没人说得清表格边框该用哪一个。</p>
+					<p>这两种都不是契约，而令牌存在的意义，恰恰是做一份契约。</p>
+					<h2>三层结构，三种承诺</h2>
+					<p>能在真实组织里存活下来的令牌体系，通常分三层，每一层承诺的东西不同。</p>
+					<ul>
+						<li><strong>基础令牌</strong>描述“有什么”：品牌的十二种蓝、间距刻度、字号。它们不对用法做任何承诺，工程师几乎不应该直接引用。</li>
+						<li><strong>语义令牌</strong>描述“用来做什么”：<code>text-primary</code>、<code>surface-raised</code>、<code>border-subtle</code>、<code>danger</code>。承诺就在这里。一个用了 <code>text-primary</code> 的组件，保证在 <code>surface-default</code> 上可读，亮色和暗色主题都成立，今天成立，下次品牌升级之后也成立。</li>
+						<li><strong>组件令牌</strong>描述例外：某个按钮确实需要一个语义集合里没有的颜色。它们应该很少见，而且每一个都该让人有点不好意思，并引出一个问题。</li>
+					</ul>
+					<p>契约住在中间这一层。设计师可以改变某个语义令牌指向哪个基础令牌——品牌升级本质上就是这件事。工程师可以依赖语义名称永远不会消失、永远不会违背它的保证。</p>
+					<h2>把保证写下来</h2>
+					<p>语义令牌只有在它的保证被写进机器能检查的地方时，才算契约。对颜色来说，就是对比度：每个文字令牌与它允许出现的每个背景配对，每一对都有最低对比度。对间距来说，就是刻度封闭——组件里不允许随意取值。对字体来说，就是每种角色的字号、字重和行高绑在一起走。</p>
+					<p>我们把这些规则放进构建流程。一个把 <code>text-muted</code> 放在 <code>surface-sunken</code> 上、对比度低于 4.5:1 的合并请求，会像单元测试失败一样被拦下。在我们的项目里，这一条检查挡住的无障碍倒退，比任何一次人工审查都多。</p>
+					<h2>按意图命名，不按外观命名</h2>
+					<p>破坏令牌体系最快的办法，就是按外观给令牌起名。<code>grey-light-border</code> 在品牌换成暖色中性色之前都没问题，换了之后，每一处用法都成了谎言。<code>border-subtle</code> 则能熬过任何一套调色板。</p>
+					<p>一个好用的测试：把整套基础调色板换成另一个品牌的，每个语义名称是否依然说得通？如果是，这些名字就尽到了职责。</p>
+					<h2>比你想的起点更小</h2>
+					<p>我们交付过最成功的令牌集，最初的语义令牌不到四十个。这足以覆盖文字、背景、边框、一个主操作和四种状态色，并且支持两套主题。其余的，等真实组件需要时再加——而“它是否真的需要”这场讨论，正是这套体系存在的目的。</p>
+					<p>令牌不是一份交付物，而是一份由双方共同维护的约定。有了它，设计语言可以改变，而不需要逐屏人工检查。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="interfaces-for-uncertainty.html">
+						<div class="card-kicker">设计语言</div>
+						<h3 class="card-title">为可能出错的答案设计界面</h3>
+						<p class="card-body">传统软件要么正确，要么坏了。AI 功能通常是对的，有时是错的，而且听起来总是很自信。模型不肯承载的不确定性，界面必须承载起来。</p>
+						<div class="card-meta">2026 年 8 月 19 日 · 2 分钟阅读</div>
+					</a>
+					<a class="card" href="design-systems-without-design-team.html">
+						<div class="card-kicker">设计语言</div>
+						<h3 class="card-title">没有设计团队的团队，也能有设计系统</h3>
+						<p class="card-body">大多数需要一致性的组织，都负担不起一个专职的设计系统小组。一套小而有主见的组件包——以及让它保持小的纪律——就能走完大部分路。</p>
+						<div class="card-meta">2026 年 7 月 22 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="motion-with-a-job.html">
+						<div class="card-kicker">设计语言</div>
+						<h3 class="card-title">有任务的动效</h3>
+						<p class="card-body">动画要么在解释什么，要么在碍事。一份简短指南：哪些动效配得上它占用的毫秒，哪些应该删掉。</p>
+						<div class="card-meta">2026 年 6 月 10 日 · 2 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "设计令牌是一份契约，不是一块调色板",
+		"description": "我们接手的大多数令牌文件，只是一串起了花哨名字的颜色。真正有用的令牌，是设计和工程之间关于“什么可以改、什么绝不能变”的约定。",
+		"datePublished": "2026-02-18",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/design-tokens-contract.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/design-tokens-contract.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

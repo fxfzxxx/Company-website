@@ -1,6 +1,8 @@
 /* Static site generator for the Modernist pages.
-   Reads content/*.json, writes /en and /zh, the root language switch and the
-   sitemap. No dependencies: run it with `node tools/build.mjs`. The output is
+   Reads content/*.json and the Markdown articles in content/insights/<loc>/,
+   writes /en and /zh, the root language switch and the sitemap. To publish an
+   article, add <slug>.md to both content/insights/en and content/insights/zh
+   (same slug, date and category) and rebuild. No dependencies: run it with `node tools/build.mjs`. The output is
    committed, so the site still deploys as plain static files.
 
    The prototype's template runtime (assets/render.js in the handoff) is
@@ -15,6 +17,7 @@ import { context, esc, LOCALES, HREFLANG, SITE } from "./templates/chrome.mjs";
 import { renderHome } from "./templates/home.mjs";
 import { renderLibrary } from "./templates/library.mjs";
 import { renderDetail } from "./templates/detail.mjs";
+import { CATEGORIES, markdown, readingMinutes, renderArticle, renderInsightsIndex } from "./templates/insights.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), "utf8"));
@@ -31,6 +34,34 @@ const write = (rel, body) => {
 const cases = read("content/cases.json");
 const ui = { en: read("content/ui.en.json"), zh: read("content/ui.zh.json") };
 const home = { en: read("content/home.en.json"), zh: read("content/home.zh.json") };
+
+/* Articles: content/insights/<loc>/<slug>.md, each opening with a front
+   matter block of title, dek, category and date. Newest first. */
+const readArticles = (loc) => {
+	const dir = path.join(ROOT, "content/insights", loc);
+	return fs
+		.readdirSync(dir)
+		.filter((f) => f.endsWith(".md"))
+		.map((f) => {
+			const raw = fs.readFileSync(path.join(dir, f), "utf8");
+			const m = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(raw);
+			if (!m) throw new Error(`content/insights/${loc}/${f}: no front matter`);
+			const meta = Object.fromEntries(
+				m[1].split("\n").map((line) => {
+					const i = line.indexOf(":");
+					return [line.slice(0, i).trim(), line.slice(i + 1).trim()];
+				})
+			);
+			return {
+				slug: f.replace(/\.md$/, ""),
+				...meta,
+				html: markdown(m[2]),
+				minutes: readingMinutes(m[2], loc),
+			};
+		})
+		.sort((a, b) => b.date.localeCompare(a.date));
+};
+const articles = { en: readArticles("en"), zh: readArticles("zh") };
 
 /* — validation ——————————————————————————————————————————————————
    The copy was written independently in each language and must transfer
@@ -68,6 +99,18 @@ for (const row of home.en.work.rows) {
 	if (!cases.some((c) => c.slug === row.slug)) problems.push(`home.en: work row slug "${row.slug}" is not a case`);
 }
 
+for (const a of articles.en) {
+	const zh = articles.zh.find((x) => x.slug === a.slug);
+	if (!zh) problems.push(`insights/${a.slug}: no Chinese version`);
+	else if (zh.date !== a.date || zh.category !== a.category) problems.push(`insights/${a.slug}: date or category differs between locales`);
+	for (const x of [a, zh].filter(Boolean)) {
+		["title", "dek", "date"].forEach((k) => require(x[k], `insights/${x.slug}.${k}`));
+		if (!CATEGORIES.includes(x.category)) problems.push(`insights/${x.slug}: unknown category "${x.category}"`);
+		if (!/^\d{4}-\d{2}-\d{2}$/.test(x.date || "")) problems.push(`insights/${x.slug}: date must be YYYY-MM-DD`);
+	}
+}
+if (articles.zh.length !== articles.en.length) problems.push("insights: the two locales have different article counts");
+
 if (problems.length) {
 	console.error("Build failed:\n" + problems.map((p) => `  - ${p}`).join("\n"));
 	process.exit(1);
@@ -89,7 +132,7 @@ for (const loc of LOCALES) {
 		path: `${loc}/index.html`,
 		altPath: `${other}/index.html`,
 	});
-	written.push(write(`${loc}/index.html`, renderHome(homeCtx, cases)));
+	written.push(write(`${loc}/index.html`, renderHome(homeCtx, cases, articles[loc])));
 	pages.push({ path: `${loc}/index.html`, loc, priority: loc === "en" ? "1.0" : "0.9", changefreq: "weekly" });
 
 	const libCtx = context({
@@ -99,6 +142,7 @@ for (const loc of LOCALES) {
 		depth: 2,
 		path: `${loc}/cases/index.html`,
 		altPath: `${other}/cases/index.html`,
+		section: "cases",
 	});
 	written.push(write(`${loc}/cases/index.html`, renderLibrary(libCtx, cases)));
 	pages.push({ path: `${loc}/cases/index.html`, loc, priority: "0.9", changefreq: "weekly" });
@@ -111,9 +155,36 @@ for (const loc of LOCALES) {
 			depth: 2,
 			path: `${loc}/cases/${c.slug}.html`,
 			altPath: `${other}/cases/${c.slug}.html`,
+			section: "cases",
 		});
 		written.push(write(`${loc}/cases/${c.slug}.html`, renderDetail(ctx, cases, i)));
 		pages.push({ path: `${loc}/cases/${c.slug}.html`, loc, priority: "0.7", changefreq: "monthly" });
+	});
+
+	const insCtx = context({
+		loc,
+		ui: ui[loc],
+		home: home[loc],
+		depth: 2,
+		path: `${loc}/insights/index.html`,
+		altPath: `${other}/insights/index.html`,
+		section: "insights",
+	});
+	written.push(write(`${loc}/insights/index.html`, renderInsightsIndex(insCtx, articles[loc])));
+	pages.push({ path: `${loc}/insights/index.html`, loc, priority: "0.8", changefreq: "weekly" });
+
+	articles[loc].forEach((a, i) => {
+		const ctx = context({
+			loc,
+			ui: ui[loc],
+			home: home[loc],
+			depth: 2,
+			path: `${loc}/insights/${a.slug}.html`,
+			altPath: `${other}/insights/${a.slug}.html`,
+			section: "insights",
+		});
+		written.push(write(`${loc}/insights/${a.slug}.html`, renderArticle(ctx, articles[loc], i)));
+		pages.push({ path: `${loc}/insights/${a.slug}.html`, loc, priority: "0.6", changefreq: "yearly", lastmod: a.date });
 	});
 }
 
@@ -195,7 +266,7 @@ const generated = pages.map((p) => {
 		`<xhtml:link rel="alternate" hreflang="${HREFLANG[loc]}" href="${SITE}/${href}" />`;
 	const enHref = p.loc === "en" ? p.path : altPath;
 	return (
-		`\t<url><loc>${SITE}/${p.path}</loc><lastmod>${today}</lastmod>` +
+		`\t<url><loc>${SITE}/${p.path}</loc><lastmod>${p.lastmod || today}</lastmod>` +
 		`<changefreq>${p.changefreq}</changefreq><priority>${p.priority}</priority>` +
 		alt("en", p.loc === "en" ? p.path : altPath) +
 		alt("zh", p.loc === "zh" ? p.path : altPath) +
@@ -216,5 +287,5 @@ ${generated.join("\n")}
 written.push("sitemap.xml");
 
 console.log(`Wrote ${written.length} files:`);
-console.log(`  ${pages.length} generated pages (${LOCALES.length} locales x ${1 + 1 + cases.length})`);
+console.log(`  ${pages.length} generated pages (${LOCALES.length} locales x ${1 + 1 + cases.length} + ${1 + articles.en.length} insights)`);
 console.log(`  index.html (language switch), sitemap.xml (${legacy.length} legacy + ${generated.length} generated)`);

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Types across the whole stack have been one of the best trades in software this decade. But there is a point where the type system becomes the product, and the product suffers." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/typescript-where-it-stops-paying.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/typescript-where-it-stops-paying.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/typescript-where-it-stops-paying.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/typescript-where-it-stops-paying.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="TypeScript everywhere, and where it stops paying — Yonder Tech" />
+	<meta property="og:description" content="Types across the whole stack have been one of the best trades in software this decade. But there is a point where the type system becomes the product, and the product suffers." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/typescript-where-it-stops-paying.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="TypeScript everywhere, and where it stops paying — Yonder Tech" />
+	<meta name="twitter:description" content="Types across the whole stack have been one of the best trades in software this decade. But there is a point where the type system becomes the product, and the product suffers." />
+	<title>TypeScript everywhere, and where it stops paying — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/typescript-where-it-stops-paying.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">Tech stack</span>
+				</div>
+				<h1 class="yt-article-h1">TypeScript everywhere, and where it stops paying</h1>
+				<p class="yt-article-dek">Types across the whole stack have been one of the best trades in software this decade. But there is a point where the type system becomes the product, and the product suffers.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-03-25">25 March 2026</time> · 2 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>It is hard to overstate how much TypeScript has changed the day-to-day of building web software. On the projects we run, a shared type between the database layer, the API and the interface catches a whole category of bugs before they exist. Refactors that used to take a nervous week take an afternoon. New developers find their way around a codebase by following types rather than asking.</p>
+					<p>So this is not an argument against TypeScript. It is an argument about where its returns flatten out, because we increasingly see teams spend real money on the part of the curve where they do.</p>
+					<h2>Where it pays</h2>
+					<ul>
+						<li><strong>At boundaries.</strong> The single most valuable use of types is describing data that crosses a boundary: API requests and responses, database rows, messages on a queue, configuration. Generate these types from a single source — the schema, the API definition — and the compiler checks that every part of the system agrees.</li>
+						<li><strong>In shared domain code.</strong> Money, dates, identifiers and statuses modelled as distinct types stop a customer ID being passed where an order ID was expected. These bugs are embarrassing, frequent and invisible to tests.</li>
+						<li><strong>During change.</strong> Types are a map of what will break. The larger and older the codebase, the more that map is worth.</li>
+					</ul>
+					<h2>Where it stops paying</h2>
+					<p>The returns start to fall when the type system is asked to prove things the business does not need proven.</p>
+					<p>We regularly inherit codebases with generic utility types several screens long, conditional types that take the compiler seconds to resolve, and components whose props are so abstract that no one can read the error messages they produce. Each piece was clever. Together they make the code slower to change than the plain JavaScript it replaced — which was the opposite of the point.</p>
+					<p>Warning signs we look for:</p>
+					<ul>
+						<li>Type definitions that are longer than the code they describe.</li>
+						<li>Error messages that need a senior developer to interpret.</li>
+						<li>Editor and build times that have crept past the point of feeling instant.</li>
+						<li><code>as</code> casts and <code>any</code> scattered through the code to escape types nobody can satisfy.</li>
+					</ul>
+					<h2>A practical middle</h2>
+					<p>Our working rule is to type the edges strictly and the middle plainly. Data coming in from outside is validated at runtime and given a precise type. Inside the application, prefer simple, named, boring types — interfaces and unions a junior developer can read aloud. Reach for advanced type features in library code that many people consume, and rarely in application code that a few people change.</p>
+					<p>It also helps to remember that types check consistency, not correctness. A perfectly typed function can still compute the wrong GST. Tests, validation at the boundaries and a clear domain model do work that no type system can.</p>
+					<p>TypeScript is at its best when it is nearly invisible: quietly catching mistakes, never demanding attention for its own sake.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="frontend-framework-is-a-team.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Choosing a frontend framework is mostly choosing a team</h3>
+						<p class="card-body">The technical differences between mainstream frameworks have narrowed. What still differs is who you can hire, how long the code will be supported, and how much of it you actually need.</p>
+						<div class="card-meta">2 September 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="observability-teams-of-five.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Observability for teams of five</h3>
+						<p class="card-body">You do not need a platform team to know what your software is doing in production. Four signals, one dashboard and a rule about alerts will cover most of what a small team needs.</p>
+						<div class="card-meta">8 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="static-first.html">
+						<div class="card-kicker">Tech stack</div>
+						<h3 class="card-title">Static first: why our own site ships as plain files</h3>
+						<p class="card-body">No server, no database, no framework runtime — and pages that load before you finish blinking. Static generation is the most underrated architecture for most business websites.</p>
+						<div class="card-meta">24 June 2026 · 2 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "TypeScript everywhere, and where it stops paying",
+		"description": "Types across the whole stack have been one of the best trades in software this decade. But there is a point where the type system becomes the product, and the product suffers.",
+		"datePublished": "2026-03-25",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/typescript-where-it-stops-paying.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/typescript-where-it-stops-paying.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

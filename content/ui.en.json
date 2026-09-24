@@ -58,5 +58,28 @@
     "UI": "UI",
     "Brand": "Brand",
     "Product": "Product"
+  },
+  "ins": {
+    "kicker": "Insights",
+    "h1a": "Notes from the work,",
+    "h1b": "written to be used.",
+    "lede": "Short essays on AI models, technology trends, the stacks we build on and the design language we ship. Each one is written for the person who has to make the decision.",
+    "topic": "Topic",
+    "all": "All",
+    "countAll": "{total} articles",
+    "countSome": "{n} of {total} articles",
+    "minutes": "{n} min read",
+    "by": "By Yonder Tech",
+    "related": "Keep reading",
+    "allLink": "All insights",
+    "image": "https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg",
+    "categories": {
+      "ai": "AI & models",
+      "stack": "Tech stack",
+      "design": "Design language",
+      "trends": "Technology trends",
+      "data": "Data",
+      "strategy": "Strategy & delivery"
+    }
   }
 }

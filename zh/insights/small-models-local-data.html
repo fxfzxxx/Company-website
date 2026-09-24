@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="不是每个 AI 任务都需要世界上最大的模型。对于隐私敏感、调用量大的工作，一个由你掌控的小模型，往往更便宜、更快，也更容易向监管和客户交代。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/small-models-local-data.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/small-models-local-data.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/small-models-local-data.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/small-models-local-data.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="小模型，本地数据 — Yonder Tech" />
+	<meta property="og:description" content="不是每个 AI 任务都需要世界上最大的模型。对于隐私敏感、调用量大的工作，一个由你掌控的小模型，往往更便宜、更快，也更容易向监管和客户交代。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/small-models-local-data.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="小模型，本地数据 — Yonder Tech" />
+	<meta name="twitter:description" content="不是每个 AI 任务都需要世界上最大的模型。对于隐私敏感、调用量大的工作，一个由你掌控的小模型，往往更便宜、更快，也更容易向监管和客户交代。" />
+	<title>小模型，本地数据 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/small-models-local-data.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">AI 与模型</span>
+				</div>
+				<h1 class="yt-article-h1">小模型，本地数据</h1>
+				<p class="yt-article-dek">不是每个 AI 任务都需要世界上最大的模型。对于隐私敏感、调用量大的工作，一个由你掌控的小模型，往往更便宜、更快，也更容易向监管和客户交代。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-05-20">2026 年 5 月 20 日</time> · 2 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>关于 AI 的公共讨论被最大的那些模型主导：它们写文章、推理问题、登顶排行榜。它们确实了不起，对开放式工作来说也常常是正确的工具。但企业实际部署 AI 的方式正在发生一个安静的转变，方向恰恰相反。</p>
+					<p>在越来越多的生产负载里，干活的是小模型——小到能跑在一台普通服务器、一台笔记本上，或者客户自己的环境里。它们的通用能力弱得多，但在一个窄而明确的任务上，配合好的指令和少量适配，往往已经够用，而且带来了大模型无法比拟的优势。</p>
+					<h2>小模型在哪里胜出</h2>
+					<ul>
+						<li><strong>不该离开的数据。</strong> 医疗记录、法律文件、客户财务。当模型运行在你自己的基础设施里——或者你掌控的新西兰区域——数据治理的讨论会简单得多：没有任何东西发给第三方，也没有任何东西被保留在别处。</li>
+						<li><strong>大调用量。</strong> 给每一封来信分类、给每一份文档打标签、从每一张发票抽取字段。在每月数百万次调用的规模下，大型托管模型和小型自运行模型之间的价差，可能决定一个功能是自负盈亏还是入不敷出。</li>
+						<li><strong>延迟。</strong> 小模型几十毫秒就能作答，快到可以在用户打字时、在交易处理过程中直接内联运行。</li>
+						<li><strong>稳定。</strong> 你托管的模型，只有你改它时才会变。没有悄无声息的升级，没有弃用通知，也不会每个季度行为都有点不一样。</li>
+					</ul>
+					<h2>小模型不擅长什么</h2>
+					<p>小模型在冗长的开放式推理、需要广泛世界知识的任务、以及含糊或复杂的指令上表现吃力。它们还把运维工作放回了你这边：托管、监控、安全补丁和升级。对低调用量或探索性工作来说，大型托管模型几乎总是更好的选择。</p>
+					<h2>常见模式：大模型设计，小模型运行</h2>
+					<p>我们最常用的做法是两者结合。开发阶段用大模型帮助定义任务、生成并标注训练样本、设定质量标准；然后把一个小模型适配到这个具体任务上，部署在高调用量的路径里。对于小模型标记为“不确定”的情况，大模型仍然作为兜底。</p>
+					<p>让这一切安全的，是评测集。只有当小模型在你的真实样本上，在约定的容差内追平了大模型的准确率，它才会被正式启用；并且任何一个模型发生变化时，都要用同一套评测集重新检验。</p>
+					<h2>用来做决定的问题</h2>
+					<ol>
+						<li>任务是否窄而明确，有清晰的正确答案？</li>
+						<li>数据是否受隐私、合同或数据主权的约束？</li>
+						<li>调用量是否大到单次调用成本成为主要因素？</li>
+						<li>你是否已经有、或者能够建立几百条高质量的标注样本？</li>
+						<li>是否有人负责这个模型在生产环境中的运行？</li>
+					</ol>
+					<p>如果大多数问题的答案是肯定的，小模型就值得一试。它很少会是系统里最亮眼的部分，却很可能是最划算的部分。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="governing-ai-use.html">
+						<div class="card-kicker">AI 与模型</div>
+						<h3 class="card-title">管住 AI 的使用，而不是禁止它</h3>
+						<p class="card-body">员工已经在用 AI 工具了，不管有没有被批准。一份简短实用的政策，加上大家真正愿意用的工具，比一纸没人遵守的禁令更能保护企业。</p>
+						<div class="card-meta">2026 年 8 月 5 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="prompts-as-specifications.html">
+						<div class="card-kicker">AI 与模型</div>
+						<h3 class="card-title">像写规格说明一样写提示词</h3>
+						<p class="card-body">能在生产环境里站得住的提示词，读起来不像巧妙的咒语，而像写给一位新同事的清晰简报。把它们当代码对待：版本化、要评审、要测试。</p>
+						<div class="card-meta">2026 年 7 月 15 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="real-cost-of-an-ai-feature.html">
+						<div class="card-kicker">AI 与模型</div>
+						<h3 class="card-title">一个 AI 功能的真实成本</h3>
+						<p class="card-body">token 账单是预算里最小的那一行。评测、人工复核、支持和变更管理，才是 AI 功能真正花钱的地方——也是商业论证应该最先看的地方。</p>
+						<div class="card-meta">2026 年 6 月 17 日 · 3 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "小模型，本地数据",
+		"description": "不是每个 AI 任务都需要世界上最大的模型。对于隐私敏感、调用量大的工作，一个由你掌控的小模型，往往更便宜、更快，也更容易向监管和客户交代。",
+		"datePublished": "2026-05-20",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/small-models-local-data.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/small-models-local-data.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

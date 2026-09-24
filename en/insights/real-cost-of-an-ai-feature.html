@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="The token bill is the smallest line in the budget. Evaluation, review, support and change management are where AI features actually cost money — and where the business case should look first." />
+	<link rel="canonical" href="https://yondertech.co.nz/en/insights/real-cost-of-an-ai-feature.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/real-cost-of-an-ai-feature.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/real-cost-of-an-ai-feature.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/real-cost-of-an-ai-feature.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="The real cost of an AI feature — Yonder Tech" />
+	<meta property="og:description" content="The token bill is the smallest line in the budget. Evaluation, review, support and change management are where AI features actually cost money — and where the business case should look first." />
+	<meta property="og:url" content="https://yondertech.co.nz/en/insights/real-cost-of-an-ai-feature.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="en_NZ" />
+	<meta property="og:locale:alternate" content="zh_CN" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="The real cost of an AI feature — Yonder Tech" />
+	<meta name="twitter:description" content="The token bill is the smallest line in the budget. Evaluation, review, support and change management are where AI features actually cost money — and where the business case should look first." />
+	<title>The real cost of an AI feature — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="Main">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">Work</a>
+					<a href="../cases/index.html">Case library</a>
+					<a href="../index.html#capabilities">Capabilities</a>
+					<a href="../index.html#method">Method</a>
+					<a href="index.html" aria-current="page">Insights</a>
+					<a href="#contact">Contact</a>
+				</span>
+				<span class="yt-lang">
+					<a class="is-active" href="#" aria-current="true">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="yt-zh" href="../../zh/insights/real-cost-of-an-ai-feature.html" hreflang="zh-Hans">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">Insights</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">AI &amp; models</span>
+				</div>
+				<h1 class="yt-article-h1">The real cost of an AI feature</h1>
+				<p class="yt-article-dek">The token bill is the smallest line in the budget. Evaluation, review, support and change management are where AI features actually cost money — and where the business case should look first.</p>
+				<div class="yt-article-meta">
+					<span>By Yonder Tech</span>
+					<span><time datetime="2026-06-17">17 June 2026</time> · 3 min read</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>When a business case for an AI feature reaches us, the cost section is usually a single calculation: expected requests per month multiplied by the price per request. It is often a reassuringly small number. It is also, in our experience, somewhere between a fifth and a tenth of what the feature will actually cost to run well.</p>
+					<p>This is not an argument against AI features. Many of them pay for themselves many times over. It is an argument for estimating them honestly, because the projects that disappoint are rarely the ones that failed technically. They are the ones whose running costs were never in the plan.</p>
+					<h2>The full cost model</h2>
+					<p>We break an AI feature&#39;s cost into six lines.</p>
+					<ol>
+						<li><strong>Inference.</strong> The provider&#39;s bill, or the cost of hosting your own model. Include retries, longer prompts than you expect once retrieval context is added, and the fallback to a larger model for hard cases.</li>
+						<li><strong>Evaluation.</strong> Building and maintaining the set of examples that tells you whether the feature works. This is ongoing: every new failure becomes a new case, and someone has to label them.</li>
+						<li><strong>Human review.</strong> For most business uses, some share of outputs is checked by a person — all of them at first, a sample later. That time is real and belongs in the budget.</li>
+						<li><strong>Integration and monitoring.</strong> Logging, dashboards, alerting on quality and cost, and the engineering to connect the feature to the systems it reads and writes.</li>
+						<li><strong>Change.</strong> Models are updated, prices move, and prompts need adjusting. Budget for a small amount of engineering every quarter simply to keep the feature at its current quality.</li>
+						<li><strong>Adoption.</strong> Training, revised procedures, and the support load while people learn to trust — and to correctly distrust — the new tool.</li>
+					</ol>
+					<h2>Where the money usually goes</h2>
+					<p>On the features we have delivered this year, inference is typically the smallest or second-smallest line. Human review and change dominate in the first six months. Evaluation is the one most often left out of the original estimate, and the one whose absence causes the most expensive problems later.</p>
+					<p>The good news is that several of these costs fall over time. Review drops from every output to a sample as confidence grows. Evaluation effort shrinks once the example set covers the main failure modes. Inference costs, for a given level of quality, have generally trended down.</p>
+					<h2>Pricing the value, not just the cost</h2>
+					<p>A complete model also needs the other side of the ledger, stated in the same units. Hours saved per month, at a real loaded rate. Errors avoided, with their typical cost. Revenue from faster response or higher conversion, if it can be measured. Compare the full cost against a measured baseline, and the decision becomes straightforward — in either direction.</p>
+					<h2>The questions to ask of any AI business case</h2>
+					<ul>
+						<li>Where does the per-request cost come from, and does it include retrieval context and retries?</li>
+						<li>Who reviews outputs, how many, and for how long?</li>
+						<li>Who maintains the evaluation set, and how much time is that?</li>
+						<li>What is the quarterly budget for keeping the feature current?</li>
+						<li>What is today&#39;s baseline for the outcome it is meant to improve?</li>
+					</ul>
+					<p>If those answers exist, the business case is ready. If they don&#39;t, the headline number is a guess.</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">Keep reading</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">All insights <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="governing-ai-use.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Governing AI use without banning it</h3>
+						<p class="card-body">Staff are already using AI tools, approved or not. A short, practical policy — backed by tools people actually want to use — protects the business better than a prohibition nobody follows.</p>
+						<div class="card-meta">5 August 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="prompts-as-specifications.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Write prompts like specifications</h3>
+						<p class="card-body">The prompts that hold up in production read less like clever incantations and more like a well-written brief for a new colleague. Treat them as code: versioned, reviewed and tested.</p>
+						<div class="card-meta">15 July 2026 · 2 min read</div>
+					</a>
+					<a class="card" href="small-models-local-data.html">
+						<div class="card-kicker">AI &amp; models</div>
+						<h3 class="card-title">Small models, local data</h3>
+						<p class="card-body">Not every AI task needs the largest model in the world. For privacy-sensitive, high-volume work, a small model you control is often cheaper, faster and easier to defend.</p>
+						<div class="card-meta">20 May 2026 · 2 min read</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>Start with the two-week diagnostic.</span></h2>
+				<p class="yt-contact-body">A 60-minute review, then a fixed-fee fortnight. You leave with a costed roadmap and no obligation to continue.</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">Email</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">Office</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "The real cost of an AI feature",
+		"description": "The token bill is the smallest line in the budget. Evaluation, review, support and change management are where AI features actually cost money — and where the business case should look first.",
+		"datePublished": "2026-06-17",
+		"inLanguage": "en-NZ",
+		"mainEntityOfPage": "https://yondertech.co.nz/en/insights/real-cost-of-an-ai-feature.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">Studio</div>
+					<div class="yt-foot-links"><a href="../index.html#work">Selected work</a><a href="../index.html#capabilities">Capabilities</a><a href="../index.html#method">Method</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Resources</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">Case library</a><a href="index.html">Insights</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">Contact</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">Start a project</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · Auckland, New Zealand</span>
+				<span><a href="../../zh/insights/real-cost-of-an-ai-feature.html" hreflang="zh-Hans">中文</a> · Privacy policy · Terms of use</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

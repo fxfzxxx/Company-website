@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="抗钓鱼的登录方式，如今已经能在客户手里现有的设备上通用。技术已经完成，剩下的是产品设计和一个合理的迁移计划。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/passkeys-ready.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/passkeys-ready.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/passkeys-ready.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/passkeys-ready.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="通行密钥已经就绪，你的登录页大概还没有 — Yonder Tech" />
+	<meta property="og:description" content="抗钓鱼的登录方式，如今已经能在客户手里现有的设备上通用。技术已经完成，剩下的是产品设计和一个合理的迁移计划。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/passkeys-ready.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="通行密钥已经就绪，你的登录页大概还没有 — Yonder Tech" />
+	<meta name="twitter:description" content="抗钓鱼的登录方式，如今已经能在客户手里现有的设备上通用。技术已经完成，剩下的是产品设计和一个合理的迁移计划。" />
+	<title>通行密钥已经就绪，你的登录页大概还没有 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/passkeys-ready.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">技术趋势</span>
+				</div>
+				<h1 class="yt-article-h1">通行密钥已经就绪，你的登录页大概还没有</h1>
+				<p class="yt-article-dek">抗钓鱼的登录方式，如今已经能在客户手里现有的设备上通用。技术已经完成，剩下的是产品设计和一个合理的迁移计划。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-07-01">2026 年 7 月 1 日</time> · 2 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>密码依然是大多数企业系统里最薄弱的一环。它们被重复使用、被钓鱼、被猜中、被泄露；而叠加在上面的每一层防御——复杂度规则、定期更换、短信验证码——都增加了摩擦，却没有消除根本问题。基于 WebAuthn 标准的通行密钥（passkeys）消除了它。登录不再依靠用户输入的秘密，而是一对密钥：私钥留在用户设备上，由指纹、面容或设备 PIN 保护，并且只会响应真正的网站。</p>
+					<p>最后这一点最重要。通行密钥无法被“输入”到一个假冒的登录页面里，因为它绑定的是真实域名。钓鱼——企业账户被攻破最常见的方式——就这样失效了。</p>
+					<h2>为什么是现在</h2>
+					<p>好几年里，通行密钥技术上可靠、实践中别扭。这种情况已经改变。主流手机和电脑平台都已支持通行密钥，能通过用户已有的账户在其设备之间同步，并允许用户在新设备上用手机扫码登录。对大多数客户来说，这比输入密码更快：点一下，看一眼手机，完成。</p>
+					<h2>挡在路上的是产品设计</h2>
+					<p>剩下的障碍几乎都在于服务如何引入通行密钥，而不在技术本身。</p>
+					<ul>
+						<li><strong>被发现。</strong> 用户不会主动去找通行密钥设置。提供它的最佳时机，是一次成功登录或重置密码之后，配上一句话说明好处。</li>
+						<li><strong>措辞。</strong> “通行密钥”对大多数人来说还没有意义，“用面容或指纹登录”才有。</li>
+						<li><strong>找回。</strong> 人会丢手机。服务在允许任何人放弃密码之前，必须先有一条清晰、安全的找回路径——第二个通行密钥、恢复码，或者经过验证的身份。</li>
+						<li><strong>共享和受管设备。</strong> 在共享终端上工作的员工，或者设备策略严格的组织，需要一个合适的选项，比如硬件安全密钥。</li>
+					</ul>
+					<h2>一次不让任何人掉队的迁移</h2>
+					<p>我们建议分阶段推进：</p>
+					<ol>
+						<li><strong>在密码旁边增加通行密钥。</strong> 登录后提供创建入口，衡量采用率和登录成功率。</li>
+						<li><strong>新账户默认使用通行密钥</strong>，密码作为后备，而不是反过来。</li>
+						<li><strong>员工和管理员强制使用。</strong> 能访问客户数据的内部账户是最有价值的攻击目标，也是最容易提供支持的人群。</li>
+						<li><strong>按账户退役密码，而不是按系统。</strong> 一旦某个用户有了两个可用的通行密钥，就提出帮他彻底移除密码。</li>
+					</ol>
+					<h2>下一次安全评审可以问的问题</h2>
+					<ul>
+						<li>过去一年的账户被攻破事件中，有多少比例始于被钓鱼或被重复使用的密码？</li>
+						<li>管理员账户今天使用的是抗钓鱼的登录方式吗？</li>
+						<li>账户找回流程是什么样的，攻击者能否利用它绕过其他一切？</li>
+					</ul>
+					<p>通行密钥不能解决所有安全问题。但很少有哪项改变，能在消除一整类攻击的同时，还让用户登录得更快。它值得写进今年的路线图。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="software-cheap-to-write.html">
+						<div class="card-kicker">技术趋势</div>
+						<h3 class="card-title">当写软件变得便宜，什么会改变</h3>
+						<p class="card-body">AI 编程工具让产出代码快了很多，却没有让“决定做什么”、“确认它能用”以及“运行它很多年”变得更便宜——而这改变了价值所在的位置。</p>
+						<div class="card-meta">2026 年 9 月 16 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="legacy-modernisation-no-big-bang.html">
+						<div class="card-kicker">技术趋势</div>
+						<h3 class="card-title">不靠“大爆炸”的遗留系统改造</h3>
+						<p class="card-body">一次性替换一切的重写，是浪费两年最可靠的方式。一次替换一条路由，说起来慢，做完却快得多。</p>
+						<div class="card-meta">2026 年 7 月 29 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="webgpu-rich-web.html">
+						<div class="card-kicker">技术趋势</div>
+						<h3 class="card-title">WebGPU 与富网页的回归</h3>
+						<p class="card-body">实时 3D、大规模可视化、端侧 AI，现在都能在一个普通浏览器标签页里运行。问题不再是网页能不能做到，而是你的内容配不配得上。</p>
+						<div class="card-meta">2026 年 5 月 13 日 · 2 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "通行密钥已经就绪，你的登录页大概还没有",
+		"description": "抗钓鱼的登录方式，如今已经能在客户手里现有的设备上通用。技术已经完成，剩下的是产品设计和一个合理的迁移计划。",
+		"datePublished": "2026-07-01",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/passkeys-ready.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/passkeys-ready.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

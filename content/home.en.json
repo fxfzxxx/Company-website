@@ -141,26 +141,7 @@
   "insights": {
     "eyebrow": "Insights",
     "heading": "Written for the person signing the invoice.",
-    "cards": [
-      {
-        "kicker": "IT strategy",
-        "title": "What a technology roadmap owes the board",
-        "body": "Three questions a roadmap has to answer before it is worth presenting: what stops, what starts, and what it costs to be wrong.",
-        "meta": "8 min read · March 2026"
-      },
-      {
-        "kicker": "Integration",
-        "title": "The case against replacing your ERP",
-        "body": "Most integration pain is process pain wearing a technical costume. How to tell the difference before committing to a migration.",
-        "meta": "6 min read · February 2026"
-      },
-      {
-        "kicker": "Data & AI",
-        "title": "Metrics before models",
-        "body": "Why the first automation project should be the one nobody wants to demo, and how to sequence the rest behind it.",
-        "meta": "7 min read · January 2026"
-      }
-    ]
+    "link": "All insights"
   },
   "contact": {
     "lines": [
@@ -213,7 +194,7 @@
           },
           {
             "label": "Insights",
-            "href": "#insights"
+            "href": "@insights"
           }
         ]
       },

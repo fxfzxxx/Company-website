@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="今年我们部署过最有用的 AI 智能体，都不和客户对话。它们匹配发票、追踪异常，然后把真正需要判断的那三件事交给人。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/back-office-agents.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/back-office-agents.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/back-office-agents.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/back-office-agents.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="后台的智能体，从对账开始 — Yonder Tech" />
+	<meta property="og:description" content="今年我们部署过最有用的 AI 智能体，都不和客户对话。它们匹配发票、追踪异常，然后把真正需要判断的那三件事交给人。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/back-office-agents.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="后台的智能体，从对账开始 — Yonder Tech" />
+	<meta name="twitter:description" content="今年我们部署过最有用的 AI 智能体，都不和客户对话。它们匹配发票、追踪异常，然后把真正需要判断的那三件事交给人。" />
+	<title>后台的智能体，从对账开始 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/back-office-agents.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">AI 与模型</span>
+				</div>
+				<h1 class="yt-article-h1">后台的智能体，从对账开始</h1>
+				<p class="yt-article-dek">今年我们部署过最有用的 AI 智能体，都不和客户对话。它们匹配发票、追踪异常，然后把真正需要判断的那三件事交给人。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-04-15">2026 年 4 月 15 日</time> · 3 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>“智能体”（agent）已经成了技术圈被拉伸得最厉害的词之一。它可以指一个带搜索工具的聊天机器人，也可以指一个在少量监督下、跨多个应用规划并执行多步骤工作的系统。演示往往偏向戏剧化的那一端：帮你订差旅、和供应商谈判、跑一整场营销活动的智能体。</p>
+					<p>那些悄悄收回了成本的部署，看起来则完全不同。它们待在财务和运营部门，做规则清晰、窄而重复的工作，并且围绕“人接手的那一刻”来设计。</p>
+					<h2>为什么对账是理想的第一份工作</h2>
+					<p>对账——把一组记录和另一组对上，并解释差异——几乎具备你希望第一个智能体项目拥有的所有特征。</p>
+					<ul>
+						<li><strong>量大、变化少。</strong> 每月成百上千条相似的条目，大多数都能干净地对上。</li>
+						<li><strong>“完成”的定义清晰。</strong> 一行要么对上了，要么没对上。智能体的成效可以无争议地衡量。</li>
+						<li><strong>规则现成。</strong> 财务团队早就知道为什么会对不上：时间差、部分付款、四舍五入、某个供应商用两个名字开票。</li>
+						<li><strong>影响范围可控。</strong> 智能体只提出匹配建议、起草解释；未经人批准，什么都不会流出公司。</li>
+						<li><strong>今天就很痛苦。</strong> 这是人们不喜欢的工作，因此推广起来比自动化人们喜欢的工作容易得多。</li>
+					</ul>
+					<h2>好的智能体是怎么做的</h2>
+					<p>我们用的模式刻意不求宏大。智能体拿到未匹配的条目，先应用确定性规则——金额完全一致、参考编号、已知的供应商别名——然后才用语言模型处理模糊情况：读一封汇款邮件、识别出“ACME Ltd”和“Acme Holdings”是同一个付款方、发现三笔付款加起来正好是一张发票。</p>
+					<p>每一个匹配建议都附带推理过程和证据。条目被分进三个桶：高置信度已匹配、已匹配但需要看一眼、确实无法解决。人的工作从“做匹配”变成“复核第二个桶、处理第三个桶”。</p>
+					<p>关键在于，每一个人工决定都会被记录下来。有人纠正了一个匹配建议，它就变成一条新规则或一个新的评测样本。智能体一个月一个月地更懂这家企业的各种怪癖，而且任何人都可以审计这个过程。</p>
+					<h2>衡量什么</h2>
+					<ul>
+						<li>自动匹配的比例，以及这部分的错误率（抽样核查）。</li>
+						<li>从期末关账到对账完成的时间。</li>
+						<li>每月在这项任务上花费的员工工时，前后对比。</li>
+						<li>最终到达人手里的异常数量，以及每个异常耗时多久。</li>
+					</ul>
+					<p>在我们做过的项目里，最亮眼的结果很少是裁员，而是月结提前好几天完成，原本做匹配的人，现在把时间花在异常处理上——而那一直都是这份工作里真正有价值的部分。</p>
+					<h2>更大的启示</h2>
+					<p>让智能体从规则已知、输出可核查、并且已经有人对结果负责的地方起步。面向客户的自主性可以晚一点再来——先在容错的工作上，搞清楚你的智能体是怎么出错的。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="governing-ai-use.html">
+						<div class="card-kicker">AI 与模型</div>
+						<h3 class="card-title">管住 AI 的使用，而不是禁止它</h3>
+						<p class="card-body">员工已经在用 AI 工具了，不管有没有被批准。一份简短实用的政策，加上大家真正愿意用的工具，比一纸没人遵守的禁令更能保护企业。</p>
+						<div class="card-meta">2026 年 8 月 5 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="prompts-as-specifications.html">
+						<div class="card-kicker">AI 与模型</div>
+						<h3 class="card-title">像写规格说明一样写提示词</h3>
+						<p class="card-body">能在生产环境里站得住的提示词，读起来不像巧妙的咒语，而像写给一位新同事的清晰简报。把它们当代码对待：版本化、要评审、要测试。</p>
+						<div class="card-meta">2026 年 7 月 15 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="real-cost-of-an-ai-feature.html">
+						<div class="card-kicker">AI 与模型</div>
+						<h3 class="card-title">一个 AI 功能的真实成本</h3>
+						<p class="card-body">token 账单是预算里最小的那一行。评测、人工复核、支持和变更管理，才是 AI 功能真正花钱的地方——也是商业论证应该最先看的地方。</p>
+						<div class="card-meta">2026 年 6 月 17 日 · 3 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "后台的智能体，从对账开始",
+		"description": "今年我们部署过最有用的 AI 智能体，都不和客户对话。它们匹配发票、追踪异常，然后把真正需要判断的那三件事交给人。",
+		"datePublished": "2026-04-15",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/back-office-agents.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/back-office-agents.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="全栈类型化是这十年软件行业最划算的交易之一。但到了某个点，类型系统本身变成了产品，而真正的产品开始受损。" />
+	<link rel="canonical" href="https://yondertech.co.nz/zh/insights/typescript-where-it-stops-paying.html" />
+	<link rel="alternate" hreflang="en-NZ" href="https://yondertech.co.nz/en/insights/typescript-where-it-stops-paying.html" />
+	<link rel="alternate" hreflang="zh-Hans" href="https://yondertech.co.nz/zh/insights/typescript-where-it-stops-paying.html" />
+	<link rel="alternate" hreflang="x-default" href="https://yondertech.co.nz/en/insights/typescript-where-it-stops-paying.html" />
+	<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#192231" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="处处 TypeScript，以及它在哪里不再划算 — Yonder Tech" />
+	<meta property="og:description" content="全栈类型化是这十年软件行业最划算的交易之一。但到了某个点，类型系统本身变成了产品，而真正的产品开始受损。" />
+	<meta property="og:url" content="https://yondertech.co.nz/zh/insights/typescript-where-it-stops-paying.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/tech-disruption/assets/img/hero.jpg" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:locale:alternate" content="en_NZ" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="处处 TypeScript，以及它在哪里不再划算 — Yonder Tech" />
+	<meta name="twitter:description" content="全栈类型化是这十年软件行业最划算的交易之一。但到了某个点，类型系统本身变成了产品，而真正的产品开始受损。" />
+	<title>处处 TypeScript，以及它在哪里不再划算 — Yonder Tech</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+		rel="stylesheet" />
+	<link rel="stylesheet" href="../../assets/design/modernist.css" />
+	<link rel="stylesheet" href="../../assets/design/site.css" />
+	<link rel="stylesheet" href="../../assets/design/locale.css" />
+</head>
+
+<body>
+		<div class="yt-header">
+			<nav class="nav yt-nav" aria-label="主导航">
+				<a class="yt-brand" href="../index.html">
+					<img class="yt-brand-lockup" src="../../assets/brand/lockup.svg" alt="Yonder Technology" width="163" height="36" />
+					<img class="yt-brand-mark" src="../../assets/brand/mark.svg" alt="Yonder Technology" width="38" height="30" />
+				</a>
+				<span class="yt-nav-links">
+					<a href="../index.html#work">案例</a>
+					<a href="../cases/index.html">案例库</a>
+					<a href="../index.html#capabilities">能力</a>
+					<a href="../index.html#method">方法</a>
+					<a href="index.html" aria-current="page">洞察</a>
+					<a href="#contact">联系</a>
+				</span>
+				<span class="yt-lang">
+					<a class="" href="../../en/insights/typescript-where-it-stops-paying.html" hreflang="en-NZ">EN</a>
+					<span aria-hidden="true">/</span>
+					<a class="is-active yt-zh" href="#" aria-current="true">中文</a>
+				</span>
+			</nav>
+		</div>
+
+	<main>
+		<article class="yt-article">
+			<header class="yt-wrap yt-detail-head">
+				<div class="yt-crumb">
+					<a href="index.html">洞察</a>
+					<span aria-hidden="true">/</span>
+					<span class="yt-crumb-current">技术栈</span>
+				</div>
+				<h1 class="yt-article-h1">处处 TypeScript，以及它在哪里不再划算</h1>
+				<p class="yt-article-dek">全栈类型化是这十年软件行业最划算的交易之一。但到了某个点，类型系统本身变成了产品，而真正的产品开始受损。</p>
+				<div class="yt-article-meta">
+					<span>Yonder Tech 撰文</span>
+					<span><time datetime="2026-03-25">2026 年 3 月 25 日</time> · 2 分钟阅读</span>
+				</div>
+			</header>
+
+			<div class="yt-wrap">
+				<div class="yt-prose">
+					<p>TypeScript 对 Web 软件日常开发的改变之大，怎么说都不为过。在我们的项目里，从数据库层、API 到界面共享同一套类型，能在一整类 bug 出现之前就把它们挡住。过去要提心吊胆一周的重构，现在一个下午完成。新同事顺着类型就能摸清代码库，而不必四处问人。</p>
+					<p>所以这不是一篇反对 TypeScript 的文章，而是在讨论它的回报在哪里趋于平缓——因为我们越来越多地看到团队在曲线的那一段花了真金白银。</p>
+					<h2>它在哪里划算</h2>
+					<ul>
+						<li><strong>在边界上。</strong> 类型最有价值的用途，是描述跨越边界的数据：API 请求与响应、数据库行、队列消息、配置。从单一源头——表结构、API 定义——生成这些类型，编译器就能检查系统的每个部分是否达成一致。</li>
+						<li><strong>在共享的领域代码里。</strong> 把金额、日期、标识符和状态建模为不同的类型，就不会在需要订单 ID 的地方传进客户 ID。这类 bug 令人尴尬、频繁出现，而且测试看不见。</li>
+						<li><strong>在变更时。</strong> 类型是一张“哪里会坏”的地图。代码库越大、越老，这张地图越值钱。</li>
+					</ul>
+					<h2>它在哪里不再划算</h2>
+					<p>当类型系统被要求证明业务并不需要证明的东西时，回报就开始下降。</p>
+					<p>我们经常接手这样的代码库：泛型工具类型长达好几屏；条件类型让编译器要花好几秒才能解析；组件的 props 抽象到没人能读懂它们产生的报错。每一块单看都很巧妙，合在一起却让代码比它替代的纯 JavaScript 更难改——这恰恰违背了初衷。</p>
+					<p>我们会留意这些信号：</p>
+					<ul>
+						<li>类型定义比它描述的代码还长。</li>
+						<li>报错信息需要资深开发者来解读。</li>
+						<li>编辑器和构建速度慢到不再有“即时”的感觉。</li>
+						<li>代码里到处是 <code>as</code> 断言和 <code>any</code>，用来逃避没人能满足的类型。</li>
+					</ul>
+					<h2>一个务实的中间地带</h2>
+					<p>我们的工作原则是：边缘严格，中间朴素。来自外部的数据在运行时校验，并赋予精确类型。应用内部则偏好简单、有名字、平淡的类型——初级开发者也能念出来的接口和联合类型。高级类型特性留给被很多人使用的库代码，很少用在只有几个人修改的应用代码里。</p>
+					<p>还要记住：类型检查的是一致性，不是正确性。一个类型完美的函数，照样可以把 GST 算错。测试、边界校验和清晰的领域模型，做的是任何类型系统都做不了的工作。</p>
+					<p>TypeScript 最好的状态，是几乎隐形：安静地捕捉错误，从不为了自己而索取注意力。</p>
+				</div>
+			</div>
+
+			<section class="yt-wrap yt-ins-more">
+				<div class="yt-head-row">
+					<div><span class="yt-eyebrow">继续阅读</span></div>
+					<a class="yt-link yt-link-nowrap hv1" href="index.html">全部洞察 <span class="yt-arrow" aria-hidden="true">→</span></a>
+				</div>
+				<div class="yt-cards">
+					<a class="card" href="frontend-framework-is-a-team.html">
+						<div class="card-kicker">技术栈</div>
+						<h3 class="card-title">选前端框架，主要是在选团队</h3>
+						<p class="card-body">主流框架之间的技术差异已经缩小。真正还不同的，是你能招到谁、代码能被支持多久，以及你实际需要多少框架。</p>
+						<div class="card-meta">2026 年 9 月 2 日 · 2 分钟阅读</div>
+					</a>
+					<a class="card" href="observability-teams-of-five.html">
+						<div class="card-kicker">技术栈</div>
+						<h3 class="card-title">五人团队的可观测性</h3>
+						<p class="card-body">想知道软件在生产环境里在干什么，并不需要一个平台团队。四个信号、一块看板、一条关于告警的规则，就能覆盖小团队的大部分需求。</p>
+						<div class="card-meta">2026 年 7 月 8 日 · 3 分钟阅读</div>
+					</a>
+					<a class="card" href="static-first.html">
+						<div class="card-kicker">技术栈</div>
+						<h3 class="card-title">静态优先：为什么我们自己的网站就是一堆普通文件</h3>
+						<p class="card-body">没有服务器、没有数据库、没有框架运行时——页面在你眨完眼之前就加载好了。对大多数企业网站来说，静态生成是最被低估的架构。</p>
+						<div class="card-meta">2026 年 6 月 24 日 · 3 分钟阅读</div>
+					</a>
+				</div>
+			</section>
+		</article>
+
+		<section class="yt-contact" id="contact">
+			<div class="yt-wrap">
+				<h2 class="yt-contact-h2"><span>从两周诊断开始。</span></h2>
+				<p class="yt-contact-body">先做 60 分钟评审，再进行固定费用的两周诊断。结束时你会拿到一份带预算的路线图，是否继续合作没有任何附加条件。</p>
+				<div class="yt-contact-grid">
+					<div>
+						<div class="yt-contact-label">邮箱</div>
+						<a class="yt-contact-link hv3" href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a>
+					</div>
+					<div>
+						<div class="yt-contact-label">办公地址</div>
+						<div class="yt-contact-addr">23A Dromorne Rd, Remuera<br />Auckland</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "处处 TypeScript，以及它在哪里不再划算",
+		"description": "全栈类型化是这十年软件行业最划算的交易之一。但到了某个点，类型系统本身变成了产品，而真正的产品开始受损。",
+		"datePublished": "2026-03-25",
+		"inLanguage": "zh-Hans",
+		"mainEntityOfPage": "https://yondertech.co.nz/zh/insights/typescript-where-it-stops-paying.html",
+		"author": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"url": "https://yondertech.co.nz/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Yonder Tech",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://yondertech.co.nz/assets/brand/lockup.svg"
+			}
+		}
+	}
+	</script>
+		<footer class="yt-footer">
+			<div class="yt-foot-grid">
+				<div>
+					<div class="yt-foot-title">工作室</div>
+					<div class="yt-foot-links"><a href="../index.html#work">精选案例</a><a href="../index.html#capabilities">能力</a><a href="../index.html#method">方法</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">资源</div>
+					<div class="yt-foot-links"><a href="../cases/index.html">案例库</a><a href="index.html">洞察</a></div>
+				</div>
+				<div>
+					<div class="yt-foot-title">联系</div>
+					<div class="yt-foot-links"><a href="mailto:admin@yondertech.co.nz">admin@yondertech.co.nz</a><a href="../index.html#contact">开始合作</a></div>
+				</div>
+			</div>
+			<div class="yt-foot-bar"></div>
+			<div class="yt-foot-legal">
+				<span>© 2026 Yonder Tech · 新西兰奥克兰</span>
+				<span><a href="../../en/insights/typescript-where-it-stops-paying.html" hreflang="en-NZ">English</a> · 隐私政策 · 使用条款</span>
+			</div>
+		</footer>
+	<script src="../../assets/design/site.js"></script>
+</body>
+
+</html>
