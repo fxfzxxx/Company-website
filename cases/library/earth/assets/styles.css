@@ -28,8 +28,7 @@ a:hover { border-bottom-color: var(--rule-strong); }
 
 body.plate { overflow: hidden; }
 
-#stage { position: fixed; inset: 0; cursor: grab; }
-#stage.is-dragging { cursor: grabbing; }
+#stage { position: fixed; inset: 0; }
 
 .hud {
 	position: fixed;

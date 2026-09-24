@@ -44,14 +44,14 @@
 	};
 
 	/* — header: the phone menu ————————————————————————————————————
-	   Up to 1024px the links fold into a panel under the bar. The button
+	   Up to 960px the links fold into a panel under the bar. The button
 	   toggles it; a link, Escape or widening the window closes it. */
 	const initMenu = () => {
 		const header = document.querySelector(".yt-header");
 		const button = header && header.querySelector(".yt-menu-btn");
 		const menu = document.getElementById("yt-menu");
 		if (!button || !menu) return;
-		const wide = window.matchMedia("(min-width: 1025px)");
+		const wide = window.matchMedia("(min-width: 961px)");
 
 		const set = (open) => {
 			header.classList.toggle("is-open", open);

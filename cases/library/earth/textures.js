@@ -24,8 +24,11 @@ function makeCanvas(width, height) {
 }
 
 /* — land ————————————————————————————————————————————————————————
-   White land on black water. Rings that straddle the antimeridian are cut
-   there, or they smear a continent right across the map. */
+   White land on black water. Rings that straddle the antimeridian are
+   unwrapped into continuous longitude and drawn three times, a map-width
+   apart, so each copy supplies the part the others push off the edge.
+   Cutting them at ±180° instead closes each piece with a chord, and those
+   chords paint a band of false ice right across the Arctic. */
 
 export function landCanvas(rings, width = 2048) {
 	const height = width / 2;
@@ -36,29 +39,36 @@ export function landCanvas(rings, width = 2048) {
 	ctx.fillStyle = "#fff";
 
 	for (const flat of rings) {
-		ctx.beginPath();
-		let previous = null;
+		const points = [];
+		let shift = 0;
 		for (let i = 0; i < flat.length; i += 2) {
-			const [x, y] = project(flat[i], flat[i + 1], width, height);
-			if (previous && Math.abs(x - previous) > width / 2) {
-				ctx.closePath();
-				ctx.fill();
-				ctx.beginPath();
-				ctx.moveTo(x, y);
-			} else if (i === 0) {
-				ctx.moveTo(x, y);
-			} else {
-				ctx.lineTo(x, y);
+			const lon = flat[i];
+			if (i > 0) {
+				const step = lon - flat[i - 2];
+				if (step > 180) shift -= 360;
+				else if (step < -180) shift += 360;
 			}
-			previous = x;
+			points.push([lon + shift, flat[i + 1]]);
 		}
-		ctx.closePath();
-		ctx.fill();
-	}
 
-	/* Antarctica arrives as a coastline, not a closed cap: fill the bottom
-	   band so the pole is ice rather than a hole. */
-	ctx.fillRect(0, height - Math.round(height * 0.022), width, Math.round(height * 0.022));
+		/* A ring that goes all the way round (Antarctica) comes back shifted
+		   by a full turn: close it through the pole it encircles. */
+		if (shift !== 0) {
+			const pole = points.reduce((sum, p) => sum + p[1], 0) < 0 ? -90 : 90;
+			points.push([points[points.length - 1][0], pole], [points[0][0], pole]);
+		}
+
+		for (const offset of [-360, 0, 360]) {
+			ctx.beginPath();
+			points.forEach(([lon, lat], i) => {
+				const [x, y] = project(lon + offset, lat, width, height);
+				if (i === 0) ctx.moveTo(x, y);
+				else ctx.lineTo(x, y);
+			});
+			ctx.closePath();
+			ctx.fill();
+		}
+	}
 	return canvas;
 }
 

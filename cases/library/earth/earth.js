@@ -28,6 +28,8 @@ export const DEFAULTS = {
 	   background of their own. */
 	background: 0x04060c,
 	stars: true,
+	/* brightness multiplies the star colour, size their on-screen scale */
+	starField: { brightness: 1, size: 1 },
 	arcs: 34,
 	post: true,
 	radius: 1,
@@ -36,6 +38,10 @@ export const DEFAULTS = {
 	cloudSpin: 0.006,
 	sun: [0.97, 0.2, 0.1],
 	camera: { fov: 26, distance: 6.1 },
+	/* Slides the globe across the frame without cropping it: x is a fraction
+	   of the canvas width, positive to the right, used only when the window
+	   is at least minWidth wide. */
+	offset: { x: 0, y: 0, minWidth: 0 },
 	exposure: 1.0,
 	segments: 128,
 	mapSize: 2048,
@@ -43,7 +49,11 @@ export const DEFAULTS = {
 	bloom: { strength: 0.42, radius: 0.7, threshold: 0.78 },
 	grain: 0.035,
 	vignette: 0.7,
-	motion: { drag: 0.0038, damping: 0.93 },
+	/* drag: 1 moves the surface exactly with the pointer. damping is per
+	   60th of a second once it is let go; pitch is the most it will tip;
+	   reach is how far past the globe's edge a drag may start, as a
+	   fraction of its on-screen radius. */
+	motion: { drag: 0.85, damping: 0.94, pitch: 0.45, reach: 1.12 },
 	maxPixelRatio: 1.75,
 };
 
@@ -496,27 +506,42 @@ export async function createEarth(container, overrides = {}) {
 		stars = new THREE.Points(
 			geometry,
 			new THREE.ShaderMaterial({
-				uniforms: { uTime: { value: 0 } },
+				uniforms: {
+					uTime: { value: 0 },
+					uBrightness: { value: config.starField.brightness },
+					/* gl_PointSize is in device pixels, so scale by the ratio or
+					   the field thins out on a sharp screen. */
+					uSize: { value: config.starField.size * renderer.getPixelRatio() },
+				},
 				vertexShader: /* glsl */ `
 					attribute float size;
 					varying vec3 vColour;
 					varying float vTwinkle;
+					varying float vFaint;
 					uniform float uTime;
+					uniform float uSize;
 					void main() {
 						vColour = color;
 						vTwinkle = 0.75 + 0.25 * sin(uTime * 1.7 + position.x * 3.1 + position.y);
 						vec4 mv = modelViewMatrix * vec4(position, 1.0);
-						gl_PointSize = size * 320.0 / -mv.z;
+						float pixels = size * 320.0 / -mv.z * uSize;
+						/* Below a pixel and a half a star shimmers in and out as
+						   it crosses pixels; hold it there and dim it instead. */
+						float floorSize = 1.5 * uSize;
+						vFaint = clamp(pixels / floorSize, 0.25, 1.0);
+						gl_PointSize = max(pixels, floorSize);
 						gl_Position = projectionMatrix * mv;
 					}
 				`,
 				fragmentShader: /* glsl */ `
 					varying vec3 vColour;
 					varying float vTwinkle;
+					varying float vFaint;
+					uniform float uBrightness;
 					void main() {
 						float d = length(gl_PointCoord - 0.5);
-						float alpha = smoothstep(0.5, 0.06, d);
-						gl_FragColor = vec4(vColour * vTwinkle, alpha * vTwinkle);
+						float alpha = smoothstep(0.5, 0.06, d) * vTwinkle * vFaint;
+						gl_FragColor = vec4(vColour * vTwinkle * uBrightness, min(alpha * uBrightness, 1.0));
 					}
 				`,
 				transparent: true,
@@ -550,33 +575,88 @@ export async function createEarth(container, overrides = {}) {
 	}
 
 	/* — pointer ——————————————————————————————————————————————— */
-	const pointer = { active: false, id: null, x: 0, y: 0 };
+	/* The globe follows the pointer directly — a pixel of drag turns it by
+	   the angle that moves its face a pixel — and only the release speed is
+	   carried on as inertia. Velocities are radians per 60th of a second. */
+	const pointer = { active: false, id: null, x: 0, y: 0, t: 0 };
 	const spin = { yaw: 0, pitch: 0, yawVelocity: 0, pitchVelocity: 0 };
+	const MAX_VELOCITY = 0.06;
+
+	const radiansPerPixel = () => {
+		const halfView = camera.position.z * Math.tan((camera.fov * DEG) / 2);
+		const globePixels = (config.radius / halfView) * (container.clientHeight / 2);
+		return config.motion.drag / Math.max(globePixels, 1);
+	};
+	const turn = (yaw, pitch) => {
+		const limit = config.motion.pitch;
+		spin.yaw += yaw;
+		spin.pitch = THREE.MathUtils.clamp(spin.pitch + pitch, -limit, limit);
+	};
+
+	/* Only the globe and a narrow ring around it take a drag; the rest of
+	   the canvas is backdrop. The silhouette of a sphere seen in perspective
+	   is a touch larger than its radius, hence the sqrt. */
+	const centre = new THREE.Vector3();
+	const onGlobe = (event) => {
+		const rect = renderer.domElement.getBoundingClientRect();
+		centre.set(0, 0, 0).project(camera);
+		const cx = rect.left + ((centre.x + 1) / 2) * rect.width;
+		const cy = rect.top + ((1 - centre.y) / 2) * rect.height;
+		const d = camera.position.z;
+		const focal = rect.height / 2 / Math.tan((camera.fov * DEG) / 2);
+		const silhouette = (focal * config.radius) / Math.sqrt(d * d - config.radius * config.radius);
+		return Math.hypot(event.clientX - cx, event.clientY - cy) <= silhouette * config.motion.reach;
+	};
+	const onHover = (event) => {
+		if (pointer.active || event.pointerType === "touch") return;
+		renderer.domElement.style.cursor = onGlobe(event) ? "grab" : "";
+	};
 
 	const onPointerDown = (event) => {
+		if (!onGlobe(event)) return;
 		pointer.active = true;
 		pointer.id = event.pointerId;
 		pointer.x = event.clientX;
 		pointer.y = event.clientY;
+		pointer.t = performance.now();
+		spin.yawVelocity = 0;
+		spin.pitchVelocity = 0;
 		renderer.domElement.setPointerCapture(event.pointerId);
+		renderer.domElement.style.cursor = "grabbing";
 		container.classList.add("is-dragging");
 	};
 	const onPointerMove = (event) => {
 		if (!pointer.active || event.pointerId !== pointer.id) return;
-		spin.yawVelocity += (event.clientX - pointer.x) * config.motion.drag;
-		spin.pitchVelocity += (event.clientY - pointer.y) * config.motion.drag;
+		const scale = radiansPerPixel();
+		const yaw = (event.clientX - pointer.x) * scale;
+		const pitch = (event.clientY - pointer.y) * scale;
+		turn(yaw, pitch);
+
+		const now = performance.now();
+		const frames = Math.max((now - pointer.t) / (1000 / 60), 0.5);
+		const clampSpeed = (v) => THREE.MathUtils.clamp(v, -MAX_VELOCITY, MAX_VELOCITY);
+		spin.yawVelocity = clampSpeed(spin.yawVelocity * 0.4 + (yaw / frames) * 0.6);
+		spin.pitchVelocity = clampSpeed(spin.pitchVelocity * 0.4 + (pitch / frames) * 0.6);
 		pointer.x = event.clientX;
 		pointer.y = event.clientY;
+		pointer.t = now;
 	};
 	const onPointerUp = (event) => {
 		if (event.pointerId !== pointer.id) return;
+		/* Held still before letting go: stop, don't fling. */
+		if (performance.now() - pointer.t > 90) {
+			spin.yawVelocity = 0;
+			spin.pitchVelocity = 0;
+		}
 		pointer.active = false;
 		pointer.id = null;
 		renderer.domElement.releasePointerCapture(event.pointerId);
 		container.classList.remove("is-dragging");
+		onHover(event);
 	};
 	renderer.domElement.addEventListener("pointerdown", onPointerDown);
 	renderer.domElement.addEventListener("pointermove", onPointerMove);
+	renderer.domElement.addEventListener("pointermove", onHover);
 	renderer.domElement.addEventListener("pointerup", onPointerUp);
 	renderer.domElement.addEventListener("pointercancel", onPointerUp);
 
@@ -586,6 +666,13 @@ export async function createEarth(container, overrides = {}) {
 		const height = Math.max(1, container.clientHeight);
 		camera.aspect = width / height;
 		camera.position.z = config.camera.distance * THREE.MathUtils.clamp(1 / camera.aspect, 1, 1.55);
+		const { x, y, minWidth } = config.offset;
+		if ((x || y) && window.innerWidth >= minWidth) {
+			/* Moving the window left moves the globe right. */
+			camera.setViewOffset(width, height, -x * width, y * height, width, height);
+		} else {
+			camera.clearViewOffset();
+		}
 		camera.updateProjectionMatrix();
 		renderer.setSize(width, height, false);
 		if (composer) {
@@ -607,21 +694,25 @@ export async function createEarth(container, overrides = {}) {
 		frame = requestAnimationFrame(tick);
 		timer.update();
 		const time = timer.getElapsed();
+		const frames = Math.min(timer.getDelta() * 60, 4);
+
+		if (!pointer.active && !reduceMotion) {
+			turn(spin.yawVelocity * frames, spin.pitchVelocity * frames);
+			const decay = Math.pow(config.motion.damping, frames);
+			spin.yawVelocity *= decay;
+			spin.pitchVelocity *= decay;
+		}
+
+		/* Dragging still works under reduced motion; only the drift stops. */
+		const drift = reduceMotion ? 0 : time;
+		const rotation = drift * config.spin + spin.yaw;
+		globe.rotation.y = rotation;
+		arcGroup.rotation.y = rotation;
+		cloudShell.rotation.y = rotation + drift * config.cloudSpin;
+		globeUniforms.uCloudRotation.value = ((drift * config.cloudSpin) / TAU) % 1;
+		tilted.rotation.x = spin.pitch;
 
 		if (!reduceMotion) {
-			spin.yaw += spin.yawVelocity;
-			spin.pitch += spin.pitchVelocity;
-			spin.yawVelocity *= config.motion.damping;
-			spin.pitchVelocity *= config.motion.damping;
-			spin.pitch = THREE.MathUtils.clamp(spin.pitch, -0.6, 0.6);
-
-			const rotation = time * config.spin + spin.yaw;
-			globe.rotation.y = rotation;
-			arcGroup.rotation.y = rotation;
-			cloudShell.rotation.y = rotation + time * config.cloudSpin;
-			globeUniforms.uCloudRotation.value = ((time * config.cloudSpin) / TAU) % 1;
-			tilted.rotation.x = spin.pitch;
-
 			for (const material of arcMaterials) material.uniforms.uTime.value = time;
 			if (stars) {
 				stars.material.uniforms.uTime.value = time;
@@ -664,6 +755,7 @@ export async function createEarth(container, overrides = {}) {
 			document.removeEventListener("visibilitychange", onVisibility);
 			renderer.domElement.removeEventListener("pointerdown", onPointerDown);
 			renderer.domElement.removeEventListener("pointermove", onPointerMove);
+			renderer.domElement.removeEventListener("pointermove", onHover);
 			renderer.domElement.removeEventListener("pointerup", onPointerUp);
 			renderer.domElement.removeEventListener("pointercancel", onPointerUp);
 			scene.traverse((object) => {

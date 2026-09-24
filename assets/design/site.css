@@ -166,7 +166,6 @@ button {
 	inset: 0 0 0 auto;
 	width: min(96vw, 1180px);
 	z-index: -2;
-	cursor: grab;
 	/* Until the module has drawn, the band is simply a dark field. */
 	opacity: 0;
 	transition: opacity 0.9s ease;
@@ -174,10 +173,6 @@ button {
 
 .yt-hero-globe[data-ready="true"] {
 	opacity: 1;
-}
-
-.yt-hero-globe.is-dragging {
-	cursor: grabbing;
 }
 
 .yt-hero-scrim {
@@ -432,7 +427,7 @@ button {
    Menu button left, lockup centred. The links drop into a full-height
    panel under the bar, set large, one per row, with the language switch
    at its foot. */
-@media (max-width: 1024px) {
+@media (max-width: 960px) {
 	.yt-nav {
 		display: grid;
 		grid-template-columns: 1fr auto 1fr;
