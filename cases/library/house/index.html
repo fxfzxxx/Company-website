@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Design showcase: Section 01 - a presentation model of an ordinary two-storey New Zealand house, black cladding and white joinery, generated in the browser." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/house/index.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#e6e4de" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Section 01 - Live concept" />
+	<meta property="og:description"
+		content="A presentation model of an ordinary two-storey New Zealand house, generated in the browser." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/house/index.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<title>Section 01 - Live concept</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body class="plate">
+	<div id="stage"></div>
+
+	<svg id="leader" aria-hidden="true"></svg>
+	<div id="tag"></div>
+
+	<div class="hud">
+		<div class="row">
+			<div class="hud-nav">
+				<a href="../../../en/cases/index.html" target="_top">Yonder Case Library</a>
+				<a href="project.html">Case study</a>
+			</div>
+			<ol class="index-list" id="index-list"></ol>
+		</div>
+
+		<div class="row"></div>
+
+		<div class="row bottom">
+			<div>
+				<h1 class="title">Section 01</h1>
+				<p class="lede">
+					An ordinary two-storey house on its section: black board cladding, white joinery, a corrugate
+					gable and a little garden. Drag to walk around it; move the sun with the slider.
+				</p>
+			</div>
+			<div>
+				<label class="sun-control">
+					<span>Sun</span>
+					<input id="sun" type="range" min="0" max="360" step="1" value="62" />
+				</label>
+				<dl class="caliber" id="caliber"></dl>
+			</div>
+		</div>
+	</div>
+
+	<div class="mark tl"></div>
+	<div class="mark tr"></div>
+	<div class="mark bl"></div>
+	<div class="mark br"></div>
+
+	<div id="fallback"><p>This study needs WebGL 2. Try a current desktop browser.</p></div>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../../../assets/vendor/three/three.module.min.js",
+				"three/addons/": "../../../assets/vendor/three/addons/"
+			}
+		}
+	</script>
+
+	<script type="module">
+		import { createSection } from "./house.js";
+
+		const stage = document.getElementById("stage");
+		let api;
+		try {
+			api = createSection(stage);
+		} catch (error) {
+			console.error(error);
+			document.getElementById("fallback").style.display = "grid";
+		}
+
+		if (api) {
+			const caliber = document.getElementById("caliber");
+			for (const [term, value] of [
+				["Storeys", "2"],
+				["Roof pitch", "28°"],
+				["Cladding", "180 mm shiplap"],
+				["Scale", "1:100"],
+			]) {
+				const row = document.createElement("div");
+				const dt = document.createElement("dt");
+				const dd = document.createElement("dd");
+				dt.textContent = term;
+				dd.textContent = value;
+				row.append(dt, dd);
+				caliber.append(row);
+			}
+
+			const sun = document.getElementById("sun");
+			sun.addEventListener("input", () => {
+				const azimuth = Number(sun.value);
+				/* Low sun at the ends of the arc, high at noon: the shadows are
+				   the point of moving it at all. */
+				const altitude = 12 + Math.sin((azimuth / 360) * Math.PI) * 52;
+				api.setSun(azimuth, altitude);
+			});
+
+			const listed = [];
+			for (const part of api.parts) {
+				const { name } = part.userData.part;
+				if (!listed.includes(name)) listed.push(name);
+			}
+			const list = document.getElementById("index-list");
+			const rows = new Map();
+			listed.forEach((name, i) => {
+				const li = document.createElement("li");
+				const label = document.createElement("span");
+				const num = document.createElement("b");
+				label.textContent = name;
+				num.textContent = String(i + 1).padStart(2, "0");
+				li.append(label, num);
+				list.append(li);
+				rows.set(name, li);
+			});
+
+			const tag = document.getElementById("tag");
+			const leader = document.getElementById("leader");
+			const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+			const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+			dot.setAttribute("r", "3");
+			leader.append(line, dot);
+			let current = null;
+
+			api.onPart((part) => {
+				for (const li of rows.values()) li.classList.remove("is-on");
+				current = part;
+				if (!part) {
+					tag.classList.remove("is-on");
+					line.setAttribute("stroke-opacity", "0");
+					dot.setAttribute("stroke-opacity", "0");
+					return;
+				}
+				rows.get(part.name)?.classList.add("is-on");
+				tag.innerHTML = "";
+				tag.append(part.name);
+				if (part.note) {
+					const em = document.createElement("em");
+					em.textContent = part.note;
+					tag.append(em);
+				}
+				tag.classList.add("is-on");
+				line.setAttribute("stroke-opacity", "1");
+				dot.setAttribute("stroke-opacity", "1");
+			});
+
+			api.onPartMove((ndc) => {
+				if (!current) return;
+				const x = (ndc.x * 0.5 + 0.5) * window.innerWidth;
+				const y = (-ndc.y * 0.5 + 0.5) * window.innerHeight;
+				const side = x > window.innerWidth * 0.55 ? -1 : 1;
+				const tagX = x + side * 92;
+				const tagY = y - 58;
+				tag.style.left = `${side > 0 ? tagX : tagX - tag.offsetWidth}px`;
+				tag.style.top = `${tagY}px`;
+				line.setAttribute("x1", x);
+				line.setAttribute("y1", y);
+				line.setAttribute("x2", tagX);
+				line.setAttribute("y2", tagY);
+				dot.setAttribute("cx", x);
+				dot.setAttribute("cy", y);
+			});
+		}
+	</script>
+</body>
+
+</html>

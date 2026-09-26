@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Case study: Section 01 - a presentation model of an ordinary two-storey New Zealand house, built from the details that make a house here look like one." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/house/project.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#e6e4de" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Section 01 - Case study" />
+	<meta property="og:description"
+		content="A presentation model of an ordinary two-storey New Zealand house, generated in the browser." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/house/project.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/house/assets/hero.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Section 01 - Case study" />
+	<meta name="twitter:description" content="An ordinary house, modelled at 1:100, generated at load." />
+	<title>Section 01 - Case study</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+	<div class="study">
+		<div class="nav">
+			<strong>Section 01</strong>
+			<div class="nav-links">
+				<a href="index.html">Live concept</a>
+				<a href="project.html">Case study</a>
+				<a href="../../../en/cases/index.html" target="_top">Case Library</a>
+			</div>
+		</div>
+
+		<h1>Ordinary is the hard part.</h1>
+		<p class="lede-block">
+			A sandbox model of a two-storey house of the kind built here every week: black board cladding, white
+			joinery, a corrugate gable, a garage wing, and a little garden. Nothing about it is remarkable, which
+			is exactly why it has to be right — a house reads as being from somewhere through details nobody
+			photographs.
+		</p>
+
+		<img class="plate-shot" src="assets/hero.jpg" width="2000" height="1333"
+			alt="A model of a two-storey house: black vertical board cladding, white window reveals, a dark corrugate gable roof, a white garage wing, driveway, slatted fence and cabbage trees, on a pale board." />
+
+		<dl class="facts">
+			<div>
+				<dt>Type</dt>
+				<dd>Concept · self-directed</dd>
+			</div>
+			<div>
+				<dt>Discipline</dt>
+				<dd>Real-time 3D · Web</dd>
+			</div>
+			<div>
+				<dt>Scale</dt>
+				<dd>1:100, one unit per metre</dd>
+			</div>
+			<div>
+				<dt>Payload</dt>
+				<dd>No models, no textures</dd>
+			</div>
+		</dl>
+
+		<section>
+			<h2>The brief</h2>
+			<p>
+				A presentation model of a common New Zealand house: two storeys, black and white, a small garden.
+				The studies before it had subjects that carry themselves — a mineral specimen, a watch movement, a
+				planet. A suburban house has no such help. If the proportions or the details are wrong it does not
+				look stylised, it looks foreign.
+			</p>
+		</section>
+
+		<section>
+			<h2>Design decisions</h2>
+			<div class="cards">
+				<article>
+					<h3>The details that place it</h3>
+					<p>
+						Vertical shiplap stained black, white reveals around every opening, corrugate roofing,
+						620&nbsp;mm eaves, a horizontal slat fence, a letterbox on the boundary. Take any one away
+						and the house drifts somewhere else; together they are unmistakable.
+					</p>
+				</article>
+				<article>
+					<h3>Shadow gaps, not textures</h3>
+					<p>
+						Cladding is built as boards with a gap between them, because what you actually read at a
+						distance is the shadow line, not the timber. Openings are cut by splitting each board
+						column into the runs the windows leave.
+					</p>
+				</article>
+				<article>
+					<h3>A model, not a render</h3>
+					<p>
+						It sits on a board with a chamfered edge, the planting is abstracted to what a model maker
+						would cut, and the sun moves on a slider — because the first thing anyone does to an
+						architectural model is turn it to the light.
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<section>
+			<h2>How it is built</h2>
+			<p>
+				One unit is one metre and everything is set out from the street: footpath, kerb, driveway crossing,
+				then the house at its setback. The main volume is a dark core with cladding hung on each face, so
+				the windows are holes in the boards rather than decals on them; a triangular prism fills the gable,
+				and two corrugate planes descend from the ridge past the wall line to the eaves.
+			</p>
+			<p>
+				The corrugate is real geometry — a cosine across the sheet — because at model scale the ripple is
+				what catches the sun and tells you the roof is steel and not slate. The deck uses the same board
+				builder as the walls, laid flat.
+			</p>
+			<p>
+				The planting is two plants and a shrub: a cabbage tree is a bare trunk forking into tufts of
+				blades, flax is a fan springing from the ground, and everything else is a clipped ball. Between
+				them they do more to say <em>New Zealand</em> than the house does.
+			</p>
+		</section>
+
+		<section>
+			<h2>What went wrong first</h2>
+			<p>
+				The cladding builder works from the base of a wall upward, and the skins were then placed at
+				mid-height — so every wall rose half a storey above its own roof, and the model read as an open
+				box with windows floating in the sky. It took a diagnostic render with the roof coloured red to see
+				it: the roof had been right all along.
+			</p>
+		</section>
+
+		<section>
+			<h2>Outcome</h2>
+			<p>
+				A section you can walk around: fourteen named parts, a sun on a slider, and a house that anyone who
+				has driven through a new subdivision here would recognise without being told where it is.
+			</p>
+		</section>
+
+		<footer>Section 01 design case study · Yonder Case Library · 2026</footer>
+	</div>
+</body>
+
+</html>
