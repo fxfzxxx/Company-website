@@ -255,38 +255,11 @@ export function createSection(container, overrides = {}) {
 	register(lawn, "Lawn", "What is left once the house and beds are set out");
 	site.add(lawn);
 
-	/* — hard landscaping ——————————————————————————————————————
-	   The street runs along the southern edge; everything is set out from
-	   the driveway crossing, as it is on a real section. */
+	/* — the plan ——————————————————————————————————————————————
+	   Every dimension below is metres, and the paving is set out from the
+	   buildings rather than typed in beside them: the first version of this
+	   model moved the house and left the driveway behind, pointing at lawn. */
 	const STREET_Z = BOARD.depth / 2 - 0.25;
-	const driveway = solid(3.8, 0.07, 9.4, M.concrete, -6.0, 0.045, STREET_Z - 4.7);
-	driveway.castShadow = false;
-	register(driveway, "Driveway", "Exposed aggregate, 3.6 m to the garage");
-	site.add(driveway);
-
-	const footpath = solid(BOARD.width - 0.5, 0.08, 1.5, M.concrete, 0, 0.05, STREET_Z + 0.95);
-	footpath.castShadow = false;
-	site.add(footpath);
-	const kerb = solid(BOARD.width - 0.5, 0.16, 0.16, M.plinthEdge, 0, 0.08, STREET_Z + 1.78);
-	site.add(kerb);
-	const road = solid(BOARD.width - 0.5, 0.06, 2.4, M.plinthEdge, 0, 0.03, STREET_Z + 3.0);
-	road.castShadow = false;
-	site.add(road);
-	register(footpath, "Street edge", "Berm, footpath and kerb");
-
-	const path = solid(1.2, 0.07, 3.8, M.concrete, -2.6, 0.045, STREET_Z - 5.6);
-	path.castShadow = false;
-	site.add(path);
-	const pathStep = solid(2.2, 0.07, 1.3, M.concrete, -2.6, 0.05, STREET_Z - 7.4);
-	pathStep.castShadow = false;
-	site.add(pathStep);
-	register(path, "Path", "Front door off the driveway crossing");
-
-	/* — the house ——————————————————————————————————————————————
-	   Two rectilinear volumes, the upper one thrown forward over the lower and
-	   sideways over the entry, under a flat roof behind a parapet. The gable
-	   this replaced is what a house here looked like for eighty years; this is
-	   what the same section gets built as now. */
 	const HOUSE = {
 		width: 9.4,
 		depth: 8.0,
@@ -294,9 +267,66 @@ export function createSection(container, overrides = {}) {
 		first: 2.95,
 		cantilever: 0.95, // the upper floor oversails the entrance front
 		over: 2.7, // and reaches west to roof the entry
-		x: 1.6,
+		x: 2.6,
 		z: STREET_Z - 11.8,
 	};
+	const WING = { width: 6.6, depth: 6.8, height: 3.05 };
+	/* The garage sits west of the entry bay, and the entry bay is the gap
+	   between the two volumes. */
+	const GARAGE = {
+		x: HOUSE.x - HOUSE.width / 2 - HOUSE.over - WING.width / 2,
+		z: HOUSE.z + 0.6,
+	};
+	const ENTRY = {
+		x: HOUSE.x - HOUSE.width / 2 - HOUSE.over / 2,
+		z: HOUSE.z + HOUSE.depth / 2,
+	};
+	const KERB_Z = STREET_Z + 1.78;
+
+	/* — hard landscaping ——————————————————————————————————————
+	   The street runs along the southern edge. The crossing is as wide as the
+	   garage door and runs from the kerb to the door itself; the path runs
+	   from the front step to the footpath, because a front door that opens
+	   onto grass is not a front door. */
+	const garageFace = GARAGE.z + WING.depth / 2;
+	/* An apron the width of the door, and a narrower run out to the kerb —
+	   which is both how it is poured and how it is consented. */
+	const apron = solid(WING.width - 0.4, 0.07, 3.0, M.concrete, GARAGE.x, 0.045, garageFace + 1.5);
+	apron.castShadow = false;
+	site.add(apron);
+	const driveLength = KERB_Z - (garageFace + 3.0);
+	const driveway = solid(4.2, 0.07, driveLength, M.concrete, GARAGE.x, 0.045, garageFace + 3.0 + driveLength / 2);
+	driveway.castShadow = false;
+	register(driveway, "Driveway", "Exposed aggregate, 4.2 m, widening to the garage apron");
+	site.add(driveway);
+
+	const footpath = solid(BOARD.width - 0.5, 0.08, 1.5, M.concrete, 0, 0.05, STREET_Z + 0.95);
+	footpath.castShadow = false;
+	site.add(footpath);
+	const kerb = solid(BOARD.width - 0.5, 0.16, 0.16, M.plinthEdge, 0, 0.08, KERB_Z);
+	site.add(kerb);
+	const road = solid(BOARD.width - 0.5, 0.06, 2.4, M.plinthEdge, 0, 0.03, STREET_Z + 3.0);
+	road.castShadow = false;
+	site.add(road);
+	register(footpath, "Street edge", "Berm, footpath and kerb");
+
+	/* The entry path: from the step at the door, straight out to the
+	   footpath, with a wider landing where the two meet. */
+	const pathStart = ENTRY.z + 1.7;
+	const pathLength = STREET_Z + 0.2 - pathStart;
+	const path = solid(1.3, 0.07, pathLength, M.concrete, ENTRY.x, 0.045, pathStart + pathLength / 2);
+	path.castShadow = false;
+	site.add(path);
+	const pathLanding = solid(2.4, 0.07, 1.4, M.concrete, ENTRY.x, 0.05, ENTRY.z + 1.1);
+	pathLanding.castShadow = false;
+	site.add(pathLanding);
+	register(path, "Path", "Front door to the footpath, 1.3 m");
+
+	/* — the house ——————————————————————————————————————————————
+	   Two rectilinear volumes, the upper one thrown forward over the lower and
+	   sideways over the entry, under a flat roof behind a parapet. The gable
+	   this replaced is what a house here looked like for eighty years; this is
+	   what the same section gets built as now. */
 	const PARAPET = 0.42;
 	const house = new THREE.Group();
 	house.position.set(HOUSE.x, 0, HOUSE.z);
@@ -465,9 +495,8 @@ export function createSection(container, overrides = {}) {
 	/* — the garage, and the front door beside it ————————————————
 	   The entry sits in the reveal between the black volume and the white
 	   one, under the floor above: covered without needing a porch roof. */
-	const WING = { width: 6.6, depth: 6.8, height: 3.05 };
 	const wing = new THREE.Group();
-	wing.position.set(HOUSE.x - HOUSE.width / 2 - HOUSE.over - WING.width / 2, 0, HOUSE.z + 0.6);
+	wing.position.set(GARAGE.x, 0, GARAGE.z);
 	site.add(wing);
 	wing.add(solid(WING.width, WING.height, WING.depth, M.plaster, 0, WING.height / 2, 0));
 	const wingSlab = solid(WING.width + 0.3, 0.16, WING.depth + 0.3, M.plaster, 0, WING.height + 0.08, 0);
@@ -490,7 +519,7 @@ export function createSection(container, overrides = {}) {
 	register(garageDoor, "Garage door", "Sectional, 4.8 m, flush panels");
 
 	const entry = new THREE.Group();
-	entry.position.set(HOUSE.x - HOUSE.width / 2 - HOUSE.over / 2, 0, HOUSE.z + HOUSE.depth / 2);
+	entry.position.set(ENTRY.x, 0, ENTRY.z);
 	site.add(entry);
 	/* The door sits in the front plane, not back in a slot: recessed it read
 	   as a dark gap between the two volumes. It is still covered, because the
@@ -510,7 +539,7 @@ export function createSection(container, overrides = {}) {
 	/* — terrace on the garage roof ————————————————————————————
 	   Off the first floor, with a frameless glass balustrade. */
 	const terrace = new THREE.Group();
-	terrace.position.set(wing.position.x, WING.height + 0.16, wing.position.z);
+	terrace.position.set(GARAGE.x, WING.height + 0.16, GARAGE.z);
 	site.add(terrace);
 	const terraceDeck = claddedWall({
 		width: WING.width - 0.2,
@@ -560,32 +589,38 @@ export function createSection(container, overrides = {}) {
 	deckGroup.add(deckBoards);
 	register(deckGroup, "Deck", "Ground level, off the living room, 7.2 × 4.8 m");
 
-	/* — boundary ——————————————————————————————————————————————— */
-	const frontFence = slatFence({ length: 8.8, materials: M });
-	frontFence.position.set(5.4, 0, STREET_Z - 0.4);
+	/* — boundary ——————————————————————————————————————————————
+	   The street fence runs the frontage east of the path; the side fence is
+	   on the western boundary, clear of the crossing. An earlier version put
+	   it straight through the garage door. */
+	const frontFence = slatFence({ length: 13.4, materials: M });
+	frontFence.position.set(5.8, 0, STREET_Z - 0.4);
 	site.add(frontFence);
-	const sideFence = slatFence({ length: 8.4, materials: M });
-	sideFence.position.set(-10.4, 0, STREET_Z - 5.0);
+	const sideFence = slatFence({ length: 12.0, materials: M });
+	sideFence.position.set(-12.55, 0, STREET_Z - 9.0);
 	sideFence.rotation.y = Math.PI / 2;
 	site.add(sideFence);
-	register(frontFence, "Fence", "Horizontal slats, 1.7 m");
+	register(frontFence, "Fence", "Horizontal slats, 1.7 m, open at the crossing");
 
 	const letterbox = new THREE.Group();
 	letterbox.add(solid(0.12, 1.0, 0.12, M.fencePost, 0, 0.5, 0));
 	letterbox.add(solid(0.34, 0.26, 0.5, M.trim, 0, 1.12, 0));
-	letterbox.position.set(-2.4, 0, STREET_Z - 0.5);
+	letterbox.position.set(ENTRY.x + 1.5, 0, STREET_Z - 0.3);
 	site.add(letterbox);
-	register(letterbox, "Letterbox", "On the boundary, as required");
+	register(letterbox, "Letterbox", "Beside the path, on the boundary");
 
 	/* — planting ———————————————————————————————————————————————
-	   A little garden: two beds, two cabbage trees, flax, clipped shrubs and
-	   a hedge along one boundary. */
+	   Three beds: the frontage east of the path, a strip west of the crossing,
+	   and the narrow run between the crossing and the path. */
 	const bedFront = solid(7.6, 0.09, 3.0, M.mulch, 4.6, 0.055, STREET_Z - 3.4);
 	bedFront.castShadow = false;
 	site.add(bedFront);
-	const bedSide = solid(2.6, 0.09, 8.0, M.mulch, -9.2, 0.055, STREET_Z - 8.6);
-	bedSide.castShadow = false;
-	site.add(bedSide);
+	const bedWest = solid(1.9, 0.09, 7.0, M.mulch, -11.9, 0.055, STREET_Z - 4.0);
+	bedWest.castShadow = false;
+	site.add(bedWest);
+	const bedVerge = solid(1.1, 0.09, 4.2, M.mulch, -4.75, 0.055, STREET_Z - 3.0);
+	bedVerge.castShadow = false;
+	site.add(bedVerge);
 	register(bedFront, "Garden bed", "Mulched, planted in natives");
 
 	const planting = new THREE.Group();
@@ -594,7 +629,7 @@ export function createSection(container, overrides = {}) {
 	const trees = [
 		[6.2, STREET_Z - 3.2, 3.9, 3],
 		[3.0, STREET_Z - 4.0, 3.1, 11],
-		[-9.0, STREET_Z - 12.0, 3.5, 23],
+		[-11.9, STREET_Z - 5.6, 3.5, 23],
 	];
 	for (const [x, z, height, seed] of trees) {
 		const tree = cabbageTree({ height, seed, materials: M });
@@ -605,9 +640,10 @@ export function createSection(container, overrides = {}) {
 	const flaxes = [
 		[8.0, STREET_Z - 3.8, 1.6, 5],
 		[5.0, STREET_Z - 2.6, 1.35, 9],
-		[-9.4, STREET_Z - 6.4, 1.5, 13],
-		[-9.0, STREET_Z - 9.6, 1.25, 17],
-		[7.2, STREET_Z - 12.8, 1.45, 29],
+		[-11.9, STREET_Z - 2.4, 1.5, 13],
+		[-12.0, STREET_Z - 6.6, 1.25, 17],
+		[-4.75, STREET_Z - 2.2, 1.3, 29],
+		[9.6, STREET_Z - 12.0, 1.45, 31],
 	];
 	for (const [x, z, height, seed] of flaxes) {
 		const clump = flax({ height, seed, materials: M });
@@ -618,10 +654,10 @@ export function createSection(container, overrides = {}) {
 	const shrubs = [
 		[2.0, STREET_Z - 2.8, 0.55, 7],
 		[3.6, STREET_Z - 2.4, 0.42, 19],
-		[9.0, STREET_Z - 2.9, 0.5, 31],
-		[-9.3, STREET_Z - 4.4, 0.46, 37],
-		[-1.2, STREET_Z - 8.2, 0.38, 41],
-		[0.2, STREET_Z - 8.4, 0.34, 43],
+		[9.0, STREET_Z - 2.9, 0.5, 33],
+		[-11.9, STREET_Z - 4.4, 0.46, 37],
+		[-4.7, STREET_Z - 4.2, 0.38, 41],
+		[-1.7, STREET_Z - 6.6, 0.4, 43],
 	];
 	for (const [x, z, radius, seed] of shrubs) {
 		const bush = shrub({ radius, seed, material: M.hedge });
@@ -629,7 +665,7 @@ export function createSection(container, overrides = {}) {
 		planting.add(bush);
 	}
 
-	const hedge = solid(0.85, 1.0, 8.0, M.hedge, 11.7, 0.5, STREET_Z - 8.6);
+	const hedge = solid(0.85, 1.0, 8.0, M.hedge, 11.9, 0.5, STREET_Z - 8.6);
 	planting.add(hedge);
 	register(planting, "Planting", "Cabbage trees, flax, clipped natives");
 
