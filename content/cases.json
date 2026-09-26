@@ -153,8 +153,150 @@
     }
   },
   {
-    "slug": "earth",
+    "slug": "house",
     "num": "02",
+    "tags": [
+      "Web",
+      "UI"
+    ],
+    "year": "2026",
+    "thumb": "/cases/library/house/assets/thumb.jpg",
+    "hero": "/cases/library/house/assets/hero.jpg",
+    "colorHero": true,
+    "figure": {
+      "en": "1:100",
+      "zh": "1:100"
+    },
+    "measure": {
+      "en": "Model scale, one unit per metre",
+      "zh": "模型比例，一单位一米"
+    },
+    "lib": {
+      "en": {
+        "meta": "Real-time 3D · Concept",
+        "title": "Section 01 house model",
+        "brief": "A presentation model of a modern two-storey house of the kind going up here now: two black board-clad volumes under a flat roof, the upper one thrown forward over the entrance front, a terrace over the garage, and a little garden.",
+        "decisions": [
+          "The details are what place it: vertical shiplap stained black, long-run steel out of sight behind a parapet, dark joinery, a horizontal slat fence and a letterbox on the boundary.",
+          "Cladding is boards with a shadow gap between them rather than a texture, because the shadow line is what you read at a distance — and openings are cut by splitting each board column into the runs the windows leave.",
+          "The model runs in daylight or after dark: wall washers, path bollards and lit rooms, with the beams and pools drawn as geometry rather than as a dozen real lights."
+        ],
+        "outcome": "A section you can walk around in either condition, with eighteen named parts, a movable sun and a lighting design you can switch on. Anyone who has driven through a new subdivision here recognises it without being told where it is."
+      },
+      "zh": {
+        "meta": "实时 3D · 概念作品",
+        "title": "Section 01 住宅沙盘",
+        "brief": "一栋现代两层住宅的沙盘——本地当下正在盖的那种：两个刷黑墙板的体量、平屋顶、上层向街面悬挑，车库上方是一处露台，外加一小片花园。",
+        "decisions": [
+          "决定它属于哪里的是细节：竖向企口板刷黑、长条钢屋面藏在女儿墙后、深色门窗、横向板条围栏，以及立在地界上的信箱。",
+          "墙板是带阴影缝的一块块板，而不是一张贴图——远看真正读到的是那条阴影线；洞口的做法是把每一列板按窗户留下的空档切开。",
+          "模型可以在白天和夜晚之间切换：外墙上下洗墙灯、小径两侧地灯、室内亮起的房间；光锥与地面光斑是几何体，而不是十几盏真实灯光。"
+        ],
+        "outcome": "一块白天夜里都能绕着走的地块，十八个可命名部件、可移动的太阳，以及一套可以打开的照明设计。任何在本地新社区开过车的人，不用被告知就认得出这是哪里。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "02 — Real-time 3D",
+        "title": "Ordinary, built the way it is built now.",
+        "lede": "A sandbox model of a modern two-storey house, built from the details that make a house here look like one.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Real-time 3D · Web"
+          },
+          {
+            "label": "Scale",
+            "value": "1:100, one unit per metre"
+          },
+          {
+            "label": "Payload",
+            "value": "No models, no textures"
+          }
+        ],
+        "brief": "A presentation model of a common New Zealand house: two storeys, black and white, a small garden. The first scheme was the gabled archetype — which is what the same section got built as for eighty years, and reads as heritage rather than as new.",
+        "briefTwo": "So it was rebuilt as what actually goes up now: rectilinear volumes, a flat roof behind a parapet, a cantilever over the entrance front, a proper front door beside the garage and a terrace on the garage roof. What keeps it local is everything below the roofline.",
+        "decisions": [
+          "Two stacked volumes rather than a pitched form: the upper box oversails the entrance front by 950 mm and reaches sideways to roof the entry, so the shadow line it throws does the work a verandah used to.",
+          "Cladding is built as boards with a gap between them, because the shadow line is what reads at a distance. Window openings are cut by splitting each board column into the vertical runs the windows leave behind.",
+          "The flat roof is long-run steel at three degrees to an internal gutter, out of sight behind a 420 mm parapet — which is how a flat roof is actually built here."
+        ],
+        "outcome": "A section you can walk around in daylight or after dark: eighteen named parts, a sun on a slider, a terrace over the garage and a house that places itself. The living side and its deck face north, as they would on a real section here.",
+        "specs": [
+          {
+            "figure": "3°",
+            "label": "Roof fall",
+            "note": "Long-run steel behind a 420 mm parapet."
+          },
+          {
+            "figure": "950",
+            "label": "mm cantilever",
+            "note": "The upper floor over the entrance front."
+          },
+          {
+            "figure": "18",
+            "label": "Named parts",
+            "note": "Board, paving, terrace, front door, lighting and on."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "02 — 实时 3D",
+        "title": "普通，但要按当下的盖法。",
+        "lede": "一栋现代两层住宅的沙盘，由那些让本地房子看起来像本地房子的细节构成。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "实时 3D · Web"
+          },
+          {
+            "label": "比例",
+            "value": "1:100，一单位一米"
+          },
+          {
+            "label": "体积",
+            "value": "无模型、无贴图"
+          }
+        ],
+        "brief": "一栋新西兰常见住宅的沙盘：两层、黑白、带一小片花园。第一版做的是坡顶原型——那是同一块地过去八十年的盖法，读起来像历史保护建筑，而不像新房。",
+        "briefTwo": "于是改成当下真正在盖的样子：方正体量、女儿墙后的平屋顶、朝街面的悬挑、车库旁一扇像样的正门，以及车库屋面上的露台。让它仍然属于此地的，是屋顶线以下的一切。",
+        "decisions": [
+          "用两个堆叠体量取代坡屋顶：上层向街面悬挑 950 毫米，并侧向伸出罩住入口，它投下的那道阴影线承担了过去由门廊承担的作用。",
+          "墙板做成一块块带缝的板，因为远看读到的是那条阴影缝。窗洞的切法是把每一列板按窗户留下的空档拆成若干段。",
+          "平屋顶其实是 3° 找坡的长条钢板，排向内天沟，藏在 420 毫米女儿墙后面——本地的平屋顶就是这么盖的。"
+        ],
+        "outcome": "一块白天夜里都能绕着走的地块：十八个可命名部件、一根太阳滑杆、车库上方的露台，以及一栋能自报家门的房子。起居一侧和露台朝北——在本地的真实地块上就该如此。",
+        "specs": [
+          {
+            "figure": "3°",
+            "label": "屋面找坡",
+            "note": "长条钢板，藏在 420 毫米女儿墙后。"
+          },
+          {
+            "figure": "950",
+            "label": "毫米悬挑",
+            "note": "上层楼板探出街面一侧。"
+          },
+          {
+            "figure": "18",
+            "label": "可命名部件",
+            "note": "底板、铺装、露台、正门、照明等等。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "earth",
+    "num": "03",
     "tags": [
       "Web",
       "UI"
@@ -197,7 +339,7 @@
     },
     "det": {
       "en": {
-        "crumb": "02 — Real-time 3D",
+        "crumb": "03 — Real-time 3D",
         "title": "A planet has to be recognisable.",
         "lede": "A lit globe with weather, night cities and traffic, built from two public data files and a great deal of arithmetic.",
         "facts": [
@@ -245,7 +387,7 @@
         ]
       },
       "zh": {
-        "crumb": "02 — 实时 3D",
+        "crumb": "03 — 实时 3D",
         "title": "行星必须认得出来。",
         "lede": "一颗带天气、夜间城市与航路的地球，由两份公开数据和大量运算构成。",
         "facts": [
@@ -296,7 +438,7 @@
   },
   {
     "slug": "movement",
-    "num": "03",
+    "num": "04",
     "tags": [
       "Web",
       "UI"
@@ -339,7 +481,7 @@
     },
     "det": {
       "en": {
-        "crumb": "03 — Real-time 3D",
+        "crumb": "04 — Real-time 3D",
         "title": "Precision that was made by people.",
         "lede": "An instrument generated at load, where every industrial quality in it is there because a person decided it should be.",
         "facts": [
@@ -387,7 +529,7 @@
         ]
       },
       "zh": {
-        "crumb": "03 — 实时 3D",
+        "crumb": "04 — 实时 3D",
         "title": "由人做出来的精密。",
         "lede": "一件在加载时生成的仪器——它身上每一处工业属性，都是因为某个人决定它该如此。",
         "facts": [
@@ -438,7 +580,7 @@
   },
   {
     "slug": "specimen",
-    "num": "04",
+    "num": "05",
     "tags": [
       "Web",
       "UI"
@@ -481,7 +623,7 @@
     },
     "det": {
       "en": {
-        "crumb": "04 — Real-time 3D",
+        "crumb": "05 — Real-time 3D",
         "title": "Light is the model.",
         "lede": "A dispersive glass specimen rebuilt as a live scene, where the spectrum comes out of refraction instead of a picture of it.",
         "facts": [
@@ -529,7 +671,7 @@
         ]
       },
       "zh": {
-        "crumb": "04 — 实时 3D",
+        "crumb": "05 — 实时 3D",
         "title": "光才是模型。",
         "lede": "把一颗色散玻璃标本重建为实时场景：光谱来自折射本身，而不是折射的照片。",
         "facts": [
@@ -580,7 +722,7 @@
   },
   {
     "slug": "luna-bloom",
-    "num": "05",
+    "num": "06",
     "tags": [
       "Web",
       "UI",
@@ -624,7 +766,7 @@
     },
     "det": {
       "en": {
-        "crumb": "05 — Community platform",
+        "crumb": "06 — Community platform",
         "title": "Softness as a design system.",
         "lede": "A maternity community concept built to hold long-form editorial and peer conversation without the pull of an endless feed.",
         "facts": [
@@ -672,7 +814,7 @@
         ]
       },
       "zh": {
-        "crumb": "05 — 社区平台",
+        "crumb": "06 — 社区平台",
         "title": "把「柔和」做成一套系统。",
         "lede": "母婴社区概念，要在没有无限信息流的前提下同时容纳长文内容和用户交流。",
         "facts": [
@@ -723,7 +865,7 @@
   },
   {
     "slug": "ion-forge",
-    "num": "06",
+    "num": "07",
     "tags": [
       "Web",
       "UI",
@@ -767,7 +909,7 @@
     },
     "det": {
       "en": {
-        "crumb": "06 — Product launch",
+        "crumb": "07 — Product launch",
         "title": "From industrial design to kinetic product storytelling.",
         "lede": "A hardware launch system carrying industrial design, spec detail and motion in one view, and repeating across twelve markets.",
         "facts": [
@@ -815,7 +957,7 @@
         ]
       },
       "zh": {
-        "crumb": "06 — 产品发布",
+        "crumb": "07 — 产品发布",
         "title": "从工业设计到动态产品叙事。",
         "lede": "硬件发布系统，在同一屏内承载工业设计、参数与动效，并复用于十二个市场。",
         "facts": [
@@ -866,7 +1008,7 @@
   },
   {
     "slug": "velvet-atelier",
-    "num": "07",
+    "num": "08",
     "tags": [
       "Web",
       "UI",
@@ -910,7 +1052,7 @@
     },
     "det": {
       "en": {
-        "crumb": "07 — Luxury commerce",
+        "crumb": "08 — Luxury commerce",
         "title": "A luxury commerce experience blueprint.",
         "lede": "The maison journey mapped across editorial, commerce, concierge and aftercare as one system rather than four.",
         "facts": [
@@ -958,7 +1100,7 @@
         ]
       },
       "zh": {
-        "crumb": "07 — 高端零售",
+        "crumb": "08 — 高端零售",
         "title": "高端零售体验蓝图。",
         "lede": "把内容、电商、专属服务和售后四段旅程画成一套系统，而不是四套。",
         "facts": [
@@ -1009,7 +1151,7 @@
   },
   {
     "slug": "ishq-escape",
-    "num": "08",
+    "num": "09",
     "tags": [
       "Web",
       "UI",
@@ -1053,7 +1195,7 @@
     },
     "det": {
       "en": {
-        "crumb": "08 — Hospitality booking",
+        "crumb": "09 — Hospitality booking",
         "title": "Luxury booking with concierge-led conversion.",
         "lede": "A full-funnel villa booking concept balancing discovery, private enquiry and confirmation in one flow.",
         "facts": [
@@ -1101,7 +1243,7 @@
         ]
       },
       "zh": {
-        "crumb": "08 — 酒店预订",
+        "crumb": "09 — 酒店预订",
         "title": "以专属服务驱动转化的高端预订。",
         "lede": "全漏斗别墅预订概念，把浏览、私下咨询与最终确认放进同一条动线。",
         "facts": [
@@ -1152,7 +1294,7 @@
   },
   {
     "slug": "starlight-kingdom",
-    "num": "09",
+    "num": "10",
     "tags": [
       "Web",
       "UI",
@@ -1197,7 +1339,7 @@
     },
     "det": {
       "en": {
-        "crumb": "09 — Destination experience",
+        "crumb": "10 — Destination experience",
         "title": "A destination page that also plans the day.",
         "lede": "A cinematic landing concept and a queue-aware itinerary planner sharing one visual system.",
         "facts": [
@@ -1245,7 +1387,7 @@
         ]
       },
       "zh": {
-        "crumb": "09 — 目的地体验",
+        "crumb": "10 — 目的地体验",
         "title": "既做目的地展示，也做当日行程。",
         "lede": "影院感落地页与考虑排队时长的行程规划工作台共用一套视觉系统。",
         "facts": [
@@ -1296,7 +1438,7 @@
   },
   {
     "slug": "aurora",
-    "num": "10",
+    "num": "11",
     "tags": [
       "Web",
       "UI",
@@ -1340,7 +1482,7 @@
     },
     "det": {
       "en": {
-        "crumb": "10 — Employer brand",
+        "crumb": "11 — Employer brand",
         "title": "A careers site that is not a job list.",
         "lede": "Teams, mission and location given equal standing beside role search, in one employer brand system.",
         "facts": [
@@ -1388,7 +1530,7 @@
         ]
       },
       "zh": {
-        "crumb": "10 — 雇主品牌",
+        "crumb": "11 — 雇主品牌",
         "title": "招聘站不该只是一份职位列表。",
         "lede": "团队、使命与地点和职位搜索并列，统一在一套雇主品牌系统里。",
         "facts": [
@@ -1439,7 +1581,7 @@
   },
   {
     "slug": "tech-disruption",
-    "num": "11",
+    "num": "12",
     "tags": [
       "Web",
       "UI"
@@ -1482,7 +1624,7 @@
     },
     "det": {
       "en": {
-        "crumb": "11 — Research hub",
+        "crumb": "12 — Research hub",
         "title": "Making dense research feel effortless.",
         "lede": "A daily-publishing research hub that absorbs editorial volume without reading as a link dump.",
         "facts": [
@@ -1530,7 +1672,7 @@
         ]
       },
       "zh": {
-        "crumb": "11 — 研究平台",
+        "crumb": "12 — 研究平台",
         "title": "让高密度研究读起来不费力。",
         "lede": "每日更新的研究平台，要承载发布量，又不能变成一堆链接。",
         "facts": [
@@ -1581,7 +1723,7 @@
   },
   {
     "slug": "lumen-stream",
-    "num": "12",
+    "num": "13",
     "tags": [
       "Web",
       "UI",
@@ -1625,7 +1767,7 @@
     },
     "det": {
       "en": {
-        "crumb": "12 — Streaming platform",
+        "crumb": "13 — Streaming platform",
         "title": "A streaming homepage that serves discovery and sign-up.",
         "lede": "A cinematic entertainment hub concept where browsing depth and a single sign-up route stop competing.",
         "facts": [
@@ -1673,7 +1815,7 @@
         ]
       },
       "zh": {
-        "crumb": "12 — 流媒体平台",
+        "crumb": "13 — 流媒体平台",
         "title": "同时服务内容发现与注册的流媒体首页。",
         "lede": "影院感娱乐平台概念，让浏览深度与唯一注册路径不再互相挤占。",
         "facts": [
@@ -1724,7 +1866,7 @@
   },
   {
     "slug": "atlas",
-    "num": "13",
+    "num": "14",
     "tags": [
       "Product",
       "UI"
@@ -1767,7 +1909,7 @@
     },
     "det": {
       "en": {
-        "crumb": "13 — Institutional finance",
+        "crumb": "14 — Institutional finance",
         "title": "Designing institutional confidence.",
         "lede": "An investor-facing experience carrying the weight of a large asset manager without decoration for decoration’s sake.",
         "facts": [
@@ -1815,7 +1957,7 @@
         ]
       },
       "zh": {
-        "crumb": "13 — 机构金融",
+        "crumb": "14 — 机构金融",
         "title": "设计出机构级的信任感。",
         "lede": "面向投资者的体验，要撑得起大型资产管理机构的分量，同时不做任何为装饰而装饰的处理。",
         "facts": [
@@ -1866,7 +2008,7 @@
   },
   {
     "slug": "fieldnote",
-    "num": "14",
+    "num": "15",
     "tags": [
       "Web",
       "UI",
@@ -1910,7 +2052,7 @@
     },
     "det": {
       "en": {
-        "crumb": "14 — Research platform",
+        "crumb": "15 — Research platform",
         "title": "Quiet type, loud evidence.",
         "lede": "A customer-research workspace in a warm editorial system, where every insight stays tied to the moment a customer said it.",
         "facts": [
@@ -1958,7 +2100,7 @@
         ]
       },
       "zh": {
-        "crumb": "14 — 研究平台",
+        "crumb": "15 — 研究平台",
         "title": "字体轻声，证据响亮。",
         "lede": "一个采用温暖编辑风格的用户研究工作台，每一条洞察都连着客户说出它的那一刻。",
         "facts": [
