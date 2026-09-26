@@ -1,12 +1,16 @@
 /* Section 01 — a New Zealand house on its section, at model scale.
 
    The brief was a sandbox model of an ordinary two-storey house here, in
-   black and white, with a little garden. Ordinary is the hard part: the
-   things that make a house read as this country are not grand. They are the
-   gable with its long eaves, vertical board cladding stained black, white
-   aluminium joinery, a corrugate roof, a slatted boundary fence, a strip of
-   lawn, and the two plants nobody plants on purpose any more because they
-   are already everywhere — cabbage trees and flax.
+   black and white, with a little garden — and then, on review, a modern one:
+   no pitched roof, a proper front door beside the garage, and a terrace.
+
+   So the massing is two rectilinear volumes, the upper thrown forward over
+   the entrance front and sideways over the entry, under a flat roof behind a
+   parapet. What keeps it local is everything below the roofline: vertical
+   board cladding stained black, long-run steel out of sight at three
+   degrees, a slatted boundary fence, a strip of lawn, and the two plants
+   nobody plants on purpose any more because they are already everywhere —
+   cabbage trees and flax.
 
    One unit is one metre. Everything is built from the site out: board,
    ground, house, garden, and a sun you can walk around the section.
@@ -172,13 +176,28 @@ export function createSection(container, overrides = {}) {
 		boardShadow: new THREE.MeshStandardMaterial({ color: 0x6f747c, roughness: 0.92 }),
 		plaster: new THREE.MeshStandardMaterial({ color: 0xe8e7e2, roughness: 0.88 }),
 		trim: new THREE.MeshStandardMaterial({ color: 0xf4f4f1, roughness: 0.55 }),
-		joinery: new THREE.MeshStandardMaterial({ color: 0xf1f1ee, roughness: 0.42, metalness: 0.15 }),
+		/* Modern joinery here is dark, not white: the white is spent on the
+		   plaster volume, the parapet capping and the soffits. */
+		joinery: new THREE.MeshStandardMaterial({ color: 0x24262a, roughness: 0.38, metalness: 0.2 }),
+		blackDoor: new THREE.MeshStandardMaterial({ color: 0x101214, roughness: 0.42 }),
+		balustrade: new THREE.MeshPhysicalMaterial({
+			color: 0xc8d9e4,
+			transmission: 0.22,
+			transparent: true,
+			roughness: 0.06,
+			ior: 1.5,
+			thickness: 0.02,
+			metalness: 0.1,
+			clearcoat: 1,
+			clearcoatRoughness: 0.02,
+			envMapIntensity: 2.8,
+		}),
 		roof: new THREE.MeshStandardMaterial({ color: 0x25272b, roughness: 0.48, metalness: 0.42 }),
 		/* Joinery glass reads as a reflection of the sky far more than as a
 		   view inside, which is also how a model maker cuts it: acrylic. */
 		glass: new THREE.MeshPhysicalMaterial({
-			color: 0xdbe4ea,
-			transmission: 0.34,
+			color: 0xc6d3dc,
+			transmission: 0.3,
 			transparent: true,
 			roughness: 0.14,
 			ior: 1.48,
@@ -188,7 +207,7 @@ export function createSection(container, overrides = {}) {
 			clearcoatRoughness: 0.04,
 			envMapIntensity: 2.4,
 		}),
-		deck: new THREE.MeshStandardMaterial({ color: 0xa39b8c, roughness: 0.82 }),
+		deck: new THREE.MeshStandardMaterial({ color: 0x9b968d, roughness: 0.84 }),
 		concrete: new THREE.MeshStandardMaterial({ color: 0xbab7b1, roughness: 0.92 }),
 		lawn: new THREE.MeshStandardMaterial({ color: 0x8f978a, roughness: 1 }),
 		mulch: new THREE.MeshStandardMaterial({ color: 0x4b463f, roughness: 1 }),
@@ -263,246 +282,266 @@ export function createSection(container, overrides = {}) {
 	site.add(pathStep);
 	register(path, "Path", "Front door off the driveway crossing");
 
-	/* — the house —————————————————————————————————————————————
-	   Two storeys under a gable, with a single-storey wing for the garage.
-	   Walls are a dark core with board cladding hung on the faces, so the
-	   window openings are holes in the boards rather than decals on them. */
+	/* — the house ——————————————————————————————————————————————
+	   Two rectilinear volumes, the upper one thrown forward over the lower and
+	   sideways over the entry, under a flat roof behind a parapet. The gable
+	   this replaced is what a house here looked like for eighty years; this is
+	   what the same section gets built as now. */
 	const HOUSE = {
 		width: 9.4,
-		depth: 7.6,
-		wall: 5.5, // two storeys to the eaves
-		pitch: 28,
+		depth: 8.0,
+		ground: 3.05,
+		first: 2.95,
+		cantilever: 0.95, // the upper floor oversails the entrance front
+		over: 2.7, // and reaches west to roof the entry
 		x: 1.6,
-		z: STREET_Z - 11.4,
+		z: STREET_Z - 11.8,
 	};
-	const ridgeRise = (HOUSE.depth / 2) * Math.tan(HOUSE.pitch * DEG);
+	const PARAPET = 0.42;
 	const house = new THREE.Group();
 	house.position.set(HOUSE.x, 0, HOUSE.z);
 	site.add(house);
 
-	const core = solid(HOUSE.width - 0.06, HOUSE.wall, HOUSE.depth - 0.06, M.boardShadow, 0, HOUSE.wall / 2, 0);
-	core.name = "core";
-	house.add(core);
+	/* Cladding a box: four faces, each with its own openings given in
+	   wall-local coordinates — x from the left edge, y from that floor. */
+	const cladBox = ({ parent, width, depth, height, base, x = 0, z = 0, faces, skin, reveal }) => {
+		const box = new THREE.Group();
+		box.position.set(x, base, z);
+		parent.add(box);
 
-	/* Openings are given in wall-local coordinates: x from the left edge,
-	   y from the floor. Ground floor sills at 0.9, first floor at 3.6. */
-	const faces = [
-		{
-			name: "south",
-			width: HOUSE.width,
-			rotation: 0,
-			position: [0, 0, HOUSE.depth / 2],
-			openings: [
-				{ x: 1.0, y: 0.75, w: 3.4, h: 2.2, mullions: 2 },
-				{ x: 5.6, y: 1.1, w: 1.5, h: 1.5, mullions: 1 },
-				{ x: 1.3, y: 3.75, w: 1.9, h: 1.4, mullions: 1 },
-				{ x: 4.3, y: 3.75, w: 1.9, h: 1.4, mullions: 1 },
-				{ x: 7.0, y: 3.75, w: 1.2, h: 1.4 },
-			],
-		},
-		{
-			name: "north",
-			width: HOUSE.width,
-			rotation: Math.PI,
-			position: [0, 0, -HOUSE.depth / 2],
-			openings: [
-				{ x: 1.4, y: 0.2, w: 4.6, h: 2.5, mullions: 3 },
-				{ x: 6.8, y: 1.1, w: 1.4, h: 1.5 },
-				{ x: 2.0, y: 3.75, w: 2.4, h: 1.5, mullions: 1 },
-				{ x: 5.6, y: 3.75, w: 1.6, h: 1.5, mullions: 1 },
-			],
-		},
-		{
-			name: "east",
-			width: HOUSE.depth,
-			rotation: Math.PI / 2,
-			position: [HOUSE.width / 2, 0, 0],
-			openings: [
-				{ x: 1.4, y: 1.2, w: 0.9, h: 2.0 },
-				{ x: 3.0, y: 1.2, w: 0.9, h: 2.0 },
-				{ x: 2.1, y: 3.8, w: 2.2, h: 1.3, mullions: 1 },
-			],
-		},
-		{
-			name: "west",
-			width: HOUSE.depth,
-			rotation: -Math.PI / 2,
-			position: [-HOUSE.width / 2, 0, 0],
-			openings: [
-				{ x: 4.6, y: 1.3, w: 1.1, h: 1.6 },
-				{ x: 2.6, y: 3.9, w: 1.3, h: 1.2 },
-			],
-		},
-	];
+		const core = solid(width - 0.06, height, depth - 0.06, M.boardShadow, 0, height / 2, 0);
+		box.add(core);
 
-	const cladding = new THREE.Group();
-	house.add(cladding);
-	for (const face of faces) {
-		const wall = new THREE.Group();
-		wall.position.set(...face.position);
-		wall.rotation.y = face.rotation;
+		const sides = [
+			{ key: "south", span: width, rotation: 0, at: [0, 0, depth / 2] },
+			{ key: "north", span: width, rotation: Math.PI, at: [0, 0, -depth / 2] },
+			{ key: "east", span: depth, rotation: Math.PI / 2, at: [width / 2, 0, 0] },
+			{ key: "west", span: depth, rotation: -Math.PI / 2, at: [-width / 2, 0, 0] },
+		];
 
-		const skin = claddedWall({
-			width: face.width,
-			height: HOUSE.wall,
-			openings: face.openings.map((o) => ({ x: o.x - face.width / 2, y: o.y, w: o.w, h: o.h })),
-			material: M.board,
-		});
-		skin.position.z = 0.012;
-		wall.add(skin);
+		for (const side of sides) {
+			const openings = faces[side.key] || [];
+			const wall = new THREE.Group();
+			wall.position.set(...side.at);
+			wall.rotation.y = side.rotation;
 
-		for (const opening of face.openings) {
-			const x = opening.x - face.width / 2 + opening.w / 2;
-			const y = opening.y + opening.h / 2;
-
-			/* A white reveal around every opening: the single detail doing
-			   the most work in a black-and-white house. */
-			const reveal = new THREE.Group();
-			const jamb = 0.07;
-			reveal.add(solid(opening.w + jamb * 2, jamb, 0.1, M.trim, 0, opening.h / 2 + jamb / 2, 0));
-			reveal.add(solid(opening.w + jamb * 2, jamb * 1.4, 0.14, M.trim, 0, -opening.h / 2 - jamb * 0.7, 0.01));
-			reveal.add(solid(jamb, opening.h, 0.1, M.trim, -opening.w / 2 - jamb / 2, 0, 0));
-			reveal.add(solid(jamb, opening.h, 0.1, M.trim, opening.w / 2 + jamb / 2, 0, 0));
-			reveal.position.set(x, y, 0.03);
-			wall.add(reveal);
-
-			const unit = window3d({
-				width: opening.w,
-				height: opening.h,
-				mullions: opening.mullions || 0,
-				materials: { joinery: M.joinery, glass: M.glass },
+			const boards = claddedWall({
+				width: side.span,
+				height,
+				openings: openings.map((o) => ({ x: o.x - side.span / 2, y: o.y, w: o.w, h: o.h })),
+				material: skin,
 			});
-			unit.position.set(x, y, -0.02);
-			wall.add(unit);
+			boards.position.z = 0.012;
+			wall.add(boards);
+
+			for (const opening of openings) {
+				const ox = opening.x - side.span / 2 + opening.w / 2;
+				const oy = opening.y + opening.h / 2;
+
+				if (reveal) {
+					/* The plaster volume keeps a white reveal; the black one
+					   takes its joinery flush, which is what reads as modern. */
+					const jamb = 0.06;
+					const frame = new THREE.Group();
+					frame.add(solid(opening.w + jamb * 2, jamb, 0.1, M.trim, 0, opening.h / 2 + jamb / 2, 0));
+					frame.add(solid(opening.w + jamb * 2, jamb, 0.12, M.trim, 0, -opening.h / 2 - jamb / 2, 0.01));
+					frame.add(solid(jamb, opening.h, 0.1, M.trim, -opening.w / 2 - jamb / 2, 0, 0));
+					frame.add(solid(jamb, opening.h, 0.1, M.trim, opening.w / 2 + jamb / 2, 0, 0));
+					frame.position.set(ox, oy, 0.03);
+					wall.add(frame);
+				}
+
+				const unit = window3d({
+					width: opening.w,
+					height: opening.h,
+					mullions: opening.mullions || 0,
+					materials: { joinery: M.joinery, glass: M.glass },
+				});
+				unit.position.set(ox, oy, 0.006);
+				wall.add(unit);
+			}
+
+			box.add(wall);
 		}
 
-		cladding.add(wall);
-	}
-	register(cladding, "Cladding", "Vertical shiplap, stained black, 180 mm boards");
+		return box;
+	};
 
-	/* Gable ends: a triangle either side, clad the same way. */
-	/* The gable fill. Its profile runs across the depth and is extruded along
-	   the width, because the ridge runs parallel to the street. */
-	const gableShape = new THREE.Shape();
-	gableShape.moveTo(-HOUSE.depth / 2, 0);
-	gableShape.lineTo(HOUSE.depth / 2, 0);
-	gableShape.lineTo(0, ridgeRise);
-	gableShape.closePath();
-	const gableGeometry = new THREE.ExtrudeGeometry(gableShape, { depth: HOUSE.width, bevelEnabled: false });
-	gableGeometry.rotateY(-Math.PI / 2);
-	gableGeometry.translate(HOUSE.width / 2, HOUSE.wall, 0);
-	const gables = new THREE.Mesh(gableGeometry, M.board);
-	gables.name = "gables";
-	gables.castShadow = true;
-	gables.receiveShadow = true;
-	house.add(gables);
+	/* A parapet: the capping is white, so the roofline reads as one drawn
+	   line rather than as an edge that stops. */
+	const parapet = (parent, width, depth, top, x = 0, z = 0) => {
+		const group = new THREE.Group();
+		group.position.set(x, top, z);
+		for (const [w, d, px, pz] of [
+			[width, 0.1, 0, depth / 2],
+			[width, 0.1, 0, -depth / 2],
+			[0.1, depth, width / 2, 0],
+			[0.1, depth, -width / 2, 0],
+		]) {
+			group.add(solid(w, PARAPET, d, M.board, px, PARAPET / 2, pz));
+			group.add(solid(w + 0.12, 0.06, d + 0.12, M.trim, px, PARAPET + 0.03, pz));
+		}
+		parent.add(group);
+		return group;
+	};
 
-	/* Roof: two corrugate planes on a thin deck, with eaves and barge
-	   overhangs. Long eaves are half of why a house here looks like one. */
-	const EAVE = 0.62;
-	const BARGE = 0.35;
-	/* Measured from the ridge down to the end of the eave, along the slope. */
-	const slopeRun = (HOUSE.depth / 2 + EAVE) / Math.cos(HOUSE.pitch * DEG);
+	const groundFloor = cladBox({
+		parent: house,
+		width: HOUSE.width,
+		depth: HOUSE.depth,
+		height: HOUSE.ground,
+		base: 0,
+		skin: M.board,
+		faces: {
+			south: [{ x: 1.1, y: 0.15, w: 4.4, h: 2.45, mullions: 2 }],
+			north: [
+				{ x: 1.2, y: 0.15, w: 5.2, h: 2.45, mullions: 3 },
+				{ x: 7.1, y: 1.0, w: 1.5, h: 1.5 },
+			],
+			east: [
+				{ x: 1.3, y: 0.95, w: 1.0, h: 1.9 },
+				{ x: 3.0, y: 0.95, w: 1.0, h: 1.9 },
+			],
+		},
+	});
+	register(groundFloor, "Ground floor", "Living, dining and kitchen; 3.05 m stud");
+
+	/* The upper box: forward over the front, west over the entry. */
+	const firstWidth = HOUSE.width + HOUSE.over;
+	const firstDepth = HOUSE.depth + HOUSE.cantilever;
+	const firstFloor = cladBox({
+		parent: house,
+		width: firstWidth,
+		depth: firstDepth,
+		height: HOUSE.first,
+		base: HOUSE.ground,
+		x: -HOUSE.over / 2,
+		z: HOUSE.cantilever / 2,
+		skin: M.board,
+		faces: {
+			south: [
+				{ x: 1.3, y: 0.85, w: 6.0, h: 1.45, mullions: 4 },
+				{ x: 8.4, y: 0.85, w: 2.0, h: 1.45, mullions: 1 },
+			],
+			north: [
+				{ x: 1.6, y: 0.9, w: 2.6, h: 1.5, mullions: 1 },
+				{ x: 5.2, y: 0.9, w: 1.8, h: 1.5, mullions: 1 },
+				{ x: 8.2, y: 0.9, w: 1.4, h: 1.5 },
+			],
+			east: [{ x: 2.0, y: 0.9, w: 2.6, h: 1.5, mullions: 1 }],
+			/* The west wall opens onto the terrace on the garage roof. */
+			west: [{ x: 3.4, y: 0.1, w: 2.6, h: 2.3, mullions: 1 }],
+		},
+	});
+	register(firstFloor, "First floor", "Oversails the entrance front by 950 mm");
+
+	/* Soffit under the cantilever, in white: the shadow line it throws across
+	   the front is the whole point of the overhang. */
+	const soffit = solid(firstWidth + 0.1, 0.07, HOUSE.cantilever + 0.06, M.trim,
+		-HOUSE.over / 2, HOUSE.ground - 0.035, HOUSE.depth / 2 + HOUSE.cantilever / 2);
+	house.add(soffit);
+	const entrySoffit = solid(HOUSE.over + 0.06, 0.07, HOUSE.depth, M.trim,
+		-HOUSE.width / 2 - HOUSE.over / 2, HOUSE.ground - 0.035, 0);
+	house.add(entrySoffit);
+
+	/* Flat roof: long-run steel at three degrees to an internal gutter, out of
+	   sight behind the parapet — which is how a "flat" roof is actually built
+	   here. */
 	const roof = new THREE.Group();
-	roof.name = "roof";
-	roof.position.y = HOUSE.wall + ridgeRise;
+	roof.position.y = HOUSE.ground + HOUSE.first;
 	house.add(roof);
+	const roofDeck = new THREE.Mesh(
+		corrugatedSheet({ width: firstWidth - 0.2, run: firstDepth - 0.2 }),
+		M.roof
+	);
+	roofDeck.rotation.x = 3 * DEG;
+	roofDeck.position.set(-HOUSE.over / 2, 0.14, HOUSE.cantilever / 2);
+	roofDeck.castShadow = true;
+	roofDeck.receiveShadow = true;
+	roof.add(roofDeck);
+	parapet(roof, firstWidth, firstDepth, 0, -HOUSE.over / 2, HOUSE.cantilever / 2);
+	register(roof, "Roof", "Long-run steel at 3°, behind a 420 mm parapet");
 
-	for (const side of [1, -1]) {
-		const pitchGroup = new THREE.Group();
-		pitchGroup.name = `pitch${side}`;
-		pitchGroup.rotation.x = side * HOUSE.pitch * DEG; // +Z tips downward
-		const centre = side * (slopeRun / 2);
-
-		const deck = new THREE.Mesh(new THREE.BoxGeometry(HOUSE.width + BARGE * 2, 0.12, slopeRun), M.roof);
-		deck.position.set(0, -0.06, centre);
-		deck.castShadow = true;
-		deck.receiveShadow = true;
-		pitchGroup.add(deck);
-
-		const sheet = new THREE.Mesh(corrugatedSheet({ width: HOUSE.width + BARGE * 2, run: slopeRun }), M.roof);
-		sheet.position.set(0, 0.01, centre);
-		sheet.castShadow = true;
-		sheet.receiveShadow = true;
-		pitchGroup.add(sheet);
-
-		/* White fascia on the eave line, and a barge board down each rake. */
-		const fascia = new THREE.Mesh(new THREE.BoxGeometry(HOUSE.width + BARGE * 2 + 0.08, 0.26, 0.06), M.trim);
-		fascia.position.set(0, -0.19, side * (slopeRun - 0.03));
-		fascia.castShadow = true;
-		pitchGroup.add(fascia);
-
-		for (const end of [-1, 1]) {
-			const barge = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.26, slopeRun), M.trim);
-			barge.position.set(end * (HOUSE.width / 2 + BARGE + 0.03), -0.19, centre);
-			barge.castShadow = true;
-			pitchGroup.add(barge);
-		}
-
-		roof.add(pitchGroup);
-	}
-	const ridge = solid(HOUSE.width + BARGE * 2 + 0.06, 0.09, 0.3, M.roof, 0, HOUSE.wall + ridgeRise + 0.05, 0);
-	house.add(ridge);
-	for (const [x, z] of [
-		[HOUSE.width / 2 - 0.12, HOUSE.depth / 2 + 0.06],
-		[-HOUSE.width / 2 + 0.12, HOUSE.depth / 2 + 0.06],
-		[HOUSE.width / 2 - 0.12, -HOUSE.depth / 2 - 0.06],
-	]) {
-		const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, HOUSE.wall, 8), M.trim);
-		pipe.position.set(x, HOUSE.wall / 2, z);
-		pipe.castShadow = true;
-		house.add(pipe);
-	}
-	register(roof, "Roof", "Corrugate, 28° pitch, 620 mm eaves");
-
-	/* — the wing: garage and entry, single storey, white ——————————— */
-	const WING = { width: 6.4, depth: 6.6, height: 3.2 };
+	/* — the garage, and the front door beside it ————————————————
+	   The entry sits in the reveal between the black volume and the white
+	   one, under the floor above: covered without needing a porch roof. */
+	const WING = { width: 6.6, depth: 6.8, height: 3.05 };
 	const wing = new THREE.Group();
-	wing.position.set(HOUSE.x - HOUSE.width / 2 - WING.width / 2 + 0.1, 0, HOUSE.z + 0.9);
+	wing.position.set(HOUSE.x - HOUSE.width / 2 - HOUSE.over - WING.width / 2, 0, HOUSE.z + 0.6);
 	site.add(wing);
 	wing.add(solid(WING.width, WING.height, WING.depth, M.plaster, 0, WING.height / 2, 0));
-
-	const wingRoof = solid(WING.width + 0.44, 0.14, WING.depth + 0.44, M.roof, 0, WING.height + 0.07, 0);
-	wing.add(wingRoof);
-	/* A thin white band on the edge of the slab, not a lid over it. */
-	for (const [w, d, x, z] of [
-		[WING.width + 0.56, 0.06, 0, (WING.depth + 0.5) / 2],
-		[WING.width + 0.56, 0.06, 0, -(WING.depth + 0.5) / 2],
-		[0.06, WING.depth + 0.56, (WING.width + 0.5) / 2, 0],
-		[0.06, WING.depth + 0.56, -(WING.width + 0.5) / 2, 0],
-	]) {
-		wing.add(solid(w, 0.2, d, M.trim, x, WING.height + 0.16, z));
-	}
-	register(wing, "Wing", "Garage and entry, plastered, flat roof");
+	const wingSlab = solid(WING.width + 0.3, 0.16, WING.depth + 0.3, M.plaster, 0, WING.height + 0.08, 0);
+	wing.add(wingSlab);
+	register(wing, "Garage", "Double, plastered, with the terrace over it");
 
 	const garageDoor = new THREE.Group();
 	const panels = 5;
 	for (let i = 0; i < panels; i++) {
-		const panel = solid(4.6, 2.5 / panels - 0.03, 0.08, M.trim, 0, (i + 0.5) * (2.5 / panels), 0);
-		garageDoor.add(panel);
+		garageDoor.add(solid(4.8, 2.45 / panels - 0.035, 0.07, M.trim, 0, (i + 0.5) * (2.45 / panels), 0));
 	}
-	garageDoor.position.set(0.2, 0, WING.depth / 2 + 0.05);
+	garageDoor.position.set(0, 0, WING.depth / 2 + 0.06);
 	wing.add(garageDoor);
 	const doorReveal = new THREE.Group();
-	doorReveal.add(solid(4.94, 0.14, 0.12, M.board, 0, 2.57, 0));
-	doorReveal.add(solid(0.14, 2.6, 0.12, M.board, -2.4, 1.3, 0));
-	doorReveal.add(solid(0.14, 2.6, 0.12, M.board, 2.4, 1.3, 0));
-	doorReveal.position.set(0.2, 0, WING.depth / 2 + 0.01);
+	doorReveal.add(solid(5.1, 0.13, 0.14, M.joinery, 0, 2.52, 0));
+	doorReveal.add(solid(0.13, 2.55, 0.14, M.joinery, -2.48, 1.27, 0));
+	doorReveal.add(solid(0.13, 2.55, 0.14, M.joinery, 2.48, 1.27, 0));
+	doorReveal.position.set(0, 0, WING.depth / 2 + 0.02);
 	wing.add(doorReveal);
-	register(garageDoor, "Garage door", "Sectional, 4.6 m");
+	register(garageDoor, "Garage door", "Sectional, 4.8 m, flush panels");
 
 	const entry = new THREE.Group();
-	entry.add(solid(1.0, 2.25, 0.08, M.board, 0, 1.125, 0));
-	entry.add(solid(0.3, 2.25, 0.05, M.glass, 0.72, 1.125, 0));
-	entry.position.set(WING.width / 2 - 0.02, 0, WING.depth / 2 - 1.6);
-	entry.rotation.y = Math.PI / 2;
-	wing.add(entry);
+	entry.position.set(HOUSE.x - HOUSE.width / 2 - HOUSE.over / 2, 0, HOUSE.z + HOUSE.depth / 2);
+	site.add(entry);
+	/* The door sits in the front plane, not back in a slot: recessed it read
+	   as a dark gap between the two volumes. It is still covered, because the
+	   floor above oversails it. */
+	entry.add(solid(HOUSE.over, HOUSE.ground, 0.14, M.plaster, 0, HOUSE.ground / 2, -0.08));
+	const frontDoor = solid(1.25, 2.45, 0.1, M.blackDoor, -0.45, 1.225, 0.02);
+	entry.add(frontDoor);
+	/* A full-height sidelight beside it, and a slim vertical handle. */
+	entry.add(solid(0.42, 2.45, 0.06, M.glass, 0.55, 1.225, 0.02));
+	entry.add(solid(0.05, 1.0, 0.05, M.joinery, 0.02, 1.4, 0.09));
+	entry.add(solid(0.26, 0.36, 0.03, M.trim, 1.06, 2.15, 0.06));
+	entry.add(solid(2.2, 0.12, 1.6, M.concrete, -0.25, 0.06, 0.88));
+	/* A step up to the threshold, so the door does not meet the path. */
+	entry.add(solid(1.6, 0.13, 0.42, M.concrete, -0.45, 0.13, 0.32));
+	register(entry, "Front door", "Beside the garage, under the floor above");
+
+	/* — terrace on the garage roof ————————————————————————————
+	   Off the first floor, with a frameless glass balustrade. */
+	const terrace = new THREE.Group();
+	terrace.position.set(wing.position.x, WING.height + 0.16, wing.position.z);
+	site.add(terrace);
+	const terraceDeck = claddedWall({
+		width: WING.width - 0.2,
+		height: WING.depth - 0.2,
+		board: 0.14,
+		gap: 0.012,
+		thickness: 0.035,
+		material: M.deck,
+	});
+	terraceDeck.rotation.x = -Math.PI / 2;
+	terraceDeck.position.set(0, 0.02, (WING.depth - 0.2) / 2);
+	terrace.add(terraceDeck);
+
+	const BALUSTRADE = 1.1;
+	for (const [w, d, bx, bz] of [
+		[WING.width + 0.3, 0.03, 0, (WING.depth + 0.3) / 2],
+		[0.03, WING.depth + 0.3, -(WING.width + 0.3) / 2, 0],
+		[0.03, WING.depth + 0.3, (WING.width + 0.3) / 2, 0],
+	]) {
+		const panel = solid(w, BALUSTRADE, d, M.balustrade, bx, BALUSTRADE / 2, bz);
+		panel.castShadow = false;
+		terrace.add(panel);
+		terrace.add(solid(w + 0.06, 0.05, d + 0.06, M.trim, bx, BALUSTRADE + 0.02, bz));
+	}
+	register(terrace, "Terrace", "Over the garage, off the first floor");
 
 	/* — deck at the back ——————————————————————————————————————— */
 	const deckGroup = new THREE.Group();
-	deckGroup.position.set(HOUSE.x - 0.6, 0, HOUSE.z - HOUSE.depth / 2 - 2.6);
+	deckGroup.position.set(HOUSE.x - 0.4, 0, HOUSE.z - HOUSE.depth / 2 - 2.4);
 	site.add(deckGroup);
-	const DECK = { width: 7.2, depth: 5.0, height: 0.42 };
+	const DECK = { width: 7.2, depth: 4.8, height: 0.38 };
 	deckGroup.add(solid(DECK.width, 0.12, DECK.depth, M.deck, 0, DECK.height, 0));
 	for (let i = 0; i < 2; i++) {
 		deckGroup.add(solid(DECK.width * 0.45, 0.1, 0.42, M.deck, -1.2, DECK.height - 0.14 * (i + 1), DECK.depth / 2 + 0.22 + i * 0.42));
@@ -519,7 +558,7 @@ export function createSection(container, overrides = {}) {
 	deckBoards.rotation.x = -Math.PI / 2; // the board run maps to -Z, so centre it
 	deckBoards.position.set(0, DECK.height + 0.075, DECK.depth / 2);
 	deckGroup.add(deckBoards);
-	register(deckGroup, "Deck", "Off the living room, 7.2 × 5.0 m");
+	register(deckGroup, "Deck", "Ground level, off the living room, 7.2 × 4.8 m");
 
 	/* — boundary ——————————————————————————————————————————————— */
 	const frontFence = slatFence({ length: 8.8, materials: M });

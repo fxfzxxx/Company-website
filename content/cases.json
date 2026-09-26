@@ -175,31 +175,31 @@
       "en": {
         "meta": "Real-time 3D · Concept",
         "title": "Section 01 house model",
-        "brief": "A presentation model of a two-storey house of the kind built here every week: black board cladding, white joinery, a corrugate gable, a garage wing and a little garden. Nothing about it is remarkable, which is why it has to be right.",
+        "brief": "A presentation model of a modern two-storey house of the kind going up here now: two black board-clad volumes under a flat roof, the upper one thrown forward over the entrance front, a terrace over the garage, and a little garden.",
         "decisions": [
-          "The details are what place it: vertical shiplap stained black, white reveals around every opening, 620 mm eaves, a horizontal slat fence, a letterbox on the boundary.",
+          "The details are what place it: vertical shiplap stained black, long-run steel out of sight behind a parapet, dark joinery, a horizontal slat fence and a letterbox on the boundary.",
           "Cladding is boards with a shadow gap between them rather than a texture, because the shadow line is what you read at a distance — and openings are cut by splitting each board column into the runs the windows leave.",
-          "It is presented as a model and not a render: a board with a chamfered edge, planting abstracted to what a model maker would cut, and the sun on a slider."
+          "The front door sits beside the garage in the reveal between the two volumes, covered by the floor above rather than by a porch roof of its own."
         ],
-        "outcome": "A section you can walk around, with fourteen named parts and a movable sun. Anyone who has driven through a new subdivision here recognises it without being told where it is."
+        "outcome": "A section you can walk around, with seventeen named parts and a movable sun. Anyone who has driven through a new subdivision here recognises it without being told where it is."
       },
       "zh": {
         "meta": "实时 3D · 概念作品",
         "title": "Section 01 住宅沙盘",
-        "brief": "一栋两层住宅的沙盘——本地每周都在盖的那种：黑色墙板、白色窗套、波纹钢山墙屋面、车库翼，以及一小片花园。它没有任何特别之处，正因如此才不能做错。",
+        "brief": "一栋现代两层住宅的沙盘——本地当下正在盖的那种：两个刷黑墙板的体量、平屋顶、上层向街面悬挑，车库上方是一处露台，外加一小片花园。",
         "decisions": [
-          "决定它属于哪里的是细节：竖向企口板刷黑、每个洞口一圈白色窗套、620 毫米出檐、横向板条围栏，以及立在地界上的信箱。",
+          "决定它属于哪里的是细节：竖向企口板刷黑、长条钢屋面藏在女儿墙后、深色门窗、横向板条围栏，以及立在地界上的信箱。",
           "墙板是带阴影缝的一块块板，而不是一张贴图——远看真正读到的是那条阴影线；洞口的做法是把每一列板按窗户留下的空档切开。",
-          "它被当作沙盘而非效果图来呈现：带倒角的底板、按模型师会裁的样子抽象过的植物，以及一根可以推的太阳滑杆。"
+          "正门设在车库旁、两个体量之间的凹口里，由上层楼板遮盖，而不是另加一个门廊屋顶。"
         ],
-        "outcome": "一块可以绕着走的地块，十四个可命名部件，太阳可移动。任何在本地新社区开过车的人，不用被告知就认得出这是哪里。"
+        "outcome": "一块可以绕着走的地块，十七个可命名部件，太阳可移动。任何在本地新社区开过车的人，不用被告知就认得出这是哪里。"
       }
     },
     "det": {
       "en": {
         "crumb": "02 — Real-time 3D",
-        "title": "Ordinary is the hard part.",
-        "lede": "A sandbox model of a common two-storey house, built from the details that make a house here look like one.",
+        "title": "Ordinary, built the way it is built now.",
+        "lede": "A sandbox model of a modern two-storey house, built from the details that make a house here look like one.",
         "facts": [
           {
             "label": "Type",
@@ -218,36 +218,36 @@
             "value": "No models, no textures"
           }
         ],
-        "brief": "A presentation model of a common New Zealand house: two storeys, black and white, a small garden. The studies before it had subjects that carry themselves — a mineral specimen, a watch movement, a planet. A suburban house has no such help.",
-        "briefTwo": "If the proportions or the details are wrong it does not look stylised, it looks foreign. So the work was research as much as modelling: which handful of things, present together, make a house unmistakably from here.",
+        "brief": "A presentation model of a common New Zealand house: two storeys, black and white, a small garden. The first scheme was the gabled archetype — which is what the same section got built as for eighty years, and reads as heritage rather than as new.",
+        "briefTwo": "So it was rebuilt as what actually goes up now: rectilinear volumes, a flat roof behind a parapet, a cantilever over the entrance front, a proper front door beside the garage and a terrace on the garage roof. What keeps it local is everything below the roofline.",
         "decisions": [
-          "Vertical shiplap stained black, white reveals around every opening, corrugate roofing, long eaves, a horizontal slat fence and a letterbox on the boundary. Take any one away and the house drifts somewhere else.",
+          "Two stacked volumes rather than a pitched form: the upper box oversails the entrance front by 950 mm and reaches sideways to roof the entry, so the shadow line it throws does the work a verandah used to.",
           "Cladding is built as boards with a gap between them, because the shadow line is what reads at a distance. Window openings are cut by splitting each board column into the vertical runs the windows leave behind.",
-          "The corrugate is real geometry — a cosine across the sheet, laid down the slope — because at this scale the ripple is what catches the sun and says steel rather than slate."
+          "The flat roof is long-run steel at three degrees to an internal gutter, out of sight behind a 420 mm parapet — which is how a flat roof is actually built here."
         ],
-        "outcome": "A section you can walk around: fourteen named parts, a sun on a slider, a house that places itself. The living side and its deck face north, as they would on a real section here.",
+        "outcome": "A section you can walk around: seventeen named parts, a sun on a slider, a terrace over the garage and a house that places itself. The living side and its deck face north, as they would on a real section here.",
         "specs": [
           {
-            "figure": "28°",
-            "label": "Roof pitch",
-            "note": "With 620 mm eaves, the local default."
+            "figure": "3°",
+            "label": "Roof fall",
+            "note": "Long-run steel behind a 420 mm parapet."
           },
           {
-            "figure": "180",
-            "label": "mm board cover",
-            "note": "Each with its own shadow gap."
+            "figure": "950",
+            "label": "mm cantilever",
+            "note": "The upper floor over the entrance front."
           },
           {
-            "figure": "14",
+            "figure": "17",
             "label": "Named parts",
-            "note": "Board, lawn, driveway, cladding, roof and on."
+            "note": "Board, lawn, driveway, terrace, front door and on."
           }
         ]
       },
       "zh": {
         "crumb": "02 — 实时 3D",
-        "title": "难的恰恰是普通。",
-        "lede": "一栋常见两层住宅的沙盘，由那些让本地房子看起来像本地房子的细节构成。",
+        "title": "普通，但要按当下的盖法。",
+        "lede": "一栋现代两层住宅的沙盘，由那些让本地房子看起来像本地房子的细节构成。",
         "facts": [
           {
             "label": "属性",
@@ -266,29 +266,29 @@
             "value": "无模型、无贴图"
           }
         ],
-        "brief": "一栋新西兰常见住宅的沙盘：两层、黑白、带一小片花园。之前几个研究的题材本身就撑得住场面——矿物标本、钟表机芯、一颗行星。郊区住宅没有这种便宜可占。",
-        "briefTwo": "比例或细节错了，它不会显得风格化，只会显得不是这里的。所以这次的工作一半是建模，一半是调查：哪几样东西同时出现，就能让一栋房子明确属于此地。",
+        "brief": "一栋新西兰常见住宅的沙盘：两层、黑白、带一小片花园。第一版做的是坡顶原型——那是同一块地过去八十年的盖法，读起来像历史保护建筑，而不像新房。",
+        "briefTwo": "于是改成当下真正在盖的样子：方正体量、女儿墙后的平屋顶、朝街面的悬挑、车库旁一扇像样的正门，以及车库屋面上的露台。让它仍然属于此地的，是屋顶线以下的一切。",
         "decisions": [
-          "刷黑的竖向企口板、每个洞口一圈白色窗套、波纹钢屋面、长出檐、横向板条围栏，以及立在地界上的信箱。少任何一样，房子就飘到别处去了。",
+          "用两个堆叠体量取代坡屋顶：上层向街面悬挑 950 毫米，并侧向伸出罩住入口，它投下的那道阴影线承担了过去由门廊承担的作用。",
           "墙板做成一块块带缝的板，因为远看读到的是那条阴影缝。窗洞的切法是把每一列板按窗户留下的空档拆成若干段。",
-          "波纹是真几何——沿坡向铺、横向一条余弦，因为在这个尺度上，正是那道起伏接住阳光，说明它是钢板而不是石板瓦。"
+          "平屋顶其实是 3° 找坡的长条钢板，排向内天沟，藏在 420 毫米女儿墙后面——本地的平屋顶就是这么盖的。"
         ],
-        "outcome": "一块可以绕着走的地块：十四个可命名部件、一根太阳滑杆，以及一栋能自报家门的房子。起居一侧和露台朝北——在本地的真实地块上就该如此。",
+        "outcome": "一块可以绕着走的地块：十七个可命名部件、一根太阳滑杆、车库上方的露台，以及一栋能自报家门的房子。起居一侧和露台朝北——在本地的真实地块上就该如此。",
         "specs": [
           {
-            "figure": "28°",
-            "label": "屋面坡度",
-            "note": "配 620 毫米出檐，本地惯例。"
+            "figure": "3°",
+            "label": "屋面找坡",
+            "note": "长条钢板，藏在 420 毫米女儿墙后。"
           },
           {
-            "figure": "180",
-            "label": "毫米板幅",
-            "note": "每块板都有自己的阴影缝。"
+            "figure": "950",
+            "label": "毫米悬挑",
+            "note": "上层楼板探出街面一侧。"
           },
           {
-            "figure": "14",
+            "figure": "17",
             "label": "可命名部件",
-            "note": "底板、草坪、车道、墙板、屋面等等。"
+            "note": "底板、草坪、车道、露台、正门等等。"
           }
         ]
       }
