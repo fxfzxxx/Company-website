@@ -231,7 +231,21 @@ body.plate { overflow: hidden; }
 	.lede, .caliber, .index-list { display: none; }
 }
 
-/* — sun control ——————————————————————————————————————————————— */
+/* — night toggle and sun control ——————————————————————————————— */
+
+.controls {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	gap: 14px;
+	margin-bottom: 14px;
+	pointer-events: auto;
+}
+
+.controls .sun-control {
+	margin-bottom: 0;
+}
+
 
 .sun-control {
 	display: grid;

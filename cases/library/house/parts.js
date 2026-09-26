@@ -283,3 +283,80 @@ export function shrub({ radius = 0.5, seed = 1, material }) {
 	mesh.receiveShadow = true;
 	return mesh;
 }
+
+/* — light, after dark ————————————————————————————————————————————
+   At model scale the fixtures matter less than what they throw. Three cheap
+   pieces do the work: a visible cone of light, a pool on the ground, and a
+   lens that glows. None of them are lights — they are geometry that reads as
+   light, which is what keeps a dozen fittings affordable. */
+
+const GLOW_VERTEX = /* glsl */ `
+	varying vec2 vUv;
+	varying vec3 vLocal;
+	void main() {
+		vUv = uv;
+		vLocal = position;
+		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+	}
+`;
+
+/* A beam: bright at the fitting, gone by the time it lands. The cone is open
+   at the wide end so you never see a lid on the light. */
+export function lightCone({ radius = 0.6, height = 1.8, colour = 0xffd9a0, strength = 0.5 } = {}) {
+	const geometry = new THREE.ConeGeometry(radius, height, 24, 1, true);
+	geometry.translate(0, -height / 2, 0); // apex at the origin, opening downward
+	const material = new THREE.ShaderMaterial({
+		uniforms: {
+			uColour: { value: new THREE.Color(colour) },
+			uStrength: { value: strength },
+			uHeight: { value: height },
+		},
+		vertexShader: GLOW_VERTEX,
+		fragmentShader: /* glsl */ `
+			uniform vec3 uColour;
+			uniform float uStrength;
+			uniform float uHeight;
+			varying vec3 vLocal;
+			void main() {
+				/* Fade along the beam, and again towards its edge, so the cone
+				   has no rim to give itself away. */
+				float along = clamp(-vLocal.y / uHeight, 0.0, 1.0);
+				float fall = pow(1.0 - along, 2.2);
+				float edge = 1.0 - pow(clamp(length(vLocal.xz) / (uHeight * 0.36), 0.0, 1.0), 2.0);
+				gl_FragColor = vec4(uColour, fall * edge * uStrength);
+			}
+		`,
+		transparent: true,
+		blending: THREE.AdditiveBlending,
+		depthWrite: false,
+		side: THREE.DoubleSide,
+	});
+	return new THREE.Mesh(geometry, material);
+}
+
+/* The pool a fitting leaves on the ground or up a wall. */
+export function lightPool({ radius = 0.8, colour = 0xffd9a0, strength = 0.45 } = {}) {
+	const geometry = new THREE.CircleGeometry(radius, 32);
+	geometry.rotateX(-Math.PI / 2);
+	const material = new THREE.ShaderMaterial({
+		uniforms: {
+			uColour: { value: new THREE.Color(colour) },
+			uStrength: { value: strength },
+		},
+		vertexShader: GLOW_VERTEX,
+		fragmentShader: /* glsl */ `
+			uniform vec3 uColour;
+			uniform float uStrength;
+			varying vec2 vUv;
+			void main() {
+				float d = length(vUv - 0.5) * 2.0;
+				float fall = pow(1.0 - clamp(d, 0.0, 1.0), 2.4);
+				gl_FragColor = vec4(uColour, fall * uStrength);
+			}
+		`,
+		transparent: true,
+		blending: THREE.AdditiveBlending,
+		depthWrite: false,
+	});
+	return new THREE.Mesh(geometry, material);
+}

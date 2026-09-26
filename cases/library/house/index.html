@@ -41,14 +41,18 @@
 				<h1 class="title">Section 01</h1>
 				<p class="lede">
 					A modern two-storey house on its section: two black volumes under a flat roof, a terrace over
-					the garage, and a little garden. Drag to walk around it; move the sun with the slider.
+					the garage, and a little garden. Drag to walk around it, move the sun, or switch it to
+					evening and see the lighting design.
 				</p>
 			</div>
 			<div>
-				<label class="sun-control">
-					<span>Sun</span>
-					<input id="sun" type="range" min="0" max="360" step="1" value="62" />
-				</label>
+				<div class="controls">
+					<button id="daynight" class="ghost-button" type="button" aria-pressed="false">Night</button>
+					<label class="sun-control">
+						<span id="sun-label">Sun</span>
+						<input id="sun" type="range" min="0" max="360" step="1" value="62" />
+					</label>
+				</div>
 				<dl class="caliber" id="caliber"></dl>
 			</div>
 		</div>
@@ -98,6 +102,18 @@
 				row.append(dt, dd);
 				caliber.append(row);
 			}
+
+			/* Day and night. The button only sets a target; the scene dims
+			   towards it over about a second. */
+			const toggle = document.getElementById("daynight");
+			const sunLabel = document.getElementById("sun-label");
+			toggle.addEventListener("click", () => {
+				const goingDark = !api.isNight;
+				api.setNight(goingDark);
+				toggle.textContent = goingDark ? "Day" : "Night";
+				toggle.setAttribute("aria-pressed", String(goingDark));
+				sunLabel.textContent = goingDark ? "Moon" : "Sun";
+			});
 
 			const sun = document.getElementById("sun");
 			sun.addEventListener("input", () => {

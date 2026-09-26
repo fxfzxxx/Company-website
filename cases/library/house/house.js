@@ -23,7 +23,17 @@ import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
-import { claddedWall, corrugatedSheet, window3d, slatFence, cabbageTree, flax, shrub } from "./parts.js";
+import {
+	claddedWall,
+	corrugatedSheet,
+	window3d,
+	slatFence,
+	cabbageTree,
+	flax,
+	shrub,
+	lightCone,
+	lightPool,
+} from "./parts.js";
 
 const DEG = Math.PI / 180;
 
@@ -173,7 +183,12 @@ export function createSection(container, overrides = {}) {
 	/* — materials ————————————————————————————————————————————— */
 	const M = {
 		board: new THREE.MeshStandardMaterial({ color: 0x15171a, roughness: 0.74 }),
-		boardShadow: new THREE.MeshStandardMaterial({ color: 0x6f747c, roughness: 0.92 }),
+		boardShadow: new THREE.MeshStandardMaterial({
+			color: 0x6f747c,
+			roughness: 0.92,
+			emissive: new THREE.Color(0xffc987),
+			emissiveIntensity: 0,
+		}),
 		plaster: new THREE.MeshStandardMaterial({ color: 0xe8e7e2, roughness: 0.88 }),
 		trim: new THREE.MeshStandardMaterial({ color: 0xf4f4f1, roughness: 0.55 }),
 		/* Modern joinery here is dark, not white: the white is spent on the
@@ -206,6 +221,8 @@ export function createSection(container, overrides = {}) {
 			clearcoat: 1,
 			clearcoatRoughness: 0.04,
 			envMapIntensity: 2.4,
+			emissive: new THREE.Color(0xffce8a),
+			emissiveIntensity: 0,
 		}),
 		deck: new THREE.MeshStandardMaterial({ color: 0x9b968d, roughness: 0.84 }),
 		concrete: new THREE.MeshStandardMaterial({ color: 0xbab7b1, roughness: 0.92 }),
@@ -219,7 +236,18 @@ export function createSection(container, overrides = {}) {
 		blade: new THREE.MeshStandardMaterial({ color: 0x77856f, roughness: 0.9, side: THREE.DoubleSide }),
 		flax: new THREE.MeshStandardMaterial({ color: 0x6d7c66, roughness: 0.9, side: THREE.DoubleSide }),
 		hedge: new THREE.MeshStandardMaterial({ color: 0x707d68, roughness: 1 }),
+		fitting: new THREE.MeshStandardMaterial({ color: 0x1d1f22, roughness: 0.5, metalness: 0.4 }),
+		/* Rooms nobody is in. Same glass, no light behind it. */
+		glassOff: null,
+		lamp: new THREE.MeshStandardMaterial({
+			color: 0x2a2c30,
+			emissive: new THREE.Color(0xffd7a0),
+			emissiveIntensity: 0,
+			roughness: 0.3,
+		}),
 	};
+
+	M.glassOff = M.glass.clone();
 
 	const site = new THREE.Group();
 	scene.add(site);
@@ -385,7 +413,7 @@ export function createSection(container, overrides = {}) {
 					width: opening.w,
 					height: opening.h,
 					mullions: opening.mullions || 0,
-					materials: { joinery: M.joinery, glass: M.glass },
+					materials: { joinery: M.joinery, glass: opening.unlit ? M.glassOff : M.glass },
 				});
 				unit.position.set(ox, oy, 0.006);
 				wall.add(unit);
@@ -429,7 +457,7 @@ export function createSection(container, overrides = {}) {
 				{ x: 7.1, y: 1.0, w: 1.5, h: 1.5 },
 			],
 			east: [
-				{ x: 1.3, y: 0.95, w: 1.0, h: 1.9 },
+				{ x: 1.3, y: 0.95, w: 1.0, h: 1.9, unlit: true },
 				{ x: 3.0, y: 0.95, w: 1.0, h: 1.9 },
 			],
 		},
@@ -451,14 +479,14 @@ export function createSection(container, overrides = {}) {
 		faces: {
 			south: [
 				{ x: 1.3, y: 0.85, w: 6.0, h: 1.45, mullions: 4 },
-				{ x: 8.4, y: 0.85, w: 2.0, h: 1.45, mullions: 1 },
+				{ x: 8.4, y: 0.85, w: 2.0, h: 1.45, mullions: 1, unlit: true },
 			],
 			north: [
 				{ x: 1.6, y: 0.9, w: 2.6, h: 1.5, mullions: 1 },
-				{ x: 5.2, y: 0.9, w: 1.8, h: 1.5, mullions: 1 },
+				{ x: 5.2, y: 0.9, w: 1.8, h: 1.5, mullions: 1, unlit: true },
 				{ x: 8.2, y: 0.9, w: 1.4, h: 1.5 },
 			],
-			east: [{ x: 2.0, y: 0.9, w: 2.6, h: 1.5, mullions: 1 }],
+			east: [{ x: 2.0, y: 0.9, w: 2.6, h: 1.5, mullions: 1, unlit: true }],
 			/* The west wall opens onto the terrace on the garage roof. */
 			west: [{ x: 3.4, y: 0.1, w: 2.6, h: 2.3, mullions: 1 }],
 		},
@@ -685,6 +713,144 @@ export function createSection(container, overrides = {}) {
 	grade.uniforms.uVignette.value = config.post.vignette;
 	composer.addPass(grade);
 
+	/* — after dark ——————————————————————————————————————————————
+	   A model gets looked at in two conditions, and a house is designed for
+	   both. Everything below is built once and faded in: the fittings are
+	   always there, they simply are not lit during the day.
+
+	   The beams and the pools are geometry, not lights. Only the wall washers
+	   and one room light are real, because a dozen shadowless point lights
+	   costs more than it shows. */
+	const afterDark = new THREE.Group();
+	site.add(afterDark);
+	const glows = []; // shader materials whose strength follows the dimmer
+	const lamps = []; // real lights, likewise
+
+	const registerGlow = (mesh, strength) => {
+		mesh.material.uniforms.uStrength.value = 0;
+		glows.push({ material: mesh.material, strength });
+		return mesh;
+	};
+
+	/* An up-and-down wall washer: the fitting, the two beams it throws, and
+	   the two spots that actually wash the cladding. */
+	const wallLight = (x, y, z, facing) => {
+		const group = new THREE.Group();
+		group.position.set(x, y, z);
+		group.rotation.y = facing;
+		afterDark.add(group);
+
+		group.add(solid(0.1, 0.3, 0.1, M.fitting, 0, 0, 0));
+		const lens = solid(0.07, 0.05, 0.07, M.lamp, 0, 0.13, 0);
+		const lensDown = solid(0.07, 0.05, 0.07, M.lamp, 0, -0.13, 0);
+		group.add(lens, lensDown);
+
+		const down = lightCone({ radius: 0.42, height: 1.9, colour: 0xffc98a });
+		down.position.set(0, -0.16, 0.05);
+		group.add(registerGlow(down, 0.2));
+
+		const up = lightCone({ radius: 0.34, height: 1.35, colour: 0xffc98a });
+		up.rotation.x = Math.PI;
+		up.position.set(0, 0.16, 0.05);
+		group.add(registerGlow(up, 0.14));
+
+		for (const direction of [-1, 1]) {
+			const spot = new THREE.SpotLight(0xffd39a, 0, 7, 0.62, 1, 1.4);
+			spot.position.set(0, direction * 0.14, 0.04);
+			spot.target.position.set(0, direction * 3, 0.5);
+			group.add(spot, spot.target);
+			lamps.push({ light: spot, intensity: direction < 0 ? 6.5 : 4.0 });
+		}
+		return group;
+	};
+
+	wallLight(ENTRY.x - 1.15, 2.15, ENTRY.z + 0.08, 0);
+	wallLight(GARAGE.x + 2.9, 2.35, garageFace + 0.06, 0);
+	wallLight(HOUSE.x + 3.4, 2.45, HOUSE.z + HOUSE.depth / 2 + 0.06, 0);
+	wallLight(GARAGE.x - WING.width / 2 - 0.06, 2.2, GARAGE.z + 1.2, -Math.PI / 2);
+
+	/* Bollards down both sides of the path. These are lens and pool only —
+	   eight more real lights would buy nothing at this scale. */
+	const bollards = new THREE.Group();
+	afterDark.add(bollards);
+	const pathRun = STREET_Z + 0.2 - (ENTRY.z + 1.7);
+	for (let i = 0; i < 4; i++) {
+		const z = ENTRY.z + 2.1 + (pathRun * (i + 0.3)) / 4;
+		for (const side of [-1, 1]) {
+			const x = ENTRY.x + side * 0.95;
+			const post = solid(0.075, 0.6, 0.075, M.fitting, x, 0.3, z);
+			bollards.add(post);
+			const lens = solid(0.09, 0.07, 0.09, M.lamp, x, 0.56, z);
+			bollards.add(lens);
+			const pool = lightPool({ radius: 0.85 });
+			pool.position.set(x, 0.055, z);
+			bollards.add(registerGlow(pool, 0.5));
+		}
+	}
+
+	/* Pools under the wall washers, so the light lands on something. */
+	for (const [x, z, radius] of [
+		[ENTRY.x - 1.15, ENTRY.z + 0.5, 1.1],
+		[GARAGE.x + 2.9, garageFace + 0.5, 1.2],
+		[HOUSE.x + 3.4, HOUSE.z + HOUSE.depth / 2 + 0.5, 1.2],
+	]) {
+		const pool = lightPool({ radius, strength: 0.4 });
+		pool.position.set(x, 0.06, z);
+		afterDark.add(registerGlow(pool, 0.34));
+	}
+
+	/* One warm room light on the ground floor: what spills out of the big
+	   slider is most of what says somebody is home. */
+	const roomLight = new THREE.PointLight(0xffc98a, 0, 12, 1.6);
+	roomLight.position.set(HOUSE.x, 1.7, HOUSE.z + 1.0);
+	afterDark.add(roomLight);
+	lamps.push({ light: roomLight, intensity: 9 });
+
+	register(afterDark, "Lighting", "Wall washers, path bollards, rooms lit");
+
+	/* The dimmer. Everything that differs between noon and evening is a lerp
+	   on this one number. */
+	/* Daylight is whatever the scene was built with, read once rather than
+	   typed again here: the two got out of step the first time. */
+	const DAY = {
+		sky: scene.background.clone(),
+		env: scene.environmentIntensity,
+		sun: sun.intensity,
+		sunColour: sun.color.clone(),
+		exposure: renderer.toneMappingExposure,
+		bloom: bloom.strength,
+		vignette: grade.uniforms.uVignette.value,
+	};
+	const NIGHT_SKY = new THREE.Color(0x0a0e16);
+	const MOON = new THREE.Color(0x9fb6e0);
+	/* The fade runs on wall-clock time, not on frame deltas: the loop clamps
+	   dt to keep the turntable sane when a frame is slow, and a dimmer that
+	   inherits that clamp takes minutes to cross on a weak GPU. */
+	const NIGHT_FADE = 1.2;
+	let nightAmount = 0;
+	let nightTarget = 0;
+	let nightFrom = 0;
+	let nightSince = -1;
+
+	const applyNight = (t) => {
+		scene.background.copy(DAY.sky).lerp(NIGHT_SKY, t);
+		renderer.setClearColor(scene.background, 1);
+		scene.environmentIntensity = THREE.MathUtils.lerp(DAY.env, 0.05, t);
+		sun.intensity = THREE.MathUtils.lerp(DAY.sun, 0.18, t);
+		sun.color.copy(DAY.sunColour).lerp(MOON, t);
+
+		M.glass.emissiveIntensity = t * 1.25;
+		M.boardShadow.emissiveIntensity = t * 0.5;
+		M.lamp.emissiveIntensity = t * 5;
+
+		for (const { material, strength } of glows) material.uniforms.uStrength.value = strength * t;
+		for (const { light, intensity } of lamps) light.intensity = intensity * t;
+
+		bloom.strength = THREE.MathUtils.lerp(DAY.bloom, 0.68, t);
+		grade.uniforms.uVignette.value = THREE.MathUtils.lerp(DAY.vignette, 0.88, t);
+		renderer.toneMappingExposure = THREE.MathUtils.lerp(DAY.exposure, 1.15, t);
+	};
+
 	/* — turntable ——————————————————————————————————————————————
 	   A model is looked at by walking around it, so drag turns the section
 	   rather than flying the camera. */
@@ -768,6 +934,12 @@ export function createSection(container, overrides = {}) {
 		const dt = Math.min(timer.getDelta(), 0.05);
 		const time = timer.getElapsed();
 
+		if (nightAmount !== nightTarget) {
+			const k = nightSince < 0 ? 1 : THREE.MathUtils.clamp((time - nightSince) / NIGHT_FADE, 0, 1);
+			nightAmount = THREE.MathUtils.lerp(nightFrom, nightTarget, k * k * (3 - 2 * k));
+			applyNight(nightAmount);
+		}
+
 		if (!reduceMotion) {
 			spin.yaw += spin.yawVelocity + dt * config.spin;
 			spin.tilt += spin.tiltVelocity;
@@ -822,6 +994,14 @@ export function createSection(container, overrides = {}) {
 		post: { bloom, grade },
 		setSun(azimuth, altitude) {
 			placeSun(azimuth, altitude ?? config.sun.altitude);
+		},
+		setNight(on) {
+			nightFrom = nightAmount;
+			nightTarget = on ? 1 : 0;
+			nightSince = timer.getElapsed();
+		},
+		get isNight() {
+			return nightTarget > 0.5;
 		},
 		onPart(callback) {
 			onHover = callback;

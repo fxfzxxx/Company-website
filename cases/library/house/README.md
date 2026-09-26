@@ -35,6 +35,18 @@ Then open `/cases/library/house/`.
 - **Planting** — cabbage trees (a trunk forking into tufts of blades) and flax
   (a fan of blades from the ground), plus clipped shrubs.
 
+## After dark
+
+`setNight(true)` fades the scene to evening over about a second — sky,
+environment, sun, bloom and exposure all lerp from the values the scene was
+*built* with, captured once at startup rather than repeated as constants.
+
+The fitting geometry always exists; only its brightness follows the dimmer.
+Beams (`lightCone`) and ground pools (`lightPool`) are additive geometry; the
+only real lights added at night are two spots per wall washer and one room
+light. Windows light up through the glass material's emissive, and openings
+marked `unlit: true` keep a separate material so a few rooms stay dark.
+
 ## Art direction
 
 `DEFAULTS` in `house.js` holds framing, sun position, spin and post values;

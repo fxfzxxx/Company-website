@@ -179,9 +179,9 @@
         "decisions": [
           "The details are what place it: vertical shiplap stained black, long-run steel out of sight behind a parapet, dark joinery, a horizontal slat fence and a letterbox on the boundary.",
           "Cladding is boards with a shadow gap between them rather than a texture, because the shadow line is what you read at a distance — and openings are cut by splitting each board column into the runs the windows leave.",
-          "The front door sits beside the garage in the reveal between the two volumes, covered by the floor above rather than by a porch roof of its own."
+          "The model runs in daylight or after dark: wall washers, path bollards and lit rooms, with the beams and pools drawn as geometry rather than as a dozen real lights."
         ],
-        "outcome": "A section you can walk around, with seventeen named parts and a movable sun. Anyone who has driven through a new subdivision here recognises it without being told where it is."
+        "outcome": "A section you can walk around in either condition, with eighteen named parts, a movable sun and a lighting design you can switch on. Anyone who has driven through a new subdivision here recognises it without being told where it is."
       },
       "zh": {
         "meta": "实时 3D · 概念作品",
@@ -190,9 +190,9 @@
         "decisions": [
           "决定它属于哪里的是细节：竖向企口板刷黑、长条钢屋面藏在女儿墙后、深色门窗、横向板条围栏，以及立在地界上的信箱。",
           "墙板是带阴影缝的一块块板，而不是一张贴图——远看真正读到的是那条阴影线；洞口的做法是把每一列板按窗户留下的空档切开。",
-          "正门设在车库旁、两个体量之间的凹口里，由上层楼板遮盖，而不是另加一个门廊屋顶。"
+          "模型可以在白天和夜晚之间切换：外墙上下洗墙灯、小径两侧地灯、室内亮起的房间；光锥与地面光斑是几何体，而不是十几盏真实灯光。"
         ],
-        "outcome": "一块可以绕着走的地块，十七个可命名部件，太阳可移动。任何在本地新社区开过车的人，不用被告知就认得出这是哪里。"
+        "outcome": "一块白天夜里都能绕着走的地块，十八个可命名部件、可移动的太阳，以及一套可以打开的照明设计。任何在本地新社区开过车的人，不用被告知就认得出这是哪里。"
       }
     },
     "det": {
@@ -225,7 +225,7 @@
           "Cladding is built as boards with a gap between them, because the shadow line is what reads at a distance. Window openings are cut by splitting each board column into the vertical runs the windows leave behind.",
           "The flat roof is long-run steel at three degrees to an internal gutter, out of sight behind a 420 mm parapet — which is how a flat roof is actually built here."
         ],
-        "outcome": "A section you can walk around: seventeen named parts, a sun on a slider, a terrace over the garage and a house that places itself. The living side and its deck face north, as they would on a real section here.",
+        "outcome": "A section you can walk around in daylight or after dark: eighteen named parts, a sun on a slider, a terrace over the garage and a house that places itself. The living side and its deck face north, as they would on a real section here.",
         "specs": [
           {
             "figure": "3°",
@@ -238,9 +238,9 @@
             "note": "The upper floor over the entrance front."
           },
           {
-            "figure": "17",
+            "figure": "18",
             "label": "Named parts",
-            "note": "Board, lawn, driveway, terrace, front door and on."
+            "note": "Board, paving, terrace, front door, lighting and on."
           }
         ]
       },
@@ -273,7 +273,7 @@
           "墙板做成一块块带缝的板，因为远看读到的是那条阴影缝。窗洞的切法是把每一列板按窗户留下的空档拆成若干段。",
           "平屋顶其实是 3° 找坡的长条钢板，排向内天沟，藏在 420 毫米女儿墙后面——本地的平屋顶就是这么盖的。"
         ],
-        "outcome": "一块可以绕着走的地块：十七个可命名部件、一根太阳滑杆、车库上方的露台，以及一栋能自报家门的房子。起居一侧和露台朝北——在本地的真实地块上就该如此。",
+        "outcome": "一块白天夜里都能绕着走的地块：十八个可命名部件、一根太阳滑杆、车库上方的露台，以及一栋能自报家门的房子。起居一侧和露台朝北——在本地的真实地块上就该如此。",
         "specs": [
           {
             "figure": "3°",
@@ -286,9 +286,9 @@
             "note": "上层楼板探出街面一侧。"
           },
           {
-            "figure": "17",
+            "figure": "18",
             "label": "可命名部件",
-            "note": "底板、草坪、车道、露台、正门等等。"
+            "note": "底板、铺装、露台、正门、照明等等。"
           }
         ]
       }
