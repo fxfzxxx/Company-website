@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Case study: Level 26 - a first-person walkthrough of a two-bedroom apartment in a residential tower, built to real dimensions and walked at real pace." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/apartment/project.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#ebe8e1" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Level 26 - Case study" />
+	<meta property="og:description"
+		content="A two-bedroom apartment on the 26th floor, walked at eye height and walking pace, generated in the browser." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/apartment/project.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/apartment/assets/hero.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Level 26 - Case study" />
+	<meta name="twitter:description" content="An apartment walkthrough that feels the right size." />
+	<title>Level 26 - Case study</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+	<div class="study">
+		<div class="nav">
+			<strong>Level 26</strong>
+			<div class="nav-links">
+				<a href="index.html">Live concept</a>
+				<a href="project.html">Case study</a>
+				<a href="../../../en/cases/index.html" target="_top">Case Library</a>
+			</div>
+		</div>
+
+		<h1>A walkthrough that feels the right size.</h1>
+		<p class="lede-block">
+			A two-bedroom apartment on the 26th floor of a residential tower, walked in first person: keys to move,
+			the mouse to look, Esc to leave. Nobody measures a room when they walk into it, but everybody knows
+			straight away when it is the wrong size — so every dimension here is the one the unit would actually be
+			built to.
+		</p>
+
+		<img class="plate-shot" src="assets/hero.jpg" width="2000" height="1333"
+			alt="The living and dining room of a high-rise apartment: a dining table under a black pendant, a grey sofa and coffee table, and full-height glazing looking out over a city of towers." />
+
+		<dl class="facts">
+			<div>
+				<dt>Type</dt>
+				<dd>Concept · self-directed</dd>
+			</div>
+			<div>
+				<dt>Discipline</dt>
+				<dd>Real-time 3D · Web</dd>
+			</div>
+			<div>
+				<dt>Plan</dt>
+				<dd>2 bed · 1 bath · 73 m² net</dd>
+			</div>
+			<div>
+				<dt>Payload</dt>
+				<dd>No models, no image files</dd>
+			</div>
+		</dl>
+
+		<section>
+			<h2>The brief</h2>
+			<p>
+				An off-the-plan apartment is sold before it exists, from a floor plan and a few renders. A render
+				shows a room at its best angle; it cannot tell a buyer whether the hallway is comfortable, whether
+				the table fits, or how far the bedroom is from the front door. Walking through it can — as long as
+				the walk is honest.
+			</p>
+			<p>
+				So the brief was a unit you walk rather than look at: two bedrooms, one living room, one bathroom, in
+				a tower, with the ceiling, the doors, the windows and the pace all at the size a person would feel
+				them.
+			</p>
+		</section>
+
+		<section>
+			<h2>Design decisions</h2>
+			<div class="cards">
+				<article>
+					<h3>Real dimensions, not a look</h3>
+					<p>
+						One unit is one metre. The ceiling is 2.8 m clear, door heads are 2.1 m, sills 0.9 m, benches
+						0.86 m, dining chairs seat at 0.45 m. The eye is at 1.6 m and the walk is 1.4 m/s — the pace of
+						an adult looking around, not a game character.
+					</p>
+				</article>
+				<article>
+					<h3>You collide with the flat</h3>
+					<p>
+						Walls, glazing, furniture and open door leaves all stop you, and you slide along them rather
+						than sticking. If a doorway or a gap between furniture is too tight to pass through, it is too
+						tight to live with.
+					</p>
+				</article>
+				<article>
+					<h3>A tower, not a stage set</h3>
+					<p>
+						The unit sits 75 m up, with the storeys below and above, a neighbouring unit, a lift core
+						behind the front door and a city laid out to the horizon — because the view is what people
+						pay for on the 26th floor.
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<section>
+			<h2>The dimensions</h2>
+			<table class="dims">
+				<tbody>
+					<tr><th>Floor to floor / clear ceiling</th><td>3.0 m / 2.8 m</td></tr>
+					<tr><th>Interior doors</th><td>0.8–0.9 m × 2.1 m</td></tr>
+					<tr><th>Front door</th><td>1.0 m × 2.1 m</td></tr>
+					<tr><th>Window sills</th><td>0.9 m (bedrooms, living) · 1.0 m (kitchen) · 1.5 m (bathroom)</td></tr>
+					<tr><th>Living room glazing</th><td>5.0 m × 2.35 m, from 0.15 m</td></tr>
+					<tr><th>Walls</th><td>240 mm exterior · 120 mm interior · 80 mm skirting</td></tr>
+					<tr><th>Benches / vanity</th><td>0.86 m</td></tr>
+					<tr><th>Eye height / pace</th><td>1.6 m / 1.4 m/s</td></tr>
+				</tbody>
+			</table>
+		</section>
+
+		<section>
+			<h2>How it is built</h2>
+			<p>
+				Every wall is declared once: an axis, a length, a thickness and a list of openings. The builder cuts
+				each opening out of the wall, adds the lintel and the sill, and dresses it — a door gets a casing
+				and a leaf hung on the right side, a window gets a frame, mullions and a stone sill. The same
+				declaration produces the collision boxes and the plan in the corner of the screen, so the walls you
+				see, the walls you bump into and the walls on the plan cannot disagree.
+			</p>
+			<p>
+				The floorboards, tiles and facade are painted on canvas at load and mapped in metres, so a 150 mm
+				board is 150 mm wherever it lands. The sun comes in low through the living room glazing and throws
+				real shadows across the floor; each room also has its own light, so the unit reads as lived in rather
+				than lit for a photograph.
+			</p>
+			<img class="plate-shot" src="assets/kitchen.jpg" width="2000" height="1333"
+				alt="An L-shaped kitchen with white cabinets, a black induction hob under a steel rangehood, a sink under the window, and full-height white wall tiles." />
+		</section>
+
+		<section>
+			<h2>North is the glazed side</h2>
+			<p>
+				In New Zealand the good side of a unit faces north. The living room, the main bedroom and the
+				full-height glazing all face the sun, while the entry, the kitchen, the bathroom and the second
+				bedroom sit on the south side. The plan in the corner is drawn north-up so that it matches.
+			</p>
+			<img class="plate-shot" src="assets/bedroom.jpg" width="2000" height="1333"
+				alt="The main bedroom: a king bed with a pale headboard, bedside tables with lamps, and a window with linen curtains looking out over the city." />
+		</section>
+
+		<section>
+			<h2>What went wrong first</h2>
+			<p>
+				The first layout put four chairs round the dining table and the sofa just south of it. On the plan it
+				looked generous. Walking it, you could not get past: the chairs left 0.37 m to the kitchen wall on one
+				side and 0.33 m to the sofa on the other, and a person needs about half a metre. Nobody noticed until
+				someone tried to walk behind the table.
+			</p>
+			<p>
+				The fix was the kind of thing an interior designer would do: the living group moved 400 mm towards
+				the glazing, and two of the chairs moved to the ends of the table. There is now 0.74 m behind the
+				table and 0.7 m between the chairs and the sofa. That this came out of walking the flat, not from
+				looking at it, is the case for building walkthroughs at all.
+			</p>
+			<p>
+				The other early mistake was the building around the unit. The corridor block was drawn along the
+				whole south side, so the kitchen, bathroom and second-bedroom windows looked straight into a wall.
+				It was cut back to a lift core behind the front door, and the unit became dual-aspect, as a corner
+				unit should be.
+			</p>
+		</section>
+
+		<section>
+			<h2>Outcome</h2>
+			<p>
+				A 73 m² unit you can walk from the front door to every room: seven named spaces, a plan that follows
+				you, and a view over the city from 75 m up. It runs in a desktop browser with nothing to download
+				beyond the page. On a phone you can drag to look around the living room; walking needs a keyboard.
+			</p>
+		</section>
+
+		<footer>Level 26 design case study · Yonder Case Library · 2026</footer>
+	</div>
+</body>
+
+</html>

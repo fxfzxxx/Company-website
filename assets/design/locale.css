@@ -103,6 +103,16 @@
 	max-width: 12ch;
 }
 
+/* Archivo has no CJK: without Noto named here, a unit such as 周 in a
+   figure falls through to the system face and reads as a different font */
+:root[lang^="zh"] .yt-stat-figure,
+:root[lang^="zh"] .yt-case-figure,
+:root[lang^="zh"] .yt-metric-figure,
+:root[lang^="zh"] .yt-lib-metric-figure,
+:root[lang^="zh"] .yt-spec-figure {
+	font-family: Archivo, "Noto Sans SC", sans-serif;
+}
+
 :root[lang^="zh"] .yt-case-lead .yt-case-title {
 	font-size: clamp(24px, 2.6vw, 34px);
 	line-height: 1.35;

@@ -6,6 +6,12 @@
 			"runtimeExecutable": "python",
 			"runtimeArgs": ["-m", "http.server", "4173"],
 			"port": 4173
+		},
+		{
+			"name": "apartment-tour",
+			"runtimeExecutable": "python",
+			"runtimeArgs": ["-m", "http.server", "4180", "--directory", "C:/eva folder/projects/apartment-tour"],
+			"port": 4180
 		}
 	]
 }

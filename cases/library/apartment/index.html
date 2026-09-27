@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Design showcase: Level 26 - a first-person walkthrough of a two-bedroom apartment in a residential tower, built to real dimensions and generated in the browser." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/apartment/index.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#ebe8e1" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Level 26 - Live concept" />
+	<meta property="og:description"
+		content="Walk through a two-bedroom apartment on the 26th floor, at walking pace and eye height." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/apartment/index.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<title>Level 26 - Live concept</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body class="plate">
+	<div id="stage"></div>
+
+	<div class="hud intro" id="intro">
+		<div class="row">
+			<div class="hud-nav">
+				<a href="../../../en/cases/index.html" target="_top">Yonder Case Library</a>
+				<a href="project.html">Case study</a>
+			</div>
+			<dl class="caliber" id="caliber"></dl>
+		</div>
+
+		<div class="row"></div>
+
+		<div class="row bottom">
+			<div>
+				<h1 class="title">Level 26</h1>
+				<p class="lede">
+					A two-bedroom apartment on the 26th floor of a residential tower, built to the dimensions it
+					would be built to — ceiling, door heads, sills, benches — and walked at eye height and walking
+					pace. Step inside and look around.
+				</p>
+			</div>
+			<div class="start">
+				<button class="start-button" id="start" type="button" disabled>Loading</button>
+				<div class="keys">
+					<span><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> Walk</span>
+					<span>Mouse Look</span>
+					<span><kbd>Esc</kbd> Leave</span>
+				</div>
+				<div class="message" id="message" role="status"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="hud walk is-hidden" id="walk" aria-hidden="true">
+		<div class="row">
+			<div class="room" id="room"><b></b><span></span></div>
+		</div>
+		<div class="row"></div>
+		<div class="row bottom">
+			<div class="hint"><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> Walk · Mouse Look · <kbd>Esc</kbd> Leave</div>
+			<canvas id="minimap"></canvas>
+		</div>
+		<div class="cross"></div>
+	</div>
+
+	<div class="mark tl"></div>
+	<div class="mark tr"></div>
+	<div class="mark bl"></div>
+	<div class="mark br"></div>
+
+	<div id="fallback"><p>This study needs WebGL 2. Try a current desktop browser.</p></div>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../../../assets/vendor/three/three.module.min.js",
+				"three/addons/": "../../../assets/vendor/three/addons/"
+			}
+		}
+	</script>
+
+	<script type="module">
+		import { createTour } from "./apartment.js";
+
+		let tour;
+		try {
+			/* ?view=x,z,lookX,lookY,lookZ sets the opening camera and ?hud=0 hides the
+			   plate; both are for the stills. */
+			const params = new URLSearchParams(location.search);
+			const view = params.get("view")?.split(",").map(Number);
+			if (params.get("hud") === "0") document.body.classList.add("bare");
+			tour = createTour(document.getElementById("stage"), view?.length === 5 ? { spawn: view.slice(0, 2), lookAt: view.slice(2) } : undefined);
+		} catch (error) {
+			console.error(error);
+			document.getElementById("fallback").style.display = "grid";
+		}
+
+		if (tour) {
+			const caliber = document.getElementById("caliber");
+			for (const [term, value] of [
+				["Plan", "2 bed · 1 bath"],
+				["Net area", "73 m²"],
+				["Ceiling", "2.8 m"],
+				["Pace", "1.4 m/s"],
+			]) {
+				const row = document.createElement("div");
+				const dt = document.createElement("dt");
+				const dd = document.createElement("dd");
+				dt.textContent = term;
+				dd.textContent = value;
+				row.append(dt, dd);
+				caliber.append(row);
+			}
+
+			const intro = document.getElementById("intro");
+			const walk = document.getElementById("walk");
+			const start = document.getElementById("start");
+			const message = document.getElementById("message");
+			const touchOnly = matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+			if (touchOnly) {
+				start.hidden = true;
+				message.textContent = "Walking needs a keyboard and mouse. Drag to look around the room.";
+			} else {
+				start.disabled = false;
+				start.textContent = "Step inside";
+			}
+
+			const refused = () => {
+				message.textContent = "The browser would not capture the mouse. Wait a moment and try again, or open the page in its own tab.";
+			};
+			start.addEventListener("click", () => {
+				message.textContent = "";
+				try {
+					const p = tour.lock();
+					if (p && p.catch) p.catch(refused);
+				} catch {
+					refused();
+				}
+			});
+			document.addEventListener("pointerlockerror", refused);
+
+			tour.onLockChange((walking) => {
+				intro.classList.toggle("is-hidden", walking);
+				walk.classList.toggle("is-hidden", !walking);
+				intro.setAttribute("aria-hidden", String(walking));
+				walk.setAttribute("aria-hidden", String(!walking));
+				if (!walking) start.textContent = "Step back inside";
+			});
+
+			/* Room label and plan. The plan is drawn north-up, and north is +z:
+			   the glazed side, as it would be for a unit in New Zealand. */
+			const roomEl = document.getElementById("room");
+			const map = document.getElementById("minimap");
+			const g = map.getContext("2d");
+			const S = 17, PAD = 12, dpr = Math.min(devicePixelRatio, 2);
+			const W = 10.24 * S + PAD * 2, Hh = 8.24 * S + PAD * 2;
+			map.width = W * dpr; map.height = Hh * dpr;
+			map.style.width = `${W}px`; map.style.height = `${Hh}px`;
+			const X = (x) => PAD + (10.12 - x) * S;
+			const Z = (z) => PAD + (8.12 - z) * S;
+			const rect = (r) => g.fillRect(X(r.x1), Z(r.z1), (r.x1 - r.x0) * S, (r.z1 - r.z0) * S);
+			const line = ([a, b, c, d]) => { g.beginPath(); g.moveTo(X(a), Z(b)); g.lineTo(X(c), Z(d)); g.stroke(); };
+			let lastRoom;
+
+			tour.onFrame(() => {
+				if (!tour.walking) return;
+				const { pos } = tour;
+				const room = tour.roomAt(pos.x, pos.y);
+				if (room !== lastRoom) {
+					lastRoom = room;
+					roomEl.querySelector("b").textContent = room ? room.name : "";
+					roomEl.querySelector("span").textContent = room ? room.note : "";
+				}
+
+				g.setTransform(dpr, 0, 0, dpr, 0, 0);
+				g.clearRect(0, 0, W, Hh);
+				g.fillStyle = "rgba(33,29,25,.04)";
+				rect({ x0: 0, x1: 10, z0: 0, z1: 8 });
+				if (room) { g.fillStyle = "rgba(138,90,43,.14)"; rect(room); }
+				g.fillStyle = "rgba(33,29,25,.16)";
+				tour.furnRects.forEach(rect);
+				g.fillStyle = "#211d19";
+				tour.wallRects.forEach(rect);
+				g.lineWidth = 2;
+				g.strokeStyle = "#6f9fbd"; tour.winLines.forEach(line);
+				g.strokeStyle = "#8a5a2b"; tour.doorLines.forEach(line);
+
+				const dir = tour.heading();
+				const px = X(pos.x), py = Z(pos.y), ang = Math.atan2(-dir.z, -dir.x);
+				const cone = g.createRadialGradient(px, py, 0, px, py, 34);
+				cone.addColorStop(0, "rgba(138,90,43,.5)");
+				cone.addColorStop(1, "rgba(138,90,43,0)");
+				g.fillStyle = cone;
+				g.beginPath(); g.moveTo(px, py); g.arc(px, py, 34, ang - 0.55, ang + 0.55); g.closePath(); g.fill();
+				g.fillStyle = "#8a5a2b";
+				g.beginPath(); g.arc(px, py, 4, 0, Math.PI * 2); g.fill();
+
+				g.fillStyle = "#6f675e";
+				g.font = "10px ui-monospace, Menlo, Consolas, monospace";
+				g.textAlign = "center";
+				g.fillText("N", W - PAD - 2, PAD - 2);
+			});
+		}
+	</script>
+</body>
+
+</html>
