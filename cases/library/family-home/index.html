@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Design showcase: Family Home - a first-person walkthrough of a two-storey, four-bedroom house, built from its floor plan and generated in the browser." />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#ebe8e1" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Family Home - Live concept" />
+	<meta property="og:description"
+		content="Walk through a two-storey family home — both floors, up the stair and out onto the patio — at eye height and walking pace." />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<title>Family Home - Live concept</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+	<style>
+		.prompt { position: fixed; left: 50%; top: calc(50% + 34px); transform: translateX(-50%); padding: 4px 10px; background: rgba(235, 232, 225, 0.88); border: 1px solid var(--rule); color: var(--ink); opacity: 0; transition: opacity 0.15s ease; white-space: nowrap; }
+		.prompt.is-on { opacity: 1; }
+		.cross { width: 14px; height: 14px; margin: -7px; border-radius: 0; background: none; box-shadow: none; }
+		.cross::before, .cross::after { content: ""; position: absolute; background: rgba(255, 255, 255, 0.95); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35); }
+		.cross::before { left: 6px; top: 0; width: 2px; height: 14px; }
+		.cross::after { top: 6px; left: 0; width: 14px; height: 2px; }
+	</style>
+</head>
+
+<body class="plate">
+	<div id="stage"></div>
+
+	<div class="hud intro" id="intro">
+		<div class="row">
+			<div class="hud-nav">
+				<a href="../../../en/cases/index.html" target="_top">Yonder Case Library</a>
+			</div>
+			<dl class="caliber" id="caliber"></dl>
+		</div>
+
+		<div class="row"></div>
+
+		<div class="row bottom">
+			<div>
+				<h1 class="title">Family Home</h1>
+				<p class="lede">
+					A two-storey, four-bedroom house built to the room sizes on its floor plan — kitchen, dining and family room
+					opening to a north-east patio, a living room with a see-through fire, and four bedrooms up a
+					U-shaped stair. Walk both floors and step outside.
+				</p>
+			</div>
+			<div class="start">
+				<button class="start-button" id="start" type="button" disabled>Loading</button>
+				<div class="keys">
+					<span><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> Walk</span>
+					<span>Mouse Look</span>
+					<span><kbd>Shift</kbd> Run</span>
+					<span><kbd>Ctrl</kbd>/<kbd>C</kbd> Crouch</span>
+					<span><kbd>Space</kbd> Jump</span>
+					<span><kbd>E</kbd> Doors</span>
+					<span>Click Fire</span>
+					<span><kbd>Esc</kbd> Leave</span>
+				</div>
+				<div class="message" id="message" role="status"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="hud walk is-hidden" id="walk" aria-hidden="true">
+		<div class="row">
+			<div class="room" id="room"><b></b><span></span></div>
+		</div>
+		<div class="row"></div>
+		<div class="row bottom">
+			<div class="hint"><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> Walk · <kbd>Shift</kbd> Run · <kbd>Ctrl</kbd>/<kbd>C</kbd> Crouch · <kbd>Space</kbd> Jump · <kbd>E</kbd> Door · Click Fire · <kbd>Esc</kbd> Leave</div>
+			<canvas id="minimap"></canvas>
+		</div>
+		<div class="cross"></div>
+		<div class="prompt" id="prompt"><kbd>E</kbd> <span></span></div>
+	</div>
+
+	<div class="mark tl"></div>
+	<div class="mark tr"></div>
+	<div class="mark bl"></div>
+	<div class="mark br"></div>
+
+	<div id="fallback"><p>This study needs WebGL 2. Try a current desktop browser.</p></div>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../../../assets/vendor/three/three.module.min.js",
+				"three/addons/": "../../../assets/vendor/three/addons/"
+			}
+		}
+	</script>
+
+	<script type="module">
+		import { createTour } from "./house.js";
+
+		let tour;
+		try {
+			/* ?view=x,z,lookX,lookY,lookZ[,floor] sets the opening camera (floor 1 is
+			   upstairs, look height is above that floor) and ?hud=0 hides the plate. */
+			const params = new URLSearchParams(location.search);
+			const view = params.get("view")?.split(",").map(Number);
+			if (params.get("hud") === "0") document.body.classList.add("bare");
+			tour = createTour(document.getElementById("stage"), view?.length >= 5 ? { spawn: [view[0], view[1], view[5] ?? 0], lookAt: view.slice(2, 5) } : undefined);
+		} catch (error) {
+			console.error(error);
+			document.getElementById("fallback").style.display = "grid";
+		}
+
+		if (tour) {
+			const caliber = document.getElementById("caliber");
+			for (const [term, value] of [
+				["Plan", "4 bed · 2 bath · WC"],
+				["Floors", "2 · double garage"],
+				["Ceilings", "2.7 m · 2.55 m"],
+				["Pace", "2.2 m/s · run 3.6"],
+			]) {
+				const row = document.createElement("div");
+				const dt = document.createElement("dt");
+				const dd = document.createElement("dd");
+				dt.textContent = term;
+				dd.textContent = value;
+				row.append(dt, dd);
+				caliber.append(row);
+			}
+
+			const intro = document.getElementById("intro");
+			const walk = document.getElementById("walk");
+			const start = document.getElementById("start");
+			const message = document.getElementById("message");
+			const touchOnly = matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+			if (touchOnly) {
+				start.hidden = true;
+				message.textContent = "Walking needs a keyboard and mouse. Drag to look around the hall.";
+			} else {
+				start.disabled = false;
+				start.textContent = "Step inside";
+			}
+
+			const refused = () => {
+				message.textContent = "The browser would not capture the mouse. Wait a moment and try again, or open the page in its own tab.";
+			};
+			/* Crouch is Ctrl, and Ctrl+W would close the tab. In full screen the
+			   Keyboard Lock API (Chrome, Edge) routes those keys to the page, so
+			   Step inside goes full screen first; C crouches everywhere. */
+			const KEYS = ["KeyW", "KeyA", "KeyS", "KeyD", "KeyE", "KeyC", "Space", "ShiftLeft", "ControlLeft", "ControlRight"];
+			const lock = () => {
+				try {
+					const p = tour.lock();
+					if (p && p.catch) p.catch(refused);
+				} catch {
+					refused();
+				}
+			};
+			start.addEventListener("click", async () => {
+				message.textContent = "";
+				if (!document.fullscreenElement && document.fullscreenEnabled) {
+					try {
+						await document.documentElement.requestFullscreen({ navigationUI: "hide" });
+						try { await navigator.keyboard?.lock?.(KEYS); } catch {}
+					} catch {}
+				}
+				lock();
+			});
+			document.addEventListener("pointerlockerror", refused);
+
+			tour.onLockChange((walking) => {
+				intro.classList.toggle("is-hidden", walking);
+				walk.classList.toggle("is-hidden", !walking);
+				intro.setAttribute("aria-hidden", String(walking));
+				walk.setAttribute("aria-hidden", String(!walking));
+				if (!walking) {
+					start.textContent = "Step back inside";
+					navigator.keyboard?.unlock?.();
+					if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+				}
+			});
+
+			/* Room label and plan of the floor you are on, drawn north-up. */
+			const roomEl = document.getElementById("room");
+			const map = document.getElementById("minimap");
+			const g = map.getContext("2d");
+			const X0 = -1, X1 = 18.5, Z0 = -1.5, Z1 = 16;
+			const S = 9.5, PAD = 12, dpr = Math.min(devicePixelRatio, 2);
+			const W = (X1 - X0) * S + PAD * 2, Hh = (Z1 - Z0) * S + PAD * 2;
+			map.width = W * dpr; map.height = Hh * dpr;
+			map.style.width = `${W}px`; map.style.height = `${Hh}px`;
+			const X = (x) => PAD + (x - X0) * S;
+			const Z = (z) => PAD + (z - Z0) * S;
+			const rect = (r) => g.fillRect(X(r.x0), Z(r.z0), (r.x1 - r.x0) * S, (r.z1 - r.z0) * S);
+			const line = ([a, b, c, d]) => { g.beginPath(); g.moveTo(X(a), Z(b)); g.lineTo(X(c), Z(d)); g.stroke(); };
+			const floorName = ["Ground floor", "First floor"];
+			let lastKey;
+			const promptEl = document.getElementById("prompt");
+			let lastPrompt;
+
+			tour.onFrame(() => {
+				if (!tour.walking) return;
+				const { pos, level } = tour;
+				const room = tour.roomAt(pos.x, pos.y);
+				const key = `${room?.name}|${level}`;
+				if (key !== lastKey) {
+					lastKey = key;
+					roomEl.querySelector("b").textContent = room ? room.name : "Garden";
+					roomEl.querySelector("span").textContent = [room?.note, room?.lv === -1 ? "" : floorName[level]].filter(Boolean).join(" · ");
+				}
+
+				const p = tour.doorPrompt();
+				if (p !== lastPrompt) {
+					lastPrompt = p;
+					promptEl.classList.toggle("is-on", !!p);
+					if (p) promptEl.querySelector("span").textContent = `${p} door`;
+				}
+
+				const y0 = level ? tour.U + 0.4 : 0.4, y1 = y0 + 1.4;
+				const onFloor = (r) => !r.off && r.y0 < y1 && r.y1 > y0;
+				g.setTransform(dpr, 0, 0, dpr, 0, 0);
+				g.clearRect(0, 0, W, Hh);
+				g.fillStyle = "rgba(33,29,25,.05)";
+				tour.rooms.filter((r) => r.lv === -1 || r.lv === level).forEach(rect);
+				if (room) { g.fillStyle = "rgba(138,90,43,.16)"; rect(room); }
+				g.fillStyle = "rgba(33,29,25,.16)";
+				tour.furnRects.filter(onFloor).forEach(rect);
+				g.fillStyle = "#211d19";
+				tour.wallRects.filter(onFloor).forEach(rect);
+				g.lineWidth = 2;
+				const lv = (o) => (o.y > 1.5 ? 1 : 0) === level;
+				g.strokeStyle = "#6f9fbd"; tour.winLines.filter(lv).forEach((o) => line(o.l));
+				g.strokeStyle = "#8a5a2b"; tour.doorLines.filter(lv).forEach((o) => line(o.l));
+
+				const dir = tour.heading();
+				const px = X(pos.x), py = Z(pos.y), ang = Math.atan2(dir.z, dir.x);
+				const cone = g.createRadialGradient(px, py, 0, px, py, 30);
+				cone.addColorStop(0, "rgba(138,90,43,.5)");
+				cone.addColorStop(1, "rgba(138,90,43,0)");
+				g.fillStyle = cone;
+				g.beginPath(); g.moveTo(px, py); g.arc(px, py, 30, ang - 0.55, ang + 0.55); g.closePath(); g.fill();
+				g.fillStyle = "#8a5a2b";
+				g.beginPath(); g.arc(px, py, 4, 0, Math.PI * 2); g.fill();
+
+				g.fillStyle = "#6f675e";
+				g.font = "10px ui-monospace, Menlo, Consolas, monospace";
+				g.textAlign = "left";
+				g.fillText(floorName[level].toUpperCase(), PAD, Hh - 4);
+				g.textAlign = "center";
+				g.fillText("N", W - PAD - 2, PAD - 2);
+			});
+		}
+	</script>
+</body>
+
+</html>
