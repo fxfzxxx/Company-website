@@ -35,6 +35,11 @@ A broken window is a way out: crouch-jump onto the sill or the furniture
 under it, then walk through crouched. Upstairs, most windows open onto the
 single-storey roofs, which you can walk on and drop off.
 
+Two cats live downstairs — a calico ragdoll and a slightly bigger ginger
+tabby. They wander the ground floor and the patio on a graph of open floor,
+only through doors that are open, and sit for a while now and then. Shoot
+one and it jumps, cries and bolts away from you for a few seconds.
+
 You start in the entrance hall with the front door shut. The stair is through
 the back passage; the bifolds in the family and living rooms are open to the
 patio.

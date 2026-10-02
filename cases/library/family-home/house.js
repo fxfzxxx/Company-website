@@ -5,7 +5,7 @@
    1.6 m (1.0 m crouched), the walk is 2.2 m/s (3.6 running) and a jump
    clears about 1.1 m — enough to land on a sofa, a bed or a table. Every
    door opens and shuts with E; the left mouse button fires a pistol that
-   leaves holes, and shatters the ornaments.
+   leaves holes, and shatters the ornaments. Two cats live downstairs.
 
    +x is east and +z is south, so the plan reads north-up with z growing down
    the page — the same way the listing plan is drawn.
@@ -365,7 +365,7 @@ export function createTour(stage, { spawn = [6.8, 12.4, 0], lookAt = [6.8, 1.5, 
 	const doorBox = (y) => { const r = { x0: 0, x1: 0, z0: 0, z1: 0, y0: y, y1: y + 2.15 }; colliders.push(r); furnRects.push(r); return r; };
 	function registerDoor(d, root, axis, at, a, b, y) {
 		const [cx, cz] = toWorld(axis, at, (a + b) / 2, 0);
-		Object.assign(d, { cx, cz, y, target: d.cur });
+		Object.assign(d, { cx, cz, y, target: d.cur, line: [...toWorld(axis, at, a, 0), ...toWorld(axis, at, b, 0)] });
 		root.traverse((o) => { o.userData.door = d; });
 		doors.push(d); applyDoor(d);
 		return d;
@@ -1227,6 +1227,182 @@ export function createTour(stage, { spawn = [6.8, 12.4, 0], lookAt = [6.8, 1.5, 
 	renderer.shadowMap.needsUpdate = true;
 
 	// ---------------------------------------------------------------------------
+	// Two cats — a calico ragdoll and a slightly bigger orange tabby — wander
+	// the ground floor and the patio on a graph of open floor. A link that
+	// passes through a door is only taken while that door is open. Shoot one
+	// and it jumps, cries and bolts away from you.
+	// ---------------------------------------------------------------------------
+	const NODES = {
+		K3: [1.25, 1.3], K2: [1.25, 3.4], K1: [3.3, 3.4], D: [7.0, 3.9], F1: [9.5, 3.95], F2: [11.1, 1.8],
+		PT1: [13.2, 2.0], PT3: [15.2, 4.9], PT2: [16.0, 8.0],
+		P1: [4.55, 5.4], L: [5.8, 5.4], H1: [7.4, 5.5], H2: [7.4, 7.6], H3: [7.4, 11.15], H4: [7.4, 12.4],
+		LV1: [9.6, 7.25], LV2: [13.95, 7.15], LV3: [13.8, 9.8], O: [9.4, 11.6],
+		P2: [4.55, 7.7], LA: [2.5, 7.6], G1: [4.55, 9.8], G2: [2.5, 12.5],
+	};
+	const LINKS = "K3-K2 K2-K1 K1-P1 K1-D D-F1 F1-F2 F2-PT1 PT1-PT3 PT3-PT2 PT2-LV2 D-H1 P1-L L-H1 H1-H2 H2-H3 H3-H4 H2-LV1 LV1-LV2 LV2-LV3 H3-O P1-P2 P2-LA P2-G1 G1-G2";
+	const crosses = ([ax, az], [bx, bz], [cx, cz, dx, dz]) => {                // do two segments cross?
+		const s = (px, pz, qx, qz, rx, rz) => Math.sign((qx - px) * (rz - pz) - (qz - pz) * (rx - px));
+		return s(ax, az, bx, bz, cx, cz) !== s(ax, az, bx, bz, dx, dz) && s(cx, cz, dx, dz, ax, az) !== s(cx, cz, dx, dz, bx, bz);
+	};
+	const graph = {};
+	for (const k in NODES) graph[k] = [];
+	for (const e of LINKS.split(" ")) {
+		const [a, b] = e.split("-");
+		const via = doors.filter((d) => d.y < 1 && d.line && crosses(NODES[a], NODES[b], d.line));
+		graph[a].push({ to: b, via }); graph[b].push({ to: a, via });
+	}
+	const passable = (l) => l.via.every((d) => d.cur > 0.7);
+
+	function catTexture(kind, seed) {
+		const c = canvas(256, 128), g = c.getContext("2d"), r = rng(seed);
+		if (kind === "calico") {                                         // white, with ginger and black patches on the back
+			g.fillStyle = "#f4efe7"; g.fillRect(0, 0, 256, 128);
+			for (const [col, n] of [["#d8873a", 7], ["#2b2521", 6]]) for (let i = 0; i < n; i++) {
+				g.fillStyle = col; g.beginPath(); g.ellipse(r() * 256, 8 + r() * 62, 16 + r() * 26, 10 + r() * 18, r() * 3, 0, Math.PI * 2); g.fill();
+			}
+		} else {                                                         // ginger tabby with a pale belly
+			const gr = g.createLinearGradient(0, 0, 0, 128);
+			gr.addColorStop(0, "#df8738"); gr.addColorStop(0.62, "#e8964a"); gr.addColorStop(1, "#f6cf9c");
+			g.fillStyle = gr; g.fillRect(0, 0, 256, 128);
+			g.strokeStyle = "#b0601f"; g.lineCap = "round";
+			for (let i = 0; i < 16; i++) {
+				let x = i * 16 + r() * 6; g.lineWidth = 3 + r() * 4; g.beginPath(); g.moveTo(x, 0);
+				for (let y = 0; y <= 80; y += 10) { x += (r() - 0.5) * 6; g.lineTo(x, y); }
+				g.stroke();
+			}
+		}
+		for (let k = 0; k < 2500; k++) { g.fillStyle = `rgba(${r() > 0.5 ? "255,255,255" : "60,40,20"},${r() * 0.08})`; g.fillRect(r() * 256, r() * 128, 1, 3); }
+		const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+	}
+
+	const cats = [];
+	function makeCat({ kind, seed, scale, fluff, eye, pitch, start }) {
+		const coat = std({ map: catTexture(kind, seed), roughness: 1 });
+		const pale = std({ color: kind === "calico" ? 0xf6f2ec : 0xf3c995, roughness: 1 });
+		const eyes = std({ color: eye, roughness: 0.15, emissive: eye, emissiveIntensity: 0.25 });
+		const pink = std({ color: 0xd98a8a, roughness: 0.6 });
+		const g = new THREE.Group(), body = new THREE.Group(); g.add(body);
+		const blob = (rx, ry, rz, mat, x, y, z, parent = body) => { const m = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 14), mat); m.scale.set(rx, ry, rz); m.position.set(x, y, z); parent.add(m); return m; };
+		blob(0.1 * fluff, 0.1 * fluff, 0.2, coat, 0, 0.21, 0);
+		blob(0.085 * fluff, 0.085 * fluff, 0.09, pale, 0, 0.21, 0.13);                 // chest
+		const head = new THREE.Group(); head.position.set(0, 0.3, 0.21); body.add(head);
+		blob(0.075 * fluff, 0.068 * fluff, 0.07 * fluff, coat, 0, 0, 0, head);
+		blob(0.036, 0.028, 0.03, pale, 0, -0.024, 0.055, head);                         // muzzle
+		blob(0.008, 0.006, 0.005, pink, 0, -0.01, 0.085, head);                          // nose
+		for (const s of [-1, 1]) {
+			const ear = new THREE.Mesh(new THREE.ConeGeometry(0.028, 0.065, 4), coat); ear.position.set(s * 0.042, 0.066, -0.01); ear.rotation.set(-0.1, Math.PI / 4, -s * 0.25); head.add(ear);
+			blob(0.013, 0.016, 0.006, eyes, s * 0.03, 0.012, 0.064, head);
+			for (const k of [-1, 1]) { const w = new THREE.Mesh(new THREE.CylinderGeometry(0.0012, 0.0012, 0.09, 3), pale); w.rotation.set(0, 0, Math.PI / 2 + k * 0.12); w.position.set(s * 0.06, -0.025 + k * 0.006, 0.06); head.add(w); }
+		}
+		const legs = [];
+		for (const [x, z] of [[-0.055, 0.12], [0.055, 0.12], [-0.055, -0.12], [0.055, -0.12]]) {
+			const pivot = new THREE.Group(); pivot.position.set(x, 0.17, z); body.add(pivot);
+			const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.022 * fluff, 0.02, 0.16, 8), kind === "calico" ? pale : coat); leg.position.y = -0.08; pivot.add(leg);
+			blob(0.025, 0.014, 0.032, pale, 0, -0.163, 0.01, pivot);
+			legs.push(pivot);
+		}
+		const tail = [], tr = kind === "calico" ? 0.032 : 0.02;
+		let parent = body;
+		for (let i = 0; i < 7; i++) {
+			const seg = new THREE.Group();
+			if (i) seg.position.y = 0.06; else seg.position.set(0, 0.24, -0.19);
+			parent.add(seg);
+			const m = new THREE.Mesh(new THREE.CylinderGeometry(tr * (1 - (i + 1) * 0.07), tr * (1 - i * 0.07), 0.066, 8), coat); m.position.y = 0.03; seg.add(m);
+			tail.push(seg); parent = seg;
+		}
+		g.scale.setScalar(scale);
+		g.traverse((o) => { if (o.isMesh) { o.castShadow = false; o.receiveShadow = true; } });
+		scene.add(g);
+		const cat = {
+			g, body, head, legs, tail, pitch, node: start, prev: null, from: NODES[start].slice(), to: null, idle: 1 + Math.random() * 2,
+			phase: Math.random() * 6, jumpT: 0, flee: 0, yaw: Math.random() * 6, sit: 0, t: Math.random() * 10,
+			spook() {                                                    // hit: jump, cry, run
+				this.jumpT = 0.5; this.flee = 5 + Math.random() * 2; this.idle = 0;
+				if (!this.to) this.pick();
+				else if (awayScore(this.node) > awayScore(this.to.node)) this.retreat();     // run back the way it came if that's away from you
+				meow(this.pitch);
+			},
+			retreat() { [this.node, this.to.node] = [this.to.node, this.node]; this.to.x = NODES[this.to.node][0]; this.to.z = NODES[this.to.node][1]; },
+			pick() {
+				const links = graph[this.node].filter(passable);
+				if (!links.length) { this.idle = 2; this.to = null; return; }
+				let l;
+				if (this.flee > 0) l = links.reduce((a, b) => awayScore(b.to) > awayScore(a.to) ? b : a);
+				else { const fresh = links.filter((q) => q.to !== this.prev); const pool = fresh.length ? fresh : links; l = pool[Math.floor(Math.random() * pool.length)]; }
+				const [x, z] = NODES[l.to], j = this.flee > 0 ? 0 : 0.18;
+				this.to = { node: l.to, x: x + (Math.random() - 0.5) * j, z: z + (Math.random() - 0.5) * j, via: l.via };
+			},
+		};
+		g.position.set(NODES[start][0], 0, NODES[start][1]);
+		cat.g.traverse((o) => { o.userData.cat = cat; });
+		cats.push(cat);
+		return cat;
+	}
+	const awayScore = (n) => Math.hypot(NODES[n][0] - pos.x, NODES[n][1] - pos.y);
+	const catOf = (o) => { for (; o; o = o.parent) if (o.userData.cat) return o.userData.cat; return null; };
+	function updateCat(c, dt) {
+		c.t += dt;
+		c.flee = Math.max(0, c.flee - dt);
+		let speed = 0;
+		if (c.to && c.to.via.some((d) => d.cur <= 0.7 && crosses([c.g.position.x, c.g.position.z], [c.to.x, c.to.z], d.line))) { c.retreat(); c.to.via = []; }   // a door shut in its face: turn back
+		if (c.idle > 0 && c.flee === 0) {
+			c.idle -= dt;
+			c.sit = Math.min(1, c.sit + dt * 2);
+		} else {
+			c.sit = Math.max(0, c.sit - dt * 4);
+			if (!c.to) c.pick();
+			if (c.to) {
+				const dx = c.to.x - c.g.position.x, dz = c.to.z - c.g.position.z, d = Math.hypot(dx, dz);
+				speed = c.flee > 0 ? 2.6 : 0.45;
+				if (d < 0.05) {
+					c.prev = c.node; c.node = c.to.node; c.to = null;
+					if (c.flee === 0 && Math.random() < 0.35) c.idle = 2 + Math.random() * 5;
+				} else {
+					const step = Math.min(d, speed * dt);
+					c.g.position.x += dx / d * step; c.g.position.z += dz / d * step;
+					const want = Math.atan2(dx, dz);
+					let dy = want - c.yaw; dy = Math.atan2(Math.sin(dy), Math.cos(dy));
+					c.yaw += dy * Math.min(1, dt * (c.flee > 0 ? 14 : 6));
+				}
+			}
+		}
+		c.g.rotation.y = c.yaw;
+		// gait, sitting, the jump when hit
+		c.phase += dt * speed * 13;
+		const moving = speed > 0 ? 1 : 0;
+		c.legs.forEach((l, i) => { l.rotation.x = moving * Math.sin(c.phase + (i === 0 || i === 3 ? 0 : Math.PI)) * (c.flee > 0 ? 0.8 : 0.5); });
+		c.body.rotation.x = -0.32 * c.sit;
+		c.body.position.y = -0.03 * c.sit;
+		c.legs[2].rotation.x -= 0.9 * c.sit; c.legs[3].rotation.x -= 0.9 * c.sit;
+		c.head.rotation.y = Math.sin(c.t * 0.7) * 0.35 * (1 - moving);
+		c.head.rotation.x = 0.3 * c.sit;
+		c.tail.forEach((s, i) => {
+			s.rotation.x = i === 0 ? (c.flee > 0 ? -0.6 : -1.2 + 0.4 * c.sit) : (c.flee > 0 ? 0.05 : 0.18 + 0.1 * c.sit);
+			s.rotation.z = Math.sin(c.t * (c.flee > 0 ? 6 : 1.8) + i * 0.6) * 0.12;
+		});
+		let y = 0;
+		if (c.jumpT > 0) { c.jumpT = Math.max(0, c.jumpT - dt); y = Math.sin(Math.PI * (1 - c.jumpT / 0.5)) * 0.45; }
+		c.g.position.y = y;
+	}
+	function meow(pitch) {                                               // a startled "mrrrow"
+		const a = audio(); if (!a) return;
+		const t0 = a.currentTime, o = a.createOscillator(), o2 = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain();
+		o.type = "sawtooth"; o2.type = "triangle";
+		for (const [osc, k] of [[o, 1], [o2, 2.02]]) {
+			osc.frequency.setValueAtTime(520 * pitch * k, t0);
+			osc.frequency.linearRampToValueAtTime(980 * pitch * k, t0 + 0.12);
+			osc.frequency.linearRampToValueAtTime(760 * pitch * k, t0 + 0.32);
+			osc.frequency.linearRampToValueAtTime(430 * pitch * k, t0 + 0.55);
+		}
+		f.type = "bandpass"; f.Q.value = 3; f.frequency.setValueAtTime(1500 * pitch, t0); f.frequency.linearRampToValueAtTime(900 * pitch, t0 + 0.55);
+		g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(0.32, t0 + 0.05); g.gain.setValueAtTime(0.3, t0 + 0.35); g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.6);
+		o.connect(f); o2.connect(f); f.connect(g).connect(a.destination);
+		o.start(t0); o2.start(t0); o.stop(t0 + 0.62); o2.stop(t0 + 0.62);
+	}
+	makeCat({ kind: "calico", seed: 51, scale: 1.0, fluff: 1.18, eye: 0x3f7fd0, pitch: 1.15, start: "F1" });   // ragdoll: long fluffy coat, blue eyes
+	makeCat({ kind: "tabby", seed: 53, scale: 1.18, fluff: 1.0, eye: 0xd09a2a, pitch: 0.85, start: "H2" });    // ginger: bigger, amber eyes
+
+	// ---------------------------------------------------------------------------
 	// First-person controls: pointer lock to look, WASD to walk, Ctrl / C to
 	// crouch, Space to jump, E for doors, left click to fire.
 	// ---------------------------------------------------------------------------
@@ -1432,9 +1608,11 @@ export function createTour(stage, { spawn = [6.8, 12.4, 0], lookAt = [6.8, 1.5, 
 			m.scale.set(1, 1, len); m.position.copy(MUZZLE).lerp(to, 0.5); m.lookAt(to); m.userData.noHit = true; scene.add(m);
 			fx.push({ m, t: 0, life: 0.07, kind: "tracer" });
 		}
-		const pane = hit && hit.object.userData.glass;
-		const root = hit && !pane && breakRoot(hit.object);
-		if (pane && ++pane.hits >= 5) {                                        // fifth hit: the pane goes
+		const cat = hit && catOf(hit.object);
+		const pane = hit && !cat && hit.object.userData.glass;
+		const root = hit && !cat && !pane && breakRoot(hit.object);
+		if (cat) cat.spook();
+		else if (pane && ++pane.hits >= 5) {                                        // fifth hit: the pane goes
 			if (pane.col) pane.col.off = true;
 			pane.bars.forEach((b) => b.removeFromParent());
 			shatter(hit.object, hit.point, ray.ray.direction);
@@ -1572,6 +1750,7 @@ export function createTour(stage, { spawn = [6.8, 12.4, 0], lookAt = [6.8, 1.5, 
 		}
 		if (moving) renderer.shadowMap.needsUpdate = true;
 		stepFx(dt);
+		for (const c of cats) updateCat(c, dt);
 		sky.position.copy(camera.position);
 		renderer.render(scene, camera);
 		frameListeners.forEach((f) => f());
