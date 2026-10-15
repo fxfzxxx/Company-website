@@ -1,0 +1,209 @@
+/* Rainy Night Drive-Thru — a night plate. The scene is dark and wet, so the
+   chrome is too: a smoked-glass control panel over the render, the brand's
+   gold for anything live, an engineer's monospace for anything measured.
+   Shared by the live concept and the case study. */
+
+:root {
+	--night: #04060b;
+	--panel: rgba(10, 14, 22, 0.74);
+	--surface: #0d121b;
+	--ink: #e8ecf3;
+	--dim: #9aa4b5;
+	--faint: #7d8798;
+	--rule: rgba(255, 255, 255, 0.09);
+	--rule-strong: rgba(255, 255, 255, 0.22);
+	--gold: #ffc72c;
+	--red: #c8102e;
+	--red-edge: #e2384f;
+	--sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+	--mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+	--serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Songti SC", serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+	margin: 0;
+	background: var(--night);
+	color: var(--ink);
+	font-family: var(--sans);
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* — the plate ——————————————————————————————————————————————————— */
+
+body.plate { overflow: hidden; }
+
+#c { display: block; width: 100%; height: 100%; }
+
+.panel {
+	position: fixed;
+	top: 12px;
+	left: 12px;
+	width: 248px;
+	padding: 12px 14px;
+	border-radius: 12px;
+	background: var(--panel);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	border: 1px solid var(--rule);
+}
+
+.site {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	margin: -2px 0 10px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid var(--rule);
+	font-family: var(--mono);
+	font-size: 10px;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+	color: var(--faint);
+}
+.site a:hover { color: var(--ink); }
+
+.hd { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.hd b { font-size: 15px; letter-spacing: 0.3px; flex: 1; }
+.hd b i { font-style: normal; color: var(--gold); }
+.hd button {
+	background: rgba(255, 255, 255, 0.07);
+	border: 1px solid var(--rule);
+	color: #dfe5ee;
+	border-radius: 6px;
+	font: 12px/18px var(--sans);
+	cursor: pointer;
+	padding: 2px 7px;
+}
+#lang span { opacity: 0.45; }
+#lang span.on { opacity: 1; color: var(--gold); font-weight: 700; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 10px 0; }
+.stats div { background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 6px 4px; text-align: center; }
+.stats span { display: block; font-size: 20px; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; }
+.stats small { color: var(--dim); font-size: 11px; }
+
+.sec { color: var(--dim); font-size: 11px; margin: 8px 0 4px; letter-spacing: 1px; text-transform: uppercase; }
+
+.btns { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+.btns button {
+	flex: 1 0 28%;
+	background: rgba(255, 255, 255, 0.07);
+	color: #dfe5ee;
+	border: 1px solid var(--rule);
+	border-radius: 7px;
+	padding: 5px 0;
+	font: 12px var(--sans);
+	cursor: pointer;
+}
+.btns button.on { background: var(--red); border-color: var(--red-edge); color: #fff; }
+
+.panel label { display: flex; align-items: center; gap: 6px; margin: 5px 0; cursor: pointer; }
+.panel label.rng input { flex: 1; accent-color: var(--gold); }
+.panel input[type="checkbox"] { accent-color: var(--red); }
+.hint { color: var(--faint); font-size: 11px; margin: 8px 0 0; }
+
+#loading {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 16px;
+	background: var(--night);
+	color: var(--dim);
+	font-size: 14px;
+	transition: opacity 0.8s;
+}
+
+body.bare .panel { display: none; }
+
+@media (max-width: 520px) {
+	.panel { width: calc(100% - 32px); left: 16px; top: 16px; }
+}
+
+/* — the case study ——————————————————————————————————————————————— */
+
+.study { max-width: 940px; margin: 0 auto; padding: clamp(24px, 5vw, 68px) clamp(20px, 5vw, 54px) 96px; font-family: var(--mono); line-height: 1.8; }
+
+.nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 24px;
+	padding-bottom: 18px;
+	border-bottom: 1px solid var(--rule);
+	font-size: 11px;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+}
+.nav strong { color: var(--gold); font-weight: 600; }
+.nav-links { display: flex; gap: 18px; color: var(--dim); }
+.nav-links a:hover { color: var(--ink); }
+
+.study h1 {
+	font-family: var(--serif);
+	font-size: clamp(32px, 5.4vw, 56px);
+	line-height: 1.04;
+	letter-spacing: -0.015em;
+	font-weight: 400;
+	margin: clamp(40px, 7vw, 68px) 0 20px;
+	max-width: 20ch;
+}
+
+.study .lede-block { max-width: 62ch; color: var(--dim); font-size: 14px; }
+.study section { margin-top: clamp(40px, 6vw, 60px); }
+
+.study h2 {
+	font-size: 11px;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	font-weight: 400;
+	color: var(--dim);
+	margin: 0 0 16px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid var(--rule);
+}
+
+.study p { max-width: 68ch; margin: 0 0 16px; }
+.study a { border-bottom: 1px solid var(--rule-strong); }
+.study .nav a { border-bottom: 0; }
+.plate-shot { display: block; width: 100%; height: auto; margin: clamp(28px, 5vw, 44px) 0 0; border: 1px solid var(--rule); }
+
+.facts, .cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 1px;
+	background: var(--rule);
+	border: 1px solid var(--rule);
+	margin-top: clamp(24px, 4vw, 40px);
+}
+
+.facts div, .cards article { background: var(--surface); padding: 16px 18px; }
+.facts dt { color: var(--dim); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+.facts dd { margin: 0; }
+.cards article { padding: 22px 20px 24px; }
+.cards h3 { font-size: 13px; font-weight: 400; margin: 0 0 10px; color: var(--gold); }
+.cards p { color: var(--dim); margin: 0; }
+
+.dims { width: 100%; max-width: 68ch; border-collapse: collapse; }
+.dims th, .dims td { text-align: left; padding: 7px 0; border-bottom: 1px solid var(--rule); font-weight: 400; }
+.dims th { color: var(--dim); padding-right: 24px; }
+.dims td { font-variant-numeric: tabular-nums; }
+
+.study footer {
+	margin-top: clamp(48px, 8vw, 80px);
+	padding-top: 18px;
+	border-top: 1px solid var(--rule);
+	color: var(--dim);
+	font-size: 11px;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+}

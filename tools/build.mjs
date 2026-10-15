@@ -229,7 +229,6 @@ const rootPage = `<!DOCTYPE html>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Yonder Tech</title>
-	<meta name="robots" content="noindex, follow" />
 	<link rel="canonical" href="${SITE}/en/index.html" />
 	<link rel="alternate" hreflang="${HREFLANG.en}" href="${SITE}/en/index.html" />
 	<link rel="alternate" hreflang="${HREFLANG.zh}" href="${SITE}/zh/index.html" />
