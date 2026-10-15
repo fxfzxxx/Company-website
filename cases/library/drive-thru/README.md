@@ -61,9 +61,11 @@ its third frame, which is what to wait for before a screenshot.
   Their fill light is a small emissive term on their materials, not a lamp.
 - **Glow is kept to a trace on purpose.** Bloom is strength 0.06, radius
   0.15, threshold 1.25, and every other glow layer is held down with it: lamp
-  heads, light shafts and ground pools, headlamps and their road pools, tail
-  lights, the wet-ground reflection (mirror tint `0x4e5560`) and the rain lit
-  by nearby lights. Raise them together, or the scene goes muddy.
+  heads, ground pools, headlamps and their road pools, tail lights, the
+  wet-ground reflection (mirror tint `0x4e5560`) and the rain lit by nearby
+  lights. Street lamps and headlamps sit below the bloom threshold, so they
+  light things without a halo. There are no light shafts: drawn as open
+  cones, their rims showed as bright rings on some GPUs.
 - **Signage** is drawn by `dtex`, which registers a redraw; the language
   switch calls every redraw. Add a sign there and it is bilingual for free —
   the strings live in `S.en` / `S.zh`, the panel's in `UI.en` / `UI.zh`.

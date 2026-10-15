@@ -803,23 +803,7 @@ for (const [x, z, s] of [[-30, -20, 1.3], [-36, 4, 1.1], [-38, 18, 1.4], [-18, -
   [24, -18, 1.3], [28, -4, 1.0], [29, 10, 1.4], [-17.5, -2, .85], [-46, -12, 1.6], [46, -10, 1.5], [-50, 10, 1.3], [52, 10, 1.2], [-58, -30, 1.7], [60, -28, 1.6]]) tree(x, z, s);
 for (let x = -22; x < 16; x += 2.4) { const h = rand(1, 1.25); rbox(2.35, h, 1.3, .3, M.hedge, x, .16 + h / 2, -16.8); }
 
-// light shafts in the rain: brightest near the lamp, fading along the cone and
-// towards its silhouette, so the open cylinder never shows a hard edge
-function shaftMat(color, opacity, edge = 2) {
-  return new THREE.ShaderMaterial({
-    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide,
-    uniforms: { uColor: { value: new THREE.Color(color) }, uOpacity: { value: opacity }, uEdge: { value: edge } },
-    vertexShader: `varying vec2 vUv; varying vec3 vN; varying vec3 vV;
-      void main(){ vUv = uv; vec4 mv = modelViewMatrix * vec4(position, 1.0);
-        vN = normalize(normalMatrix * normal); vV = normalize(-mv.xyz); gl_Position = projectionMatrix * mv; }`,
-    fragmentShader: `uniform vec3 uColor; uniform float uOpacity, uEdge; varying vec2 vUv; varying vec3 vN; varying vec3 vV;
-      void main(){ float f = pow(abs(dot(normalize(vN), normalize(vV))), uEdge);
-        float a = uOpacity * f * pow(vUv.y, 1.6); gl_FragColor = vec4(uColor * a, a); }`,
-  });
-}
-// ---- street lamps
-const coneMat = shaftMat(0xffdcae, .07, .8);
-const lampHeadMat = new THREE.MeshBasicMaterial({ color: lin(1.5, 1.25, .9) });
+const lampHeadMat = new THREE.MeshBasicMaterial({ color: lin(1.05, .92, .7) });   // under the bloom threshold: lit, no halo
 const lampArc = new THREE.TorusGeometry(.8, .05, 6, 16, PI / 2);
 for (const x of [-42, -8, 26, 60]) {
   const z = 29.0;
@@ -830,7 +814,6 @@ for (const x of [-42, -8, 26, 60]) {
   const head = new THREE.Mesh(new THREE.PlaneGeometry(.38, .82), lampHeadMat); head.rotation.x = PI / 2; head.position.set(x, 8.67, z + 2.45); P.add(head);
   if (x === -8 || x === 26) pointLight(0xffc98f, 55, 26, x, 8.4, z + 2.45);
   lightPool(x, z + 2.45, 14, 0xffc98f, x === -8 || x === 26 ? .06 : .16);
-  const cone = new THREE.Mesh(new THREE.CylinderGeometry(.25, 4.6, 8.5, 24, 1, true), coneMat); cone.position.set(x, 4.35, z + 2.45); P.add(cone);
 }
 // ---- distant city
 const cityMat = new THREE.MeshBasicMaterial({ map: windowsTex, color: lin(.5, .5, .55) });
@@ -933,10 +916,9 @@ const trimMat = MS({ color: 0x0e0f11, roughness: .5, metalness: .2 });
 const tyreMat = MS({ color: 0x121212, roughness: .85 });
 const rimMat = MS({ color: 0xc4c8ce, roughness: .18, metalness: 1 });
 const rimDark = MS({ color: 0x1a1b1d, roughness: .4, metalness: .6 });
-const headOn = new THREE.MeshBasicMaterial({ color: lin(1.5, 1.45, 1.3) });
+const headOn = new THREE.MeshBasicMaterial({ color: lin(1.05, 1.02, .92) });          // under the bloom threshold: lit, no halo
 const headOff = MS({ color: 0x8a8a8a, roughness: .15, metalness: .8 });
 const poolMat = new THREE.MeshBasicMaterial({ map: poolTex, color: lin(.12, .11, .09), blending: THREE.AdditiveBlending, transparent: true, depthWrite: false });
-const beamMat = shaftMat(0xfff1d6, .025);
 const driverMat = MS({ color: 0x1a1512, roughness: .8 });
 
 const TYPES = {
@@ -1045,7 +1027,6 @@ function makeCar(lit = true, type = pick(['sedan', 'sedan', 'suv', 'hatch'])) {
   }
   if (lit) {
     const pl = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 10), poolMat); pl.rotation.x = -PI / 2; pl.position.set(0, .1, T.L / 2 + 5); g.add(pl);
-    const beam = new THREE.Mesh(new THREE.CylinderGeometry(.35, 2.4, 11, 18, 1, true).rotateX(-PI / 2), beamMat); beam.position.set(0, lt.headY, T.L / 2 + 5.5); g.add(beam);
   }
   scene.add(g);
   return { g, wheels, tail, indL, wipers, wph: rand(0, 6), paint, s: 0, v: 0, stop: 0, wait: null };
