@@ -66,6 +66,14 @@ its third frame, which is what to wait for before a screenshot.
   compiles its shaders with `compileAsync` before the first frame, and the
   loading plate reports a failed file, a script error or a lost context
   instead of staying black.
+- **The HDR buffer is scrubbed before bloom.** The scene renders into a
+  half-float buffer (max 65504). On some GPUs a razor-sharp highlight
+  overflows to Infinity, and the bloom blur turns one such pixel into NaN
+  across most of the screen: a black page, or black blocks while orbiting,
+  only with Glow on. A small pass after the render pass zeroes non-finite
+  pixels and caps the rest, and the sharpest materials (glass, chrome, car
+  glass, clear coat) have a little more roughness. Keep that pass first
+  after `RenderPass`.
 - **Static geometry** is built into `world` and `decals` and merged by
   material (`mergeGroup`) at the end of the build: about sixty meshes for the
   building, the site and the city.

@@ -17,6 +17,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 
 const rand = (a, b) => a + Math.random() * (b - a);
 const pick = a => a[(Math.random() * a.length) | 0];
@@ -414,7 +415,7 @@ const M = {
   black: MS({ color: 0x141518, roughness: .3, metalness: .6 }),
   dark: MS({ color: 0x0b0c0e, roughness: .6 }),
   steel: MS({ color: 0xb4b9c1, roughness: .22, metalness: .95 }),
-  chrome: MS({ color: 0xe6e9ee, roughness: .08, metalness: 1 }),
+  chrome: MS({ color: 0xe6e9ee, roughness: .18, metalness: 1 }),
   yellow: MS({ color: 0xf2c21b, roughness: .4 }),
   orange: MS({ color: 0xe0782a, roughness: .5 }),
   paintW: MS({ color: 0xcfd0d1, roughness: .35, transparent: true, opacity: .85, depthWrite: false }),
@@ -422,7 +423,7 @@ const M = {
   led: new THREE.MeshBasicMaterial({ color: lin(2.6, 2.6, 2.45) }),
   down: new THREE.MeshBasicMaterial({ color: lin(3, 2.6, 2) }),
   bulb: new THREE.MeshBasicMaterial({ color: lin(4, 3, 1.6) }),
-  glass: MS({ map: glassDropTex, color: 0xd6e2ee, transparent: true, roughness: .05, metalness: .2, depthWrite: false, side: THREE.DoubleSide }),
+  glass: MS({ map: glassDropTex, color: 0xd6e2ee, transparent: true, roughness: .12, metalness: .2, depthWrite: false, side: THREE.DoubleSide }),
   leaf: MS({ color: 0x1a3020, roughness: .75, flatShading: true }),
   leaf2: MS({ color: 0x23402a, roughness: .75, flatShading: true }),
 };
@@ -893,13 +894,13 @@ for (const s of [sLotIn + 22, sLotIn + 40, stops[0] - 14, stops[0] + 10, stops[1
 
 // ================================================================ cars
 const carCols = [0xb0182a, 0x1d3f8a, 0xd9d9d9, 0x141414, 0x5e636b, 0x2e6b4f, 0xe0b33a, 0x8a8f99, 0xf2f2f2, 0x6a2a6a, 0x2b5d8a, 0x8a3a1a];
-const glassCar = new THREE.MeshPhysicalMaterial({ color: 0x0a0d12, roughness: .04, metalness: .3, clearcoat: 1, transparent: true, opacity: .82, clearcoatNormalMap: dropNormal, clearcoatNormalScale: new THREE.Vector2(.6, .6) });
+const glassCar = new THREE.MeshPhysicalMaterial({ color: 0x0a0d12, roughness: .12, metalness: .3, clearcoat: 1, transparent: true, opacity: .82, clearcoatNormalMap: dropNormal, clearcoatNormalScale: new THREE.Vector2(.6, .6) });
 const trimMat = MS({ color: 0x0e0f11, roughness: .5, metalness: .2 });
 const tyreMat = MS({ color: 0x121212, roughness: .85 });
 const rimMat = MS({ color: 0xc4c8ce, roughness: .18, metalness: 1 });
 const rimDark = MS({ color: 0x1a1b1d, roughness: .4, metalness: .6 });
 const headOn = new THREE.MeshBasicMaterial({ color: lin(4, 3.9, 3.5) });
-const headOff = MS({ color: 0x8a8a8a, roughness: .05, metalness: .8 });
+const headOff = MS({ color: 0x8a8a8a, roughness: .15, metalness: .8 });
 const poolMat = new THREE.MeshBasicMaterial({ map: poolTex, color: lin(.55, .5, .42), blending: THREE.AdditiveBlending, transparent: true, depthWrite: false });
 const beamMat = shaftMat(0xfff1d6, .12);
 const driverMat = MS({ color: 0x1a1512, roughness: .8 });
@@ -980,7 +981,7 @@ const driverGeo = new THREE.SphereGeometry(.12, 10, 8);
 
 function makeCar(lit = true, type = pick(['sedan', 'sedan', 'suv', 'hatch'])) {
   const C = CT[type], T = C.T, g = new THREE.Group(), xs = T.W / 1.84;
-  const paint = new THREE.MeshPhysicalMaterial({ color: pick(carCols), metalness: .55, roughness: .32, clearcoat: 1, clearcoatRoughness: .06, clearcoatNormalMap: dropNormal, clearcoatNormalScale: new THREE.Vector2(.35, .35) });
+  const paint = new THREE.MeshPhysicalMaterial({ color: pick(carCols), metalness: .55, roughness: .32, clearcoat: 1, clearcoatRoughness: .12, clearcoatNormalMap: dropNormal, clearcoatNormalScale: new THREE.Vector2(.35, .35) });
   g.add(new THREE.Mesh(C.paint, paint), new THREE.Mesh(C.trim, trimMat), new THREE.Mesh(C.chrome, M.chrome));
   const cab = new THREE.Mesh(C.cabin, glassCar); cab.renderOrder = 1; g.add(cab);
   const drv = new THREE.Mesh(driverGeo, driverMat); drv.position.set(.38, T.H + .3, (T.roofF + T.roofB) / 2 + .1); drv.visible = lit; g.add(drv);
@@ -1423,6 +1424,20 @@ const splashes = new THREE.Mesh(splGeo, splMat); splashes.frustumCulled = false;
 // ================================================================ post
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
+// The scene renders into a half-float buffer (max 65504). On some GPUs a
+// razor-sharp specular highlight overflows to Infinity, which the bloom blur
+// turns into NaN and smears into large black blocks. Scrub the buffer before
+// bloom: non-finite pixels become black, everything else is capped.
+composer.addPass(new ShaderPass({
+  uniforms: { tDiffuse: { value: null } },
+  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+  fragmentShader: `uniform sampler2D tDiffuse; varying vec2 vUv;
+    void main(){
+      vec4 c = texture2D(tDiffuse, vUv);
+      if (any(isnan(c)) || any(isinf(c))) c = vec4(0.0, 0.0, 0.0, 1.0);
+      gl_FragColor = vec4(min(c.rgb, vec3(48.0)), c.a);
+    }`,
+}));
 const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), .55, .45, .9);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
