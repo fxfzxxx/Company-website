@@ -432,9 +432,9 @@ const M = {
   orange: MS({ color: 0xe0782a, roughness: .5 }),
   paintW: MS({ color: 0xcfd0d1, roughness: .35, transparent: true, opacity: .85, depthWrite: false }),
   paintY: MS({ color: 0xd8ae36, roughness: .35, transparent: true, opacity: .85, depthWrite: false }),
-  led: new THREE.MeshBasicMaterial({ color: lin(2.6, 2.6, 2.45) }),
-  down: new THREE.MeshBasicMaterial({ color: lin(3, 2.6, 2) }),
-  bulb: new THREE.MeshBasicMaterial({ color: lin(4, 3, 1.6) }),
+  led: new THREE.MeshBasicMaterial({ color: lin(1.7, 1.7, 1.6) }),
+  down: new THREE.MeshBasicMaterial({ color: lin(1.6, 1.4, 1.1) }),
+  bulb: new THREE.MeshBasicMaterial({ color: lin(1.8, 1.4, .8) }),
   glass: MS({ map: glassDropTex, color: 0xd6e2ee, transparent: true, roughness: .12, metalness: .2, depthWrite: false, side: THREE.DoubleSide }),
   leaf: MS({ color: 0x1a3020, roughness: .75, flatShading: true }),
   leaf2: MS({ color: 0x23402a, roughness: .75, flatShading: true }),
@@ -546,7 +546,7 @@ const sky = new THREE.Mesh(new THREE.SphereGeometry(500, 32, 16), skyMat);
 scene.add(sky);
 
 const mirror = new Reflector(new THREE.PlaneGeometry(240, 240), {
-  textureWidth: innerWidth * DPR * .5, textureHeight: innerHeight * DPR * .5, color: 0x8794a6, clipBias: .003,
+  textureWidth: innerWidth * DPR * .5, textureHeight: innerHeight * DPR * .5, color: 0x4e5560, clipBias: .003,
 });
 mirror.rotation.x = -PI / 2; scene.add(mirror);
 asphalt.map.repeat.set(34, 34); asphalt.normal.repeat.set(34, 34); wetTex.repeat.set(4, 4);
@@ -818,8 +818,8 @@ function shaftMat(color, opacity, edge = 2) {
   });
 }
 // ---- street lamps
-const coneMat = shaftMat(0xffdcae, .3, .8);
-const lampHeadMat = new THREE.MeshBasicMaterial({ color: lin(4, 3.2, 2.2) });
+const coneMat = shaftMat(0xffdcae, .07, .8);
+const lampHeadMat = new THREE.MeshBasicMaterial({ color: lin(1.5, 1.25, .9) });
 const lampArc = new THREE.TorusGeometry(.8, .05, 6, 16, PI / 2);
 for (const x of [-42, -8, 26, 60]) {
   const z = 29.0;
@@ -828,8 +828,8 @@ for (const x of [-42, -8, 26, 60]) {
   strut([x, 8.8, z + .8], [x, 8.8, z + 2.2], .05, M.black);
   rbox(.5, .14, 1.0, .05, M.black, x, 8.75, z + 2.45);
   const head = new THREE.Mesh(new THREE.PlaneGeometry(.38, .82), lampHeadMat); head.rotation.x = PI / 2; head.position.set(x, 8.67, z + 2.45); P.add(head);
-  if (x === -8 || x === 26) pointLight(0xffc98f, 110, 30, x, 8.4, z + 2.45);
-  lightPool(x, z + 2.45, 16, 0xffc98f, x === -8 || x === 26 ? .25 : .7);
+  if (x === -8 || x === 26) pointLight(0xffc98f, 55, 26, x, 8.4, z + 2.45);
+  lightPool(x, z + 2.45, 14, 0xffc98f, x === -8 || x === 26 ? .06 : .16);
   const cone = new THREE.Mesh(new THREE.CylinderGeometry(.25, 4.6, 8.5, 24, 1, true), coneMat); cone.position.set(x, 4.35, z + 2.45); P.add(cone);
 }
 // ---- distant city
@@ -875,9 +875,9 @@ pointLight(0xffc27a, 24, 12, -6.7, 2.5, 8.8);              // dining room
 downLight(warm, 60, 14, 8.5, 4.5, 11.8, .85);             // timber-box canopy
 downLight(warm, 110, 15, 15.2, 4.5, 2.5, 1.2);            // drive-thru canopy and windows
 pointLight(0xff2a20, 70, 30, -16.2, 10, 13.8);             // pylon
-lightPool(-16.4, 14, 12, 0xffb030, .35);                   // arches glow
-lightPool(1.6, -12.6, 6, 0xdfe8ff, .5);                    // menu board
-lightPool(-.4, 11.5, 10, 0xffffff, .12);                   // sign wash
+lightPool(-16.4, 14, 12, 0xffb030, .1);                    // arches glow
+lightPool(1.6, -12.6, 6, 0xdfe8ff, .15);                   // menu board
+lightPool(-.4, 11.5, 10, 0xffffff, .04);                   // sign wash
 
 // ================================================================ drive-thru path
 const curve = new THREE.CatmullRomCurve3([
@@ -933,10 +933,10 @@ const trimMat = MS({ color: 0x0e0f11, roughness: .5, metalness: .2 });
 const tyreMat = MS({ color: 0x121212, roughness: .85 });
 const rimMat = MS({ color: 0xc4c8ce, roughness: .18, metalness: 1 });
 const rimDark = MS({ color: 0x1a1b1d, roughness: .4, metalness: .6 });
-const headOn = new THREE.MeshBasicMaterial({ color: lin(4, 3.9, 3.5) });
+const headOn = new THREE.MeshBasicMaterial({ color: lin(1.5, 1.45, 1.3) });
 const headOff = MS({ color: 0x8a8a8a, roughness: .15, metalness: .8 });
-const poolMat = new THREE.MeshBasicMaterial({ map: poolTex, color: lin(.55, .5, .42), blending: THREE.AdditiveBlending, transparent: true, depthWrite: false });
-const beamMat = shaftMat(0xfff1d6, .12);
+const poolMat = new THREE.MeshBasicMaterial({ map: poolTex, color: lin(.12, .11, .09), blending: THREE.AdditiveBlending, transparent: true, depthWrite: false });
+const beamMat = shaftMat(0xfff1d6, .025);
 const driverMat = MS({ color: 0x1a1512, roughness: .8 });
 
 const TYPES = {
@@ -1114,9 +1114,9 @@ function updateCars(dt) {
       if (c.wait <= 0) { c.stop++; c.wait = null; if (c.stop === 3) served++; }
     }
     const braking = c.v < .25 || c.v < pv - .01;
-    c.tail.color.setRGB(braking ? 6 : 1.6, braking ? .12 : .03, .03);
+    c.tail.color.setRGB(braking ? 2.2 : .9, braking ? .05 : .02, .02);
     const turning = (c.s > sLotIn - 26 && c.s < sLotIn + 2) || (c.s > sLotOut - 14 && c.s < sLotOut + 8);
-    c.indL.color.setRGB(turning && blink ? 5 : .25, turning && blink ? 2 : .1, 0);
+    c.indL.color.setRGB(turning && blink ? 2.2 : .25, turning && blink ? .9 : .1, 0);
     placeCar(c); animCar(c, dt);
   }
   while (cars.length && cars[0].s >= L - .5) { const c = cars.shift(); freeCar(c); if (follow === c) follow = null; }
@@ -1127,7 +1127,7 @@ function updateCars(dt) {
   if (trafficT <= 0) { const c = getCar(); c.g.position.set(110, 0, 37.2); c.g.rotation.y = -PI / 2; c.v = 13; traffic.push(c); trafficT = rand(3, 9); }
   for (let i = traffic.length - 1; i >= 0; i--) {
     const c = traffic[i]; c.g.position.x -= c.v * dt; animCar(c, dt);
-    c.tail.color.setRGB(1.6, .03, .03); c.indL.color.setRGB(.25, .1, 0);
+    c.tail.color.setRGB(.9, .02, .02); c.indL.color.setRGB(.25, .1, 0);
     if (c.g.position.x < -110) { freeCar(c); traffic.splice(i, 1); }
   }
   return cars.filter(c => c.s > sLotIn - 4 && c.stop < 3).length;
@@ -1432,7 +1432,7 @@ const rainMat = new THREE.ShaderMaterial({
     void main(){
       if (underRoof(vW) || vW.y < 0.0) discard;
       vec3 c = vec3(0.10,0.12,0.16) + uFlash*vec3(0.5,0.55,0.7);
-      for(int i=0;i<8;i++){ vec3 d = vW-uL[i]; c += uC[i]*1.6/(1.0+dot(d,d)*0.05); }
+      for(int i=0;i<8;i++){ vec3 d = vW-uL[i]; c += uC[i]*.7/(1.0+dot(d,d)*0.05); }
       float a = mix(1.0, 0.1, vTip) * vFade * uOpacity;
       gl_FragColor = vec4(c*a*0.55, a);
     }`,
@@ -1523,7 +1523,7 @@ composer.addPass(new ShaderPass({
       gl_FragColor = vec4(min(c.rgb, vec3(48.0)), c.a);
     }`,
 }));
-const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), .2, .22, 1.05);   // a restrained halo, not a haze
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), .06, .15, 1.25);   // only a trace of halo on the brightest emitters
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
 

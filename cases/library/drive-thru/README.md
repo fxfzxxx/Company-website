@@ -59,9 +59,11 @@ its third frame, which is what to wait for before a screenshot.
   the till between cars; when a car stops at their window the sliding half
   opens and they reach out with a card reader (pay) or the bag (pickup).
   Their fill light is a small emissive term on their materials, not a lamp.
-- **Glow is restrained on purpose** (`UnrealBloomPass` strength 0.2, radius
-  0.22, threshold 1.05): only the LED strips, signs and lamps bloom, and only
-  a little.
+- **Glow is kept to a trace on purpose.** Bloom is strength 0.06, radius
+  0.15, threshold 1.25, and every other glow layer is held down with it: lamp
+  heads, light shafts and ground pools, headlamps and their road pools, tail
+  lights, the wet-ground reflection (mirror tint `0x4e5560`) and the rain lit
+  by nearby lights. Raise them together, or the scene goes muddy.
 - **Signage** is drawn by `dtex`, which registers a redraw; the language
   switch calls every redraw. Add a sign there and it is bilingual for free —
   the strings live in `S.en` / `S.zh`, the panel's in `UI.en` / `UI.zh`.
