@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Design showcase: Rainy Night Drive-Thru - a live 3D scene of a drive-thru restaurant on a wet night, with queuing cars, walking customers and rain, generated in the browser." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/drive-thru/index.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#04060b" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Rainy Night Drive-Thru - Live concept" />
+	<meta property="og:description"
+		content="A drive-thru on a rainy night: cars queue through the order point and both windows, people walk in under umbrellas, and the wet asphalt reflects every sign." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/drive-thru/index.html" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/drive-thru/assets/hero.jpg" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<title>Rainy Night Drive-Thru - Live concept</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body class="plate">
+	<canvas id="c"></canvas>
+	<div id="loading" data-i18n="loading">Building the rainy night…</div>
+
+	<div id="ui" class="panel">
+		<nav class="site" aria-label="Case">
+			<a href="../../../en/cases/index.html" target="_top" data-i18n="lib">Case library</a>
+			<a href="project.html" data-i18n="study">Case study</a>
+		</nav>
+		<div class="hd">
+			<b><span data-i18n="title">Rainy Night Drive-Thru</span> <i>M</i></b>
+			<button id="lang" type="button" title="English / 中文"><span data-l="zh">中</span> / <span data-l="en">EN</span></button>
+			<button id="tg" type="button" aria-label="Collapse panel">–</button>
+		</div>
+		<div id="body">
+			<div class="stats">
+				<div><span id="sq">0</span><small data-i18n="queue">In queue</small></div>
+				<div><span id="ss">0</span><small data-i18n="served">Served</small></div>
+				<div><span id="sp">0</span><small data-i18n="inside">Inside</small></div>
+			</div>
+			<div class="sec" data-i18n="view">Camera</div>
+			<div class="btns">
+				<button type="button" data-v="overview" class="on" data-i18n="overview">Overview</button>
+				<button type="button" data-v="door" data-i18n="door">Entrance</button>
+				<button type="button" data-v="inside" data-i18n="insideV">Dining</button>
+				<button type="button" data-v="window" data-i18n="window">Window</button>
+				<button type="button" data-v="follow" data-i18n="follow">Follow car</button>
+				<button type="button" data-v="top" data-i18n="top">Top</button>
+				<button type="button" data-v="street" data-i18n="street">Street</button>
+				<button type="button" data-v="order" data-i18n="order">Menu</button>
+				<button type="button" data-v="pylon" data-i18n="pylon">Sign</button>
+			</div>
+			<label><input type="checkbox" id="cRain" checked /> <span data-i18n="rain">Rain</span></label>
+			<label class="rng"><span data-i18n="amount">Rain amount</span> <input type="range" id="rRain" min="2000" max="30000" step="1000" value="16000" /></label>
+			<label><input type="checkbox" id="cFlash" checked /> <span data-i18n="flash">Lightning</span></label>
+			<label><input type="checkbox" id="cBloom" checked /> <span data-i18n="bloom">Glow</span></label>
+			<label><input type="checkbox" id="cRot" /> <span data-i18n="rotate">Auto orbit</span></label>
+			<p class="hint" data-i18n="hint">Drag to orbit · scroll to zoom · right-drag to pan</p>
+		</div>
+	</div>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../../../assets/vendor/three/three.module.min.js",
+				"three/addons/": "../../../assets/vendor/three/addons/"
+			}
+		}
+	</script>
+	<script type="module" src="drive-thru.js"></script>
+	<script>
+		/* If the module never starts (no WebGL, or a script failed to load), say so. */
+		setTimeout(() => {
+			const l = document.getElementById("loading");
+			if (l && l.style.opacity !== "0") l.textContent = document.documentElement.lang === "zh-CN"
+				? "无法启动：这个场景需要支持 WebGL 2 的桌面浏览器。"
+				: "This scene needs WebGL 2. Try a current desktop browser.";
+		}, 25000);
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Case study: Rainy Night Drive-Thru - a drive-thru restaurant on a wet night, with a simulated car queue, walking customers and rain, generated live in the browser." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/drive-thru/project.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#04060b" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Rainy Night Drive-Thru - Case study" />
+	<meta property="og:description"
+		content="A drive-thru that runs itself in the rain: queuing cars, customers under umbrellas and wet asphalt reflecting every sign, generated in the browser." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/drive-thru/project.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/drive-thru/assets/hero.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Rainy Night Drive-Thru - Case study" />
+	<meta name="twitter:description" content="A drive-thru that runs itself in the rain." />
+	<title>Rainy Night Drive-Thru - Case study</title>
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+	<div class="study">
+		<div class="nav">
+			<strong>Rainy Night Drive-Thru</strong>
+			<div class="nav-links">
+				<a href="index.html">Live concept</a>
+				<a href="project.html">Case study</a>
+				<a href="../../../en/cases/index.html" target="_top">Case Library</a>
+			</div>
+		</div>
+
+		<h1>A drive-thru that runs itself in the rain.</h1>
+		<p class="lede-block">
+			A drive-thru restaurant on a wet night, left running on its own. Cars queue round the building through
+			the order board and both windows, customers walk in from the car park under umbrellas, and the asphalt
+			doubles every sign. You do not drive anything: you watch, from nine camera positions, and the scene keeps
+			going.
+		</p>
+
+		<img class="plate-shot" src="assets/hero.jpg" width="2000" height="1333"
+			alt="A drive-thru restaurant at night in heavy rain: a dark building with glowing white light strips and a lit sign, a tall red pylon with golden arches reflected in the wet car park, cars queuing under the drive-thru canopy and a street lamp throwing a cone of light through the rain." />
+
+		<dl class="facts">
+			<div>
+				<dt>Type</dt>
+				<dd>Concept · self-directed</dd>
+			</div>
+			<div>
+				<dt>Discipline</dt>
+				<dd>Real-time 3D · Web</dd>
+			</div>
+			<div>
+				<dt>Scene</dt>
+				<dd>Drive-thru, dining room, car park, street</dd>
+			</div>
+			<div>
+				<dt>Payload</dt>
+				<dd>No models, no image files</dd>
+			</div>
+		</dl>
+
+		<section>
+			<h2>The brief</h2>
+			<p>
+				Most architectural visualisation shows a building at noon with nobody in it. A drive-thru is the
+				opposite kind of building: it is defined by what moves through it, and it is busiest at night, in
+				weather, when the signs are doing the work.
+			</p>
+			<p>
+				So the brief was a scene that runs rather than poses — a rainy night with the queue moving, people
+				coming and going and the wet ground doubling every light — in a single page, built from code, and
+				readable in English or Chinese at the press of a button.
+			</p>
+		</section>
+
+		<section>
+			<h2>Design decisions</h2>
+			<div class="cards">
+				<article>
+					<h3>The queue is simulated</h3>
+					<p>
+						Each car follows the lane as a spline, keeps its distance from the car ahead and brakes on a
+						curve it could actually stop in. It waits at the order board, the pay window and the pickup
+						window, and gives way to anyone crossing. Brake lights and indicators follow what the car is
+						doing; the wipers never stop.
+					</p>
+				</article>
+				<article>
+					<h3>Rain in one draw call</h3>
+					<p>
+						30,000 streaks are wrapped around the camera in the vertex shader, discarded under the
+						canopies and brightened by the eight nearest light sources, so the rain glows red by the
+						pylon and amber under the street lamps. Splashes, canopy drips and lightning are three more
+						small shaders.
+					</p>
+				</article>
+				<article>
+					<h3>Only code is downloaded</h3>
+					<p>
+						Asphalt, cladding, timber, stone, concrete, grass and glass are painted on canvas at load,
+						each with a normal map derived from its own height field. Signage is drawn the same way, so
+						switching language redraws every sign, menu board and number plate.
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<section>
+			<h2>The numbers</h2>
+			<table class="dims">
+				<tbody>
+					<tr><th>Stops per car</th><td>Order board 4–7 s · pay window 2–3.5 s · pickup window 3.5–6 s</td></tr>
+					<tr><th>Car speed</th><td>5.2 m/s in the lane · 12 m/s on the road · 6.9 m nose to nose in the queue</td></tr>
+					<tr><th>Car types</th><td>Sedan, SUV, hatchback — extruded from side profiles, with alloy wheels and wipers</td></tr>
+					<tr><th>People</th><td>10 walking routes · 2 waiting under the canopy · 6 diners inside · 1.15–1.5 m/s</td></tr>
+					<tr><th>Rain</th><td>30,000 streaks over 90 × 90 m around the camera · 2,600 splashes</td></tr>
+					<tr><th>Building</th><td>24 × 14 m, 7.4 m to the parapet · canopies at 3.65 m and 4.6 m</td></tr>
+					<tr><th>Clearance bar</th><td>3.1 m, at the lane entrance</td></tr>
+					<tr><th>Camera presets</th><td>9, including the dining room and a chase camera behind the newest car</td></tr>
+				</tbody>
+			</table>
+		</section>
+
+		<section>
+			<h2>How it is built</h2>
+			<p>
+				The lane is one spline. Every stop, painted arrow, lane line and the concrete lane surface is placed
+				by distance along it, so moving a window moves its stop, its arrow and the point where cars brake.
+				The cars are three body profiles extruded across their width, with the glasshouse, pillars,
+				bumpers, lamps and plates added to the profile and merged once per car type.
+			</p>
+			<p>
+				The ground is a mirror under a layer of asphalt whose opacity is a puddle map: where the map is dark
+				you see the reflection, where it is light you see aggregate and cracks. The same map drives the
+				roughness, so the puddles are also where the highlights are sharpest. The building, the site and the
+				distant city are merged by material at load, so the static scene costs a few dozen draw calls rather
+				than thousands.
+			</p>
+			<img class="plate-shot" src="assets/window.jpg" width="2000" height="1333"
+				alt="Two cars waiting under a lit drive-thru canopy beside a red wall with a pay window and a pickup window, each with a glowing sign above it; their headlights and the canopy lights reflect in the wet lane." />
+		</section>
+
+		<section>
+			<h2>Two languages, one switch</h2>
+			<p>
+				The scene opens in English and switches to Chinese from the panel. Every piece of text in the world
+				is a canvas that knows how to redraw itself: the main sign, the pylon, the menu board and the
+				screens inside, the window signs, the clearance bar, the lettering on the lane, the wet-floor sign
+				and the number plates, which change from three letters and three digits to a blue provincial plate.
+				Prices change currency with the language.
+			</p>
+			<img class="plate-shot" src="assets/entrance.jpg" width="2000" height="1333"
+				alt="The glazed dining room seen from the entrance in the rain: customers seated at round tables under orange pendant lamps, digital menu boards with prices on the back wall, self-order kiosks, and two people walking up to the sliding doors." />
+		</section>
+
+		<section>
+			<h2>What went wrong first</h2>
+			<p>
+				In the first version the dining room was a picture: the glazing carried a painted interior, and
+				customers vanished the moment they reached the door. Building the room for real — tables, pendant
+				lamps, kiosks, people eating — meant customers now had to get through the glass, so the door bay
+				became its own pair of sliding leaves that open when anyone comes within a couple of metres.
+			</p>
+			<p>
+				The headlight beams were open cones with a flat fade along their length. Seen from the side, the
+				walls of the cone showed as a pale slab with a hard edge. They now fade towards their silhouette
+				as well as along their length, so a beam reads as light in rain rather than as a sheet of glass,
+				and the street-lamp cones use the same shader.
+			</p>
+		</section>
+
+		<section>
+			<h2>Outcome</h2>
+			<p>
+				A scene that holds attention without a script: six to eight cars working through the lane,
+				customers walking in and out, nine camera presets and a live count of the queue, in a single page
+				with nothing to download beyond the code. It runs in a current desktop browser; on a phone you can
+				orbit and switch cameras.
+			</p>
+		</section>
+
+		<footer>Rainy Night Drive-Thru design case study · Yonder Case Library · 2026</footer>
+	</div>
+</body>
+
+</html>

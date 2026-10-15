@@ -863,8 +863,150 @@
     }
   },
   {
-    "slug": "luna-bloom",
+    "slug": "drive-thru",
     "num": "07",
+    "tags": [
+      "Web",
+      "UI"
+    ],
+    "year": "2026",
+    "thumb": "/cases/library/drive-thru/assets/thumb.jpg",
+    "hero": "/cases/library/drive-thru/assets/hero.jpg",
+    "colorHero": true,
+    "figure": {
+      "en": "3",
+      "zh": "3"
+    },
+    "measure": {
+      "en": "stops for every car: order, pay, pick up",
+      "zh": "每辆车的停靠点：点餐、付款、取餐"
+    },
+    "lib": {
+      "en": {
+        "meta": "Real-time 3D · Concept",
+        "title": "Rainy night drive-thru",
+        "brief": "A drive-thru restaurant on a wet night, left running on its own: cars queue round the building through the order board and both windows, customers walk in from the car park under umbrellas, and the asphalt reflects every sign.",
+        "decisions": [
+          "The queue is a simulation, not an animation: each car brakes for the car ahead, waits its turn at three stops and gives way to people crossing its lane.",
+          "Rain is one draw call — 30,000 streaks wrapped around the camera, kept out from under the canopies and lit by the nearest sign — with splashes, drips and lightning on top.",
+          "Every surface is painted on canvas at load with its own normal map, so nothing is downloaded but the code; one switch redraws all the signage, menus and plates between English and Chinese."
+        ],
+        "outcome": "A night scene that holds attention without a script: six to eight cars in the lane, people inside and out, nine camera presets and a live count of the queue — all in a single page."
+      },
+      "zh": {
+        "meta": "实时 3D · 概念作品",
+        "title": "雨夜得来速",
+        "brief": "一家雨夜里的得来速餐厅，自己运转：车辆绕着建筑排队，依次经过点餐屏和两个窗口；顾客打着伞从停车场走进店里；湿透的柏油路倒映着每一块招牌。",
+        "decisions": [
+          "车队是模拟，不是动画：每辆车会跟前车刹车，在三个停靠点轮流等待，遇到横穿车道的行人会让行。",
+          "雨只占一次绘制——三万条雨丝围绕镜头循环，雨棚下不落雨，靠近招牌的雨丝会被照亮——再叠上地面溅起的水圈、雨棚滴水和闪电。",
+          "每一种表面都在加载时用 canvas 画出来，并带有自己的法线贴图，所以除了代码什么都不用下载；一个开关就能把所有招牌、菜单和车牌在中英文之间重绘。"
+        ],
+        "outcome": "一个不靠脚本也能让人一直看下去的夜景：车道里有六到八辆车、店里店外都有人、九个镜头预设，还有实时的排队计数——全在一个页面里。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "07 — Real-time 3D",
+        "title": "A drive-thru that runs itself in the rain.",
+        "lede": "A drive-thru restaurant on a wet night — queuing cars, walking customers, rain on every surface — simulated live in the browser.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Real-time 3D · Web"
+          },
+          {
+            "label": "Scene",
+            "value": "Drive-thru, dining room, car park, street"
+          },
+          {
+            "label": "Payload",
+            "value": "No models, no image files"
+          }
+        ],
+        "brief": "Most architectural visualisation shows a building at noon with nobody in it. A drive-thru is the opposite kind of building: it is defined by what moves through it, and it is busiest at night, in weather, when the signs are doing the work.",
+        "briefTwo": "So the brief was a scene that runs rather than poses — a rainy night with the queue moving, people coming and going and the wet ground doubling every light — in a single page, built from code, and readable in English or Chinese at the press of a button.",
+        "decisions": [
+          "The queue is simulated. Each car follows the lane as a spline, keeps its distance from the car ahead, brakes on a curve it can actually stop in, waits at the order board, the pay window and the pickup window, and gives way to anyone crossing. Brake lights and indicators follow what the car is doing.",
+          "Rain is drawn in one call: 30,000 streaks are wrapped around the camera in the vertex shader, discarded under the canopies, and brightened by the eight nearest light sources. Splashes, canopy drips and lightning are three more small shaders.",
+          "Nothing is downloaded but code. Asphalt, cladding, timber, stone, concrete, grass and glass are painted on canvas at load, each with a normal map derived from its own height field. Signage is drawn the same way, so switching language redraws every sign, menu board and number plate."
+        ],
+        "outcome": "A scene that holds attention without a script: six to eight cars working through the lane, customers walking in and out, nine camera presets from the dining room to a car's rear bumper, and a live count of the queue. The building, the site and the city are merged by material at load, so the static scene costs a few dozen draw calls rather than thousands.",
+        "specs": [
+          {
+            "figure": "3",
+            "label": "stops per car",
+            "note": "Order board, pay window, pickup window."
+          },
+          {
+            "figure": "30,000",
+            "label": "rain streaks",
+            "note": "One draw call, lit by the nearest signs."
+          },
+          {
+            "figure": "2",
+            "label": "languages",
+            "note": "Every sign, menu and plate redraws on switch."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "07 — 实时 3D",
+        "title": "一家在雨里自己运转的得来速。",
+        "lede": "一家雨夜里的得来速餐厅——排队的车、来往的顾客、落在每一处表面上的雨——在浏览器里实时模拟。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "实时 3D · Web"
+          },
+          {
+            "label": "场景",
+            "value": "得来速、餐厅、停车场、街道"
+          },
+          {
+            "label": "体积",
+            "value": "无模型、无图片文件"
+          }
+        ],
+        "brief": "大多数建筑可视化，展示的都是正午、空无一人的建筑。得来速恰恰相反：它由穿过它的东西来定义，而且最忙的时候是夜里、是坏天气、是招牌在干活的时候。",
+        "briefTwo": "所以这次的题目是一个会运转、而不是摆姿势的场景——雨夜里车队在走、人来人往、湿地面把每一盏灯都映成两盏——只用一个页面，全部由代码生成，按一下按钮就能在中英文之间切换。",
+        "decisions": [
+          "车队是模拟出来的。每辆车沿样条曲线行驶，和前车保持距离，按真正刹得住的距离减速，在点餐屏、付款窗和取餐窗依次等待，遇到横穿的行人会让行。刹车灯和转向灯跟着车的实际动作走。",
+          "雨只用一次绘制：三万条雨丝在顶点着色器里围绕镜头循环，雨棚下的会被丢弃，并被最近的八个光源照亮。地面水圈、雨棚滴水和闪电是另外三个小着色器。",
+          "除了代码什么都不下载。柏油、外墙波纹板、木板、石材、混凝土、草地和玻璃，都在加载时用 canvas 画出来，每一种都带有从自身高度图推导出的法线贴图。招牌也是这样画的，所以切换语言时，每一块招牌、菜单屏和车牌都会重绘。"
+        ],
+        "outcome": "一个不靠脚本也能让人一直看下去的场景：六到八辆车在车道里依次通过，顾客进进出出，九个镜头预设从餐厅里一直到某辆车的后保险杠，还有实时的排队计数。建筑、场地和城市在加载时按材质合并，静态部分只需几十次绘制调用，而不是几千次。",
+        "specs": [
+          {
+            "figure": "3",
+            "label": "个停靠点",
+            "note": "点餐屏、付款窗、取餐窗。"
+          },
+          {
+            "figure": "30,000",
+            "label": "条雨丝",
+            "note": "一次绘制，被最近的招牌照亮。"
+          },
+          {
+            "figure": "2",
+            "label": "种语言",
+            "note": "切换时所有招牌、菜单和车牌一起重绘。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "luna-bloom",
+    "num": "08",
     "tags": [
       "Web",
       "UI",
@@ -908,7 +1050,7 @@
     },
     "det": {
       "en": {
-        "crumb": "07 — Community platform",
+        "crumb": "08 — Community platform",
         "title": "Softness as a design system.",
         "lede": "A maternity community concept built to hold long-form editorial and peer conversation without the pull of an endless feed.",
         "facts": [
@@ -956,7 +1098,7 @@
         ]
       },
       "zh": {
-        "crumb": "07 — 社区平台",
+        "crumb": "08 — 社区平台",
         "title": "把「柔和」做成一套系统。",
         "lede": "母婴社区概念，要在没有无限信息流的前提下同时容纳长文内容和用户交流。",
         "facts": [
@@ -1007,7 +1149,7 @@
   },
   {
     "slug": "ion-forge",
-    "num": "08",
+    "num": "09",
     "tags": [
       "Web",
       "UI",
@@ -1051,7 +1193,7 @@
     },
     "det": {
       "en": {
-        "crumb": "08 — Product launch",
+        "crumb": "09 — Product launch",
         "title": "From industrial design to kinetic product storytelling.",
         "lede": "A hardware launch system carrying industrial design, spec detail and motion in one view, and repeating across twelve markets.",
         "facts": [
@@ -1099,7 +1241,7 @@
         ]
       },
       "zh": {
-        "crumb": "08 — 产品发布",
+        "crumb": "09 — 产品发布",
         "title": "从工业设计到动态产品叙事。",
         "lede": "硬件发布系统，在同一屏内承载工业设计、参数与动效，并复用于十二个市场。",
         "facts": [
@@ -1150,7 +1292,7 @@
   },
   {
     "slug": "velvet-atelier",
-    "num": "09",
+    "num": "10",
     "tags": [
       "Web",
       "UI",
@@ -1194,7 +1336,7 @@
     },
     "det": {
       "en": {
-        "crumb": "09 — Luxury commerce",
+        "crumb": "10 — Luxury commerce",
         "title": "A luxury commerce experience blueprint.",
         "lede": "The maison journey mapped across editorial, commerce, concierge and aftercare as one system rather than four.",
         "facts": [
@@ -1242,7 +1384,7 @@
         ]
       },
       "zh": {
-        "crumb": "09 — 高端零售",
+        "crumb": "10 — 高端零售",
         "title": "高端零售体验蓝图。",
         "lede": "把内容、电商、专属服务和售后四段旅程画成一套系统，而不是四套。",
         "facts": [
@@ -1293,7 +1435,7 @@
   },
   {
     "slug": "ishq-escape",
-    "num": "10",
+    "num": "11",
     "tags": [
       "Web",
       "UI",
@@ -1337,7 +1479,7 @@
     },
     "det": {
       "en": {
-        "crumb": "10 — Hospitality booking",
+        "crumb": "11 — Hospitality booking",
         "title": "Luxury booking with concierge-led conversion.",
         "lede": "A full-funnel villa booking concept balancing discovery, private enquiry and confirmation in one flow.",
         "facts": [
@@ -1385,7 +1527,7 @@
         ]
       },
       "zh": {
-        "crumb": "10 — 酒店预订",
+        "crumb": "11 — 酒店预订",
         "title": "以专属服务驱动转化的高端预订。",
         "lede": "全漏斗别墅预订概念，把浏览、私下咨询与最终确认放进同一条动线。",
         "facts": [
@@ -1436,7 +1578,7 @@
   },
   {
     "slug": "starlight-kingdom",
-    "num": "11",
+    "num": "12",
     "tags": [
       "Web",
       "UI",
@@ -1481,7 +1623,7 @@
     },
     "det": {
       "en": {
-        "crumb": "11 — Destination experience",
+        "crumb": "12 — Destination experience",
         "title": "A destination page that also plans the day.",
         "lede": "A cinematic landing concept and a queue-aware itinerary planner sharing one visual system.",
         "facts": [
@@ -1529,7 +1671,7 @@
         ]
       },
       "zh": {
-        "crumb": "11 — 目的地体验",
+        "crumb": "12 — 目的地体验",
         "title": "既做目的地展示，也做当日行程。",
         "lede": "影院感落地页与考虑排队时长的行程规划工作台共用一套视觉系统。",
         "facts": [
@@ -1580,7 +1722,7 @@
   },
   {
     "slug": "aurora",
-    "num": "12",
+    "num": "13",
     "tags": [
       "Web",
       "UI",
@@ -1624,7 +1766,7 @@
     },
     "det": {
       "en": {
-        "crumb": "12 — Employer brand",
+        "crumb": "13 — Employer brand",
         "title": "A careers site that is not a job list.",
         "lede": "Teams, mission and location given equal standing beside role search, in one employer brand system.",
         "facts": [
@@ -1672,7 +1814,7 @@
         ]
       },
       "zh": {
-        "crumb": "12 — 雇主品牌",
+        "crumb": "13 — 雇主品牌",
         "title": "招聘站不该只是一份职位列表。",
         "lede": "团队、使命与地点和职位搜索并列，统一在一套雇主品牌系统里。",
         "facts": [
@@ -1723,7 +1865,7 @@
   },
   {
     "slug": "tech-disruption",
-    "num": "13",
+    "num": "14",
     "tags": [
       "Web",
       "UI"
@@ -1766,7 +1908,7 @@
     },
     "det": {
       "en": {
-        "crumb": "13 — Research hub",
+        "crumb": "14 — Research hub",
         "title": "Making dense research feel effortless.",
         "lede": "A daily-publishing research hub that absorbs editorial volume without reading as a link dump.",
         "facts": [
@@ -1814,7 +1956,7 @@
         ]
       },
       "zh": {
-        "crumb": "13 — 研究平台",
+        "crumb": "14 — 研究平台",
         "title": "让高密度研究读起来不费力。",
         "lede": "每日更新的研究平台，要承载发布量，又不能变成一堆链接。",
         "facts": [
@@ -1865,7 +2007,7 @@
   },
   {
     "slug": "lumen-stream",
-    "num": "14",
+    "num": "15",
     "tags": [
       "Web",
       "UI",
@@ -1909,7 +2051,7 @@
     },
     "det": {
       "en": {
-        "crumb": "14 — Streaming platform",
+        "crumb": "15 — Streaming platform",
         "title": "A streaming homepage that serves discovery and sign-up.",
         "lede": "A cinematic entertainment hub concept where browsing depth and a single sign-up route stop competing.",
         "facts": [
@@ -1957,7 +2099,7 @@
         ]
       },
       "zh": {
-        "crumb": "14 — 流媒体平台",
+        "crumb": "15 — 流媒体平台",
         "title": "同时服务内容发现与注册的流媒体首页。",
         "lede": "影院感娱乐平台概念，让浏览深度与唯一注册路径不再互相挤占。",
         "facts": [
@@ -2008,7 +2150,7 @@
   },
   {
     "slug": "atlas",
-    "num": "15",
+    "num": "16",
     "tags": [
       "Product",
       "UI"
@@ -2051,7 +2193,7 @@
     },
     "det": {
       "en": {
-        "crumb": "15 — Institutional finance",
+        "crumb": "16 — Institutional finance",
         "title": "Designing institutional confidence.",
         "lede": "An investor-facing experience carrying the weight of a large asset manager without decoration for decoration’s sake.",
         "facts": [
@@ -2099,7 +2241,7 @@
         ]
       },
       "zh": {
-        "crumb": "15 — 机构金融",
+        "crumb": "16 — 机构金融",
         "title": "设计出机构级的信任感。",
         "lede": "面向投资者的体验，要撑得起大型资产管理机构的分量，同时不做任何为装饰而装饰的处理。",
         "facts": [
@@ -2150,7 +2292,7 @@
   },
   {
     "slug": "fieldnote",
-    "num": "16",
+    "num": "17",
     "tags": [
       "Web",
       "UI",
@@ -2194,7 +2336,7 @@
     },
     "det": {
       "en": {
-        "crumb": "16 — Research platform",
+        "crumb": "17 — Research platform",
         "title": "Quiet type, loud evidence.",
         "lede": "A customer-research workspace in a warm editorial system, where every insight stays tied to the moment a customer said it.",
         "facts": [
@@ -2242,7 +2384,7 @@
         ]
       },
       "zh": {
-        "crumb": "16 — 研究平台",
+        "crumb": "17 — 研究平台",
         "title": "字体轻声，证据响亮。",
         "lede": "一个采用温暖编辑风格的用户研究工作台，每一条洞察都连着客户说出它的那一刻。",
         "facts": [
