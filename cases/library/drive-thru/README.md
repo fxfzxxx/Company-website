@@ -57,6 +57,15 @@ its third frame, which is what to wait for before a screenshot.
 - **Signage** is drawn by `dtex`, which registers a redraw; the language
   switch calls every redraw. Add a sign there and it is bilingual for free —
   the strings live in `S.en` / `S.zh`, the panel's in `UI.en` / `UI.zh`.
+- **Lights are budgeted.** There are seven real lights: three downward
+  spotlights under the canopies, one each in the dining room and on the pylon,
+  and two street lamps. Every lit shader is compiled against every light, and
+  with seventeen of them Chrome on Windows (ANGLE / Direct3D) could stall
+  long enough to lose the WebGL context: a black page. Everything else that
+  glows is an emissive surface or a `lightPool` on the ground. The scene also
+  compiles its shaders with `compileAsync` before the first frame, and the
+  loading plate reports a failed file, a script error or a lost context
+  instead of staying black.
 - **Static geometry** is built into `world` and `decals` and merged by
   material (`mergeGroup`) at the end of the build: about sixty meshes for the
   building, the site and the city.

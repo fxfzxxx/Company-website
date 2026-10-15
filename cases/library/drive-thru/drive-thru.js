@@ -28,11 +28,11 @@ const UI = {
   zh: { title: '雨夜 · 得来速', loading: '正在搭建雨夜场景…',
     queue: '排队车辆', served: '已出餐', inside: '店内顾客', view: '视角', overview: '全景', door: '门口', insideV: '店内', window: '取餐窗',
     follow: '跟车', top: '俯视', street: '街角', order: '点餐屏', pylon: '招牌', rain: '下雨', amount: '雨量', flash: '闪电', bloom: '灯光辉光',
-    rotate: '自动环绕', hint: '拖动旋转 · 滚轮缩放 · 右键平移', doc: '雨夜得来速 - 实时概念', lib: '案例库', study: '案例研究' },
+    rotate: '自动环绕', hint: '拖动旋转 · 滚轮缩放 · 右键平移', doc: '雨夜得来速 - 实时概念', lib: '案例库', study: '案例研究', compiling: '正在准备着色器…', lost: '显卡驱动重置了这个场景，请刷新页面。' },
   en: { title: 'Rainy Night Drive-Thru', loading: 'Building the rainy night…',
     queue: 'In queue', served: 'Served', inside: 'Inside', view: 'CAMERA', overview: 'Overview', door: 'Entrance', insideV: 'Dining', window: 'Window',
     follow: 'Follow car', top: 'Top', street: 'Street', order: 'Menu', pylon: 'Sign', rain: 'Rain', amount: 'Rain amount', flash: 'Lightning', bloom: 'Glow',
-    rotate: 'Auto orbit', hint: 'Drag to orbit · scroll to zoom · right-drag to pan', doc: 'Rainy Night Drive-Thru - Live concept', lib: 'Case library', study: 'Case study' },
+    rotate: 'Auto orbit', hint: 'Drag to orbit · scroll to zoom · right-drag to pan', doc: 'Rainy Night Drive-Thru - Live concept', lib: 'Case library', study: 'Case study', compiling: 'Preparing shaders…', lost: 'The graphics driver reset this scene. Reload the page to start it again.' },
 };
 const CJK = "'PingFang SC','Microsoft YaHei','Noto Sans CJK SC','Source Han Sans SC',sans-serif";
 const S = {   // in-scene signage
@@ -489,6 +489,16 @@ function led(a, b, normal) {      // LED strip set in an aluminium channel
   strut(a, b, .14, M.black, P, true);
   strut(new THREE.Vector3(...a).addScaledVector(n, .05).toArray(), new THREE.Vector3(...b).addScaledVector(n, .05).toArray(), .07, M.led, P, true);
 }
+const poolDecalTex = toTex(draw(128, 128, (g, w, h) => { const gr = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2); gr.addColorStop(0, '#fff'); gr.addColorStop(.45, '#666'); gr.addColorStop(1, '#000'); g.fillStyle = gr; g.fillRect(0, 0, w, h); }), { wrap: false });
+const poolDecalGeo = new THREE.CircleGeometry(.5, 32).rotateX(-Math.PI / 2);
+function lightPool(x, z, size, color, strength) {   // fake light on the wet ground: additive, unlit, no shader cost
+  const m = new THREE.Mesh(poolDecalGeo, new THREE.MeshBasicMaterial({ map: poolDecalTex, color: new THREE.Color(color).multiplyScalar(strength), blending: THREE.AdditiveBlending, transparent: true, depthWrite: false }));
+  m.scale.setScalar(size); m.position.set(x, .035, z); m.renderOrder = -8; m.userData.keep = true; scene.add(m); return m;
+}
+function downLight(color, intensity, dist, x, y, z, angle) {
+  const l = new THREE.SpotLight(color, intensity, dist, angle, .7, 2); l.position.set(x, y, z);
+  l.target.position.set(x, 0, z); scene.add(l, l.target); return l;
+}
 function pointLight(color, intensity, dist, x, y, z) {
   const l = new THREE.PointLight(color, intensity, dist, 2); l.position.set(x, y, z); scene.add(l); return l;
 }
@@ -724,7 +734,6 @@ box(.1, .1, .04, indMat, -.9, 1.26, .92).userData.keep = true;
 const dome = new THREE.Mesh(new THREE.SphereGeometry(.09, 12, 8, 0, PI * 2, PI / 2, PI / 2), MS({ color: 0x111111, roughness: .1, metalness: .5 }));
 dome.position.set(1.6, 3.49, .6); menu.add(dome);
 P = world;
-pointLight(0xdfe8ff, 10, 10, 1.6, 3.2, -13.2);
 
 // ---- height-clearance bar at the lane entrance
 for (const x of [-26.6, -21.4]) { cyl(.09, .09, 3.4, M.yellow, x, 1.7, 19.5, 10); box(.3, .04, .3, M.steel, x, .02, 19.5); box(.5, .06, .06, M.steel, x, 3.32, 19.5); }
@@ -783,7 +792,8 @@ for (const x of [-42, -8, 26, 60]) {
   strut([x, 8.8, z + .8], [x, 8.8, z + 2.2], .05, M.black);
   rbox(.5, .14, 1.0, .05, M.black, x, 8.75, z + 2.45);
   const head = new THREE.Mesh(new THREE.PlaneGeometry(.38, .82), lampHeadMat); head.rotation.x = PI / 2; head.position.set(x, 8.67, z + 2.45); P.add(head);
-  pointLight(0xffc98f, 110, 30, x, 8.4, z + 2.45);
+  if (x === -8 || x === 26) pointLight(0xffc98f, 110, 30, x, 8.4, z + 2.45);
+  lightPool(x, z + 2.45, 16, 0xffc98f, x === -8 || x === 26 ? .25 : .7);
   const cone = new THREE.Mesh(new THREE.CylinderGeometry(.25, 4.6, 8.5, 24, 1, true), coneMat); cone.position.set(x, 4.35, z + 2.45); P.add(cone);
 }
 // ---- distant city
@@ -820,14 +830,19 @@ const hemi = new THREE.HemisphereLight(0x3a4a72, 0x0c0c12, .55); scene.add(hemi)
 const moon = new THREE.DirectionalLight(0x7088c0, .25); moon.position.set(-30, 50, -20); scene.add(moon);
 const bolt = new THREE.DirectionalLight(0xc6d6ff, 0); bolt.position.set(30, 80, -60); scene.add(bolt);
 const warm = 0xffc98a;
-pointLight(warm, 22, 13, -10, 3.4, 11.4); pointLight(warm, 22, 13, -4.5, 3.4, 11.4);
-pointLight(0xffc27a, 16, 9, -9.5, 3.0, 8.8); pointLight(0xffc27a, 16, 9, -4, 3.0, 8.8);
-pointLight(warm, 22, 13, 4.5, 4.3, 11.7); pointLight(warm, 22, 13, 10.5, 4.3, 11.2);
-pointLight(warm, 20, 12, 15.5, 4.3, -1); pointLight(warm, 20, 12, 15.5, 4.3, 6);
-pointLight(0xfff0d8, 10, 8, 13.4, 1.8, 2.3);
-pointLight(0xff2a20, 70, 30, -16.2, 10, 13.8);
-pointLight(0xffc040, 26, 16, -16.4, 11.8, 13.6);
-pointLight(0xffffff, 18, 16, -.4, 6.3, 9.5);
+// Seven real point lights. Every lit shader pays for each one, and on Windows
+// (ANGLE / Direct3D) a long light list can stall shader compilation long
+// enough to lose the WebGL context, so the rest of the glow is faked with
+// additive pools on the ground (lightPool), which cost no shader time. The
+// canopy lights are spotlights aimed at the ground, as real downlights are.
+downLight(warm, 60, 14, -6.5, 3.55, 11.2, 1.1);           // entrance canopy (aims down, so the soffit stays dark)
+pointLight(0xffc27a, 24, 12, -6.7, 2.5, 8.8);              // dining room
+downLight(warm, 60, 14, 8.5, 4.5, 11.8, .85);             // timber-box canopy
+downLight(warm, 110, 15, 15.2, 4.5, 2.5, 1.2);            // drive-thru canopy and windows
+pointLight(0xff2a20, 70, 30, -16.2, 10, 13.8);             // pylon
+lightPool(-16.4, 14, 12, 0xffb030, .35);                   // arches glow
+lightPool(1.6, -12.6, 6, 0xdfe8ff, .5);                    // menu board
+lightPool(-.4, 11.5, 10, 0xffffff, .12);                   // sign wash
 
 // ================================================================ drive-thru path
 const curve = new THREE.CatmullRomCurve3([
@@ -1461,6 +1476,19 @@ let time = 0, nextBolt = rand(6, 12), boltT = -1;
 let last = performance.now(), frames = 0;
 const camGoal = new THREE.Vector3(), lookGoal = new THREE.Vector3(), lookCur = new THREE.Vector3(0, 2, 0);
 let uiT = 0, first = true;
+
+// Compile every program before the first frame, in parallel where the browser
+// supports KHR_parallel_shader_compile, so a slow driver shows a message
+// instead of freezing on a black canvas.
+$('loading').textContent = t('compiling');
+try { await renderer.compileAsync(scene, camera); } catch (e) { console.warn(e); }
+last = performance.now();
+
+canvas.addEventListener('webglcontextlost', (e) => {
+  e.preventDefault();
+  renderer.setAnimationLoop(null);
+  const l = document.createElement('div'); l.id = 'loading'; l.textContent = t('lost'); document.body.append(l);
+});
 
 renderer.setAnimationLoop(() => {
   const now = performance.now(), dt = Math.min((now - last) / 1000, .05); last = now; time += dt;

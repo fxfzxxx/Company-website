@@ -71,13 +71,18 @@
 	</script>
 	<script type="module" src="drive-thru.js"></script>
 	<script>
-		/* If the module never starts (no WebGL, or a script failed to load), say so. */
-		setTimeout(() => {
+		/* If the scene never starts (no WebGL, a failed script, an error during the
+		   build), say so on the loading plate instead of leaving a black page. */
+		const zh = () => document.documentElement.lang === "zh-CN";
+		const say = (text) => {
 			const l = document.getElementById("loading");
-			if (l && l.style.opacity !== "0") l.textContent = document.documentElement.lang === "zh-CN"
-				? "无法启动：这个场景需要支持 WebGL 2 的桌面浏览器。"
-				: "This scene needs WebGL 2. Try a current desktop browser.";
-		}, 25000);
+			if (l && l.style.opacity !== "0") l.textContent = text;
+		};
+		addEventListener("error", (e) => say((zh() ? "场景启动失败：" : "The scene failed to start: ") + (e.message || "a file did not load") + "."), true);
+		addEventListener("unhandledrejection", (e) => say((zh() ? "场景启动失败：" : "The scene failed to start: ") + ((e.reason && e.reason.message) || e.reason) + "."));
+		setTimeout(() => say(zh()
+			? "场景仍在准备。如果一直停在这里，这台设备可能不支持 WebGL 2，请换用较新的桌面浏览器。"
+			: "Still preparing. If this does not change, this device may not support WebGL 2 — try a current desktop browser."), 30000);
 	</script>
 </body>
 
