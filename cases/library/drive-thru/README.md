@@ -27,11 +27,12 @@ every sign in the scene (English by default; the choice is remembered).
 | --- | --- |
 | `?lang=en` / `?lang=zh` | open in that language |
 | `?view=<name>` | open on a camera preset with no fly-in, and no lightning (`overview`, `door`, `inside`, `window`, `top`, `street`, `order`, `pylon`) |
+| `?cam=x,y,z,tx,ty,tz` | place the camera exactly, looking at the target point (also no lightning) |
 | `?hud=0` | hide the panel |
 
 The stills were taken with `?hud=0&view=overview` (hero 1500 × 1000 at
-4⁄3 scale, thumb 1200 × 900 at 2⁄3), `?hud=0&view=window` and
-`?hud=0&view=door`. The page sets `document.body.dataset.ready = "1"` after
+4⁄3 scale, thumb 1200 × 900 at 2⁄3), `?hud=0&cam=17.6,2.6,8.9,13.2,1.8,5.2` (taken while the pickup crew is
+reaching out) and `?hud=0&view=door`. The page sets `document.body.dataset.ready = "1"` after
 its third frame, which is what to wait for before a screenshot.
 
 ## Files
@@ -54,6 +55,13 @@ its third frame, which is what to wait for before a screenshot.
 - **People** are jointed (hip, knee, shoulder, elbow), fade in and out at the
   ends of their routes, close their umbrellas under a roof and yield to
   moving cars; cars yield to people in their path.
+- **Crew** stand in the two service booths (`crew`, `updateCrew`). They work
+  the till between cars; when a car stops at their window the sliding half
+  opens and they reach out with a card reader (pay) or the bag (pickup).
+  Their fill light is a small emissive term on their materials, not a lamp.
+- **Glow is restrained on purpose** (`UnrealBloomPass` strength 0.2, radius
+  0.22, threshold 1.05): only the LED strips, signs and lamps bloom, and only
+  a little.
 - **Signage** is drawn by `dtex`, which registers a redraw; the language
   switch calls every redraw. Add a sign there and it is bilingual for free —
   the strings live in `S.en` / `S.zh`, the panel's in `UI.en` / `UI.zh`.

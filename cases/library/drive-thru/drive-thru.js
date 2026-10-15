@@ -6,7 +6,8 @@
    page downloads no models and no images.
 
    URL parameters (used for the library stills): ?lang=en|zh, ?view=<name>
-   opens on a camera preset without the fly-in, ?hud=0 hides the panel. */
+   opens on a camera preset without the fly-in, ?cam=x,y,z,tx,ty,tz places the
+   camera exactly, ?hud=0 hides the panel. */
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -343,6 +344,17 @@ const kioskTex = toTex(draw(128, 256, (g, w, h) => {
   for (let i = 0; i < 6; i++) { g.fillStyle = pick(['#f2c14e', '#e8863a', '#d9a14c', '#c8102e']); g.fillRect(10 + (i % 2) * 58, 54 + ((i / 2) | 0) * 58, 50, 50); }
   g.fillStyle = '#2b8a3e'; g.fillRect(14, h - 34, w - 28, 22);
 }), { wrap: false });
+const kitchenBackTex = toTex(draw(256, 240, (g, w, h) => {
+  const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#fff1d6'); gr.addColorStop(1, '#8d9196'); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 6; i++) { g.fillStyle = '#c9ccd1'; g.fillRect(i * 44 + 2, h * .08, 40, h * .22); g.fillStyle = '#9aa0a8'; g.fillRect(i * 44 + 2, h * .3, 40, 3); }
+  for (let i = 0; i < 5; i++) { g.fillStyle = pick(['#c8102e', '#ffc72c', '#f2f2f2', '#d9a14c']); g.fillRect(14 + i * 48, h * .13, 18, 22); }
+  const lamp = g.createRadialGradient(w * .7, h * .45, 4, w * .7, h * .45, 70); lamp.addColorStop(0, 'rgba(255,180,90,.9)'); lamp.addColorStop(1, 'rgba(255,180,90,0)');
+  g.fillStyle = lamp; g.fillRect(0, 0, w, h);
+  g.fillStyle = '#b8bcc2'; g.fillRect(0, h * .58, w, h * .42);
+  g.fillStyle = '#f2c84a'; for (let i = 0; i < 26; i++) g.fillRect(w * .55 + (i % 13) * 5, h * .5 - (i > 12 ? 8 : 0), 4, 16);
+  g.fillStyle = '#d0151f'; g.fillRect(w * .52, h * .56, 76, 6);
+  g.fillStyle = '#6d7178'; for (let i = 0; i < 4; i++) g.fillRect(20 + i * 30, h * .62, 24, h * .3);
+}), { wrap: false });
 const kitchenTex = toTex(draw(256, 240, (g, w, h) => {
   const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#fff3dc'); gr.addColorStop(1, '#9a9ea4'); g.fillStyle = gr; g.fillRect(0, 0, w, h);
   for (let i = 0; i < 6; i++) { g.fillStyle = '#c9ccd1'; g.fillRect(i * 44, h * .12, 40, h * .3); }
@@ -652,15 +664,38 @@ box(.1, .1, 14.2, M.black, 19.72, 5.22, 3.5);
 for (const z of [-3.3, 3.5, 10.3]) { box(.25, 4.6, .25, M.white, 19.4, 2.3, z); box(.45, .06, .45, M.steel, 19.4, .03, z); }
 for (const z of [-2, 2, 6, 9.5]) downlight(15.5, 4.59, z);
 box(.3, 4.6, 10, M.red, 12.15, 2.3, 1.8);
-const winMat = new THREE.MeshBasicMaterial({ map: kitchenTex, color: lin(1.2, 1.15, 1.05) });
-[-1, 5.5].forEach((z, k) => {
-  plane(1.6, 1.5, winMat, 12.31, 1.95, z, PI / 2);
-  plane(1.6, 1.5, M.glass, 12.33, 1.95, z, PI / 2).renderOrder = 2;
-  box(.55, .07, 1.9, M.steel, 12.58, 1.16, z);
-  for (const dz of [-.82, .82]) box(.08, 1.6, .08, M.steel, 12.34, 1.95, z + dz);
-  box(.08, .08, 1.72, M.steel, 12.34, 2.74, z);
-  box(.6, .05, 2.1, M.black, 12.6, 3.15, z);
-  plane(1.5, .38, new THREE.MeshBasicMaterial({ map: winSignTex[k], color: lin(1.7, 1.7, 1.7) }), 12.32, 3.45, z, PI / 2);
+const winMat = new THREE.MeshBasicMaterial({ map: kitchenBackTex, color: lin(1.05, 1, .95) });
+const bayInner = MS({ color: 0xd9dcdf, roughness: .35, metalness: .4 });
+const bayGlow = new THREE.MeshBasicMaterial({ color: lin(3, 2.6, 2) });
+const posTex = toTex(draw(128, 96, (g, w, h) => {
+  flatFill(g, w, h, '#0e1116'); g.fillStyle = '#c8102e'; g.fillRect(0, 0, w, 16);
+  for (let i = 0; i < 8; i++) { g.fillStyle = pick(['#ffc72c', '#2b8a3e', '#e8863a', '#3a6fd8']); g.fillRect(6 + (i % 4) * 30, 22 + ((i / 4) | 0) * 34, 26, 28); }
+}), { wrap: false });
+const posMat = new THREE.MeshBasicMaterial({ map: posTex, color: lin(1.3, 1.3, 1.3) });
+// each service window is a booth that projects 1.2 m from the red wall, so its
+// ledge ends about 0.6 m from a waiting car's door:
+// opening 1.6 m wide from 1.15 m to 2.65 m, a steel counter inside and a ledge outside
+const BAY_X0 = 12.3, BAY_X1 = 13.5, WIN_Y0 = 1.15, WIN_Y1 = 2.65;
+const BAYS = [-1, 5.5];
+BAYS.forEach((z, k) => {
+  const cx = (BAY_X0 + BAY_X1) / 2, d = BAY_X1 - BAY_X0;
+  box(d, WIN_Y0, 2.0, M.red, cx, WIN_Y0 / 2, z);                                   // below the opening
+  box(d, 3.2 - WIN_Y1, 2.0, M.red, cx, (WIN_Y1 + 3.2) / 2, z);                      // header
+  for (const s of [-1, 1]) {
+    box(d, WIN_Y1 - WIN_Y0, .2, M.red, cx, (WIN_Y0 + WIN_Y1) / 2, z + s * .9);     // cheeks
+    box(d - .04, WIN_Y1 - WIN_Y0, .02, bayInner, cx, (WIN_Y0 + WIN_Y1) / 2, z + s * .79);
+    box(.07, WIN_Y1 - WIN_Y0 + .1, .07, M.steel, BAY_X1, (WIN_Y0 + WIN_Y1) / 2, z + s * .8);
+  }
+  box(.07, .07, 1.67, M.steel, BAY_X1, WIN_Y1, z); box(.07, .07, 1.67, M.steel, BAY_X1, WIN_Y0, z);
+  plane(1.6, WIN_Y1 - WIN_Y0 + .3, winMat, BAY_X0 + .01, (WIN_Y0 + WIN_Y1) / 2, z, PI / 2);  // kitchen beyond
+  const glow = new THREE.Mesh(new THREE.PlaneGeometry(.5, 1.4), bayGlow); glow.rotation.x = PI / 2; glow.position.set(cx - .05, WIN_Y1 - .01, z); P.add(glow);
+  box(.3, .05, 1.56, M.steel, BAY_X1 - .16, 1.1, z);                                 // counter at the window
+  box(.16, .1, .24, M.black, BAY_X1 - .2, 1.18, z - .45);                            // till
+  const pos = plane(.24, .18, posMat, BAY_X1 - .27, 1.36, z - .45, -PI / 2); pos.rotation.x = -.3;
+  box(.04, .2, .04, M.black, BAY_X1 - .22, 1.25, z - .45);
+  box(.5, .06, 1.75, M.steel, BAY_X1 + .2, WIN_Y0 + .02, z);                          // outside ledge
+  box(.95, .06, 2.2, M.black, BAY_X1 - .05, 3.26, z);                                // awning
+  plane(1.5, .38, new THREE.MeshBasicMaterial({ map: winSignTex[k], color: lin(1.5, 1.5, 1.5) }), BAY_X1 + .005, 2.93, z, PI / 2);
 });
 const capGeo = new THREE.SphereGeometry(.13, 12, 6, 0, PI * 2, 0, PI / 2);
 for (const z of [-3.6, 2.25, 8.7]) {                            // bollards
@@ -824,7 +859,6 @@ const doors = [-1, 1].map(s => {
 });
 let doorOpen = 0;
 const bagMat = MS({ map: bagTex, roughness: .9 });
-const bag = new THREE.Mesh(new THREE.BoxGeometry(.3, .38, .2), bagMat); bag.position.set(12.8, 1.45, 5.5); bag.visible = false; scene.add(bag);
 
 // ---------------------------------------------------------------- lights
 const hemi = new THREE.HemisphereLight(0x3a4a72, 0x0c0c12, .55); scene.add(hemi);
@@ -984,7 +1018,7 @@ function makeCar(lit = true, type = pick(['sedan', 'sedan', 'suv', 'hatch'])) {
   const paint = new THREE.MeshPhysicalMaterial({ color: pick(carCols), metalness: .55, roughness: .32, clearcoat: 1, clearcoatRoughness: .12, clearcoatNormalMap: dropNormal, clearcoatNormalScale: new THREE.Vector2(.35, .35) });
   g.add(new THREE.Mesh(C.paint, paint), new THREE.Mesh(C.trim, trimMat), new THREE.Mesh(C.chrome, M.chrome));
   const cab = new THREE.Mesh(C.cabin, glassCar); cab.renderOrder = 1; g.add(cab);
-  const drv = new THREE.Mesh(driverGeo, driverMat); drv.position.set(.38, T.H + .3, (T.roofF + T.roofB) / 2 + .1); drv.visible = lit; g.add(drv);
+  const drv = new THREE.Mesh(driverGeo, driverMat); drv.position.set(-.38, T.H + .3, (T.roofF + T.roofB) / 2 + .1); drv.visible = lit; g.add(drv);
   const wheels = [];
   for (const [x, z] of [[1, C.wb], [-1, C.wb], [1, -C.wb], [-1, -C.wb]]) {
     const w = new THREE.Group(); w.position.set(x * .79 * xs, .36, z);
@@ -1058,7 +1092,7 @@ function updateCars(dt) {
     if ((!last || last.s > 16) && inLot < 9) addCar(0, 0, 11);
     spawnT = rand(5, 10);
   }
-  let pickupWait = null, orderWait = false;
+  let payWait = null, pickupWait = null, orderWait = false;
   const blink = Math.sin(time * 9) > 0;
   for (let i = 0; i < cars.length; i++) {
     const c = cars[i], ahead = i > 0 ? cars[i - 1] : null;
@@ -1074,6 +1108,7 @@ function updateCars(dt) {
     if (c.stop < 3 && c.s >= stops[c.stop] - .25 && c.v < .4) {
       if (c.wait === null) c.wait = rand(...waits[c.stop]);
       c.wait -= dt;
+      if (c.stop === 1) payWait = c.wait;
       if (c.stop === 2) pickupWait = c.wait;
       if (c.stop === 0) orderWait = true;
       if (c.wait <= 0) { c.stop++; c.wait = null; if (c.stop === 3) served++; }
@@ -1085,8 +1120,7 @@ function updateCars(dt) {
     placeCar(c); animCar(c, dt);
   }
   while (cars.length && cars[0].s >= L - .5) { const c = cars.shift(); freeCar(c); if (follow === c) follow = null; }
-  bag.visible = pickupWait !== null && pickupWait < 2.2;
-  if (bag.visible) bag.position.x = 12.8 + (2.2 - pickupWait) * .5;
+  winWait[0] = payWait; winWait[1] = pickupWait;
   indMat.color.setRGB(.05, orderWait ? (Math.sin(time * 10) > 0 ? 4 : 1) : .3, .05);
 
   trafficT -= dt;
@@ -1229,6 +1263,57 @@ for (const r of routes) {
 for (const [x, z, ry] of [[-6.4, 11.6, .4], [-1.6, 11.9, -.6]]) {   // waiting under the canopy, one on the phone
   const p = makePerson({ raincoat: false }); p.g.position.set(x, .15, z); p.g.rotation.y = ry; p.umb.visible = false; p.umbK = 0; p.idle = true;
   pose(p, 0, false); p.arms[1].sh.rotation.set(-.4, 0, -.25); p.arms[1].el.rotation.x = -2.2; people.push(p);
+}
+// crew at the two windows: visor cap, headset, uniform; they work the till,
+// slide the window open when a car arrives, then reach out to it
+const winWait = [null, null];
+const crew = BAYS.map((z, k) => {
+  const p = makePerson({ raincoat: false });
+  p.umb.visible = false; p.umbK = 0; p.idle = true; p.isCrew = true;
+  p.mats[0].color.set(k ? 0x1f2329 : 0x2a2d33); p.mats[1].color.set(0x15171b);
+  for (const m of p.mats) m.emissive.setRGB(.09, .06, .035);   // warm fill from the kitchen behind them (no extra light)
+  const cap = new THREE.Mesh(new THREE.SphereGeometry(.118, 16, 8, 0, PI * 2, 0, PI * .5).scale(.95, .9, 1.05), MS({ color: 0xc8102e, roughness: .6 }));
+  cap.position.y = 1.77; p.g.add(cap);
+  const brim = new THREE.Mesh(new THREE.BoxGeometry(.17, .014, .11), cap.material); brim.position.set(0, 1.78, .14); brim.rotation.x = .12; p.g.add(brim);
+  const band = new THREE.Mesh(new THREE.TorusGeometry(.118, .007, 6, 18, PI), M.black); band.position.y = 1.74; band.rotation.y = PI / 2; p.g.add(band);
+  const cup = new THREE.Mesh(new THREE.CylinderGeometry(.03, .03, .02, 10).rotateZ(PI / 2), M.black); cup.position.set(.115, 1.72, 0); p.g.add(cup);
+  const mic = strut([.12, 1.7, .01], [.05, 1.67, .1], .006, M.black, p.g);
+  const badge = new THREE.Mesh(new THREE.BoxGeometry(.06, .035, .01), MS({ color: 0xffc72c })); badge.position.set(.09, 1.36, .155); p.g.add(badge);
+  const stripe = new THREE.Mesh(new THREE.BoxGeometry(.3, .025, .012), cap.material); stripe.position.set(0, 1.42, .148); p.g.add(stripe);
+  const held = k
+    ? new THREE.Mesh(new THREE.BoxGeometry(.26, .32, .16), bagMat)                          // order bag
+    : new THREE.Mesh(new THREE.BoxGeometry(.07, .03, .14), MS({ color: 0x111111, roughness: .4 }));   // card reader
+  held.position.set(0, k ? -.2 : -.04, k ? 0 : .05); p.arms[1].hn.add(held); held.visible = false;
+  pose(p, 0, false);
+  p.g.position.set(12.95, 0, z - .05); p.g.rotation.y = PI / 2;   // centred; the right hand works the -z half
+  // the sliding half of the window (the other half is fixed glass)
+  const frameMat = M.steel;
+  const fixed = new THREE.Group(); fixed.position.set(BAY_X1 - .03, 0, z + .4); scene.add(fixed);
+  const sliding = new THREE.Group(); sliding.position.set(BAY_X1 - .06, 0, z - .4); scene.add(sliding);
+  for (const g of [fixed, sliding]) {
+    const gl = new THREE.Mesh(new THREE.PlaneGeometry(.78, WIN_Y1 - WIN_Y0 - .04), M.glass); gl.rotation.y = PI / 2; gl.position.y = (WIN_Y0 + WIN_Y1) / 2; gl.renderOrder = 2; g.add(gl);
+    for (const s of [-1, 1]) box(.03, WIN_Y1 - WIN_Y0 - .04, .03, frameMat, 0, (WIN_Y0 + WIN_Y1) / 2, s * .385, g);
+  }
+  box(.05, .16, .02, M.black, 0, 1.75, .33, sliding);    // finger pull
+  return { p, z, k, held, sliding, open: 0, reach: 0, activeT: 0, ph: rand(0, 6) };
+});
+function updateCrew(dt) {
+  for (const c of crew) {
+    const w = winWait[c.k], active = w !== null;
+    c.activeT = active ? c.activeT + dt : 0;
+    c.open += ((active ? 1 : 0) - c.open) * Math.min(1, dt * 3);
+    const wantReach = active && c.activeT > .7 && w > .35 ? 1 : 0;
+    c.reach += (wantReach - c.reach) * Math.min(1, dt * 4);
+    c.sliding.position.z = c.z - .4 + c.open * .76;
+    const [AL, AR] = c.p.arms, r = c.reach, tt = time * 2 + c.ph;
+    // idle: both hands at the till, a little typing; serving: right arm out through the window
+    AL.sh.rotation.set(-.55 + Math.sin(tt * 2.1) * .03 * (1 - r), 0, .08); AL.el.rotation.x = -1.05;
+    AR.sh.rotation.set(THREE.MathUtils.lerp(-.55, -1.42, r), 0, THREE.MathUtils.lerp(-.08, .1, r));
+    AR.el.rotation.x = THREE.MathUtils.lerp(-1.05 + Math.sin(tt * 2.7) * .05, -.12, r);
+    c.p.g.position.x = 12.95 + r * .12;
+    c.p.g.rotation.y = PI / 2 + THREE.MathUtils.lerp(Math.sin(time * .5 + c.ph) * .35 - .25, 0, Math.max(r, c.open * .6));
+    c.held.visible = r > .35;
+  }
 }
 const diners = [];
 for (const i of [0, 3, 5, 6, 9, 10]) {
@@ -1438,7 +1523,7 @@ composer.addPass(new ShaderPass({
       gl_FragColor = vec4(min(c.rgb, vec3(48.0)), c.a);
     }`,
 }));
-const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), .55, .45, .9);
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), .2, .22, 1.05);   // a restrained halo, not a haze
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
 
@@ -1467,6 +1552,8 @@ document.querySelectorAll('.btns button').forEach(b => b.onclick = () => setView
 {
   const v = params.get('view');
   if (v && views[v]) { setView(v); camera.position.copy(tween.p1); controls.target.copy(tween.t1); tween = null; }
+  const cam = params.get('cam')?.split(',').map(Number);   // ?cam=x,y,z,targetX,targetY,targetZ for stills
+  if (cam?.length === 6 && cam.every(Number.isFinite)) { camera.position.set(cam[0], cam[1], cam[2]); controls.target.set(cam[3], cam[4], cam[5]); }
 }
 $('tg').onclick = () => { const b = $('body'); const h = b.style.display === 'none'; b.style.display = h ? '' : 'none'; $('tg').textContent = h ? '–' : '+'; };
 $('lang').onclick = () => {
@@ -1509,9 +1596,10 @@ renderer.setAnimationLoop(() => {
   const now = performance.now(), dt = Math.min((now - last) / 1000, .05); last = now; time += dt;
   const queue = updateCars(dt);
   const inside = updatePeople(dt);
+  updateCrew(dt);
 
   let fl = 0;
-  if ($('cFlash').checked && !params.has('view')) { nextBolt -= dt; if (nextBolt <= 0) { boltT = 0; nextBolt = rand(9, 22); } }
+  if ($('cFlash').checked && !params.has('view') && !params.has('cam')) { nextBolt -= dt; if (nextBolt <= 0) { boltT = 0; nextBolt = rand(9, 22); } }
   if (boltT >= 0) {
     boltT += dt; const tt = boltT;
     fl = tt < .07 ? 1 : tt < .14 ? .15 : tt < .24 ? .85 : tt < .9 ? .85 * Math.exp(-(tt - .24) * 7) : 0;
