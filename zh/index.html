@@ -31,28 +31,44 @@
 	<link rel="stylesheet" href="../assets/design/modernist.css" />
 	<link rel="stylesheet" href="../assets/design/site.css" />
 	<link rel="stylesheet" href="../assets/design/locale.css" />
-</head>
 	<script type="application/ld+json">
 	{
 		"@context": "https://schema.org",
-		"@type": "Organization",
-		"name": "Yonder Tech",
-		"url": "https://yondertech.co.nz/",
-		"logo": "https://yondertech.co.nz/assets/favicon.svg",
-		"description": "IT enablement and digital consulting across technology strategy, enterprise architecture, system integration, and data intelligence.",
-		"address": {
-			"@type": "PostalAddress",
-			"streetAddress": "23A Dromorne Rd, Remuera",
-			"addressLocality": "Auckland",
-			"addressCountry": "NZ"
-		},
-		"contactPoint": {
-			"@type": "ContactPoint",
-			"email": "admin@yondertech.co.nz",
-			"contactType": "customer service"
-		}
+		"@graph": [
+			{
+				"@type": "WebSite",
+				"@id": "https://yondertech.co.nz/#website",
+				"name": "Yonder Tech",
+				"alternateName": ["YonderTech", "yondertech.co.nz"],
+				"url": "https://yondertech.co.nz/",
+				"inLanguage": ["en-NZ", "zh-Hans"],
+				"publisher": { "@id": "https://yondertech.co.nz/#organization" }
+			},
+			{
+				"@type": "Organization",
+				"@id": "https://yondertech.co.nz/#organization",
+				"name": "Yonder Tech",
+				"alternateName": "YonderTech",
+				"url": "https://yondertech.co.nz/",
+				"logo": "https://yondertech.co.nz/assets/brand/yondertech-signature-logo.png",
+				"description": "IT enablement and digital consulting across technology strategy, enterprise architecture, system integration, and data intelligence.",
+				"areaServed": "NZ",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "23A Dromorne Rd, Remuera",
+					"addressLocality": "Auckland",
+					"addressCountry": "NZ"
+				},
+				"contactPoint": {
+					"@type": "ContactPoint",
+					"email": "admin@yondertech.co.nz",
+					"contactType": "customer service"
+				}
+			}
+		]
 	}
 	</script>
+</head>
 
 <body>
 		<div class="yt-header">
