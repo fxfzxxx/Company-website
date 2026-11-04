@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+	<meta name="description"
+		content="Benthos-8: an interactive 3D mechanical octopus you can take apart. One jet model drives every part, gauge and chart." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/octopus/index.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#d6dde0" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Benthos-8 Octopod - Live concept" />
+	<meta property="og:description"
+		content="A machined octopus you can take apart: a head full of gears, a mantle that opens like petals, 200 arm links and 400 suckers, all driven by one jet model." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/octopus/index.html" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/octopus/assets/hero.jpg" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<title>Benthos-8 Octopod - Live concept</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Saira+Condensed:wght@500;600;700&display=swap" />
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body class="plate">
+	<canvas id="c" tabindex="0" aria-label="3D view of the Benthos-8 octopod. Drag to orbit, scroll to zoom."></canvas>
+	<div id="loading">Assembling Benthos-8…</div>
+
+	<div id="callouts" aria-hidden="true"><svg id="coLines"></svg></div>
+
+	<div id="hud">
+		<div class="col left">
+			<div class="card title">
+				<nav class="site" aria-label="Case">
+					<a href="../../../en/cases/index.html" target="_top" data-i18n="lib">Case library</a>
+					<a href="project.html" data-i18n="study">Case study</a>
+				</nav>
+				<div class="eyebrow" data-i18n="eyebrow">Survey octopod · jet drive</div>
+				<h1>BENTHOS<span>-8</span></h1>
+				<div class="state-row">
+					<span class="chip" id="state">JETTING</span>
+					<span class="clock" id="clock">T+00:00.0</span>
+				</div>
+				<div class="big"><b id="thrust">0.0</b><i>N</i></div>
+				<div class="big-sub" id="thrustSub">jet thrust · mean 0.0 N · peak 0.0 N</div>
+				<div class="card mini">
+					<dl class="rows">
+						<dt>ΔP</dt><dd id="mP">0.0 kPa</dd>
+						<dt data-i18n="curl">Curl</dt><dd id="mC">0%</dd>
+						<dt data-i18n="power">Power</dt><dd id="mW">0 W</dd>
+					</dl>
+				</div>
+			</div>
+
+			<div class="card">
+				<h2><span data-i18n="jet">Jet pump</span><small id="jetWin">last 3.0 s</small></h2>
+				<canvas class="chart" id="chartJet"></canvas>
+				<dl class="rows" style="margin-top:6px">
+					<dt data-i18n="nozzle">Siphon nozzle</dt><dd id="rNoz">—</dd>
+					<dt data-i18n="jetv">Jet velocity</dt><dd id="rV">—</dd>
+					<dt data-i18n="flow">Flow Q</dt><dd id="rQ">—</dd>
+					<dt data-i18n="stroke">Stroke ΔV</dt><dd id="rDV">—</dd>
+					<dt data-i18n="period">Pulse period</dt><dd id="rT">—</dd>
+					<dt data-i18n="pump">Impeller</dt><dd id="rPump">—</dd>
+				</dl>
+				<div class="check" id="check"></div>
+			</div>
+
+			<div class="card hide-mid">
+				<h2><span data-i18n="section">Mantle section</span><small data-i18n="live2d">2D · same model</small></h2>
+				<canvas class="schem" id="schem"></canvas>
+			</div>
+		</div>
+
+		<div class="col right">
+			<div class="card">
+				<h2><span data-i18n="arms">Arm curl</span><small>8 × 25 <span data-i18n="links">links</span> · 400 <span data-i18n="suckers">suckers</span></small></h2>
+				<div class="bars" id="bars"></div>
+			</div>
+
+			<div class="card">
+				<h2><span data-i18n="systems">Systems</span><small id="sQ">render Q1</small></h2>
+				<dl class="rows">
+					<dt data-i18n="elec">Electrical draw</dt><dd id="sPow">—</dd>
+					<dt data-i18n="endur">Endurance</dt><dd id="sEnd">—</dd>
+					<dt data-i18n="depth">Depth</dt><dd id="sDepth">—</dd>
+					<dt data-i18n="current">Water current</dt><dd id="sCur">—</dd>
+					<dt data-i18n="drag">Body drag</dt><dd id="sDrag">—</dd>
+					<dt data-i18n="hold">Station keeping</dt><dd id="sHold">—</dd>
+					<dt data-i18n="optics">Optics</dt><dd id="sOpt">—</dd>
+					<dt data-i18n="drivem">Drive motor</dt><dd id="sDrive">—</dd>
+					<dt data-i18n="mantle">Mantle</dt><dd id="sMan">—</dd>
+					<dt data-i18n="armset">Arms</dt><dd id="sArm">—</dd>
+					<dt data-i18n="beak">Beak</dt><dd id="sBeak">—</dd>
+				</dl>
+			</div>
+
+			<div class="card log hide-mid">
+				<h2><span data-i18n="log">Operator log</span></h2>
+				<ol id="log"></ol>
+			</div>
+		</div>
+
+		<div class="dock">
+			<div class="card">
+				<div class="btnrow">
+					<span class="lab" data-i18n="parts">Parts</span>
+					<button type="button" data-act="optics" id="b-optics" data-i18n="bOptics">Optics</button>
+					<button type="button" data-act="head" id="b-head" data-i18n="bHead">Open head</button>
+					<button type="button" data-act="mantle" id="b-mantle" data-i18n="bMantle">Open mantle</button>
+					<button type="button" data-act="arm" id="b-arm" data-i18n="bArm">Arm R2</button>
+					<button type="button" data-act="flow" id="b-flow" class="on" data-i18n="bFlow">Jet x-ray</button>
+					<button type="button" data-act="beak" id="b-beak" data-i18n="bBeak">Beak</button>
+					<button type="button" data-act="explode" id="b-explode" data-i18n="bExplode">Explode</button>
+				</div>
+			</div>
+			<div class="card">
+				<div class="btnrow">
+					<span class="lab" data-i18n="views">Views</span>
+					<button type="button" data-view="hero" id="v-hero" class="on" data-i18n="vHero">Hero</button>
+					<button type="button" data-view="front" id="v-front" data-i18n="vFront">Front</button>
+					<button type="button" data-view="side" id="v-side" data-i18n="vSide">Side</button>
+					<button type="button" data-view="top" id="v-top" data-i18n="vTop">Top</button>
+					<button type="button" data-view="under" id="v-under" data-i18n="vUnder">Under</button>
+					<button type="button" id="b-tour" data-i18n="bTour">Tour</button>
+					<button type="button" id="b-hud" data-i18n="bHud">Panels</button>
+				</div>
+			</div>
+			<div class="card">
+				<div class="sliders">
+					<label class="sl"><span data-i18n="slCur">Current</span><input type="range" id="slCur" min="0" max="3" step="0.05" value="0" /><output id="oCur">0.00 m/s</output></label>
+					<label class="sl"><span data-i18n="slNoz">Nozzle Ø</span><input type="range" id="slNoz" min="24" max="52" step="1" value="38" /><output id="oNoz">38 mm</output></label>
+				</div>
+			</div>
+			<div class="hint" data-i18n="hint">Drag to orbit · scroll to zoom · H hides panels · any input takes over the tour, 25 s of quiet hands it back</div>
+		</div>
+	</div>
+
+	<div class="tourtag" id="tourtag"><i></i><span id="tourtxt">AUTO TOUR</span></div>
+	<div id="cursor"><svg viewBox="0 0 22 22"><path d="M3 2 L3 18 L7.5 14 L10.5 20.5 L13.2 19.3 L10.3 12.9 L16.5 12.6 Z" fill="#1b2226" stroke="#fff" stroke-width="1.4" stroke-linejoin="round" /></svg></div>
+	<button type="button" id="lang" title="中文 / English">中 / EN</button>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "../../../assets/vendor/three/three.module.min.js",
+				"three/addons/": "../../../assets/vendor/three/addons/"
+			}
+		}
+	</script>
+	<script type="module" src="octopus.js"></script>
+	<script>
+		/* If the scene never starts, say so instead of leaving a blank plate. */
+		const say = (t) => { const l = document.getElementById("loading"); if (l && l.style.opacity !== "0") l.textContent = t; };
+		addEventListener("error", (e) => say("The simulator failed to start: " + (e.message || "a file did not load") + "."), true);
+		addEventListener("unhandledrejection", (e) => say("The simulator failed to start: " + ((e.reason && e.reason.message) || e.reason) + "."));
+	</script>
+</body>
+
+</html>

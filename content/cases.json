@@ -1005,8 +1005,150 @@
     }
   },
   {
-    "slug": "luna-bloom",
+    "slug": "octopus",
     "num": "08",
+    "tags": [
+      "Web",
+      "UI"
+    ],
+    "year": "2026",
+    "thumb": "/cases/library/octopus/assets/thumb.jpg",
+    "hero": "/cases/library/octopus/assets/hero.jpg",
+    "colorHero": true,
+    "figure": {
+      "en": "200",
+      "zh": "200"
+    },
+    "measure": {
+      "en": "machined arm links, one jet model",
+      "zh": "个机加工触手关节，由同一个喷射模型驱动"
+    },
+    "lib": {
+      "en": {
+        "meta": "Real-time 3D · Concept",
+        "title": "Benthos-8, a machine you can take apart",
+        "brief": "A jet-driven mechanical octopus in a pale studio, ringed by live instrument panels. Open the head to watch the gear train turn, hinge the mantle open like petals, pull an arm off the hub, or blow the whole machine apart.",
+        "decisions": [
+          "One model drives everything: a jet pump in real units sets the mantle's breathing, the pump and motor speeds, every chart, the 2D section and the callouts, so no number on screen is typed in.",
+          "Every part is built from code and every gear turns at its real ratio: a 4:1 planetary, a 48-tooth crown and eight 12-tooth pinions winding the tendon spools.",
+          "A cursor tours the console on its own; any input hands control to the visitor, and two sliders let them push the machine until it drifts or overpressures."
+        ],
+        "outcome": "A single page that explains a machine by letting people open it: 200 arm links, 400 suckers, a working drivetrain and a mantle full of parts, all live and all consistent with the numbers beside them."
+      },
+      "zh": {
+        "meta": "实时 3D · 概念作品",
+        "title": "Benthos-8：一台能拆开的机器",
+        "brief": "一只喷射推进的机械章鱼，立在浅色摄影棚里，四周是实时跳动的仪表面板。可以打开头部看齿轮组转动，像花瓣一样掀开外套膜，从轮毂上拆下一条触手，或者把整台机器炸开。",
+        "decisions": [
+          "一个模型驱动一切：一个按真实单位计算的喷射泵模型，决定外套膜的起伏、泵和电机的转速、每一张图表、二维剖面和标注，屏幕上没有一个数字是手填的。",
+          "每个零件都由代码生成，每个齿轮都按真实传动比转动：4:1 行星齿轮、48 齿冠齿轮、八个 12 齿小锥齿轮，分别卷动八条触手的腱绳卷筒。",
+          "光标会自己巡览控制台；访客一操作就接管，两个滑块可以把机器推到漂移或超压。"
+        ],
+        "outcome": "一个靠“让人拆开”来讲清楚一台机器的页面：200 个触手关节、400 个吸盘、一套能转的传动系统和装满零件的外套膜，全部实时运行，并且和旁边的数字一致。"
+      }
+    },
+    "det": {
+      "en": {
+        "crumb": "08 — Real-time 3D",
+        "title": "A mechanical octopus you can take apart.",
+        "lede": "Benthos-8 is an original jet-driven octopod built entirely from code: open its head, its mantle and its arms, and every part, gauge and chart moves from the same model.",
+        "facts": [
+          {
+            "label": "Type",
+            "value": "Concept · self-directed"
+          },
+          {
+            "label": "Discipline",
+            "value": "Real-time 3D · Web"
+          },
+          {
+            "label": "Machine",
+            "value": "Head, drivetrain, mantle, 8 arms"
+          },
+          {
+            "label": "Payload",
+            "value": "No models, no image files"
+          }
+        ],
+        "brief": "Exploded diagrams and cutaways are how engineers explain machines, but on paper they are frozen. The brief was to make one that moves: a machine you can open part by part while it keeps running, with the instruments beside it telling the truth about what it is doing.",
+        "briefTwo": "The subject is an invented survey octopod that swims by jet, like the real animal: the mantle squeezes water out through a siphon. That gives one input that drives the whole machine, and a body with plenty to open: a head, a mantle and eight long arms.",
+        "decisions": [
+          "One jet model drives everything. Mantle volume, stroke and nozzle area give flow, jet speed, thrust and pressure. The mantle breathes with that model, the pump and drive motor turn at the speeds it sets, and every chart, the 2D section, the callouts and a live hand check of the thrust formula read from it.",
+          "Every gear turns at its real ratio. The drive motor feeds a 4:1 planetary, whose carrier turns a 48-tooth crown gear meshing with eight 12-tooth bevel pinions, one per arm, each winding a tendon spool through a clutch. A 22-to-32-tooth timing belt takes the motor up to the jet pump.",
+          "The page runs itself and then hands over. A cursor walks the console and presses the buttons; any click, drag or key gives control to the visitor, and 25 seconds of quiet gives it back. Two sliders, water current and nozzle diameter, feed straight into the model, so the machine can be pushed until it drifts or overpressures."
+        ],
+        "outcome": "A machine people can take apart in the browser: the head swings open on its drivetrain, the mantle's upper panels hinge open on actuators over the pump and cell packs, arm R2 comes off its hub, and the whole thing explodes on a turntable and reassembles. It opens in jet x-ray, so the inside shows from the first frame.",
+        "specs": [
+          {
+            "figure": "200",
+            "label": "arm links",
+            "note": "8 arms × 25 machined modules, 400 suckers."
+          },
+          {
+            "figure": "4 : 1",
+            "label": "planetary reduction",
+            "note": "Sun 12, ring 36, crown 48 to pinion 12."
+          },
+          {
+            "figure": "1",
+            "label": "model",
+            "note": "Drives every part, chart and callout."
+          }
+        ]
+      },
+      "zh": {
+        "crumb": "08 — 实时 3D",
+        "title": "一只可以拆开的机械章鱼。",
+        "lede": "Benthos-8 是一台原创的喷射推进章鱼机器人，完全由代码生成：打开它的头部、外套膜和触手，每个零件、仪表和图表都由同一个模型驱动。",
+        "facts": [
+          {
+            "label": "属性",
+            "value": "概念作品 · 自主设计"
+          },
+          {
+            "label": "方向",
+            "value": "实时 3D · Web"
+          },
+          {
+            "label": "机器",
+            "value": "头部、传动系统、外套膜、8 条触手"
+          },
+          {
+            "label": "体积",
+            "value": "无模型、无图片文件"
+          }
+        ],
+        "brief": "爆炸图和剖视图是工程师解释机器的方式，但印在纸上它们是静止的。这次的题目是做一张会动的：一台可以一边运转、一边逐个部件打开的机器，旁边的仪表如实反映它正在做什么。",
+        "briefTwo": "主角是一台虚构的勘测章鱼，像真正的章鱼一样靠喷射游动：外套膜收缩，把水从虹吸管里挤出去。这样整台机器只有一个驱动输入，而且有足够多可以打开的部分：头部、外套膜和八条长触手。",
+        "decisions": [
+          "一个喷射模型驱动一切。外套膜容积、单次排水量和喷口面积，算出流量、射流速度、推力和压强。外套膜按这个模型起伏，泵和主驱电机按它给出的转速转动，每一张图表、二维剖面、标注，以及推力公式的实时验算，都从它读数。",
+          "每个齿轮都按真实传动比转动。主驱电机带动 4:1 行星齿轮，行星架带动 48 齿冠齿轮，冠齿轮与八个 12 齿小锥齿轮啮合，每条触手一个，各自通过离合器卷动腱绳卷筒。一条 22 齿到 32 齿的同步带把电机动力传到喷射泵。",
+          "页面先自己演示，再交给访客。光标在控制台上走动、按按钮；任何点击、拖动或按键都会把控制权交给访客，静置 25 秒后巡览恢复。水流和喷口直径两个滑块直接输入模型，可以把机器推到漂移或超压。"
+        ],
+        "outcome": "一台可以在浏览器里拆开的机器：头部像两扇门一样打开，露出传动系统；外套膜上半圈面板靠作动杆掀开，露出泵和电芯；R2 触手可以从轮毂上拆下；整机可以在转台上炸开再复位。页面默认开着射流透视，第一帧就能看到内部结构。",
+        "specs": [
+          {
+            "figure": "200",
+            "label": "个触手关节",
+            "note": "8 条触手 × 25 个机加工模块，共 400 个吸盘。"
+          },
+          {
+            "figure": "4 : 1",
+            "label": "行星减速比",
+            "note": "太阳轮 12 齿、齿圈 36 齿，冠齿轮 48 齿对小锥齿轮 12 齿。"
+          },
+          {
+            "figure": "1",
+            "label": "个模型",
+            "note": "驱动每个零件、图表和标注。"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "slug": "luna-bloom",
+    "num": "09",
     "tags": [
       "Web",
       "UI",
@@ -1050,7 +1192,7 @@
     },
     "det": {
       "en": {
-        "crumb": "08 — Community platform",
+        "crumb": "09 — Community platform",
         "title": "Softness as a design system.",
         "lede": "A maternity community concept built to hold long-form editorial and peer conversation without the pull of an endless feed.",
         "facts": [
@@ -1098,7 +1240,7 @@
         ]
       },
       "zh": {
-        "crumb": "08 — 社区平台",
+        "crumb": "09 — 社区平台",
         "title": "把「柔和」做成一套系统。",
         "lede": "母婴社区概念，要在没有无限信息流的前提下同时容纳长文内容和用户交流。",
         "facts": [
@@ -1149,7 +1291,7 @@
   },
   {
     "slug": "ion-forge",
-    "num": "09",
+    "num": "10",
     "tags": [
       "Web",
       "UI",
@@ -1193,7 +1335,7 @@
     },
     "det": {
       "en": {
-        "crumb": "09 — Product launch",
+        "crumb": "10 — Product launch",
         "title": "From industrial design to kinetic product storytelling.",
         "lede": "A hardware launch system carrying industrial design, spec detail and motion in one view, and repeating across twelve markets.",
         "facts": [
@@ -1241,7 +1383,7 @@
         ]
       },
       "zh": {
-        "crumb": "09 — 产品发布",
+        "crumb": "10 — 产品发布",
         "title": "从工业设计到动态产品叙事。",
         "lede": "硬件发布系统，在同一屏内承载工业设计、参数与动效，并复用于十二个市场。",
         "facts": [
@@ -1292,7 +1434,7 @@
   },
   {
     "slug": "velvet-atelier",
-    "num": "10",
+    "num": "11",
     "tags": [
       "Web",
       "UI",
@@ -1336,7 +1478,7 @@
     },
     "det": {
       "en": {
-        "crumb": "10 — Luxury commerce",
+        "crumb": "11 — Luxury commerce",
         "title": "A luxury commerce experience blueprint.",
         "lede": "The maison journey mapped across editorial, commerce, concierge and aftercare as one system rather than four.",
         "facts": [
@@ -1384,7 +1526,7 @@
         ]
       },
       "zh": {
-        "crumb": "10 — 高端零售",
+        "crumb": "11 — 高端零售",
         "title": "高端零售体验蓝图。",
         "lede": "把内容、电商、专属服务和售后四段旅程画成一套系统，而不是四套。",
         "facts": [
@@ -1435,7 +1577,7 @@
   },
   {
     "slug": "ishq-escape",
-    "num": "11",
+    "num": "12",
     "tags": [
       "Web",
       "UI",
@@ -1479,7 +1621,7 @@
     },
     "det": {
       "en": {
-        "crumb": "11 — Hospitality booking",
+        "crumb": "12 — Hospitality booking",
         "title": "Luxury booking with concierge-led conversion.",
         "lede": "A full-funnel villa booking concept balancing discovery, private enquiry and confirmation in one flow.",
         "facts": [
@@ -1527,7 +1669,7 @@
         ]
       },
       "zh": {
-        "crumb": "11 — 酒店预订",
+        "crumb": "12 — 酒店预订",
         "title": "以专属服务驱动转化的高端预订。",
         "lede": "全漏斗别墅预订概念，把浏览、私下咨询与最终确认放进同一条动线。",
         "facts": [
@@ -1578,7 +1720,7 @@
   },
   {
     "slug": "starlight-kingdom",
-    "num": "12",
+    "num": "13",
     "tags": [
       "Web",
       "UI",
@@ -1623,7 +1765,7 @@
     },
     "det": {
       "en": {
-        "crumb": "12 — Destination experience",
+        "crumb": "13 — Destination experience",
         "title": "A destination page that also plans the day.",
         "lede": "A cinematic landing concept and a queue-aware itinerary planner sharing one visual system.",
         "facts": [
@@ -1671,7 +1813,7 @@
         ]
       },
       "zh": {
-        "crumb": "12 — 目的地体验",
+        "crumb": "13 — 目的地体验",
         "title": "既做目的地展示，也做当日行程。",
         "lede": "影院感落地页与考虑排队时长的行程规划工作台共用一套视觉系统。",
         "facts": [
@@ -1722,7 +1864,7 @@
   },
   {
     "slug": "aurora",
-    "num": "13",
+    "num": "14",
     "tags": [
       "Web",
       "UI",
@@ -1766,7 +1908,7 @@
     },
     "det": {
       "en": {
-        "crumb": "13 — Employer brand",
+        "crumb": "14 — Employer brand",
         "title": "A careers site that is not a job list.",
         "lede": "Teams, mission and location given equal standing beside role search, in one employer brand system.",
         "facts": [
@@ -1814,7 +1956,7 @@
         ]
       },
       "zh": {
-        "crumb": "13 — 雇主品牌",
+        "crumb": "14 — 雇主品牌",
         "title": "招聘站不该只是一份职位列表。",
         "lede": "团队、使命与地点和职位搜索并列，统一在一套雇主品牌系统里。",
         "facts": [
@@ -1865,7 +2007,7 @@
   },
   {
     "slug": "tech-disruption",
-    "num": "14",
+    "num": "15",
     "tags": [
       "Web",
       "UI"
@@ -1908,7 +2050,7 @@
     },
     "det": {
       "en": {
-        "crumb": "14 — Research hub",
+        "crumb": "15 — Research hub",
         "title": "Making dense research feel effortless.",
         "lede": "A daily-publishing research hub that absorbs editorial volume without reading as a link dump.",
         "facts": [
@@ -1956,7 +2098,7 @@
         ]
       },
       "zh": {
-        "crumb": "14 — 研究平台",
+        "crumb": "15 — 研究平台",
         "title": "让高密度研究读起来不费力。",
         "lede": "每日更新的研究平台，要承载发布量，又不能变成一堆链接。",
         "facts": [
@@ -2007,7 +2149,7 @@
   },
   {
     "slug": "lumen-stream",
-    "num": "15",
+    "num": "16",
     "tags": [
       "Web",
       "UI",
@@ -2051,7 +2193,7 @@
     },
     "det": {
       "en": {
-        "crumb": "15 — Streaming platform",
+        "crumb": "16 — Streaming platform",
         "title": "A streaming homepage that serves discovery and sign-up.",
         "lede": "A cinematic entertainment hub concept where browsing depth and a single sign-up route stop competing.",
         "facts": [
@@ -2099,7 +2241,7 @@
         ]
       },
       "zh": {
-        "crumb": "15 — 流媒体平台",
+        "crumb": "16 — 流媒体平台",
         "title": "同时服务内容发现与注册的流媒体首页。",
         "lede": "影院感娱乐平台概念，让浏览深度与唯一注册路径不再互相挤占。",
         "facts": [
@@ -2150,7 +2292,7 @@
   },
   {
     "slug": "atlas",
-    "num": "16",
+    "num": "17",
     "tags": [
       "Product",
       "UI"
@@ -2193,7 +2335,7 @@
     },
     "det": {
       "en": {
-        "crumb": "16 — Institutional finance",
+        "crumb": "17 — Institutional finance",
         "title": "Designing institutional confidence.",
         "lede": "An investor-facing experience carrying the weight of a large asset manager without decoration for decoration’s sake.",
         "facts": [
@@ -2241,7 +2383,7 @@
         ]
       },
       "zh": {
-        "crumb": "16 — 机构金融",
+        "crumb": "17 — 机构金融",
         "title": "设计出机构级的信任感。",
         "lede": "面向投资者的体验，要撑得起大型资产管理机构的分量，同时不做任何为装饰而装饰的处理。",
         "facts": [
@@ -2292,7 +2434,7 @@
   },
   {
     "slug": "fieldnote",
-    "num": "17",
+    "num": "18",
     "tags": [
       "Web",
       "UI",
@@ -2336,7 +2478,7 @@
     },
     "det": {
       "en": {
-        "crumb": "17 — Research platform",
+        "crumb": "18 — Research platform",
         "title": "Quiet type, loud evidence.",
         "lede": "A customer-research workspace in a warm editorial system, where every insight stays tied to the moment a customer said it.",
         "facts": [
@@ -2384,7 +2526,7 @@
         ]
       },
       "zh": {
-        "crumb": "17 — 研究平台",
+        "crumb": "18 — 研究平台",
         "title": "字体轻声，证据响亮。",
         "lede": "一个采用温暖编辑风格的用户研究工作台，每一条洞察都连着客户说出它的那一刻。",
         "facts": [

@@ -30,8 +30,8 @@ export const renderHome = (ctx, cases, articles) => {
 		title: home.title,
 		description: home.description,
 		image: home.method.photo,
+		extra: orgJsonLd(),
 	})}
-${orgJsonLd()}
 
 <body>
 ${header(ctx, "work")}

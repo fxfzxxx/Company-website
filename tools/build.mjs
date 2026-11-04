@@ -228,7 +228,8 @@ const rootPage = `<!DOCTYPE html>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Yonder Tech</title>
+	<title>Yonder Tech — IT enablement &amp; digital consulting, Auckland</title>
+	<meta name="description" content="Yonder Tech works with New Zealand businesses on IT strategy, system integration, data platforms and managed operations." />
 	<link rel="canonical" href="${SITE}/en/index.html" />
 	<link rel="alternate" hreflang="${HREFLANG.en}" href="${SITE}/en/index.html" />
 	<link rel="alternate" hreflang="${HREFLANG.zh}" href="${SITE}/zh/index.html" />

@@ -34,7 +34,8 @@ export const context = ({ loc, ui, home, depth, path, altPath, section }) => {
 	};
 };
 
-export const head = ({ ctx, title, description, image, robots }) => {
+/* extra: markup placed last inside <head>, e.g. the home page's JSON-LD */
+export const head = ({ ctx, title, description, image, robots, extra = "" }) => {
 	const { root, loc, other, path, altPath, home } = ctx;
 	const enPath = loc === "en" ? path : altPath;
 	const zhPath = loc === "zh" ? path : altPath;
@@ -70,29 +71,48 @@ export const head = ({ ctx, title, description, image, robots }) => {
 		rel="stylesheet" />
 	<link rel="stylesheet" href="${root}assets/design/modernist.css" />
 	<link rel="stylesheet" href="${root}assets/design/site.css" />
-	<link rel="stylesheet" href="${root}assets/design/locale.css" />
+	<link rel="stylesheet" href="${root}assets/design/locale.css" />${extra ? `\n${extra}` : ""}
 </head>`;
 };
 
+/* The home pages' structured data: a WebSite node and the Organization, linked by
+   @id, so the brand query ("YonderTech") matches the site. Google ignores SVG
+   logos, so the logo is the PNG lockup. */
 export const orgJsonLd = () => `	<script type="application/ld+json">
 	{
 		"@context": "https://schema.org",
-		"@type": "Organization",
-		"name": "Yonder Tech",
-		"url": "https://yondertech.co.nz/",
-		"logo": "https://yondertech.co.nz/assets/favicon.svg",
-		"description": "IT enablement and digital consulting across technology strategy, enterprise architecture, system integration, and data intelligence.",
-		"address": {
-			"@type": "PostalAddress",
-			"streetAddress": "23A Dromorne Rd, Remuera",
-			"addressLocality": "Auckland",
-			"addressCountry": "NZ"
-		},
-		"contactPoint": {
-			"@type": "ContactPoint",
-			"email": "admin@yondertech.co.nz",
-			"contactType": "customer service"
-		}
+		"@graph": [
+			{
+				"@type": "WebSite",
+				"@id": "https://yondertech.co.nz/#website",
+				"name": "Yonder Tech",
+				"alternateName": ["YonderTech", "yondertech.co.nz"],
+				"url": "https://yondertech.co.nz/",
+				"inLanguage": ["en-NZ", "zh-Hans"],
+				"publisher": { "@id": "https://yondertech.co.nz/#organization" }
+			},
+			{
+				"@type": "Organization",
+				"@id": "https://yondertech.co.nz/#organization",
+				"name": "Yonder Tech",
+				"alternateName": "YonderTech",
+				"url": "https://yondertech.co.nz/",
+				"logo": "https://yondertech.co.nz/assets/brand/yondertech-signature-logo.png",
+				"description": "IT enablement and digital consulting across technology strategy, enterprise architecture, system integration, and data intelligence.",
+				"areaServed": "NZ",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "23A Dromorne Rd, Remuera",
+					"addressLocality": "Auckland",
+					"addressCountry": "NZ"
+				},
+				"contactPoint": {
+					"@type": "ContactPoint",
+					"email": "admin@yondertech.co.nz",
+					"contactType": "customer service"
+				}
+			}
+		]
 	}
 	</script>`;
 
