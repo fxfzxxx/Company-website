@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Case study: Benthos-8 - an original mechanical octopus built from code in the browser, with a working drivetrain, a mantle that opens and one jet model driving every part and gauge." />
+	<link rel="canonical" href="https://yondertech.co.nz/cases/library/octopus/project.html" />
+	<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+	<meta name="theme-color" content="#d6dde0" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Benthos-8 Octopod - Case study" />
+	<meta property="og:description"
+		content="A mechanical octopus you can take apart: a head full of gears, a mantle that opens like petals, 200 arm links and 400 suckers, all driven by one jet model." />
+	<meta property="og:url" content="https://yondertech.co.nz/cases/library/octopus/project.html" />
+	<meta property="og:site_name" content="Yonder Tech" />
+	<meta property="og:image" content="https://yondertech.co.nz/cases/library/octopus/assets/hero.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Benthos-8 Octopod - Case study" />
+	<meta name="twitter:description" content="A mechanical octopus you can take apart." />
+	<title>Benthos-8 Octopod - Case study</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Saira+Condensed:wght@500;600;700&display=swap" />
+	<link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+	<div class="study">
+		<div class="nav">
+			<strong>BENTHOS<span>-8</span></strong>
+			<div class="nav-links">
+				<a href="index.html">Live concept</a>
+				<a href="project.html">Case study</a>
+				<a href="../../../en/cases/index.html" target="_top">Case Library</a>
+			</div>
+		</div>
+
+		<h1>A mechanical octopus you can take apart.</h1>
+		<p class="lede-block">
+			Benthos-8 is an invented survey octopod that swims by jet, the way the real animal does. It stands in a
+			pale studio inside a ring of live instruments. You can open its head and watch the gear train turn,
+			hinge its mantle open like petals, pull an arm off the hub, or blow the whole machine apart and watch it
+			reassemble. Every part, gauge and chart reads from the same model.
+		</p>
+
+		<img class="plate-shot" src="assets/hero.jpg" width="2000" height="1333"
+			alt="A white and orange mechanical octopus in a pale studio, its clear shell showing the frame, pump and gears inside, eight segmented arms with orange pins reaching out and curling at the tips." />
+
+		<dl class="facts">
+			<div>
+				<dt>Type</dt>
+				<dd>Concept · self-directed</dd>
+			</div>
+			<div>
+				<dt>Discipline</dt>
+				<dd>Real-time 3D · Web</dd>
+			</div>
+			<div>
+				<dt>Machine</dt>
+				<dd>Head, drivetrain, mantle, 8 arms</dd>
+			</div>
+			<div>
+				<dt>Payload</dt>
+				<dd>No models, no image files</dd>
+			</div>
+		</dl>
+
+		<section>
+			<h2>The brief</h2>
+			<p>
+				Exploded diagrams and cutaways are how engineers explain machines, but on paper they are frozen. The
+				brief was to make one that moves: a machine you can open part by part while it keeps running, with
+				the instruments beside it telling the truth about what it is doing.
+			</p>
+			<p>
+				An octopus suits that well. It swims by squeezing water out of its mantle through a siphon, which
+				gives the machine one input that drives everything, and its body has plenty to open: a head, a
+				mantle and eight long arms.
+			</p>
+		</section>
+
+		<section>
+			<h2>Design decisions</h2>
+			<div class="cards">
+				<article>
+					<h3>One model drives everything</h3>
+					<p>
+						Mantle volume, stroke and nozzle area give flow, jet speed, thrust and pressure. The mantle
+						breathes with that model, the pump and motor turn at the speeds it sets, and every chart,
+						the 2D section, the callouts and a live hand check of the thrust formula read from it. No
+						number on screen is typed in.
+					</p>
+				</article>
+				<article>
+					<h3>Every gear at its real ratio</h3>
+					<p>
+						The drive motor feeds a 4:1 planetary. Its carrier turns a 48-tooth crown gear that meshes
+						with eight 12-tooth bevel pinions, one per arm, each winding a tendon spool through a
+						clutch. A 22-to-32-tooth timing belt takes the motor up to the jet pump.
+					</p>
+				</article>
+				<article>
+					<h3>It runs itself, then hands over</h3>
+					<p>
+						A cursor walks the console and presses the buttons. Any click, drag or key gives control to
+						the visitor; 25 seconds of quiet gives it back. Two sliders, water current and nozzle
+						diameter, feed the model directly, so you can push the machine until it drifts or
+						overpressures.
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<section>
+			<h2>Inside the head</h2>
+			<p>
+				The head shell splits down the middle and swings open like a pair of doors, each half taking its
+				optic turret and that turret's worm-drive micro-motor with it. Inside is the drivetrain, stacked on
+				a deck: an outer-rotor motor with twelve copper windings, sixteen magnets and an encoder disc, a
+				copper coolant loop, the planetary gearbox on an orange carrier, and the crown gear with its eight
+				pinions, clutches and tendon spools. The spools wind to each arm's curl; the pinions never stop.
+			</p>
+			<img class="plate-shot" src="assets/drive.jpg" width="2000" height="1333"
+				alt="The head opened in two halves, showing a stacked drivetrain: a motor with a barred rotor bell and copper coolant ring above a planetary gearbox, and below it a crown gear driving eight small bevel gears and orange tendon spools, one for each arm." />
+		</section>
+
+		<section>
+			<h2>The mantle and the arms</h2>
+			<p>
+				The mantle is sixteen bolted ceramic panels with real thickness, laid in two courses over ring
+				frames and eight longerons. The upper course hinges open on linear actuators to show the finned pump
+				column and its impeller, two packs of nine cells, a control board on a mast and a clipped harness.
+				When exploded, the lower course steps outward and the parts inside rise out.
+			</p>
+			<img class="plate-shot" src="assets/mantle.jpg" width="2000" height="1333"
+				alt="The mantle seen from behind with its upper panels hinged open like petals, revealing a cage of dark frames around a finned pump, cell packs and a control board on a mast." />
+			<p>
+				Each arm is twenty-five copies of one machined module, every one 5.5 % smaller than the last: a
+				chamfered ceramic shell, a rubber knuckle, clevis cheeks, a steel pin on the bend axis, a tendon
+				guide on top and a pair of silicone suction cups underneath. The arms reach out, droop and curl at
+				the tips, and stream back while the jet is firing. All 200 links of all eight arms are drawn as
+				instances, so they cost a handful of draw calls.
+			</p>
+			<img class="plate-shot" src="assets/suckers.jpg" width="2000" height="1333"
+				alt="The underside of the octopod: segmented white arms with two rows of cream suction cups, each with a dark centre, and a three-claw beak under the hub." />
+		</section>
+
+		<section>
+			<h2>The numbers</h2>
+			<div class="dims-wrap">
+				<table class="dims">
+					<tbody>
+						<tr><th>Mantle cavity</th><td>9.0 L at rest · 18 % stroke cruising, 28 % flat out</td></tr>
+						<tr><th>Pulse</th><td>1.6 s cruising, down to 0.7 s · 35 % of each cycle contracting</td></tr>
+						<tr><th>Siphon nozzle</th><td>Ø 38 mm by default, 24–52 mm on the slider</td></tr>
+						<tr><th>Thrust</th><td>3.3 N mean and 18.7 N peak cruising · holds station up to about 1.5 m/s of current</td></tr>
+						<tr><th>Drivetrain</th><td>Motor → 4:1 planetary (sun 12, ring 36) → crown 48 → 8 pinions of 12 · belt 22 → 32 to the pump</td></tr>
+						<tr><th>Arms</th><td>8 × 25 links, root radius 50 mm, tip 13 mm · 400 suction cups</td></tr>
+						<tr><th>Power</th><td>480 Wh pack · about 55 W cruising, 8.7 h endurance</td></tr>
+						<tr><th>Rendering</th><td>Ambient occlusion, soft shadows, three quality tiers that step down on slow GPUs</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<section>
+			<h2>What went wrong first</h2>
+			<p>
+				The first version read as a toy: smooth capsules, a mantle shaped like a rugby ball and arms that
+				were stacks of plain cylinders standing the machine up like a tripod. The rebuild started from the
+				joint: once one arm link had a pin, a knuckle and a cup, the rest of the machine had a level of
+				detail to match. The arms were re-posed to reach out and curl so it floats instead of standing.
+			</p>
+			<p>
+				Ambient occlusion briefly made the closed shell look transparent. The pass renders its own normal
+				buffer with front faces only, so it missed the thin shell panels and shaded the parts inside onto
+				them. Rendering that buffer double-sided fixed it.
+			</p>
+		</section>
+
+		<section>
+			<h2>Outcome</h2>
+			<p>
+				A single page that explains a machine by letting people open it, with nothing to download beyond the
+				code. It opens in jet x-ray, so the frame, the pump and the drivetrain show through the shell from
+				the first frame. It runs in a current desktop browser; on a phone the panels fold away and you can
+				still orbit, open every part and use the sliders.
+			</p>
+		</section>
+	</div>
+</body>
+
+</html>

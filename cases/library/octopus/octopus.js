@@ -51,7 +51,7 @@ function rng(seed) {
 // ================================================================== i18n
 const I18N = {
 	zh: {
-		suckers: '吸盘', bHead: '打开头部', drivem: '主驱电机', eyebrow: '深海勘测章鱼 · 喷射推进', curl: '弯曲', power: '功耗', jet: '喷射泵', nozzle: '虹吸喷口', jetv: '射流速度',
+		lib: '案例库', study: '案例说明', suckers: '吸盘', bHead: '打开头部', drivem: '主驱电机', eyebrow: '深海勘测章鱼 · 喷射推进', curl: '弯曲', power: '功耗', jet: '喷射泵', nozzle: '虹吸喷口', jetv: '射流速度',
 		flow: '流量 Q', stroke: '单次排水 ΔV', period: '脉冲周期', pump: '叶轮转速', section: '外套膜剖面', live2d: '2D · 同一模型',
 		arms: '手臂弯曲', links: '节', systems: '系统', elec: '电功率', endur: '续航', depth: '深度', current: '水流',
 		drag: '机体阻力', hold: '定点保持', optics: '光学单元', mantle: '外套膜', armset: '手臂', beak: '喙', log: '操作日志',
@@ -68,6 +68,8 @@ let lang = (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'e
 const enText = new Map();
 document.querySelectorAll('[data-i18n]').forEach((el) => enText.set(el, el.textContent));
 function applyLang() {
+	const libLink = document.querySelector('nav.site a[target="_top"]');
+	if (libLink) libLink.href = '../../../' + (lang === 'zh' ? 'zh' : 'en') + '/cases/index.html';
 	document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
 	document.querySelectorAll('[data-i18n]').forEach((el) => {
 		const k = el.dataset.i18n;
