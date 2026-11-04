@@ -51,7 +51,7 @@ function rng(seed) {
 // ================================================================== i18n
 const I18N = {
 	zh: {
-		suckers: '吸盘', eyebrow: '深海勘测章鱼 · 喷射推进', curl: '弯曲', power: '功耗', jet: '喷射泵', nozzle: '虹吸喷口', jetv: '射流速度',
+		suckers: '吸盘', bHead: '打开头部', drivem: '主驱电机', eyebrow: '深海勘测章鱼 · 喷射推进', curl: '弯曲', power: '功耗', jet: '喷射泵', nozzle: '虹吸喷口', jetv: '射流速度',
 		flow: '流量 Q', stroke: '单次排水 ΔV', period: '脉冲周期', pump: '叶轮转速', section: '外套膜剖面', live2d: '2D · 同一模型',
 		arms: '手臂弯曲', links: '节', systems: '系统', elec: '电功率', endur: '续航', depth: '深度', current: '水流',
 		drag: '机体阻力', hold: '定点保持', optics: '光学单元', mantle: '外套膜', armset: '手臂', beak: '喙', log: '操作日志',
@@ -398,36 +398,76 @@ const headR = (y) => {
 	}
 	return 0;
 };
-{
+// The head shell splits down the middle into two halves that slide apart, each
+// carrying its optic turret and that turret's worm drive.
+M.headShell = new THREE.MeshPhysicalMaterial({ color: '#eceeea', roughness: 0.36, clearcoat: 0.7, clearcoatRoughness: 0.2, side: THREE.DoubleSide });
+M.headIn = new THREE.MeshStandardMaterial({ color: '#b5bdc1', roughness: 0.75, side: THREE.DoubleSide });
+M.copper = new THREE.MeshStandardMaterial({ color: '#b86a3c', roughness: 0.32, metalness: 1 });
+const headHalves = [];
+for (const side of [1, -1]) {
+	const grp = new THREE.Group();
+	head.add(grp);
+	const p0 = side > 0 ? 0 : PI;
 	const k = new Kit();
-	k.add('white', lathe(HEAD_PROFILE, 64));
-	// seam bands
-	for (const y of [0.7, 0.872]) k.add('graphite', xf(new THREE.TorusGeometry(headR(y) + 0.001, 0.0045, 8, 96), [0, y, 0], [PI / 2, 0, 0]));
-	// visor: a dark glass band across the face, with three sensor ports
-	k.add('glass', new THREE.CylinderGeometry(0.2185, 0.2165, 0.07, 48, 1, true, -0.85, 1.7).translate(0, 0.79, 0));
-	for (const s of [1, -1]) k.add('alu', xf(new THREE.BoxGeometry(0.006, 0.078, 0.014), [Math.sin(0.86 * s) * 0.218, 0.79, Math.cos(0.86 * s) * 0.218], [0, 0.86 * s, 0]));
-	for (const a of [-0.42, 0, 0.42]) {
+	k.add('headShell', lathe(HEAD_PROFILE, 40, p0, PI));
+	k.add('headIn', lathe(HEAD_PROFILE.map(([r, y]) => [Math.max(0, r - 0.007), y]), 40, p0, PI));
+	const arc = (y, r, a0, a1, rad) => {
+		const pts = [];
+		for (let i = 0; i <= 24; i++) { const a = lerp(a0, a1, i / 24); pts.push(V3(Math.sin(a) * r, y, Math.cos(a) * r)); }
+		return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 48, rad, 8);
+	};
+	const meridian = (a, y0, y1, rad, off = 0.0008) => {
+		const pts = [];
+		for (let i = 0; i <= 24; i++) { const y = lerp(y0, y1, i / 24), r = headR(y) + off; pts.push(V3(Math.sin(a) * r, y, Math.cos(a) * r)); }
+		return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 40, rad, 6);
+	};
+	// seam bands, and a flange along both split edges
+	for (const y of [0.7, 0.872]) k.add('graphite', arc(y, headR(y) + 0.001, p0 + 0.01, p0 + PI - 0.01, 0.0045));
+	for (const a of [p0 + 0.004, p0 + PI - 0.004]) k.add('alu', meridian(a, 0.65, 1.0, 0.0042, 0));
+	k.add('graphite', meridian(p0 + PI / 2, 0.875, 0.985, 0.0035));
+	// visor half with its sensor ports
+	const v0 = side > 0 ? 0.006 : -0.85;
+	k.add('glass', new THREE.CylinderGeometry(0.2185, 0.2165, 0.07, 32, 1, true, v0, 0.844).translate(0, 0.79, 0));
+	k.add('alu', xf(new THREE.BoxGeometry(0.006, 0.078, 0.014), [Math.sin(0.86 * side) * 0.218, 0.79, Math.cos(0.86 * side) * 0.218], [0, 0.86 * side, 0]));
+	for (const a of [0.24 * side, 0.58 * side]) {
 		const n = V3(Math.sin(a), 0, Math.cos(a));
 		const p = n.clone().multiplyScalar(0.219).add(V3(0, 0.79, 0));
 		k.add('accOpt', along(new THREE.TorusGeometry(0.014, 0.0028, 8, 24).rotateX(PI / 2), p, n));
 		k.add('glass', along(new THREE.SphereGeometry(0.012, 16, 8, 0, TAU, 0, PI / 2), p, n, [1, 0.6, 1]));
 	}
-	// bolts around both seams
-	for (const y of [0.7, 0.872]) for (let i = 0; i < 16; i++) {
-		const a = (i / 16) * TAU + 0.1;
+	for (const y of [0.7, 0.872]) for (let i = 0; i < 8; i++) {
+		const a = p0 + ((i + 0.5) / 8) * PI;
 		if (y < 0.8 && Math.abs(Math.atan2(Math.sin(a), Math.cos(a))) < 0.9) continue; // not across the visor
 		const n = V3(Math.sin(a), 0, Math.cos(a));
 		k.add('steel', along(hex(), n.clone().multiplyScalar(headR(y) + 0.002).add(V3(0, y + 0.012, 0)), n, [0.0055, 0.003, 0.0055]));
 	}
-	// two meridian seams over the crown and a bolted top hatch
-	for (const a of [PI / 2, -PI / 2]) {
-		const pts = [];
-		for (let i = 0; i <= 20; i++) {
-			const y = lerp(0.875, 0.985, i / 20), r = headR(y) + 0.0008;
-			pts.push(V3(Math.sin(a) * r, y, Math.cos(a) * r));
-		}
-		k.add('graphite', new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 24, 0.0035, 6));
+	// the optic worm drive lives in this half: micro-motor, worm, bracket
+	{
+		const mp = V3(side * 0.118, 0.875, 0.02);
+		k.add('graphite', xf(cyl(0.014, 0.014, 0.044, 20), [mp.x, mp.y, mp.z], [PI / 2, 0, 0]));
+		k.add('copper', xf(cyl(0.0145, 0.0145, 0.008, 20), [mp.x, mp.y, mp.z - 0.024], [PI / 2, 0, 0]));
+		k.add('accOpt', xf(cyl(0.0148, 0.0148, 0.004, 20), [mp.x, mp.y, mp.z + 0.012], [PI / 2, 0, 0]));
+		k.add('alu', new THREE.BoxGeometry(0.03, 0.004, 0.05).translate(mp.x, mp.y - 0.016, mp.z));
+		k.add('steel', xf(cyl(0.003, 0.003, 0.06, 8), [mp.x, mp.y, mp.z + 0.05], [PI / 2, 0, 0]));
 	}
+	const parts = k.build(grp);
+	parts.headIn.castShadow = false;
+	const worm = new THREE.Group();
+	worm.position.set(side * 0.118, 0.875, 0.068);
+	grp.add(worm);
+	{
+		const pts = [];
+		for (let i = 0; i <= 80; i++) { const t = i / 80, a = t * TAU * 5; pts.push(V3(Math.cos(a) * 0.0065, Math.sin(a) * 0.0065, (t - 0.5) * 0.03)); }
+		const wm = mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 160, 0.0022, 6), M.steel, worm);
+		wm.castShadow = true;
+		mesh(cyl(0.0045, 0.0045, 0.032, 10), M.alu, worm, [0, 0, 0], [PI / 2, 0, 0]);
+	}
+	headHalves.push({ grp, side, worm });
+}
+
+// fixed: the top hatch (a bearing cap on the drive column) and the hub
+{
+	const k = new Kit();
 	k.add('alu', cyl(0.06, 0.066, 0.012, 48).translate(0, 1.0, 0));
 	k.add('graphite', cyl(0.045, 0.045, 0.008, 40).translate(0, 1.009, 0));
 	k.add('accBody', xf(new THREE.TorusGeometry(0.03, 0.003, 8, 32), [0, 1.014, 0], [PI / 2, 0, 0]));
@@ -435,7 +475,6 @@ const headR = (y) => {
 		const a = (i / 6) * TAU;
 		k.add('steel', xf(hex(), [Math.cos(a) * 0.054, 1.007, Math.sin(a) * 0.054], [0, 0, 0], [0.0045, 0.003, 0.0045]));
 	}
-	// hub: graphite drum, gear crown and an orange skirt
 	k.add('graphite', cyl(0.168, 0.152, 0.07, 48).translate(0, 0.632, 0));
 	k.add('graphite', cyl(0.11, 0.12, 0.024, 40).translate(0, 0.586, 0));
 	for (let i = 0; i < 48; i++) {
@@ -444,8 +483,222 @@ const headR = (y) => {
 	}
 	k.add('accBody', xf(new THREE.TorusGeometry(0.16, 0.007, 10, 64), [0, 0.6, 0], [PI / 2, 0, 0]));
 	k.add('steel', xf(new THREE.TorusGeometry(0.17, 0.004, 8, 64), [0, 0.669, 0], [PI / 2, 0, 0]));
+	// siphon gimbal servo with its linkage
+	k.add('graphite', new THREE.BoxGeometry(0.036, 0.022, 0.03).translate(0.06, 0.705, 0.135));
+	k.add('accJet', cyl(0.009, 0.009, 0.006, 16).translate(0.06, 0.719, 0.135));
+	k.add('steel', along(cyl(0.0025, 0.0025, 1, 8), V3(0.042, 0.717, 0.16), V3(-0.036, -0.004, 0.05).normalize(), [1, 0.062, 1]));
 	k.build(head);
 }
+
+// --- drivetrain inside the head -------------------------------------------------------
+// Main motor → 4:1 planetary → crown gear (48 t) → eight bevel pinions (12 t), one per arm,
+// each driving a tendon spool through a clutch. A timing belt (22 t → 32 t) takes the
+// motor up to the jet pump. Every gear turns at its real ratio.
+const DRV = { Zs: 12, Zp: 12, Zr: 36, Zc: 48, Zpin: 12, Zm: 22, Zpump: 32 };
+DRV.planet = DRV.Zs / (DRV.Zs + DRV.Zr); // carrier turns per sun turn
+function teeth(k, mat, r, h, t, n, y, inward = false, w = 0.5) {
+	for (let i = 0; i < n; i++) {
+		const a = (i / n) * TAU, rr = inward ? r - h / 2 : r + h / 2;
+		k.add(mat, xf(new THREE.BoxGeometry(h, t, ((TAU * r) / n) * w), [Math.cos(a) * rr, y, Math.sin(a) * rr], [0, -a, 0]));
+	}
+}
+const ringLathe = (rIn, rOut, y, h, seg = 64) => lathe([[rIn, y], [rOut, y], [rOut, y + h], [rIn, y + h], [rIn, y]], seg);
+const drive = new THREE.Group();
+head.add(drive);
+const stages = { deck: new THREE.Group(), planet: new THREE.Group(), motor: new THREE.Group(), top: new THREE.Group() };
+for (const g of Object.values(stages)) drive.add(g);
+const spin = {}; // rotating parts
+
+// deck: base plate, standoffs, crown gear, pinions, clutches and tendon spools
+{
+	const k = new Kit();
+	k.add('graphite', cyl(0.165, 0.165, 0.01, 64).translate(0, 0.676, 0));
+	for (let i = 0; i < 4; i++) {
+		const a = (i / 4) * TAU + PI / 4;
+		k.add('alu', cyl(0.0048, 0.0048, 0.225, 10).translate(Math.cos(a) * 0.1, 0.793, Math.sin(a) * 0.1));
+		k.add('steel', xf(hex(), [Math.cos(a) * 0.1, 0.684, Math.sin(a) * 0.1], [0, 0, 0], [0.008, 0.006, 0.008]));
+	}
+	k.add('alu', cyl(0.008, 0.008, 0.29, 12).translate(0, 0.82, 0)); // main shaft
+	// two coolant lines and a harness down the side
+	for (const s of [1, -1]) {
+		const c = new THREE.CatmullRomCurve3([V3(s * 0.1, 0.845, 0.02), V3(s * 0.135, 0.8, 0.0), V3(s * 0.14, 0.72, -0.03), V3(s * 0.12, 0.684, -0.06)]);
+		k.add('copper', new THREE.TubeGeometry(c, 30, 0.0035, 8));
+	}
+	const cols = ['accBody', 'graphite', 'graphite', 'white'];
+	for (let i = 0; i < 4; i++) {
+		const a = -PI / 2 - 0.25 + i * 0.16;
+		const c = new THREE.CatmullRomCurve3([V3(Math.cos(a) * 0.09, 0.905, Math.sin(a) * 0.09), V3(Math.cos(a) * 0.125, 0.84, Math.sin(a) * 0.125), V3(Math.cos(a) * 0.13, 0.74, Math.sin(a) * 0.13), V3(Math.cos(a) * 0.15, 0.684, Math.sin(a) * 0.15)]);
+		k.add(cols[i], new THREE.TubeGeometry(c, 30, 0.0028, 6));
+	}
+	k.build(stages.deck);
+	const crown = new THREE.Group();
+	stages.deck.add(crown);
+	const kc = new Kit();
+	kc.add('alu', cyl(0.118, 0.12, 0.014, 72).translate(0, 0.69, 0));
+	kc.add('steel', ringLathe(0.096, 0.12, 0.697, 0.004, 72));
+	for (let i = 0; i < DRV.Zc; i++) {
+		const a = (i / DRV.Zc) * TAU;
+		kc.add('steel', xf(new THREE.BoxGeometry(0.022, 0.008, 0.006), [Math.cos(a) * 0.108, 0.704, Math.sin(a) * 0.108], [0, -a, 0]));
+	}
+	for (let i = 0; i < 6; i++) {
+		const a = (i / 6) * TAU;
+		kc.add('graphite', xf(new THREE.BoxGeometry(0.05, 0.016, 0.012), [Math.cos(a) * 0.058, 0.69, Math.sin(a) * 0.058], [0, -a, 0]));
+	}
+	kc.add('accBody', cyl(0.028, 0.028, 0.02, 32).translate(0, 0.697, 0));
+	kc.build(crown);
+	spin.crown = crown;
+	spin.pinions = [];
+	spin.spools = [];
+	for (let a = 0; a < 8; a++) {
+		const ang = ARM_ANGLES[a];
+		const dir = V3(Math.cos(ang), 0, Math.sin(ang));
+		const holder = new THREE.Group();
+		holder.position.set(0, 0.718, 0);
+		holder.quaternion.setFromUnitVectors(V3(0, 1, 0), dir);
+		stages.deck.add(holder);
+		// in holder space +Y is radial
+		const pin = new THREE.Group();
+		pin.position.y = 0.108;
+		holder.add(pin);
+		const kp = new Kit();
+		kp.add('steel', cyl(0.011, 0.017, 0.016, 24));
+		teeth(kp, 'steel', 0.014, 0.006, 0.014, DRV.Zpin, 0, false, 0.5);
+		kp.build(pin);
+		spin.pinions.push(pin);
+		const ks = new Kit();
+		ks.add('alu', cyl(0.0042, 0.0042, 0.06, 10).translate(0, 0.14, 0));
+		ks.add('alu', ringLathe(0.006, 0.012, 0.118, 0.008, 20)); // bearing block
+		ks.add('graphite', new THREE.BoxGeometry(0.03, 0.012, 0.03).translate(0, 0.122, 0.0));
+		ks.build(holder);
+		const spool = new THREE.Group();
+		spool.position.y = 0.152;
+		holder.add(spool);
+		const kq = new Kit();
+		kq.add('accArm', cyl(0.015, 0.015, 0.005, 24).translate(0, -0.012, 0)); // clutch plate
+		kq.add('graphite', cyl(0.009, 0.009, 0.018, 20));
+		kq.add('alu', cyl(0.014, 0.014, 0.003, 20).translate(0, 0.0095, 0));
+		kq.add('alu', cyl(0.014, 0.014, 0.003, 20).translate(0, -0.0085, 0));
+		kq.add('white', xf(new THREE.TorusGeometry(0.0105, 0.0022, 6, 20), [0, 0.003, 0], [PI / 2, 0, 0]));
+		kq.add('white', xf(new THREE.TorusGeometry(0.0105, 0.0022, 6, 20), [0, -0.003, 0], [PI / 2, 0, 0]));
+		kq.add('accBody', new THREE.BoxGeometry(0.004, 0.016, 0.004).translate(0.0125, 0, 0)); // index mark
+		kq.build(spool);
+		spin.spools.push(spool);
+	}
+}
+const aSpool = anchor(stages.deck, [0, 0.72, 0]);
+
+// planetary: fixed ring gear, carrier with three planets, sun on the motor shaft
+{
+	const k = new Kit();
+	k.add('steel', ringLathe(0.072, 0.088, 0.752, 0.028, 72));
+	teeth(k, 'steel', 0.072, 0.008, 0.024, DRV.Zr, 0.766, true, 0.5);
+	for (let i = 0; i < 6; i++) {
+		const a = (i / 6) * TAU;
+		k.add('steel', xf(hex(), [Math.cos(a) * 0.082, 0.782, Math.sin(a) * 0.082], [0, 0, 0], [0.0045, 0.003, 0.0045]));
+	}
+	k.build(stages.planet);
+	const carrier = new THREE.Group();
+	stages.planet.add(carrier);
+	const kc = new Kit();
+	kc.add('accJet', cyl(0.064, 0.064, 0.006, 48).translate(0, 0.748, 0));
+	kc.add('accJet', cyl(0.02, 0.02, 0.04, 24).translate(0, 0.73, 0));
+	kc.build(carrier);
+	spin.carrier = carrier;
+	spin.planets = [];
+	for (let i = 0; i < 3; i++) {
+		const a = (i / 3) * TAU;
+		const p = new THREE.Group();
+		p.position.set(Math.cos(a) * 0.046, 0.766, Math.sin(a) * 0.046);
+		carrier.add(p);
+		const kp = new Kit();
+		kp.add('alu', cyl(0.016, 0.016, 0.02, 24));
+		teeth(kp, 'alu', 0.016, 0.006, 0.02, DRV.Zp, 0, false, 0.5);
+		kp.add('graphite', cyl(0.005, 0.005, 0.03, 10));
+		kp.build(p);
+		spin.planets.push(p);
+	}
+	const sun = new THREE.Group();
+	stages.planet.add(sun);
+	const ku = new Kit();
+	ku.add('copper', cyl(0.018, 0.018, 0.022, 24).translate(0, 0.766, 0));
+	teeth(ku, 'copper', 0.018, 0.006, 0.022, DRV.Zs, 0.766, false, 0.5);
+	ku.build(sun);
+	spin.sun = sun;
+}
+const aPlanet = anchor(stages.planet, [0.088, 0.766, 0]);
+
+// motor: stator with twelve copper windings inside an outer-rotor bell with magnets
+{
+	const k = new Kit();
+	k.add('graphite', cyl(0.046, 0.046, 0.066, 36).translate(0, 0.845, 0));
+	for (let i = 0; i < 12; i++) {
+		const a = (i / 12) * TAU;
+		k.add('copper', xf(new THREE.BoxGeometry(0.02, 0.058, 0.019), [Math.cos(a) * 0.057, 0.845, Math.sin(a) * 0.057], [0, -a, 0]));
+		k.add('graphite', xf(new THREE.BoxGeometry(0.006, 0.066, 0.023), [Math.cos(a) * 0.069, 0.845, Math.sin(a) * 0.069], [0, -a, 0]));
+	}
+	k.add('accJet', xf(new THREE.TorusGeometry(0.047, 0.0035, 8, 40), [0, 0.879, 0], [PI / 2, 0, 0]));
+	k.add('copper', xf(new THREE.TorusGeometry(0.102, 0.0035, 8, 64), [0, 0.845, 0], [PI / 2, 0, 0])); // coolant loop
+	for (const s of [1, -1]) k.add('alu', cyl(0.006, 0.006, 0.012, 10).translate(s * 0.102, 0.845, 0.0));
+	k.build(stages.motor);
+	const rotor = new THREE.Group();
+	stages.motor.add(rotor);
+	const kr = new Kit();
+	kr.add('alu', ringLathe(0.077, 0.087, 0.81, 0.006, 64));
+	kr.add('alu', ringLathe(0.03, 0.087, 0.878, 0.005, 64));
+	for (let i = 0; i < 8; i++) {
+		const a = (i / 8) * TAU;
+		kr.add('alu', xf(new THREE.BoxGeometry(0.008, 0.068, 0.012), [Math.cos(a) * 0.083, 0.847, Math.sin(a) * 0.083], [0, -a, 0]));
+	}
+	for (let i = 0; i < 16; i++) {
+		const a = ((i + 0.5) / 16) * TAU;
+		kr.add(i % 2 ? 'graphite' : 'steel', xf(new THREE.BoxGeometry(0.005, 0.054, 0.013), [Math.cos(a) * 0.077, 0.847, Math.sin(a) * 0.077], [0, -a, 0]));
+	}
+	kr.build(rotor);
+	spin.rotor = rotor;
+}
+const aMotor = anchor(stages.motor, [0.09, 0.86, 0]);
+
+// top: plate, encoder disc and read head, timing belt to the pump pulley
+const PULLEY_M = 0.022, PULLEY_P = 0.032, PUMP_C = V3(0, 0.936, -0.12);
+{
+	const k = new Kit();
+	k.add('alu', ringLathe(0.012, 0.112, 0.903, 0.006, 64));
+	k.add('graphite', new THREE.BoxGeometry(0.016, 0.012, 0.012).translate(0.044, 0.92, 0));
+	k.add('accOpt', new THREE.BoxGeometry(0.004, 0.004, 0.004).translate(0.037, 0.926, 0));
+	k.add('steel', cyl(0.006, 0.006, 0.06, 10).translate(PUMP_C.x, PUMP_C.y + 0.03, PUMP_C.z)); // pump shaft
+	k.add('alu', new THREE.BoxGeometry(0.03, 0.006, 0.05).translate(0, 0.909, -0.1));
+	// toothed belt: round the two pulleys
+	const pts = [];
+	for (let i = 0; i <= 24; i++) { const a = (i / 24) * PI; pts.push(V3(Math.cos(a) * (PULLEY_M + 0.003), 0.936, Math.sin(a) * (PULLEY_M + 0.003))); }
+	for (let i = 0; i < 24; i++) { const a = PI + (i / 24) * PI; pts.push(V3(Math.cos(a) * (PULLEY_P + 0.003), 0.936, PUMP_C.z + Math.sin(a) * (PULLEY_P + 0.003))); }
+	k.add('rubber', new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, true), 120, 0.0035, 6, true));
+	k.build(stages.top);
+	const enc = new THREE.Group();
+	stages.top.add(enc);
+	const ke = new Kit();
+	ke.add('glass', cyl(0.04, 0.04, 0.002, 48).translate(0, 0.92, 0));
+	for (let i = 0; i < 32; i++) {
+		const a = (i / 32) * TAU;
+		ke.add('alu', xf(new THREE.BoxGeometry(0.008, 0.0025, 0.003), [Math.cos(a) * 0.035, 0.92, Math.sin(a) * 0.035], [0, -a, 0]));
+	}
+	ke.build(enc);
+	spin.encoder = enc;
+	const pulley = (r, z, n) => {
+		const g = new THREE.Group();
+		g.position.set(0, 0, z);
+		stages.top.add(g);
+		const kp = new Kit();
+		kp.add('steel', cyl(r, r, 0.012, 32).translate(0, 0.936, 0));
+		teeth(kp, 'steel', r, 0.003, 0.01, n, 0.936, false, 0.45);
+		kp.add('accBody', cyl(r + 0.003, r + 0.003, 0.002, 32).translate(0, 0.943, 0));
+		kp.add('accBody', cyl(r + 0.003, r + 0.003, 0.002, 32).translate(0, 0.929, 0));
+		kp.build(g);
+		return g;
+	};
+	spin.pulleyM = pulley(PULLEY_M, 0, DRV.Zm);
+	spin.pulleyP = pulley(PULLEY_P, PUMP_C.z, DRV.Zpump);
+}
+const driveAng = { m: 0 };
 
 // --- optic turrets: mount, housing, knurled ring, focus ring, lens barrel, iris --------
 const optics = [];
@@ -455,7 +708,7 @@ for (const side of [1, -1]) {
 	const base = V3(side * 0.163, 0.9, 0.07);
 	g.position.copy(base);
 	g.quaternion.setFromUnitVectors(V3(0, 1, 0), dir);
-	head.add(g);
+	headHalves[side > 0 ? 0 : 1].grp.add(g);
 	const k = new Kit();
 	k.add('graphite', cyl(0.064, 0.07, 0.035, 48).translate(0, 0.0, 0));
 	k.add('white', cyl(0.058, 0.062, 0.05, 48).translate(0, 0.04, 0));
@@ -841,6 +1094,7 @@ const FLOW = new THREE.Vector3(1, 0, 0.25).normalize(); // direction the water c
 const _d = V3(), _k = V3(), _z = V3(), _p = V3(), _rhat = V3(), _m = new THREE.Matrix4();
 const suckAt = V3();
 const SUCK_ARM = ARM_NAMES.indexOf('L1');
+const VIS = 0.12; // rotating parts are drawn at 12 % of real speed so the teeth stay readable
 const LINK_Q = Math.pow(P.armR1 / P.armR0, 1 / (N - 1));
 
 function poseArms(t, jet, u, explode, iso, curls) {
@@ -918,10 +1172,10 @@ composer.addPass(new OutputPass());
 
 // ================================================================== 3. CONSOLE
 const ui = {
-	optics: false, mantle: false, arm: false, flow: false, beak: false, explode: false,
+	optics: false, head: false, mantle: false, arm: false, flow: false, beak: false, explode: false,
 	current: 0, nozzleD: 0.038,
 };
-const anim = { optics: 0, mantle: 0, arm: 0, flow: 0, beak: 0, explode: 0, turn: 0, turnTarget: 0 };
+const anim = { optics: 0, head: 0, mantle: 0, arm: 0, flow: 0, beak: 0, explode: 0, turn: 0, turnTarget: 0 };
 let phase = 0, simT = 0;
 const hist = []; // [t, dP, F]
 
@@ -959,6 +1213,7 @@ function log(msg) {
 // actions shared by the visitor and the tour
 const ACT = {
 	optics: (on) => log(on ? 'OPTICS · lens unscrewed, iris cycling' : 'OPTICS · lens seated'),
+	head: (on) => log(on ? 'HEAD OPEN · drivetrain exposed' : 'HEAD CLOSED'),
 	mantle: (on) => log(on ? 'MANTLE OPEN · shell hinged, pump raised' : 'MANTLE SEALED'),
 	arm: (on) => log(on ? 'ARM R2 APART · 25 links on the bench' : 'ARM R2 · re-seated on hub'),
 	flow: (on) => log(on ? 'JET X-RAY · shell at 18 %, flow traced' : 'JET X-RAY off'),
@@ -991,6 +1246,7 @@ const VIEWS = {
 	top: { p: [0.05, 3.6, 0.6], t: [0, 0.7, 0] },
 	under: { p: [1.35, 0.22, 1.85], t: [0, 0.66, 0] },
 	suckers: { p: [0.75, 0.3, 1.15], t: [0.3, 0.5, 0.35] }, // tour only: close on the cups
+	drive: { p: [0.55, 1.3, 1.55], t: [0, 0.8, 0.0] }, // tour only: into the open head
 	rear: { p: [-1.95, 2.35, -2.2], t: [0, 0.98, -0.28] }, // tour only: looks into the open mantle
 };
 let camTween = null;
@@ -1177,10 +1433,13 @@ const coSvg = $('coLines');
 const SVGNS = 'http://www.w3.org/2000/svg';
 const CALLOUTS = [
 	{ key: 'optics', name: 'OPTIC UNIT L', obj: () => optics[0].tip, dx: 1, dy: -0.9, val: (S) => 'iris f/' + S.fstop.toFixed(1) },
-	{ key: 'mantle', name: 'MANTLE SHELL', obj: () => aMantle, dx: -1, dy: -0.7, val: (S) => 'r ×' + S.rScale.toFixed(3) + ' · ' + (anim.mantle > 0.5 ? 'OPEN' : 'SEALED') },
+	{ key: 'mantle', name: 'MANTLE SHELL', when: () => anim.head < 0.4, obj: () => aMantle, dx: -1, dy: -0.7, val: (S) => 'r ×' + S.rScale.toFixed(3) + ' · ' + (anim.mantle > 0.5 ? 'OPEN' : 'SEALED') },
 	{ key: 'pump', name: 'JET PUMP', obj: () => aPump, dx: -1.1, dy: 0.25, val: (S) => Math.round(S.rpm) + ' rpm', when: () => anim.mantle > 0.4 || anim.flow > 0.4 || anim.explode > 0.4 },
 	{ key: 'flow', name: 'SIPHON', obj: () => nozzleTip, dx: 1, dy: 0.45, val: (S) => 'Ø' + Math.round(S.d * 1000) + ' · ' + S.jet.v.toFixed(1) + ' m/s' },
 	{ key: 'arm', name: 'ARM R2', obj: () => ({ getWorldPosition: (v) => v.copy(armTips[ARM_R2]).applyMatrix4(root.matrixWorld) }), dx: -1, dy: 0.5, val: (S) => 'curl ' + Math.round(S.curls[ARM_R2] * 100) + ' %' },
+	{ key: 'head', name: 'DRIVE MOTOR', obj: () => aMotor, dx: 1, dy: -0.75, val: (S) => Math.round(S.motorRpm) + ' rpm · 12 slots / 16 poles', when: () => anim.head > 0.4 || anim.explode > 0.4 },
+	{ key: 'head', name: 'PLANETARY 4 : 1', obj: () => aPlanet, dx: 1, dy: 0.15, val: (S) => 'sun 12 · ring 36 · ' + Math.round(S.motorRpm * DRV.planet) + ' rpm', when: () => anim.head > 0.4 || anim.explode > 0.4 },
+	{ key: 'head', name: 'TENDON SPOOLS ×8', obj: () => aSpool, dx: -1, dy: 0.55, val: (S) => 'crown 48 → pinion 12 · ' + Math.round(S.curls[0] * 100) + ' %', when: () => anim.head > 0.4 },
 	{ key: 'suck', name: 'SUCKERS', obj: () => ({ getWorldPosition: (v) => v.copy(suckAt).applyMatrix4(root.matrixWorld) }), dx: -1, dy: -0.5, val: () => '2 × 25 per arm · 400' },
 	{ key: 'beak', name: 'BEAK', obj: () => beakTip, dx: 0.9, dy: 0.9, val: () => (anim.beak > 0.5 ? 'OPEN' : 'CLOSED'), when: () => anim.beak > 0.3 || anim.explode > 0.3 },
 ];
@@ -1213,7 +1472,7 @@ function drawCallouts(S, W, H, dt) {
 	if (frameNo % 30 === 1) measureCols();
 	const cxs = W / 2, cys = H * 0.45;
 	for (const c of CALLOUTS) {
-		const vis = (!c.when || c.when()) && !(small && (c.key === 'pump' || c.key === 'beak' || c.key === 'suck'));
+		const vis = (!c.when || c.when()) && !(small && (c.key === 'pump' || c.key === 'beak' || c.key === 'suck' || (c.key === 'head' && c.name !== 'DRIVE MOTOR')));
 		c.obj().getWorldPosition(_w);
 		_w.project(camera);
 		const behind = _w.z > 1;
@@ -1250,29 +1509,33 @@ const cursor = $('cursor');
 const BEATS = [
 	{ t: 1.2, el: 'v-hero', go: () => setView('hero', true) },
 	{ t: 3.4, el: 'b-optics', go: () => toggle('optics', true) },
-	{ t: 6.6, el: 'b-mantle', go: () => toggle('mantle', true) },
-	{ t: 7.6, el: null, go: () => setView('rear', true) },
-	{ t: 9.6, el: 'v-hero', go: () => setView('hero', true) },
-	{ t: 10.2, el: 'b-arm', go: () => toggle('arm', true) },
-	{ t: 13.8, el: 'b-arm', go: () => toggle('arm', true) },
-	{ t: 15.0, el: 'b-flow', go: () => toggle('flow', true) },
-	{ t: 17.2, el: 'v-side', go: () => setView('side', true) },
-	{ t: 19.4, el: 'slCur', slide: [slCur, 2.0], dur: 1.6 },
-	{ t: 24.0, el: 'slCur', slide: [slCur, 0], dur: 1.0 },
-	{ t: 25.6, el: 'b-flow', go: () => toggle('flow', true) },
-	{ t: 26.6, el: 'b-optics', go: () => toggle('optics', true) },
-	{ t: 27.8, el: 'v-hero', go: () => setView('hero', true) },
-	{ t: 29.0, el: 'b-explode', go: () => toggle('explode', true) },
-	{ t: 36.6, el: 'b-explode', go: () => toggle('explode', true) },
-	{ t: 38.2, el: 'b-mantle', go: () => toggle('mantle', true) },
-	{ t: 39.4, el: 'b-beak', go: () => toggle('beak', true) },
-	{ t: 41.0, el: 'v-under', go: () => setView('under', true) },
-	{ t: 42.6, el: null, go: () => setView('suckers', true) },
-	{ t: 44.0, el: 'b-beak', go: () => toggle('beak', true) },
-	{ t: 45.2, el: 'v-top', go: () => setView('top', true) },
-	{ t: 48.4, el: 'v-hero', go: () => setView('hero', true) },
+	{ t: 5.0, el: 'b-head', go: () => toggle('head', true) },
+	{ t: 5.8, el: null, go: () => setView('drive', true) },
+	{ t: 10.6, el: 'b-head', go: () => toggle('head', true) },
+	{ t: 11.6, el: 'v-hero', go: () => setView('hero', true) },
+	{ t: 13.2, el: 'b-mantle', go: () => toggle('mantle', true) },
+	{ t: 14.2, el: null, go: () => setView('rear', true) },
+	{ t: 16.2, el: 'v-hero', go: () => setView('hero', true) },
+	{ t: 16.8, el: 'b-arm', go: () => toggle('arm', true) },
+	{ t: 20.4, el: 'b-arm', go: () => toggle('arm', true) },
+	{ t: 21.6, el: 'b-flow', go: () => toggle('flow', true) },
+	{ t: 23.8, el: 'v-side', go: () => setView('side', true) },
+	{ t: 26.0, el: 'slCur', slide: [slCur, 2.0], dur: 1.6 },
+	{ t: 30.6, el: 'slCur', slide: [slCur, 0], dur: 1.0 },
+	{ t: 32.2, el: 'b-flow', go: () => toggle('flow', true) },
+	{ t: 33.2, el: 'b-optics', go: () => toggle('optics', true) },
+	{ t: 34.4, el: 'v-hero', go: () => setView('hero', true) },
+	{ t: 35.6, el: 'b-explode', go: () => toggle('explode', true) },
+	{ t: 43.2, el: 'b-explode', go: () => toggle('explode', true) },
+	{ t: 44.8, el: 'b-mantle', go: () => toggle('mantle', true) },
+	{ t: 46.0, el: 'b-beak', go: () => toggle('beak', true) },
+	{ t: 47.6, el: 'v-under', go: () => setView('under', true) },
+	{ t: 49.2, el: null, go: () => setView('suckers', true) },
+	{ t: 50.6, el: 'b-beak', go: () => toggle('beak', true) },
+	{ t: 51.8, el: 'v-top', go: () => setView('top', true) },
+	{ t: 55.0, el: 'v-hero', go: () => setView('hero', true) },
 ];
-const LOOP = 52;
+const LOOP = 58.6;
 const tour = { on: false, t: 0, i: 0, cx: 0, cy: 0, from: null, slide: null };
 let lastInput = -1e9;
 let clock = 0;
@@ -1282,7 +1545,7 @@ function setTourTag() {
 	$('tourtag').classList.toggle('user', !tour.on);
 }
 function resetMachine() {
-	for (const k of ['optics', 'mantle', 'arm', 'flow', 'beak', 'explode']) {
+	for (const k of ['optics', 'head', 'mantle', 'arm', 'flow', 'beak', 'explode']) {
 		if (ui[k]) { ui[k] = false; $('b-' + k).classList.remove('on'); }
 	}
 	anim.turnTarget = anim.turn > 0 ? 360 : 0;
@@ -1444,10 +1707,11 @@ function step(dt) {
 	for (let a = 0; a < 8; a++) curls[a] = armCurl(a, simT, jetEase, ui.current);
 	const rScale = Math.sqrt(1 - jet.expelled / P.V0);
 	const rpm = (Math.abs(jet.Q) / P.pumpDisp) * 60;
+	const motorRpm = (rpm * DRV.Zpump) / DRV.Zm; // the belt steps the pump down from the motor
 	const armsW = P.armW * (8 - (ui.arm ? 1 : 0)) * (1 + 0.6 * clamp(ui.current / 2, 0, 1));
 	const elecW = c.hydW / P.pumpEff + armsW + P.hotelW;
 	const fstop = lerp(2.8, 11, 0.5 + 0.5 * Math.sin(simT * (ui.optics ? 1.6 : 0.35)));
-	Object.assign(S, { cyc: c, eff, jet, rScale, rpm, elecW, d: ui.nozzleD, curls, fstop });
+	Object.assign(S, { cyc: c, eff, jet, rScale, rpm, motorRpm, elecW, d: ui.nozzleD, curls, fstop });
 	hist.push([simT, jet.dP, jet.F]);
 	while (hist.length && simT - hist[0][0] > WIN + 0.2) hist.shift();
 	const over = c.peakP > P.pumpMaxP;
@@ -1455,7 +1719,7 @@ function step(dt) {
 	if (over !== lastOver) { log(over ? 'OVERPRESSURE · ' + (c.peakP / 1000).toFixed(0) + ' kPa' : 'PRESSURE NOMINAL'); lastOver = over; }
 
 	// --- animate toward the switches ---
-	for (const k of ['optics', 'mantle', 'arm', 'flow', 'beak', 'explode']) anim[k] = damp(anim[k], ui[k] ? 1 : 0, k === 'explode' ? 2.2 : 3.2, dt);
+	for (const k of ['optics', 'head', 'mantle', 'arm', 'flow', 'beak', 'explode']) anim[k] = damp(anim[k], ui[k] ? 1 : 0, k === 'explode' ? 2.2 : 3.2, dt);
 	if (anim.turn !== anim.turnTarget) {
 		const sp = 52 * dt;
 		anim.turn = anim.turn < anim.turnTarget ? Math.min(anim.turnTarget, anim.turn + sp) : Math.max(anim.turnTarget, anim.turn - sp);
@@ -1498,7 +1762,38 @@ function step(dt) {
 	const lift = ease(Math.max(anim.mantle * 0.6, e));
 	internals.position.y = 0.06 * lift + 0.14 * e;
 	pump.rotation.y = lift * PI * 0.25;
-	impeller.rotation.y += (rpm / 60) * TAU * dt * 0.2; // shown at a fifth of real speed so the blades read
+	impeller.rotation.y += (rpm / 60) * TAU * dt * VIS;
+
+	// head: halves slide apart, the drive stages lift apart when exploded
+	const ho = ease(Math.max(anim.head, e * 0.9));
+	for (const h of headHalves) {
+		h.grp.position.set(h.side * (0.17 * ho + 0.12 * e), 0, -0.05 * ho);
+		h.grp.rotation.set(0, h.side * 0.62 * ho, -h.side * 0.05 * ho); // swing open like doors
+		h.worm.rotation.z += dt * (ui.optics ? 9 : 2.5) * h.side; // worm turns the turret iris
+	}
+	stages.planet.position.y = 0.05 * e;
+	stages.motor.position.y = 0.1 * e;
+	stages.top.position.y = 0.16 * e;
+	M.headShell.opacity = 1 - 0.84 * xr;
+	M.headShell.transparent = xr > 0.01;
+	M.headShell.depthWrite = xr < 0.5;
+	M.headIn.opacity = M.headShell.opacity;
+	M.headIn.transparent = M.headShell.transparent;
+	// the gear train: motor → sun; carrier = sun × 12/48; crown on the carrier; pinions × 48/12
+	driveAng.m += (S.motorRpm / 60) * TAU * dt * VIS;
+	const m = driveAng.m, cAng = m * DRV.planet;
+	spin.rotor.rotation.y = m;
+	spin.sun.rotation.y = m;
+	spin.encoder.rotation.y = m;
+	spin.pulleyM.rotation.y = m;
+	spin.pulleyP.rotation.y = (m * DRV.Zm) / DRV.Zpump;
+	spin.carrier.rotation.y = cAng;
+	for (const p of spin.planets) p.rotation.y = -(m - cAng) * (DRV.Zs / DRV.Zp);
+	spin.crown.rotation.y = cAng;
+	for (let a = 0; a < 8; a++) {
+		spin.pinions[a].rotation.y = (-cAng * DRV.Zc) / DRV.Zpin;
+		spin.spools[a].rotation.y = curls[a] * TAU * 1.2; // the clutch winds the tendon to the arm's curl
+	}
 	for (const pk of packs) pk.g.position.set(pk.s * (0.1 + 0.13 * e), 0.4 + 0.05 * e, -0.01);
 	board.position.y = 0.58 + 0.16 * e;
 
@@ -1583,6 +1878,7 @@ function readouts(dt) {
 	else if (anim.explode > 0.5) { state = 'EXPLODED'; cls = 'hot'; }
 	else if (anim.arm > 0.5) { state = 'ARM R2 APART'; cls = 'hot'; }
 	else if (anim.mantle > 0.5) { state = 'MANTLE OPEN'; cls = 'hot'; }
+	else if (anim.head > 0.5) { state = 'HEAD OPEN'; cls = 'hot'; }
 	else if (anim.optics > 0.5) { state = 'OPTICS OUT'; cls = 'hot'; }
 	else if (anim.beak > 0.5) { state = 'BEAK OPEN'; cls = 'hot'; }
 	else if (jet.contracting) { state = 'JETTING'; cls = 'hot'; }
@@ -1642,6 +1938,8 @@ function readouts(dt) {
 	$('sArm').textContent = yes('arm', '7 / 8 · R2 OFF', '8 / 8 ON HUB');
 	$('sArm').className = anim.arm > 0.5 ? 'hot' : '';
 	$('sBeak').textContent = yes('beak', 'OPEN', 'CLOSED');
+	$('sDrive').textContent = Math.round(S.motorRpm) + ' rpm · 4:1 · 48/12';
+	$('sDrive').className = anim.head > 0.5 ? 'hot' : '';
 }
 
 // ================================================================== boot
