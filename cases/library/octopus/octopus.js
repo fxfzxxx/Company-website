@@ -51,7 +51,7 @@ function rng(seed) {
 // ================================================================== i18n
 const I18N = {
 	zh: {
-		eyebrow: '深海勘测章鱼 · 喷射推进', curl: '弯曲', power: '功耗', jet: '喷射泵', nozzle: '虹吸喷口', jetv: '射流速度',
+		suckers: '吸盘', eyebrow: '深海勘测章鱼 · 喷射推进', curl: '弯曲', power: '功耗', jet: '喷射泵', nozzle: '虹吸喷口', jetv: '射流速度',
 		flow: '流量 Q', stroke: '单次排水 ΔV', period: '脉冲周期', pump: '叶轮转速', section: '外套膜剖面', live2d: '2D · 同一模型',
 		arms: '手臂弯曲', links: '节', systems: '系统', elec: '电功率', endur: '续航', depth: '深度', current: '水流',
 		drag: '机体阻力', hold: '定点保持', optics: '光学单元', mantle: '外套膜', armset: '手臂', beak: '喙', log: '操作日志',
@@ -283,7 +283,7 @@ const M = {
 	steel: new THREE.MeshStandardMaterial({ color: '#8b9397', roughness: 0.36, metalness: 1 }),
 	glass: new THREE.MeshPhysicalMaterial({ color: '#0f1a20', roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.02, metalness: 0.2 }),
 	pupil: new THREE.MeshStandardMaterial({ color: '#000000', emissive: '#ffb27a', emissiveIntensity: 0.6 }),
-	sucker: new THREE.MeshStandardMaterial({ color: '#cfc6bb', roughness: 0.7 }),
+	sucker: new THREE.MeshPhysicalMaterial({ color: '#ead3c2', roughness: 0.5, clearcoat: 0.5, clearcoatRoughness: 0.4, sheen: 0.4, sheenColor: '#ffd9c4', side: THREE.DoubleSide }),
 	cell: new THREE.MeshStandardMaterial({ color: '#33414a', roughness: 0.5, metalness: 0.4 }),
 	board: new THREE.MeshStandardMaterial({ color: '#1f3b33', roughness: 0.6 }),
 	accJet: new THREE.MeshStandardMaterial({ color: '#e95a1a', roughness: 0.38, metalness: 0.45, emissive: '#e95a1a', emissiveIntensity: 0 }),
@@ -766,9 +766,17 @@ function linkKit() {
 	// tendon guide on the back of each link
 	k.add('graphite', new THREE.BoxGeometry(0.26, 0.6, 0.14).translate(0, 0.5, 0.98));
 	k.add('steel', xf(cyl(0.06, 0.06, 0.62, 8), [0, 0.5, 1.06], [0, 0, 0]));
-	// sucker cup on the underside (−z), the outside of the up-curl like a real arm
-	k.add('sucker', xf(lathe([[0, 0], [0.36, 0], [0.42, 0.08], [0.44, 0.2], [0.36, 0.22], [0.26, 0.12], [0, 0.12]], 20), [0, 0.5, -0.92], [-PI / 2, 0, 0]));
-	k.add('steel', xf(new THREE.TorusGeometry(0.4, 0.035, 6, 24), [0, 0.5, -1.12], [0, 0, 0]));
+	// two rows of suction cups on the underside (−z), like a real arm: a stalk, a flared
+	// silicone cup with a rolled rim, a dark hollow and a steel vacuum port in the middle
+	const cup = [[0, 0], [0.19, 0], [0.19, 0.16], [0.26, 0.2], [0.34, 0.27], [0.39, 0.36], [0.4, 0.42], [0.37, 0.46], [0.32, 0.44], [0.27, 0.38], [0.2, 0.34], [0, 0.33]];
+	for (const sx of [1, -1]) {
+		const dir = V3(sx * 0.32, 0, -1).normalize();
+		const base = V3(sx * 0.4, 0.5, -0.84);
+		k.add('sucker', along(lathe(cup, 24), base, dir));
+		k.add('graphite', along(new THREE.CircleGeometry(0.25, 24).rotateX(-PI / 2), base.clone().addScaledVector(dir, 0.335), dir));
+		k.add('steel', along(cyl(0.07, 0.07, 0.03, 12), base.clone().addScaledVector(dir, 0.34), dir));
+		k.add('steel', along(new THREE.TorusGeometry(0.385, 0.028, 6, 28).rotateX(PI / 2), base.clone().addScaledVector(dir, 0.43), dir));
+	}
 	return k;
 }
 const linkMeshes = [];
@@ -831,6 +839,8 @@ for (let a = 0; a < NA; a++) armTips.push(new THREE.Vector3());
 const UP = new THREE.Vector3(0, 1, 0);
 const FLOW = new THREE.Vector3(1, 0, 0.25).normalize(); // direction the water current runs
 const _d = V3(), _k = V3(), _z = V3(), _p = V3(), _rhat = V3(), _m = new THREE.Matrix4();
+const suckAt = V3();
+const SUCK_ARM = ARM_NAMES.indexOf('L1');
 const LINK_Q = Math.pow(P.armR1 / P.armR0, 1 / (N - 1));
 
 function poseArms(t, jet, u, explode, iso, curls) {
@@ -866,6 +876,7 @@ function poseArms(t, jet, u, explode, iso, curls) {
 			_z.crossVectors(_k, _d);
 			_m.makeBasis(_k, _d, _z).scale(_z.set(r, r, r)).setPosition(_p);
 			_m.toArray(sharedMatrix.array, (a * N + i) * 16);
+			if (a === SUCK_ARM && i === 15) suckAt.set(0, 0.5, -1.2).applyMatrix4(_m);
 			_p.addScaledVector(_d, r * LINK_LEN);
 			r *= LINK_Q;
 		}
@@ -974,11 +985,12 @@ document.querySelectorAll('[data-act]').forEach((b) => b.addEventListener('click
 
 // camera views
 const VIEWS = {
-	hero: { p: [2.15, 1.6, 2.75], t: [0, 0.86, 0] },
+	hero: { p: [2.2, 1.3, 2.8], t: [0, 0.8, 0] },
 	front: { p: [0, 1.0, 3.3], t: [0, 0.84, 0] },
 	side: { p: [3.3, 1.05, 0.15], t: [0, 0.86, 0] },
 	top: { p: [0.05, 3.6, 0.6], t: [0, 0.7, 0] },
 	under: { p: [1.35, 0.22, 1.85], t: [0, 0.66, 0] },
+	suckers: { p: [0.75, 0.3, 1.15], t: [0.3, 0.5, 0.35] }, // tour only: close on the cups
 	rear: { p: [-1.95, 2.35, -2.2], t: [0, 0.98, -0.28] }, // tour only: looks into the open mantle
 };
 let camTween = null;
@@ -1169,6 +1181,7 @@ const CALLOUTS = [
 	{ key: 'pump', name: 'JET PUMP', obj: () => aPump, dx: -1.1, dy: 0.25, val: (S) => Math.round(S.rpm) + ' rpm', when: () => anim.mantle > 0.4 || anim.flow > 0.4 || anim.explode > 0.4 },
 	{ key: 'flow', name: 'SIPHON', obj: () => nozzleTip, dx: 1, dy: 0.45, val: (S) => 'Ø' + Math.round(S.d * 1000) + ' · ' + S.jet.v.toFixed(1) + ' m/s' },
 	{ key: 'arm', name: 'ARM R2', obj: () => ({ getWorldPosition: (v) => v.copy(armTips[ARM_R2]).applyMatrix4(root.matrixWorld) }), dx: -1, dy: 0.5, val: (S) => 'curl ' + Math.round(S.curls[ARM_R2] * 100) + ' %' },
+	{ key: 'suck', name: 'SUCKERS', obj: () => ({ getWorldPosition: (v) => v.copy(suckAt).applyMatrix4(root.matrixWorld) }), dx: -1, dy: -0.5, val: () => '2 × 25 per arm · 400' },
 	{ key: 'beak', name: 'BEAK', obj: () => beakTip, dx: 0.9, dy: 0.9, val: () => (anim.beak > 0.5 ? 'OPEN' : 'CLOSED'), when: () => anim.beak > 0.3 || anim.explode > 0.3 },
 ];
 for (const c of CALLOUTS) {
@@ -1200,7 +1213,7 @@ function drawCallouts(S, W, H, dt) {
 	if (frameNo % 30 === 1) measureCols();
 	const cxs = W / 2, cys = H * 0.45;
 	for (const c of CALLOUTS) {
-		const vis = (!c.when || c.when()) && !(small && (c.key === 'pump' || c.key === 'beak'));
+		const vis = (!c.when || c.when()) && !(small && (c.key === 'pump' || c.key === 'beak' || c.key === 'suck'));
 		c.obj().getWorldPosition(_w);
 		_w.project(camera);
 		const behind = _w.z > 1;
@@ -1254,6 +1267,7 @@ const BEATS = [
 	{ t: 38.2, el: 'b-mantle', go: () => toggle('mantle', true) },
 	{ t: 39.4, el: 'b-beak', go: () => toggle('beak', true) },
 	{ t: 41.0, el: 'v-under', go: () => setView('under', true) },
+	{ t: 42.6, el: null, go: () => setView('suckers', true) },
 	{ t: 44.0, el: 'b-beak', go: () => toggle('beak', true) },
 	{ t: 45.2, el: 'v-top', go: () => setView('top', true) },
 	{ t: 48.4, el: 'v-hero', go: () => setView('hero', true) },
