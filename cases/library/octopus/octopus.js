@@ -1172,10 +1172,12 @@ composer.addPass(new OutputPass());
 
 // ================================================================== 3. CONSOLE
 const ui = {
-	optics: false, head: false, mantle: false, arm: false, flow: false, beak: false, explode: false,
+	optics: false, head: false, mantle: false, arm: false, flow: true, beak: false, explode: false,
 	current: 0, nozzleD: 0.038,
 };
-const anim = { optics: 0, head: 0, mantle: 0, arm: 0, flow: 0, beak: 0, explode: 0, turn: 0, turnTarget: 0 };
+// jet x-ray is on when the page opens and whenever the tour resets
+const DEFAULTS = { flow: true };
+const anim = { optics: 0, head: 0, mantle: 0, arm: 0, flow: 1, beak: 0, explode: 0, turn: 0, turnTarget: 0 };
 let phase = 0, simT = 0;
 const hist = []; // [t, dP, F]
 
@@ -1518,11 +1520,9 @@ const BEATS = [
 	{ t: 16.2, el: 'v-hero', go: () => setView('hero', true) },
 	{ t: 16.8, el: 'b-arm', go: () => toggle('arm', true) },
 	{ t: 20.4, el: 'b-arm', go: () => toggle('arm', true) },
-	{ t: 21.6, el: 'b-flow', go: () => toggle('flow', true) },
 	{ t: 23.8, el: 'v-side', go: () => setView('side', true) },
 	{ t: 26.0, el: 'slCur', slide: [slCur, 2.0], dur: 1.6 },
 	{ t: 30.6, el: 'slCur', slide: [slCur, 0], dur: 1.0 },
-	{ t: 32.2, el: 'b-flow', go: () => toggle('flow', true) },
 	{ t: 33.2, el: 'b-optics', go: () => toggle('optics', true) },
 	{ t: 34.4, el: 'v-hero', go: () => setView('hero', true) },
 	{ t: 35.6, el: 'b-explode', go: () => toggle('explode', true) },
@@ -1546,7 +1546,8 @@ function setTourTag() {
 }
 function resetMachine() {
 	for (const k of ['optics', 'head', 'mantle', 'arm', 'flow', 'beak', 'explode']) {
-		if (ui[k]) { ui[k] = false; $('b-' + k).classList.remove('on'); }
+		ui[k] = !!DEFAULTS[k];
+		$('b-' + k).classList.toggle('on', ui[k]);
 	}
 	anim.turnTarget = anim.turn > 0 ? 360 : 0;
 	slCur.value = '0';
