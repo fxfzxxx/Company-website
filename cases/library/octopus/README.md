@@ -30,10 +30,3 @@ The page takes URL parameters for screenshots:
 The library stills were shot with headless Chromium, e.g.
 `index.html?still&at=3&hud=0&cam=2.05,1.25,2.6,0,0.8,0` at 1500 × 1000,
 device scale 2000/1500, JPEG quality 84.
-
-## Site build note
-
-`node tools/build.mjs` regenerates `index.html`, `en/index.html` and
-`zh/index.html` without the structured data and root description added by
-hand in 32cf7e2. After a rebuild, restore those three files from git and
-reapply only the content change.
