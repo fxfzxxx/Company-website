@@ -3,8 +3,11 @@
    Built the teardown way, without the teardown kit:
    1. MODEL     one jet-pump model in real units. Every pose, gauge, chart and
                 label below reads from it; nothing is keyframed by hand.
-   2. MACHINE   every part is built from three.js primitives at load. Eight
-                arms of 25 links each are three instanced meshes in total.
+   2. MACHINE   every part is built from three.js primitives at load: a lathed
+                head with visor and turret optics, a mantle of 16 bolted panels
+                whose upper course hinges open on actuators over a frame, pump,
+                cell packs and harness, and 8 arms of 25 machined links (shell,
+                knuckle, clevis, pin, tendon guide, sucker) drawn as instances.
    3. CONSOLE   live charts, a 2D section that redraws from the same model,
                 subsystem buttons, camera views and callouts with leader lines.
    4. TOUR      with nobody at the controls a cursor walks the console and
@@ -13,11 +16,19 @@
    5. SLIDERS   water current and nozzle diameter feed straight into the model,
                 so you can push the machine past what it can hold.
 
+   Stills: ?at=<s> fast-forwards the tour, ?cam=x,y,z,tx,ty,tz places the camera,
+   ?hud=0 hides the panels, ?still renders one frame and stops.
+
    The numbers are a plausible design, not a real vehicle's data: each one is
    marked in the parameter block with where it comes from. */
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 const $ = (id) => document.getElementById(id);
 const PI = Math.PI;
@@ -87,9 +98,8 @@ const P = {
 	battWh: 480,          // Wh      battery pack
 	depth: 38.2,          // m       survey depth for the demo
 	N: 25,                // links per arm
-	armLen: 0.95,         // m
-	armR0: 0.052,         // m       link radius at the root
-	armR1: 0.012,         // m       link radius at the tip
+	armR0: 0.05,          // m       link radius at the root; each link is 1.15 radii long
+	armR1: 0.013,         // m       link radius at the tip (taper 5.5 % per link)
 	maxCurl: 3.4,         // rad     total bend of a fully curled arm
 };
 
@@ -172,113 +182,117 @@ const canvas = $('c');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
+renderer.toneMappingExposure = 1.0;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
 
 const scene = new THREE.Scene();
-const STUDIO = new THREE.Color('#d6dde0');
-scene.background = STUDIO;
+{
+	// a cyclorama: pale at the top, a little deeper where the floor meets the eye
+	const c = document.createElement('canvas');
+	c.width = 4; c.height = 512;
+	const g = c.getContext('2d');
+	const gr = g.createLinearGradient(0, 0, 0, 512);
+	gr.addColorStop(0, '#e8eced');
+	gr.addColorStop(1, '#cbd2d5');
+	g.fillStyle = gr;
+	g.fillRect(0, 0, 4, 512);
+	const t = new THREE.CanvasTexture(c);
+	t.colorSpace = THREE.SRGBColorSpace;
+	scene.background = t;
+}
 
 const camera = new THREE.PerspectiveCamera(32, 1, 0.05, 50);
-camera.position.set(2.3, 1.55, 2.9);
+camera.position.set(2.2, 1.6, 2.8);
 const controls = new OrbitControls(camera, canvas);
-controls.target.set(0, 0.78, 0);
+controls.target.set(0, 0.86, 0);
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
-controls.minDistance = 1.2;
+controls.minDistance = 0.6;
 controls.maxDistance = 8;
 controls.maxPolarAngle = PI * 0.97;
 
-// soft studio reflections from a hand-built light box
+// studio reflections from a hand-built light box: two soft boxes and a strip
 {
 	const pm = new THREE.PMREMGenerator(renderer);
 	const env = new THREE.Scene();
-	const room = new THREE.Mesh(new THREE.SphereGeometry(10, 24, 12), new THREE.MeshBasicMaterial({ color: '#8f999e', side: THREE.BackSide }));
-	env.add(room);
-	const panel = (w, h, pos, look, k) => {
+	env.add(new THREE.Mesh(new THREE.SphereGeometry(10, 24, 12), new THREE.MeshBasicMaterial({ color: '#6f7a80', side: THREE.BackSide })));
+	const panel = (w, h, pos, k) => {
 		const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(k, k, k), side: THREE.DoubleSide }));
 		m.position.copy(pos);
-		m.lookAt(look);
+		m.lookAt(0, 1, 0);
 		env.add(m);
 	};
-	panel(8, 4, new THREE.Vector3(0, 8, 0), new THREE.Vector3(0, 0, 0), 3.2);
-	panel(4, 6, new THREE.Vector3(7, 3, 4), new THREE.Vector3(0, 1, 0), 2.2);
-	panel(3, 5, new THREE.Vector3(-7, 2, -3), new THREE.Vector3(0, 1, 0), 1.4);
-	const tex = pm.fromScene(env, 0.035).texture;
-	scene.environment = tex;
-	scene.environmentIntensity = 0.75;
+	panel(7, 3, new THREE.Vector3(0, 8, 1), 4.0);
+	panel(2.5, 7, new THREE.Vector3(7, 3, 3), 2.6);
+	panel(1.2, 7, new THREE.Vector3(-6, 3, -5), 3.2);
+	panel(9, 1.2, new THREE.Vector3(0, 0.6, -8), 1.2);
+	const floorBounce = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), new THREE.MeshBasicMaterial({ color: '#9aa4a9' }));
+	floorBounce.rotation.x = -PI / 2;
+	floorBounce.position.y = -1.5;
+	env.add(floorBounce);
+	scene.environment = pm.fromScene(env, 0.02).texture;
+	scene.environmentIntensity = 0.85;
 	pm.dispose();
 }
 
-scene.add(new THREE.HemisphereLight('#ffffff', '#aab4b9', 1.1));
-const key = new THREE.DirectionalLight('#ffffff', 2.1);
-key.position.set(2.5, 5.5, 3.2);
+scene.add(new THREE.HemisphereLight('#ffffff', '#9ea9ae', 0.55));
+const key = new THREE.DirectionalLight('#fffaf3', 2.6);
+key.position.set(2.2, 5.5, 3.4);
 key.castShadow = true;
 key.shadow.mapSize.set(2048, 2048);
-key.shadow.camera.left = -2.2;
-key.shadow.camera.right = 2.2;
-key.shadow.camera.top = 2.2;
-key.shadow.camera.bottom = -2.2;
-key.shadow.camera.near = 1;
-key.shadow.camera.far = 14;
-key.shadow.bias = -0.0004;
-key.shadow.normalBias = 0.02;
-key.shadow.radius = 5;
+Object.assign(key.shadow.camera, { left: -2, right: 2, top: 2, bottom: -2, near: 1, far: 14 });
+key.shadow.bias = -0.0003;
+key.shadow.normalBias = 0.015;
 scene.add(key);
-const fill = new THREE.DirectionalLight('#e6eef2', 0.7);
-fill.position.set(-4, 2, -2.5);
+const rim = new THREE.DirectionalLight('#e3f0ff', 1.6); // separates the silhouette from the cyc
+rim.position.set(-3, 3.2, -4.5);
+scene.add(rim);
+const fill = new THREE.DirectionalLight('#eef2f4', 0.45);
+fill.position.set(-3.5, 1.2, 3);
 scene.add(fill);
 
-// an invisible floor that only catches the shadow, and a faint contact disc
-const floor = new THREE.Mesh(new THREE.PlaneGeometry(14, 14), new THREE.ShadowMaterial({ color: '#2b3a42', opacity: 0.2 }));
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(14, 14), new THREE.ShadowMaterial({ color: '#25343b', opacity: 0.24 }));
 floor.rotation.x = -PI / 2;
 floor.receiveShadow = true;
 scene.add(floor);
 {
-	const c = document.createElement('canvas');
-	c.width = c.height = 256;
-	const g = c.getContext('2d');
-	const gr = g.createRadialGradient(128, 128, 0, 128, 128, 128);
-	gr.addColorStop(0, 'rgba(40,55,62,0.16)');
-	gr.addColorStop(1, 'rgba(40,55,62,0)');
-	g.fillStyle = gr;
-	g.fillRect(0, 0, 256, 256);
-	const disc = new THREE.Mesh(new THREE.PlaneGeometry(3.2, 3.2), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false }));
-	disc.rotation.x = -PI / 2;
-	disc.position.y = 0.002;
-	scene.add(disc);
-	// a scale ring on the floor: 1 m diameter, ticks every 30°
-	const ringPts = [];
-	for (let i = 0; i <= 128; i++) {
-		const a = (i / 128) * TAU;
-		ringPts.push(new THREE.Vector3(Math.cos(a) * 1.25, 0.003, Math.sin(a) * 1.25));
+	// a survey ring on the floor: 2.5 m across, ticks every 10°, majors every 30°
+	const lm = new THREE.LineBasicMaterial({ color: '#8f9ba1', transparent: true, opacity: 0.55 });
+	const ring = [];
+	for (let i = 0; i <= 180; i++) {
+		const a = (i / 180) * TAU;
+		ring.push(new THREE.Vector3(Math.cos(a) * 1.25, 0.002, Math.sin(a) * 1.25));
 	}
-	const lm = new THREE.LineBasicMaterial({ color: '#9aa6ac', transparent: true, opacity: 0.6 });
-	scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(ringPts), lm));
+	scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(ring), lm));
 	const ticks = [];
-	for (let i = 0; i < 12; i++) {
-		const a = (i / 12) * TAU;
-		ticks.push(new THREE.Vector3(Math.cos(a) * 1.25, 0.003, Math.sin(a) * 1.25), new THREE.Vector3(Math.cos(a) * 1.33, 0.003, Math.sin(a) * 1.33));
+	for (let i = 0; i < 36; i++) {
+		const a = (i / 36) * TAU, l = i % 3 === 0 ? 0.1 : 0.04;
+		ticks.push(new THREE.Vector3(Math.cos(a) * 1.25, 0.002, Math.sin(a) * 1.25), new THREE.Vector3(Math.cos(a) * (1.25 + l), 0.002, Math.sin(a) * (1.25 + l)));
 	}
 	scene.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(ticks), lm));
 }
 
 // ================================================================== materials
 const M = {
-	shell: new THREE.MeshPhysicalMaterial({ color: '#f3f4f1', roughness: 0.36, clearcoat: 0.55, clearcoatRoughness: 0.3, side: THREE.DoubleSide }),
-	shellIn: new THREE.MeshStandardMaterial({ color: '#c9cfd1', roughness: 0.7 }),
-	white: new THREE.MeshPhysicalMaterial({ color: '#eff1ee', roughness: 0.4, clearcoat: 0.4, clearcoatRoughness: 0.35 }),
-	dark: new THREE.MeshPhysicalMaterial({ color: '#262c30', roughness: 0.32, metalness: 0.1, clearcoat: 0.6 }),
-	metal: new THREE.MeshStandardMaterial({ color: '#a3acb1', roughness: 0.45, metalness: 0.85 }),
-	glass: new THREE.MeshPhysicalMaterial({ color: '#16232b', roughness: 0.06, metalness: 0.0, clearcoat: 1, clearcoatRoughness: 0.04 }),
-	bladder: new THREE.MeshStandardMaterial({ color: '#46525a', roughness: 0.55, transparent: true, opacity: 0.92 }),
-	accJet: new THREE.MeshStandardMaterial({ color: '#ee5f1d', roughness: 0.45, emissive: '#ee5f1d', emissiveIntensity: 0 }),
-	accOpt: new THREE.MeshStandardMaterial({ color: '#ee5f1d', roughness: 0.45, emissive: '#ee5f1d', emissiveIntensity: 0 }),
-	accBody: new THREE.MeshStandardMaterial({ color: '#ee5f1d', roughness: 0.45, emissive: '#ee5f1d', emissiveIntensity: 0 }),
-	sucker: new THREE.MeshStandardMaterial({ color: '#d9d0c6', roughness: 0.6 }),
+	ceramic: new THREE.MeshPhysicalMaterial({ color: '#eef0ec', roughness: 0.34, clearcoat: 0.8, clearcoatRoughness: 0.16, side: THREE.DoubleSide }),
+	white: new THREE.MeshPhysicalMaterial({ color: '#eceeea', roughness: 0.36, clearcoat: 0.7, clearcoatRoughness: 0.2 }),
+	graphite: new THREE.MeshPhysicalMaterial({ color: '#23292d', roughness: 0.42, metalness: 0.35, clearcoat: 0.35, clearcoatRoughness: 0.3 }),
+	rubber: new THREE.MeshStandardMaterial({ color: '#2b3034', roughness: 0.82 }),
+	alu: new THREE.MeshStandardMaterial({ color: '#c3c9cc', roughness: 0.4, metalness: 1 }),
+	steel: new THREE.MeshStandardMaterial({ color: '#8b9397', roughness: 0.36, metalness: 1 }),
+	glass: new THREE.MeshPhysicalMaterial({ color: '#0f1a20', roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.02, metalness: 0.2 }),
+	pupil: new THREE.MeshStandardMaterial({ color: '#000000', emissive: '#ffb27a', emissiveIntensity: 0.6 }),
+	sucker: new THREE.MeshStandardMaterial({ color: '#cfc6bb', roughness: 0.7 }),
+	cell: new THREE.MeshStandardMaterial({ color: '#33414a', roughness: 0.5, metalness: 0.4 }),
+	board: new THREE.MeshStandardMaterial({ color: '#1f3b33', roughness: 0.6 }),
+	accJet: new THREE.MeshStandardMaterial({ color: '#e95a1a', roughness: 0.38, metalness: 0.45, emissive: '#e95a1a', emissiveIntensity: 0 }),
+	accOpt: new THREE.MeshStandardMaterial({ color: '#e95a1a', roughness: 0.38, metalness: 0.45, emissive: '#e95a1a', emissiveIntensity: 0 }),
+	accBody: new THREE.MeshStandardMaterial({ color: '#e95a1a', roughness: 0.38, metalness: 0.45, emissive: '#e95a1a', emissiveIntensity: 0 }),
+	accArm: new THREE.MeshStandardMaterial({ color: '#e95a1a', roughness: 0.38, metalness: 0.45, emissive: '#e95a1a', emissiveIntensity: 0 }),
 };
-const castAll = (o) => o.traverse((m) => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; } });
+
+// ================================================================== geometry kit
 const mesh = (geo, mat, parent, pos, rot) => {
 	const m = new THREE.Mesh(geo, mat);
 	if (pos) m.position.set(...pos);
@@ -293,258 +307,578 @@ const anchor = (parent, pos) => {
 	return o;
 };
 
-// ================================================================== 2. MACHINE
-const root = new THREE.Group();          // turntable + hover
-scene.add(root);
-const HEAD = new THREE.Vector3(0, 0.95, 0.02);
-
-// --- head ---------------------------------------------------------------
-const head = new THREE.Group();
-root.add(head);
-{
-	const h = mesh(new THREE.SphereGeometry(1, 48, 32), M.white, head, [HEAD.x, HEAD.y, HEAD.z]);
-	h.scale.set(0.205, 0.165, 0.215);
-	// a seam band around the head
-	mesh(new THREE.TorusGeometry(0.205, 0.006, 8, 64), M.dark, head, [HEAD.x, HEAD.y - 0.01, HEAD.z], [PI / 2, 0, 0]).scale.set(1, 1.05, 1);
-	// arm hub under the head
-	mesh(new THREE.CylinderGeometry(0.17, 0.15, 0.06, 40), M.dark, head, [0, 0.8, 0.02]);
-	mesh(new THREE.TorusGeometry(0.165, 0.012, 10, 48), M.accBody, head, [0, 0.826, 0.02], [PI / 2, 0, 0]);
+const V3 = (x = 0, y = 0, z = 0) => new THREE.Vector3(x, y, z);
+const _xm = new THREE.Matrix4(), _xq = new THREE.Quaternion(), _xe = new THREE.Euler();
+// place a geometry: p position, r euler, s scale (number or [x,y,z])
+function xf(geo, p = [0, 0, 0], r = [0, 0, 0], s = 1) {
+	const sc = Array.isArray(s) ? V3(...s) : V3(s, s, s);
+	_xm.compose(V3(...p), _xq.setFromEuler(_xe.set(...r)), sc);
+	return geo.applyMatrix4(_xm);
 }
-const aHead = anchor(head, [0, 1.12, 0.1]);
+// orient +Y of a geometry along dir, then move it to p
+function along(geo, p, dir, s = 1) {
+	_xq.setFromUnitVectors(V3(0, 1, 0), dir.clone().normalize());
+	_xm.compose(p.clone ? p.clone() : V3(...p), _xq, Array.isArray(s) ? V3(...s) : V3(s, s, s));
+	return geo.applyMatrix4(_xm);
+}
+// place with a full basis: x, y, z axes
+function basis(geo, p, x, y, z, s = 1) {
+	_xm.makeBasis(x, y, z);
+	_xm.scale(Array.isArray(s) ? V3(...s) : V3(s, s, s));
+	_xm.setPosition(p);
+	return geo.applyMatrix4(_xm);
+}
+const clean = (g) => {
+	// mergeGeometries needs matching attributes: keep position, normal, uv on indexed geometry
+	if (!g.index) {
+		const n = g.attributes.position.count, idx = [];
+		for (let i = 0; i < n; i++) idx.push(i);
+		g.setIndex(idx);
+	}
+	for (const k of Object.keys(g.attributes)) if (!['position', 'normal', 'uv'].includes(k)) g.deleteAttribute(k);
+	if (!g.attributes.uv) g.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2));
+	return g;
+};
+const merge = (list) => (list.length ? mergeGeometries(list.map(clean), false) : null);
+const cyl = (rt, rb, h, seg = 24, open = false) => new THREE.CylinderGeometry(rt, rb, h, seg, 1, open);
+const hex = () => new THREE.CylinderGeometry(1, 1, 1, 6);
+const lathe = (pts, seg = 32, p0 = 0, pl = TAU) => new THREE.LatheGeometry(pts.map(([r, y]) => new THREE.Vector2(r, y)), seg, p0, pl);
 
-// --- optic units (two, on the sides of the head) ----------------------------
+// a parametric grid: f(i/nu, j/nv) → Vector3
+function grid(nu, nv, f) {
+	const pos = [], uv = [], idx = [];
+	for (let i = 0; i <= nu; i++) for (let j = 0; j <= nv; j++) {
+		const v = f(i / nu, j / nv);
+		pos.push(v.x, v.y, v.z);
+		uv.push(i / nu, j / nv);
+	}
+	for (let i = 0; i < nu; i++) for (let j = 0; j < nv; j++) {
+		const a = i * (nv + 1) + j, b = a + nv + 1;
+		idx.push(a, b, a + 1, b, b + 1, a + 1);
+	}
+	const g = new THREE.BufferGeometry();
+	g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+	g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+	g.setIndex(idx);
+	g.computeVertexNormals();
+	return g;
+}
+
+// bucketed parts: add(materialKey, geometry) and build one mesh per material
+class Kit {
+	constructor() { this.parts = {}; }
+	add(mat, geo) { (this.parts[mat] = this.parts[mat] || []).push(geo); return this; }
+	build(parent, cast = true) {
+		const out = {};
+		for (const [k, list] of Object.entries(this.parts)) {
+			const m = new THREE.Mesh(merge(list), M[k]);
+			m.castShadow = cast;
+			m.receiveShadow = true;
+			parent.add(m);
+			out[k] = m;
+		}
+		return out;
+	}
+}
+
+// ================================================================== 2. MACHINE
+const root = new THREE.Group(); // turntable + hover
+root.position.y = 0.08;
+scene.add(root);
+
+// --- head: a lathed ceramic skull on a graphite hub ---------------------------------
+const head = new THREE.Group();
+head.position.z = 0.02;
+root.add(head);
+const HEAD_PROFILE = [[0.15, 0.645], [0.188, 0.672], [0.21, 0.72], [0.217, 0.79], [0.21, 0.86], [0.19, 0.915], [0.155, 0.958], [0.11, 0.988], [0.05, 1.004], [0, 1.008]];
+const headR = (y) => {
+	for (let i = 1; i < HEAD_PROFILE.length; i++) {
+		const [r0, y0] = HEAD_PROFILE[i - 1], [r1, y1] = HEAD_PROFILE[i];
+		if (y <= y1) return lerp(r0, r1, (y - y0) / (y1 - y0));
+	}
+	return 0;
+};
+{
+	const k = new Kit();
+	k.add('white', lathe(HEAD_PROFILE, 64));
+	// seam bands
+	for (const y of [0.7, 0.872]) k.add('graphite', xf(new THREE.TorusGeometry(headR(y) + 0.001, 0.0045, 8, 96), [0, y, 0], [PI / 2, 0, 0]));
+	// visor: a dark glass band across the face, with three sensor ports
+	k.add('glass', new THREE.CylinderGeometry(0.2185, 0.2165, 0.07, 48, 1, true, -0.85, 1.7).translate(0, 0.79, 0));
+	for (const s of [1, -1]) k.add('alu', xf(new THREE.BoxGeometry(0.006, 0.078, 0.014), [Math.sin(0.86 * s) * 0.218, 0.79, Math.cos(0.86 * s) * 0.218], [0, 0.86 * s, 0]));
+	for (const a of [-0.42, 0, 0.42]) {
+		const n = V3(Math.sin(a), 0, Math.cos(a));
+		const p = n.clone().multiplyScalar(0.219).add(V3(0, 0.79, 0));
+		k.add('accOpt', along(new THREE.TorusGeometry(0.014, 0.0028, 8, 24).rotateX(PI / 2), p, n));
+		k.add('glass', along(new THREE.SphereGeometry(0.012, 16, 8, 0, TAU, 0, PI / 2), p, n, [1, 0.6, 1]));
+	}
+	// bolts around both seams
+	for (const y of [0.7, 0.872]) for (let i = 0; i < 16; i++) {
+		const a = (i / 16) * TAU + 0.1;
+		if (y < 0.8 && Math.abs(Math.atan2(Math.sin(a), Math.cos(a))) < 0.9) continue; // not across the visor
+		const n = V3(Math.sin(a), 0, Math.cos(a));
+		k.add('steel', along(hex(), n.clone().multiplyScalar(headR(y) + 0.002).add(V3(0, y + 0.012, 0)), n, [0.0055, 0.003, 0.0055]));
+	}
+	// two meridian seams over the crown and a bolted top hatch
+	for (const a of [PI / 2, -PI / 2]) {
+		const pts = [];
+		for (let i = 0; i <= 20; i++) {
+			const y = lerp(0.875, 0.985, i / 20), r = headR(y) + 0.0008;
+			pts.push(V3(Math.sin(a) * r, y, Math.cos(a) * r));
+		}
+		k.add('graphite', new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 24, 0.0035, 6));
+	}
+	k.add('alu', cyl(0.06, 0.066, 0.012, 48).translate(0, 1.0, 0));
+	k.add('graphite', cyl(0.045, 0.045, 0.008, 40).translate(0, 1.009, 0));
+	k.add('accBody', xf(new THREE.TorusGeometry(0.03, 0.003, 8, 32), [0, 1.014, 0], [PI / 2, 0, 0]));
+	for (let i = 0; i < 6; i++) {
+		const a = (i / 6) * TAU;
+		k.add('steel', xf(hex(), [Math.cos(a) * 0.054, 1.007, Math.sin(a) * 0.054], [0, 0, 0], [0.0045, 0.003, 0.0045]));
+	}
+	// hub: graphite drum, gear crown and an orange skirt
+	k.add('graphite', cyl(0.168, 0.152, 0.07, 48).translate(0, 0.632, 0));
+	k.add('graphite', cyl(0.11, 0.12, 0.024, 40).translate(0, 0.586, 0));
+	for (let i = 0; i < 48; i++) {
+		const a = (i / 48) * TAU;
+		k.add('steel', xf(new THREE.BoxGeometry(0.012, 0.018, 0.014), [Math.cos(a) * 0.171, 0.66, Math.sin(a) * 0.171], [0, -a, 0]));
+	}
+	k.add('accBody', xf(new THREE.TorusGeometry(0.16, 0.007, 10, 64), [0, 0.6, 0], [PI / 2, 0, 0]));
+	k.add('steel', xf(new THREE.TorusGeometry(0.17, 0.004, 8, 64), [0, 0.669, 0], [PI / 2, 0, 0]));
+	k.build(head);
+}
+
+// --- optic turrets: mount, housing, knurled ring, focus ring, lens barrel, iris --------
 const optics = [];
 for (const side of [1, -1]) {
+	const dir = V3(side * 0.82, 0.42, 0.4).normalize();
 	const g = new THREE.Group();
-	g.position.set(side * 0.178, 0.99, 0.085);
-	g.rotation.y = side * 0.32;
+	const base = V3(side * 0.163, 0.9, 0.07);
+	g.position.copy(base);
+	g.quaternion.setFromUnitVectors(V3(0, 1, 0), dir);
 	head.add(g);
-	const housing = mesh(new THREE.CylinderGeometry(0.064, 0.07, 0.07, 40), M.white, g, [side * 0.02, 0, 0], [0, 0, PI / 2]);
-	housing.castShadow = true;
-	mesh(new THREE.TorusGeometry(0.066, 0.008, 10, 48), M.accOpt, g, [side * 0.056, 0, 0], [0, PI / 2, 0]);
+	const k = new Kit();
+	k.add('graphite', cyl(0.064, 0.07, 0.035, 48).translate(0, 0.0, 0));
+	k.add('white', cyl(0.058, 0.062, 0.05, 48).translate(0, 0.04, 0));
+	for (let i = 0; i < 8; i++) {
+		const a = (i / 8) * TAU;
+		k.add('steel', xf(hex(), [Math.cos(a) * 0.05, 0.066, Math.sin(a) * 0.05], [0, 0, 0], [0.004, 0.003, 0.004]));
+	}
+	for (let i = 0; i < 56; i++) {
+		const a = (i / 56) * TAU;
+		k.add('alu', xf(new THREE.BoxGeometry(0.0045, 0.016, 0.006), [Math.cos(a) * 0.058, 0.077, Math.sin(a) * 0.058], [0, -a, 0]));
+	}
+	k.add('alu', cyl(0.0565, 0.0565, 0.016, 56).translate(0, 0.077, 0));
+	k.build(g);
 	const lens = new THREE.Group(); // the part that unscrews
-	lens.position.x = side * 0.056;
+	lens.position.y = 0.085;
 	g.add(lens);
-	mesh(new THREE.CylinderGeometry(0.056, 0.056, 0.02, 40), M.dark, lens, [side * 0.006, 0, 0], [0, 0, PI / 2]);
+	const kl = new Kit();
+	kl.add('accOpt', cyl(0.056, 0.056, 0.012, 48).translate(0, 0.006, 0));
+	kl.add('graphite', cyl(0.048, 0.052, 0.034, 48).translate(0, 0.028, 0));
+	for (let t = 0; t < 4; t++) kl.add('steel', xf(new THREE.TorusGeometry(0.05, 0.0018, 6, 48), [0, -0.012 - t * 0.007, 0], [PI / 2, 0, 0]));
+	kl.add('steel', cyl(0.047, 0.047, 0.03, 32, true).translate(0, -0.024, 0));
+	kl.add('alu', xf(new THREE.TorusGeometry(0.044, 0.004, 8, 48), [0, 0.045, 0], [PI / 2, 0, 0]));
+	kl.add('glass', xf(new THREE.SphereGeometry(0.042, 40, 16, 0, TAU, 0, PI / 2), [0, 0.04, 0], [0, 0, 0], [1, 0.42, 1]));
+	kl.build(lens);
+	const pupil = mesh(new THREE.CircleGeometry(0.009, 24), M.pupil, lens, [0, 0.0395, 0], [-PI / 2, 0, 0]);
+	pupil.castShadow = false;
 	const iris = new THREE.Group();
-	iris.position.x = side * 0.017;
+	iris.position.y = 0.038;
 	lens.add(iris);
 	const blades = [];
-	for (let b = 0; b < 7; b++) {
-		const pivot = new THREE.Group();
-		pivot.rotation.x = (b / 7) * TAU;
-		iris.add(pivot);
-		const bl = mesh(new THREE.BoxGeometry(0.003, 0.034, 0.016), M.metal, pivot, [0, 0.03, 0]);
+	for (let b = 0; b < 9; b++) {
+		const piv = new THREE.Group();
+		piv.rotation.y = (b / 9) * TAU;
+		iris.add(piv);
+		const bl = mesh(new THREE.BoxGeometry(0.026, 0.0015, 0.014), M.steel, piv, [0.028, 0, 0]);
 		blades.push(bl);
 	}
-	const glass = mesh(new THREE.SphereGeometry(0.05, 32, 16, 0, TAU, 0, PI / 2), M.glass, lens, [side * 0.016, 0, 0], [0, 0, -side * PI / 2]);
-	glass.scale.set(1, 0.38, 1);
-	// thread rings that show when the lens is out
-	for (let k = 0; k < 3; k++) mesh(new THREE.TorusGeometry(0.052, 0.0025, 6, 40), M.metal, lens, [-side * (0.008 + k * 0.008), 0, 0], [0, PI / 2, 0]);
-	const tip = anchor(lens, [side * 0.03, 0, 0]);
-	optics.push({ g, lens, iris, blades, side, tip });
+	const tip = anchor(lens, [0, 0.06, 0]);
+	optics.push({ g, base, dir, lens, iris, blades, side, tip });
 }
 
-// --- siphon (the jet nozzle) ------------------------------------------------
+// --- siphon: gimbal, bellows, machined nozzle -------------------------------------
 const siphon = new THREE.Group();
-siphon.position.set(0, 0.84, 0.17);
-siphon.rotation.x = 1.2; // points forward and a little down
+const SIPHON_BASE = V3(0, 0.705, 0.19);
+const SIPHON_DIR = V3(0, -0.32, 1).normalize();
+siphon.position.copy(SIPHON_BASE);
+siphon.quaternion.setFromUnitVectors(V3(0, 1, 0), SIPHON_DIR);
 head.add(siphon);
-mesh(new THREE.CylinderGeometry(0.036, 0.046, 0.15, 32, 1, true), M.white, siphon, [0, 0.06, 0]).material = M.white;
-const nozzleRing = mesh(new THREE.TorusGeometry(1, 0.22, 10, 40), M.accJet, siphon, [0, 0.14, 0], [PI / 2, 0, 0]);
-const nozzleBore = mesh(new THREE.CylinderGeometry(1, 1, 0.02, 32), M.dark, siphon, [0, 0.135, 0]);
+{
+	const k = new Kit();
+	k.add('graphite', cyl(0.05, 0.056, 0.02, 40).translate(0, 0, 0));
+	k.add('steel', xf(new THREE.TorusGeometry(0.05, 0.005, 8, 48), [0, 0.014, 0], [PI / 2, 0, 0]));
+	for (const s of [1, -1]) k.add('alu', xf(cyl(0.008, 0.008, 0.016, 12), [s * 0.054, 0.014, 0], [0, 0, PI / 2]));
+	for (let i = 0; i < 7; i++) k.add('rubber', xf(new THREE.TorusGeometry(0.04 - i * 0.0012, 0.0062, 10, 36), [0, 0.03 + i * 0.0115, 0], [PI / 2, 0, 0]));
+	k.add('rubber', cyl(0.034, 0.038, 0.08, 32).translate(0, 0.066, 0));
+	k.add('alu', cyl(0.03, 0.037, 0.04, 40).translate(0, 0.122, 0));
+	for (let i = 0; i < 4; i++) k.add('steel', xf(new THREE.BoxGeometry(0.006, 0.03, 0.004), [Math.cos(i * PI / 2) * 0.034, 0.122, Math.sin(i * PI / 2) * 0.034], [0, -i * PI / 2, 0]));
+	k.build(siphon);
+}
+const nozzle = new THREE.Group(); // radius follows the slider
+nozzle.position.y = 0.143;
+siphon.add(nozzle);
+const nozzleRing = mesh(new THREE.TorusGeometry(1, 0.18, 12, 48), M.accJet, nozzle, [0, 0, 0], [PI / 2, 0, 0]);
+const nozzleBore = mesh(cyl(1, 1, 0.012, 40), M.graphite, nozzle, [0, -0.004, 0]);
 const nozzleTip = anchor(siphon, [0, 0.15, 0]);
 
-// --- beak (two jaws under the hub) --------------------------------------------
+// --- beak: a three-claw gripper under the hub ----------------------------------------
 const beak = new THREE.Group();
-beak.position.set(0, 0.765, 0.02);
+beak.position.set(0, 0.575, 0);
 head.add(beak);
-const jaws = [];
-for (const s of [1, -1]) {
-	const p = new THREE.Group();
-	beak.add(p);
-	const j = mesh(new THREE.ConeGeometry(0.045, 0.09, 24, 1, false, s > 0 ? 0 : PI, PI), M.dark, p, [0, -0.04, 0], [PI, 0, 0]);
-	j.castShadow = true;
-	jaws.push({ p, s });
+mesh(cyl(0.05, 0.042, 0.022, 32), M.steel, beak, [0, 0, 0]);
+mesh(new THREE.TorusGeometry(0.045, 0.004, 8, 40), M.accBody, beak, [0, -0.008, 0], [PI / 2, 0, 0]);
+const claws = [];
+for (let i = 0; i < 3; i++) {
+	const a = (i / 3) * TAU + PI / 6;
+	const piv = new THREE.Group();
+	piv.position.set(Math.cos(a) * 0.028, -0.012, Math.sin(a) * 0.028);
+	piv.rotation.y = -a;
+	beak.add(piv);
+	const k = new Kit();
+	// a claw: two machined segments that curve inwards, with a pin at the knuckle
+	k.add('graphite', xf(new THREE.BoxGeometry(0.016, 0.05, 0.022), [0.004, -0.025, 0], [0, 0, 0.12]));
+	k.add('graphite', xf(new THREE.BoxGeometry(0.013, 0.042, 0.018), [-0.004, -0.066, 0], [0, 0, -0.42]));
+	k.add('steel', xf(cyl(0.006, 0.006, 0.026, 12), [0.001, -0.048, 0], [PI / 2, 0, 0]));
+	k.add('accBody', xf(new THREE.ConeGeometry(0.008, 0.018, 12), [-0.015, -0.089, 0], [0, 0, -0.42 + PI]));
+	k.build(piv);
+	claws.push(piv);
 }
-mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.02, 24), M.metal, beak, [0, 0.005, 0]);
-const beakTip = anchor(beak, [0, -0.09, 0]);
+const beakTip = anchor(beak, [0, -0.08, 0]);
 
-// --- mantle -------------------------------------------------------------------
-const ML = 0.64;
+// --- mantle: eight gores in two courses, the upper course hinges open like petals -----
+const ML = 0.7, MR = 0.27;
+// an egg: narrow where it meets the head, fullest two-thirds of the way back
+const rM = (u) => MR * Math.pow(Math.sin(PI * (0.1 + 0.9 * Math.pow(u, 0.82))), 0.55) * (0.86 + 0.24 * u);
+const SM = (u, phi, off = 0) => { const r = rM(u) + off; return V3(r * Math.sin(phi), u * ML, r * Math.cos(phi)); };
 const mantleRoot = new THREE.Group();
-mantleRoot.position.set(0, 1.03, -0.055);
-mantleRoot.rotation.x = -0.78;
+const MANTLE_POS = V3(0, 0.93, -0.06);
+mantleRoot.position.copy(MANTLE_POS);
+mantleRoot.rotation.x = -1.0;
 root.add(mantleRoot);
-const mantleBreath = new THREE.Group(); // scaled by the contraction
+const mantleBreath = new THREE.Group(); // scaled radially by the contraction
 mantleRoot.add(mantleBreath);
 
-const shellProfile = (rScale) => {
-	const pts = [];
-	for (let k = 0; k <= 30; k++) {
-		const u = k / 30;
-		const r = P.R * rScale * Math.pow(Math.sin(PI * (0.14 + 0.86 * u)), 0.72);
-		pts.push(new THREE.Vector2(Math.max(r, 0.0008), u * ML));
+const GORES = 8, GAP = 0.024, U_SPLIT = 0.405, U_TOP = 0.935, T_SHELL = 0.011;
+function shellPanel(kit, u0, u1, p0, p1) {
+	const f = (fu, fv, off) => SM(lerp(u0, u1, fu), lerp(p0, p1, fv), off);
+	kit.add('ceramic', grid(14, 10, (a, b) => f(a, b, 0)));
+	kit.add('ceramic', grid(14, 10, (a, b) => f(a, b, -T_SHELL)));
+	kit.add('ceramic', grid(1, 10, (a, b) => f(0, b, -T_SHELL * a)));
+	kit.add('ceramic', grid(1, 10, (a, b) => f(1, b, -T_SHELL * a)));
+	kit.add('ceramic', grid(14, 1, (a, b) => f(a, 0, -T_SHELL * b)));
+	kit.add('ceramic', grid(14, 1, (a, b) => f(a, 1, -T_SHELL * b)));
+	// a bolt in each corner
+	for (const [fu, fv] of [[0.08, 0.12], [0.08, 0.88], [0.92, 0.12], [0.92, 0.88]]) {
+		const u = lerp(u0, u1, fu), ph = lerp(p0, p1, fv);
+		const n = V3(Math.sin(ph), 0.25 * (1 - 2 * u), Math.cos(ph)).normalize();
+		kit.add('steel', along(hex(), SM(u, ph, 0.001), n, [0.0058, 0.0035, 0.0058]));
 	}
-	return pts;
-};
-const HINGE = 0.165;
-const shellHalves = [];
-for (const s of [1, -1]) {
-	const pivot = new THREE.Group();
-	pivot.position.z = -HINGE;
-	mantleBreath.add(pivot);
-	const geo = new THREE.LatheGeometry(shellProfile(1), 40, s > 0 ? 0 : PI, PI);
-	const half = mesh(geo, M.shell, pivot, [0, 0, HINGE]);
-	half.castShadow = true;
-	half.receiveShadow = true;
-	// orange collar and seam bead on each half
-	const collar = mesh(new THREE.TorusGeometry(P.R * 0.6, 0.009, 8, 40, PI), M.accBody, pivot, [0, 0.03, HINGE], [PI / 2, 0, s > 0 ? -PI / 2 : PI / 2]);
-	collar.rotation.set(PI / 2, 0, s > 0 ? 0 : PI);
-	// segmentation ribs, the "one link at a time" look on the shell
-	for (const u of [0.32, 0.55, 0.76]) {
-		const r = P.R * Math.pow(Math.sin(PI * (0.14 + 0.86 * u)), 0.72);
-		const rib = mesh(new THREE.TorusGeometry(r + 0.002, 0.0035, 6, 48, PI), M.dark, pivot, [0, u * ML, HINGE], [PI / 2, 0, s > 0 ? 0 : PI]);
-		rib.castShadow = false;
+}
+const lowerPanels = [], petals = [];
+for (let g = 0; g < GORES; g++) {
+	const p0 = (g / GORES) * TAU + GAP, p1 = ((g + 1) / GORES) * TAU - GAP, pc = (p0 + p1) / 2;
+	// lower course: fixed, with vents on the flanks
+	{
+		const grp = new THREE.Group();
+		mantleBreath.add(grp);
+		const k = new Kit();
+		shellPanel(k, 0.035, U_SPLIT - 0.012, p0, p1);
+		if (g === 2 || g === 5) {
+			for (let j = 0; j < 6; j++) {
+				const u = 0.14 + j * 0.032;
+				const n = V3(Math.sin(pc), 0, Math.cos(pc)), t = V3(Math.cos(pc), 0, -Math.sin(pc));
+				k.add('graphite', basis(new THREE.BoxGeometry(1, 1, 1), SM(u, pc, 0.0005), t, V3(0, 1, 0), n, [0.07, 0.008, 0.004]));
+			}
+		}
+		k.build(grp);
+		lowerPanels.push({ grp, n: V3(Math.sin(pc), 0, Math.cos(pc)) });
 	}
-	shellHalves.push({ pivot, half, s });
+	// upper course: a petal on a hinge with two knuckles and a linear actuator
+	{
+		const hinge = SM(U_SPLIT + 0.012, pc, -T_SHELL * 0.5);
+		const axis = V3(Math.cos(pc), 0, -Math.sin(pc));
+		const pivot = new THREE.Group();
+		pivot.position.copy(hinge);
+		mantleBreath.add(pivot);
+		const k = new Kit();
+		shellPanel(k, U_SPLIT + 0.012, U_TOP - 0.008, p0, p1);
+		for (const fv of [0.25, 0.75]) {
+			const ph = lerp(p0, p1, fv);
+			k.add('alu', along(cyl(0.007, 0.007, 0.026, 16), SM(U_SPLIT + 0.012, ph, -T_SHELL * 0.5), V3(Math.cos(ph), 0, -Math.sin(ph))));
+		}
+		k.add('steel', along(cyl(0.006, 0.006, 0.012, 12), SM(0.56, pc, -T_SHELL - 0.006), V3(Math.cos(pc), 0, -Math.sin(pc))));
+		const parts = Object.values(k.parts).flat();
+		for (const geo of parts) geo.translate(-hinge.x, -hinge.y, -hinge.z);
+		k.build(pivot);
+		// actuator: barrel fixed on the frame, rod to a lug under the petal
+		const barrel = mesh(cyl(0.008, 0.008, 1, 12), M.graphite, mantleBreath);
+		const rod = mesh(cyl(0.0042, 0.0042, 1, 10), M.steel, mantleBreath);
+		const collar = mesh(cyl(0.0095, 0.0095, 0.008, 12), M.accBody, mantleBreath);
+		const base = SM(0.3, pc, -0.05);
+		const lug = SM(0.56, pc, -T_SHELL - 0.006).sub(hinge);
+		petals.push({ pivot, axis, base, lug, barrel, rod, collar, pc });
+	}
 }
-const aMantle = anchor(mantleBreath, [0, ML * 0.62, P.R * 0.86]);
-const aMantleTip = anchor(mantleRoot, [0, ML * 0.98, 0]);
-
-// inner bladder (the actual pumping volume) and the electronics around it
-const bladder = mesh(new THREE.LatheGeometry(shellProfile(0.74), 32), M.bladder, mantleRoot);
-bladder.castShadow = true;
-const pump = new THREE.Group();
-pump.position.set(0, 0.2, 0.02);
-mantleRoot.add(pump);
-mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.13, 32, 1, true), M.metal, pump);
-mesh(new THREE.TorusGeometry(0.061, 0.007, 8, 40), M.accJet, pump, [0, 0.066, 0], [PI / 2, 0, 0]);
-mesh(new THREE.TorusGeometry(0.061, 0.007, 8, 40), M.accJet, pump, [0, -0.066, 0], [PI / 2, 0, 0]);
-const impeller = new THREE.Group();
-pump.add(impeller);
-for (let b = 0; b < 6; b++) {
-	const bl = mesh(new THREE.BoxGeometry(0.052, 0.1, 0.006), M.white, impeller, [0, 0, 0], [0, (b / 6) * PI, 0.35]);
-	bl.position.set(0, 0, 0);
-}
-mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.15, 12), M.dark, impeller);
-const aPump = anchor(pump, [0.06, 0.04, 0]);
-
-const battery = mesh(new THREE.BoxGeometry(0.13, 0.17, 0.05), M.dark, mantleRoot, [0, 0.43, -0.03]);
-mesh(new THREE.BoxGeometry(0.131, 0.02, 0.051), M.accBody, battery, [0, 0.05, 0]);
-
-// cable runs from the head into the mantle
+// frame: ring frames and eight longerons that sit under the seams
 {
-	const r = rng(8);
-	const cols = [M.accBody, M.dark, M.metal, M.white, M.dark, M.metal, M.dark, M.white, M.accBody, M.dark];
-	for (let i = 0; i < 10; i++) {
-		const a = r() * TAU;
-		const start = new THREE.Vector3(Math.cos(a) * 0.07, -0.02, Math.sin(a) * 0.07);
-		const toPump = i % 2 === 0;
-		const end = toPump ? new THREE.Vector3(Math.cos(a) * 0.055, 0.14 + r() * 0.04, 0.02 + Math.sin(a) * 0.055) : new THREE.Vector3((r() - 0.5) * 0.1, 0.36 + r() * 0.03, -0.03);
-		const mid = start.clone().lerp(end, 0.5).add(new THREE.Vector3((r() - 0.5) * 0.12, 0, (r() - 0.5) * 0.12 + 0.03));
-		const curve = new THREE.CatmullRomCurve3([start, mid, end]);
-		const tube = mesh(new THREE.TubeGeometry(curve, 30, 0.0065 + r() * 0.003, 6), cols[i], mantleRoot);
-		tube.castShadow = false;
+	const k = new Kit();
+	for (const u of [0.035, U_SPLIT, U_TOP]) k.add('steel', xf(new THREE.TorusGeometry(rM(u) - 0.014, 0.0075, 10, 80), [0, u * ML, 0], [PI / 2, 0, 0]));
+	for (let g = 0; g < GORES; g++) {
+		const ph = (g / GORES) * TAU;
+		const pts = [];
+		for (let i = 0; i <= 16; i++) pts.push(SM(lerp(0.035, U_TOP, i / 16), ph, -0.015));
+		k.add('graphite', new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 48, 0.0085, 8));
 	}
+	// collar where the mantle meets the head
+	k.add('accBody', xf(new THREE.TorusGeometry(rM(0.0) + 0.004, 0.009, 12, 64), [0, 0.004, 0], [PI / 2, 0, 0]));
+	k.add('graphite', cyl(rM(0.03) + 0.002, rM(0) + 0.002, 0.026, 64, true).translate(0, 0.013, 0));
+	k.build(mantleBreath);
 }
+// tip cap on a mast
+const cap = new THREE.Group();
+mantleBreath.add(cap);
+{
+	const k = new Kit();
+	const pts = [];
+	for (let i = 0; i <= 10; i++) { const u = lerp(U_TOP + 0.004, 1, i / 10); pts.push([rM(u) + 0.001, u * ML]); }
+	pts.push([0, ML]);
+	k.add('graphite', lathe(pts, 48));
+	k.add('accBody', xf(new THREE.TorusGeometry(rM(U_TOP + 0.01) + 0.002, 0.004, 8, 48), [0, (U_TOP + 0.01) * ML, 0], [PI / 2, 0, 0]));
+	k.add('glass', xf(new THREE.SphereGeometry(0.014, 16, 8, 0, TAU, 0, PI / 2), [0, ML - 0.002, 0], [0, 0, 0], [1, 0.7, 1]));
+	k.build(cap);
+}
+const aMantle = anchor(mantleBreath, [0, ML * 0.66, MR * 0.92]);
 
-// --- arms: 8 × 25 links, three instanced meshes for all of them -----------------
-const NA = 8, N = P.N, SEG = P.armLen / N;
-const linkGeo = new THREE.CylinderGeometry(0.94, 1, 1, 16, 1);
-const jointGeo = new THREE.CylinderGeometry(1, 1, 1, 12, 1);
-const suckGeo = new THREE.CylinderGeometry(1, 0.8, 1, 12, 1);
-const links = new THREE.InstancedMesh(linkGeo, new THREE.MeshPhysicalMaterial({ color: '#ffffff', roughness: 0.4, clearcoat: 0.35, clearcoatRoughness: 0.35 }), NA * N);
-const joints = new THREE.InstancedMesh(jointGeo, M.dark, NA * N);
-const SUCK_FROM = 3;
-const suckers = new THREE.InstancedMesh(suckGeo, M.sucker, NA * (N - SUCK_FROM));
-for (const im of [links, joints, suckers]) {
-	im.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-	im.castShadow = true;
-	im.receiveShadow = true;
-	im.frustumCulled = false;
-	root.add(im);
+// internals: pump column, two cell packs, a control board on a mast, the harness
+const internals = new THREE.Group();
+mantleRoot.add(internals);
+const pump = new THREE.Group();
+pump.position.y = 0.05;
+internals.add(pump);
+{
+	const k = new Kit();
+	k.add('alu', cyl(0.068, 0.072, 0.2, 48).translate(0, 0.1, 0));
+	for (let i = 0; i < 9; i++) k.add('steel', cyl(0.086, 0.086, 0.005, 48).translate(0, 0.03 + i * 0.016, 0));
+	k.add('accJet', cyl(0.074, 0.074, 0.014, 48).translate(0, 0.205, 0));
+	for (let i = 0; i < 6; i++) {
+		const a = (i / 6) * TAU;
+		k.add('steel', xf(hex(), [Math.cos(a) * 0.062, 0.214, Math.sin(a) * 0.062], [0, 0, 0], [0.005, 0.004, 0.005]));
+	}
+	// impeller cage
+	k.add('steel', xf(new THREE.TorusGeometry(0.062, 0.004, 8, 48), [0, 0.3, 0], [PI / 2, 0, 0]));
+	for (let i = 0; i < 4; i++) {
+		const a = (i / 4) * TAU + PI / 4;
+		k.add('steel', cyl(0.0035, 0.0035, 0.09, 8).translate(Math.cos(a) * 0.062, 0.257, Math.sin(a) * 0.062));
+	}
+	k.add('graphite', cyl(0.014, 0.014, 0.1, 16).translate(0, 0.26, 0));
+	k.build(pump);
 }
-const LINK_WHITE = new THREE.Color('#f1f2ef');
-const LINK_BAND = new THREE.Color('#ee5f1d');
-const LINK_TIP = new THREE.Color('#c8ced1');
-const LINK_GHOST = new THREE.Color('#b3bcc1');
-const tmpC = new THREE.Color();
-function paintLinks(iso) {
-	for (let a = 0; a < NA; a++) {
-		for (let i = 0; i < N; i++) {
-			let c = i === 0 || i === 8 ? LINK_BAND : i > N - 4 ? LINK_TIP : LINK_WHITE;
-			if (iso > 0.001 && a !== ARM_R2) c = tmpC.copy(c).lerp(LINK_GHOST, iso * 0.85);
-			links.setColorAt(a * N + i, c);
+const impeller = new THREE.Group();
+impeller.position.y = 0.27;
+pump.add(impeller);
+for (let b = 0; b < 7; b++) {
+	const bl = mesh(new THREE.BoxGeometry(0.05, 0.05, 0.004), M.white, impeller, [0, 0, 0], [0, (b / 7) * TAU, 0.5]);
+	bl.position.set(Math.cos((b / 7) * TAU) * 0.0, 0, 0);
+	bl.geometry.translate(0.03, 0, 0);
+	bl.castShadow = true;
+}
+const aPump = anchor(pump, [0.075, 0.2, 0]);
+
+const packs = [];
+for (const s of [1, -1]) {
+	const g = new THREE.Group();
+	g.position.set(s * 0.1, 0.4, -0.01);
+	internals.add(g);
+	const k = new Kit();
+	for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
+		const x = (i - 1) * 0.034, z = (j - 1) * 0.034;
+		k.add('cell', cyl(0.016, 0.016, 0.13, 20).translate(x, 0.065, z));
+		k.add('steel', cyl(0.011, 0.011, 0.006, 16).translate(x, 0.133, z));
+	}
+	k.add('graphite', new THREE.BoxGeometry(0.11, 0.012, 0.11).translate(0, -0.004, 0));
+	for (const y of [0.03, 0.1]) k.add('accBody', new THREE.BoxGeometry(0.108, 0.01, 0.108).translate(0, y, 0));
+	k.add('alu', new THREE.BoxGeometry(0.106, 0.006, 0.106).translate(0, 0.138, 0));
+	k.build(g);
+	packs.push({ g, s });
+}
+const board = new THREE.Group();
+board.position.y = 0.58;
+internals.add(board);
+{
+	const k = new Kit();
+	k.add('alu', cyl(0.007, 0.007, 0.5, 12).translate(0, -0.08, 0)); // mast
+	k.add('board', new THREE.BoxGeometry(0.15, 0.004, 0.1));
+	const r = rng(4);
+	for (let i = 0; i < 9; i++) {
+		const w = 0.01 + r() * 0.022, d = 0.01 + r() * 0.018;
+		k.add(i % 4 === 0 ? 'alu' : 'graphite', new THREE.BoxGeometry(w, 0.004 + r() * 0.006, d).translate((r() - 0.5) * 0.12, 0.004, (r() - 0.5) * 0.07));
+	}
+	k.add('accBody', new THREE.BoxGeometry(0.02, 0.008, 0.012).translate(0.05, 0.006, 0.03));
+	for (const [x, z] of [[-0.068, -0.043], [0.068, -0.043], [-0.068, 0.043], [0.068, 0.043]]) k.add('steel', cyl(0.004, 0.004, 0.012, 8).translate(x, -0.006, z));
+	k.build(board);
+}
+{
+	// harness: bundled cables along the frame, with clips
+	const k = new Kit();
+	const r = rng(11);
+	const cols = ['accBody', 'graphite', 'steel', 'white', 'graphite', 'accBody', 'graphite', 'white', 'steel', 'graphite', 'graphite', 'accBody'];
+	for (let i = 0; i < 9; i++) {
+		const a = (i / 9) * TAU + r() * 0.15;
+		const pts = [];
+		const toBoard = i % 3 === 0;
+		const uEnd = toBoard ? 0.78 : 0.55;
+		for (let s = 0; s <= 6; s++) {
+			const u = lerp(0.04, uEnd, s / 6);
+			const inward = toBoard && s === 6 ? 0.06 : 0.026 + 0.004 * Math.sin(s + i);
+			const p = SM(u, a, -inward);
+			pts.push(p);
+		}
+		if (!toBoard) pts.push(V3(Math.sign(Math.sin(a) || 1) * 0.1, 0.46, -0.01));
+		else pts.push(V3(0, 0.58, 0));
+		const curve = new THREE.CatmullRomCurve3(pts);
+		k.add(cols[i], new THREE.TubeGeometry(curve, 60, 0.0042 + r() * 0.0018, 6));
+		for (const f of [0.25, 0.5]) {
+			const p = curve.getPointAt(f), t = curve.getTangentAt(f);
+			k.add('alu', along(cyl(0.0075, 0.0075, 0.006, 10), p, t));
 		}
 	}
-	links.instanceColor.needsUpdate = true;
+	const parts = k.build(internals);
+	for (const m of Object.values(parts)) m.castShadow = false;
+}
+
+// --- arms: 8 × 25 machined links. Every link is one module scaled down the arm --------
+const NA = 8, N = P.N;
+const LINK_LEN = 1.15; // link pitch in units of its own radius
+function linkKit() {
+	const k = new Kit();
+	// ceramic shell with chamfered ends and a groove
+	k.add('white', lathe([[0, 0.07], [0.76, 0.07], [0.92, 0.13], [1, 0.25], [1, 0.48], [0.97, 0.52], [0.97, 0.58], [1, 0.62], [1, 0.74], [0.9, 0.88], [0.7, 0.95], [0, 0.95]], 28));
+	// knuckle and the pin through it, along the bend axis (x)
+	k.add('rubber', cyl(0.7, 0.7, 0.36, 24).translate(0, 1.07, 0));
+	k.add('steel', xf(cyl(0.17, 0.17, 1.86, 16), [0, 1.07, 0], [0, 0, PI / 2]));
+	for (const s of [1, -1]) {
+		// clevis cheeks
+		k.add('alu', xf(cyl(0.33, 0.33, 0.1, 20), [s * 0.86, 1.07, 0], [0, 0, PI / 2]));
+		k.add('alu', new THREE.BoxGeometry(0.1, 0.42, 0.66).translate(s * 0.86, 0.86, 0));
+		k.add('accArm', xf(cyl(0.2, 0.2, 0.08, 6), [s * 0.95, 1.07, 0], [0, 0, PI / 2]));
+	}
+	// tendon guide on the back of each link
+	k.add('graphite', new THREE.BoxGeometry(0.26, 0.6, 0.14).translate(0, 0.5, 0.98));
+	k.add('steel', xf(cyl(0.06, 0.06, 0.62, 8), [0, 0.5, 1.06], [0, 0, 0]));
+	// sucker cup on the underside (−z), the outside of the up-curl like a real arm
+	k.add('sucker', xf(lathe([[0, 0], [0.36, 0], [0.42, 0.08], [0.44, 0.2], [0.36, 0.22], [0.26, 0.12], [0, 0.12]], 20), [0, 0.5, -0.92], [-PI / 2, 0, 0]));
+	k.add('steel', xf(new THREE.TorusGeometry(0.4, 0.035, 6, 24), [0, 0.5, -1.12], [0, 0, 0]));
+	return k;
+}
+const linkMeshes = [];
+const sharedMatrix = new THREE.InstancedBufferAttribute(new Float32Array(NA * N * 16), 16);
+sharedMatrix.setUsage(THREE.DynamicDrawUsage);
+{
+	const k = linkKit();
+	for (const [mat, list] of Object.entries(k.parts)) {
+		const im = new THREE.InstancedMesh(merge(list), M[mat], NA * N);
+		im.instanceMatrix = sharedMatrix;
+		im.castShadow = true;
+		im.receiveShadow = true;
+		im.frustumCulled = false;
+		root.add(im);
+		linkMeshes.push(im);
+		if (mat === 'white') linkMeshes.white = im;
+	}
+}
+// servo pod at each arm root: housing, fin stack, end cap, bracket
+const podMatrix = new THREE.InstancedBufferAttribute(new Float32Array(NA * 16), 16);
+podMatrix.setUsage(THREE.DynamicDrawUsage);
+const POD_LEN = 0.085;
+{
+	const k = new Kit();
+	k.add('white', cyl(0.05, 0.056, 0.05, 32).translate(0, 0.028, 0));
+	for (let i = 0; i < 5; i++) k.add('alu', cyl(0.059, 0.059, 0.0035, 32).translate(0, 0.008 + i * 0.01, 0));
+	k.add('accArm', cyl(0.052, 0.05, 0.012, 32).translate(0, 0.06, 0));
+	k.add('graphite', cyl(0.042, 0.048, 0.03, 32).translate(0, 0.078, 0));
+	k.add('graphite', new THREE.BoxGeometry(0.03, 0.04, 0.09).translate(0, -0.01, 0));
+	for (let i = 0; i < 6; i++) {
+		const a = (i / 6) * TAU;
+		k.add('steel', xf(hex(), [Math.cos(a) * 0.044, 0.067, Math.sin(a) * 0.044], [0, 0, 0], [0.0045, 0.004, 0.0045]));
+	}
+	for (const [mat, list] of Object.entries(k.parts)) {
+		const im = new THREE.InstancedMesh(merge(list), M[mat], NA);
+		im.instanceMatrix = podMatrix;
+		im.castShadow = true;
+		im.receiveShadow = true;
+		im.frustumCulled = false;
+		root.add(im);
+	}
+}
+
+const LINK_WHITE = new THREE.Color('#ffffff');
+const LINK_GHOST = new THREE.Color('#9ea8ad');
+const tmpC = new THREE.Color();
+function paintLinks(iso) {
+	const im = linkMeshes.white;
+	for (let a = 0; a < NA; a++) for (let i = 0; i < N; i++) {
+		const c = tmpC.copy(LINK_WHITE);
+		if (iso > 0.001 && a !== ARM_R2) c.lerp(LINK_GHOST, iso * 0.8);
+		im.setColorAt(a * N + i, c);
+	}
+	im.instanceColor.needsUpdate = true;
 }
 paintLinks(0);
 const armTips = [];
 for (let a = 0; a < NA; a++) armTips.push(new THREE.Vector3());
 
 const UP = new THREE.Vector3(0, 1, 0);
-const Y = new THREE.Vector3(0, 1, 0);
 const FLOW = new THREE.Vector3(1, 0, 0.25).normalize(); // direction the water current runs
-const _d = new THREE.Vector3(), _k = new THREE.Vector3(), _n = new THREE.Vector3(), _p = new THREE.Vector3(), _mid = new THREE.Vector3();
-const _q = new THREE.Quaternion(), _qs = new THREE.Quaternion(), _s = new THREE.Vector3(), _m = new THREE.Matrix4(), _rhat = new THREE.Vector3();
+const _d = V3(), _k = V3(), _z = V3(), _p = V3(), _rhat = V3(), _m = new THREE.Matrix4();
+const LINK_Q = Math.pow(P.armR1 / P.armR0, 1 / (N - 1));
 
 function poseArms(t, jet, u, explode, iso, curls) {
-	let si = 0;
 	for (let a = 0; a < NA; a++) {
 		const ang = ARM_ANGLES[a];
 		_rhat.set(Math.cos(ang), 0, Math.sin(ang));
 		const curl = curls[a] * P.maxCurl;
-		// root on the hub ring; explode and isolation push it outwards
-		const out = 0.38 * explode + (a === ARM_R2 ? 0.34 * iso : 0);
-		_p.set(_rhat.x * (0.15 + out), 0.79 - 0.06 * explode - (a === ARM_R2 ? 0.03 * iso : 0), 0.02 + _rhat.z * (0.15 + out));
-		// arms leave the hub between 35° (relaxed) and 72° (streamlined) below horizontal
-		const drop = lerp(0.62, 1.25, jet) + (a === ARM_R2 ? -0.35 * iso : 0);
+		const out = 0.34 * explode + (a === ARM_R2 ? 0.32 * iso : 0);
+		_p.set(_rhat.x * (0.162 + out), 0.632 - 0.07 * explode - (a === ARM_R2 ? 0.02 * iso : 0), 0.02 + _rhat.z * (0.162 + out));
+		// arms leave the hub between 14° (relaxed) and 66° (streamlined) below horizontal
+		const drop = lerp(0.25, 0.85, jet) + (a === ARM_R2 ? -0.2 * iso : 0);
 		_d.copy(_rhat).multiplyScalar(Math.cos(drop)).addScaledVector(UP, -Math.sin(drop)).normalize();
 		_k.crossVectors(_rhat, UP).normalize(); // bend axis: positive curls the tip up and out
+		// the servo pod
+		_z.crossVectors(_k, _d);
+		_m.makeBasis(_k, _d, _z).setPosition(_p);
+		_m.toArray(podMatrix.array, a * 16);
+		_p.addScaledVector(_d, POD_LEN);
 		const ph = a * 0.79;
+		let r = P.armR0;
 		for (let i = 0; i < N; i++) {
 			const s = i / (N - 1);
-			const w = (0.25 + 2.2 * s * s) / 1.0;
-			const wave = 0.07 * Math.sin(t * 2.3 - s * 5.4 + ph) * (0.3 + s);
-			const theta = (curl / N) * w + wave;
-			_d.applyAxisAngle(_k, theta);
+			// droop over the first half (bends down), curl over the outer half (bends up)
+			const droop = -(1.05 - 0.6 * jet) * (1 - curls[a] * 0.4) * Math.max(0, 1 - s * 1.8) * 2.2 / N;
+			const up = (curl / N) * (3.0 * Math.max(0, s - 0.3) ** 1.4 / 0.6);
+			const wave = 0.06 * Math.sin(t * 2.3 - s * 5.4 + ph) * (0.3 + s);
+			if (i > 0) _d.applyAxisAngle(_k, droop + up + wave);
 			if (u > 0.001) {
 				const flutter = 1 + 0.35 * Math.sin(t * (3 + u) + s * 6 + ph);
 				_d.addScaledVector(FLOW, 0.022 * u * flutter * (0.2 + s)).normalize();
+				_k.addScaledVector(_d, -_k.dot(_d)).normalize();
 			}
-			const r = lerp(P.armR0, P.armR1, Math.pow(s, 0.9));
-			// joint disc at the start of the link
-			_q.setFromUnitVectors(Y, _d);
-			_m.compose(_p, _q, _s.set(r * 0.82, SEG * 0.36, r * 0.82));
-			joints.setMatrixAt(a * N + i, _m);
-			// the link itself
-			_mid.copy(_p).addScaledVector(_d, SEG * 0.5);
-			_m.compose(_mid, _q, _s.set(r, SEG * 0.8, r));
-			links.setMatrixAt(a * N + i, _m);
-			// sucker on the inside of the curl
-			if (i >= SUCK_FROM) {
-				_n.crossVectors(_k, _d).normalize();
-				_qs.setFromUnitVectors(Y, _n);
-				const sr = r * 0.52;
-				_m.compose(_mid.addScaledVector(_n, r * 0.92), _qs, _s.set(sr, r * 0.32, sr));
-				suckers.setMatrixAt(si++, _m);
-			}
-			_p.addScaledVector(_d, SEG);
+			_z.crossVectors(_k, _d);
+			_m.makeBasis(_k, _d, _z).scale(_z.set(r, r, r)).setPosition(_p);
+			_m.toArray(sharedMatrix.array, (a * N + i) * 16);
+			_p.addScaledVector(_d, r * LINK_LEN);
+			r *= LINK_Q;
 		}
 		armTips[a].copy(_p);
 	}
-	links.instanceMatrix.needsUpdate = true;
-	joints.instanceMatrix.needsUpdate = true;
-	suckers.instanceMatrix.needsUpdate = true;
+	sharedMatrix.needsUpdate = true;
+	podMatrix.needsUpdate = true;
 }
 
-castAll(root);
-links.castShadow = joints.castShadow = suckers.castShadow = true;
+root.traverse((m) => { if (m.isMesh) { m.castShadow = m.castShadow !== false; m.receiveShadow = true; } });
 
 // --- jet flow particles (world space) --------------------------------------------
-const NP = 320;
+const NP = 360;
 const flowGeo = new THREE.BufferGeometry();
 const flowPos = new Float32Array(NP * 3);
 const flowSeed = [];
@@ -553,11 +887,23 @@ const flowSeed = [];
 	for (let i = 0; i < NP; i++) flowSeed.push([r(), r() * TAU, r()]);
 }
 flowGeo.setAttribute('position', new THREE.BufferAttribute(flowPos, 3));
-const flowMat = new THREE.PointsMaterial({ color: '#2b7fa3', size: 0.012, transparent: true, opacity: 0, depthWrite: false, sizeAttenuation: true });
+const flowMat = new THREE.PointsMaterial({ color: '#2b7fa3', size: 0.011, transparent: true, opacity: 0, depthWrite: false, sizeAttenuation: true });
 const flow = new THREE.Points(flowGeo, flowMat);
 flow.frustumCulled = false;
 scene.add(flow);
-const _np = new THREE.Vector3(), _nd = new THREE.Vector3(), _a1 = new THREE.Vector3(), _a2 = new THREE.Vector3();
+const _np = V3(), _nd = V3(), _a1 = V3(), _a2 = V3();
+
+// ================================================================== post: ambient occlusion
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const gtao = new GTAOPass(scene, camera, 16, 16);
+gtao.output = GTAOPass.OUTPUT.Default;
+gtao.blendIntensity = 1.0;
+gtao.updateGtaoMaterial({ radius: 0.09, distanceExponent: 1.6, thickness: 1.2, scale: 1.25, samples: 16, distanceFallOff: 1, screenSpaceRadius: false });
+gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 6, radiusExponent: 1, rings: 2, samples: 16 });
+gtao.normalMaterial.side = THREE.DoubleSide; // thin shell panels need both faces in the depth/normal pass
+composer.addPass(gtao);
+composer.addPass(new OutputPass());
 
 // ================================================================== 3. CONSOLE
 const ui = {
@@ -617,7 +963,7 @@ function toggle(act, fromTour) {
 		const dist = camera.position.distanceTo(controls.target);
 		if (ui.explode && dist < 5) {
 			const dir = camera.position.clone().sub(controls.target).normalize();
-			const t1 = new THREE.Vector3(0, 0.92, 0);
+			const t1 = new THREE.Vector3(0, 0.95, 0);
 			camTween = { t: 0, dur: 1.4, p0: camera.position.clone(), t0: controls.target.clone(), p1: t1.clone().addScaledVector(dir, 5.1), t1 };
 		}
 	}
@@ -628,11 +974,12 @@ document.querySelectorAll('[data-act]').forEach((b) => b.addEventListener('click
 
 // camera views
 const VIEWS = {
-	hero: { p: [2.3, 1.55, 2.9], t: [0, 0.78, 0] },
-	front: { p: [0, 0.95, 3.4], t: [0, 0.78, 0] },
-	side: { p: [3.4, 0.95, 0.1], t: [0, 0.78, 0] },
-	top: { p: [0.05, 3.7, 0.55], t: [0, 0.6, 0] },
-	under: { p: [0.9, 0.12, 1.6], t: [0, 0.82, 0] },
+	hero: { p: [2.15, 1.6, 2.75], t: [0, 0.86, 0] },
+	front: { p: [0, 1.0, 3.3], t: [0, 0.84, 0] },
+	side: { p: [3.3, 1.05, 0.15], t: [0, 0.86, 0] },
+	top: { p: [0.05, 3.6, 0.6], t: [0, 0.7, 0] },
+	under: { p: [1.35, 0.22, 1.85], t: [0, 0.66, 0] },
+	rear: { p: [-1.95, 2.35, -2.2], t: [0, 0.98, -0.28] }, // tour only: looks into the open mantle
 };
 let camTween = null;
 function setView(name, fromTour) {
@@ -891,6 +1238,8 @@ const BEATS = [
 	{ t: 1.2, el: 'v-hero', go: () => setView('hero', true) },
 	{ t: 3.4, el: 'b-optics', go: () => toggle('optics', true) },
 	{ t: 6.6, el: 'b-mantle', go: () => toggle('mantle', true) },
+	{ t: 7.6, el: null, go: () => setView('rear', true) },
+	{ t: 9.6, el: 'v-hero', go: () => setView('hero', true) },
 	{ t: 10.2, el: 'b-arm', go: () => toggle('arm', true) },
 	{ t: 13.8, el: 'b-arm', go: () => toggle('arm', true) },
 	{ t: 15.0, el: 'b-flow', go: () => toggle('flow', true) },
@@ -977,7 +1326,7 @@ function updateTour(dt) {
 	if (b) {
 		// travel to the control during the 0.9 s before its beat
 		if (tour.t >= b.t - 0.9 && !tour.from) {
-			const c = elCenter(b.el);
+			const c = b.el ? elCenter(b.el) : null;
 			tour.from = { x: tour.cx, y: tour.cy, to: c, t0: tour.t };
 		}
 		if (tour.from && tour.from.to) {
@@ -1021,15 +1370,17 @@ function updateTour(dt) {
 
 // ================================================================== quality tiers
 const TIERS = [
-	{ name: 'Q1', pr: 2, shadow: 2048, every: 1 },
-	{ name: 'Q2', pr: 1.25, shadow: 1024, every: 1 },
-	{ name: 'Q3', pr: 1, shadow: 512, every: 2 },
+	{ name: 'Q1', pr: 1.75, shadow: 2048, every: 1, ao: true },
+	{ name: 'Q2', pr: 1.25, shadow: 1024, every: 1, ao: true },
+	{ name: 'Q3', pr: 1, shadow: 1024, every: 2, ao: false },
 ];
 let tier = 0;
 function setTier(i, manual) {
 	tier = i;
 	const T = TIERS[i];
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, T.pr));
+	composer.setPixelRatio(Math.min(window.devicePixelRatio || 1, T.pr));
+	gtao.enabled = T.ao;
 	key.shadow.mapSize.set(T.shadow, T.shadow);
 	if (key.shadow.map) { key.shadow.map.dispose(); key.shadow.map = null; }
 	$('sQ').textContent = 'render ' + T.name + (manual ? '' : ' auto');
@@ -1051,6 +1402,7 @@ function watchPerf(dt) {
 function resize() {
 	const w = window.innerWidth, h = window.innerHeight;
 	renderer.setSize(w, h, false);
+	composer.setSize(w, h);
 	camera.aspect = w / h;
 	// keep the machine at 60–70 % of the view on narrow screens too
 	camera.fov = w / h < 0.8 ? 50 : w / h < 1.3 ? 40 : 32;
@@ -1098,49 +1450,68 @@ function step(dt) {
 
 	// --- pose the machine from the model ---
 	root.rotation.y = (anim.turn * PI) / 180;
-	root.position.y = 0.018 * Math.sin(simT * 0.8) + 0.008 * jetEase;
+	root.position.y = 0.08 + 0.016 * Math.sin(simT * 0.8) + 0.008 * jetEase;
 	const e = anim.explode;
-	head.position.set(0, 0, 0.0);
-	mantleRoot.position.set(0, 1.03 + 0.2 * e, -0.055 - 0.3 * e);
+	// mantle: breathe with the model, petals hinge open, the course below steps out when exploded
+	mantleRoot.position.set(MANTLE_POS.x, MANTLE_POS.y + 0.16 * e, MANTLE_POS.z - 0.26 * e);
 	mantleBreath.scale.set(rScale, 1, rScale);
-	bladder.scale.set(Math.pow(rScale, 1.6), 1, Math.pow(rScale, 1.6));
-	const open = Math.max(anim.mantle, e * 0.85);
-	for (const h of shellHalves) h.pivot.rotation.y = h.s * open * 1.12;
+	const open = Math.max(anim.mantle, e * 0.9);
+	for (const pt of petals) {
+		pt.pivot.quaternion.setFromAxisAngle(pt.axis, ease(open) * 1.08);
+		// actuator from the frame to the lug under the petal
+		_a1.copy(pt.lug).applyQuaternion(pt.pivot.quaternion).add(SM(U_SPLIT + 0.012, pt.pc, -T_SHELL * 0.5));
+		_a2.subVectors(_a1, pt.base);
+		const len = _a2.length();
+		_a2.normalize();
+		const bl = Math.min(0.09, len * 0.6);
+		pt.barrel.position.copy(pt.base).addScaledVector(_a2, bl / 2);
+		pt.barrel.quaternion.setFromUnitVectors(UP, _a2);
+		pt.barrel.scale.set(1, bl, 1);
+		pt.rod.position.copy(pt.base).addScaledVector(_a2, bl + (len - bl) / 2);
+		pt.rod.quaternion.copy(pt.barrel.quaternion);
+		pt.rod.scale.set(1, Math.max(0.001, len - bl), 1);
+		pt.collar.position.copy(pt.base).addScaledVector(_a2, bl);
+		pt.collar.quaternion.copy(pt.barrel.quaternion);
+	}
+	for (const pt of petals) pt.pivot.position.copy(SM(U_SPLIT + 0.012, pt.pc, -T_SHELL * 0.5)).addScaledVector(V3(Math.sin(pt.pc), 0, Math.cos(pt.pc)), 0.05 * e);
+	for (const lp of lowerPanels) lp.grp.position.copy(lp.n).multiplyScalar(0.075 * e);
+	cap.position.y = 0.12 * Math.max(e, anim.mantle * 0.5);
 	const xr = anim.flow;
-	M.shell.opacity = 1 - 0.82 * xr;
-	M.shell.transparent = xr > 0.01;
-	M.shell.depthWrite = xr < 0.5;
-	const lift = Math.max(anim.mantle, e);
-	pump.position.y = 0.2 + 0.1 * lift;
-	pump.position.z = 0.02 + 0.07 * lift;
-	pump.rotation.y = lift * PI * 0.5;
-	impeller.rotation.y += (rpm / 60) * TAU * dt * 0.25; // shown at quarter speed so the blades read
-	battery.position.set(0, 0.43 + 0.08 * e, -0.03 - 0.1 * e);
+	M.ceramic.opacity = 1 - 0.84 * xr;
+	M.ceramic.transparent = xr > 0.01;
+	M.ceramic.depthWrite = xr < 0.5;
+	// internals rise out of the open mantle
+	const lift = ease(Math.max(anim.mantle * 0.6, e));
+	internals.position.y = 0.06 * lift + 0.14 * e;
+	pump.rotation.y = lift * PI * 0.25;
+	impeller.rotation.y += (rpm / 60) * TAU * dt * 0.2; // shown at a fifth of real speed so the blades read
+	for (const pk of packs) pk.g.position.set(pk.s * (0.1 + 0.13 * e), 0.4 + 0.05 * e, -0.01);
+	board.position.y = 0.58 + 0.16 * e;
 
 	for (const o of optics) {
 		const out = Math.max(anim.optics, e);
-		o.lens.position.x = o.side * (0.056 + 0.11 * out);
-		o.lens.rotation.x = out * 2.6 * o.side;
+		o.g.position.copy(o.base).addScaledVector(o.dir, 0.16 * e);
+		o.lens.position.y = 0.085 + 0.075 * ease(out);
+		o.lens.rotation.y = ease(out) * 4.2 * o.side; // unscrews on its thread
 		const ap = (S.fstop - 2.8) / (11 - 2.8); // 0 = wide open
-		for (const b of o.blades) b.rotation.z = 0.25 + ap * 0.9;
-		o.iris.scale.setScalar(1);
-		o.g.position.x = o.side * (0.178 + 0.2 * e);
+		for (const b of o.blades) b.rotation.y = 0.15 + ap * 0.75;
 	}
-	siphon.position.set(0, 0.84 - 0.04 * e, 0.17 + 0.28 * e);
+	siphon.position.copy(SIPHON_BASE).addScaledVector(SIPHON_DIR, 0.24 * e);
 	const nr = ui.nozzleD / 2;
-	nozzleRing.scale.set(nr + 0.004, nr + 0.004, nr + 0.004);
-	nozzleBore.scale.set(nr, 1, nr);
-	beak.position.set(0, 0.765 - 0.26 * e, 0.02);
-	const bo = Math.max(anim.beak, e * 0.6);
-	for (const j of jaws) j.p.rotation.z = j.s * bo * 0.55;
+	nozzle.scale.setScalar(nr);
+	beak.position.set(0, 0.575 - 0.24 * e, 0);
+	const bo = ease(Math.max(anim.beak, e * 0.7));
+	for (const c of claws) c.rotation.z = -bo * 0.7;
 
 	if (Math.abs(anim.arm - (paintLinks.last || 0)) > 0.01) { paintLinks(anim.arm); paintLinks.last = anim.arm; }
 	poseArms(simT, jetEase, ui.current, e, anim.arm, curls);
 
-	// the part doing the work glows: the jet while contracting, optics while out
-	M.accJet.emissiveIntensity = 0.55 * (jet.contracting ? Math.sin(PI * jet.x) : 0);
+	// the part doing the work glows: the jet while contracting, optics while out, R2 while apart
+	M.accJet.emissiveIntensity = 0.6 * (jet.contracting ? Math.sin(PI * jet.x) : 0);
 	M.accOpt.emissiveIntensity = 0.45 * anim.optics;
-	M.accBody.emissiveIntensity = 0.3 * Math.max(anim.mantle, anim.arm) * (0.6 + 0.4 * Math.sin(simT * 4));
+	M.accArm.emissiveIntensity = 0.25 * anim.arm;
+	M.accBody.emissiveIntensity = 0.28 * anim.mantle * (0.6 + 0.4 * Math.sin(simT * 4));
+	M.pupil.emissiveIntensity = 0.35 + 0.5 * (1 - (S.fstop - 2.8) / 8.2);
 
 	// jet flow particles
 	root.updateMatrixWorld(true);
@@ -1272,10 +1643,20 @@ startTour();
 // ?at=<s> fast-forwards the tour (for stills); ?hud=0 hides the panels
 const QS = new URLSearchParams(location.search);
 if (QS.get('hud') === '0') document.body.classList.add('hide-hud');
+if (QS.get('ao') === '0') { TIERS[0].ao = false; setTier(0, false); }
+
 if (QS.has('at')) {
 	const n = Math.round(parseFloat(QS.get('at')) * 30);
 	for (let i = 0; i < n; i++) { step(1 / 30); if (i % 30 === 0) readouts(1); }
 	lastInput = clock - 1; // keep the tour state without restarting it
+}
+
+if (QS.has('cam')) {
+	const c = QS.get('cam').split(',').map(Number);
+	camera.position.set(c[0], c[1], c[2]);
+	controls.target.set(c[3], c[4], c[5]);
+	camTween = null;
+	controls.update();
 }
 
 let last = performance.now();
@@ -1285,12 +1666,13 @@ function frame(now) {
 	frameNo++;
 	step(dt);
 	readouts(dt);
-	renderer.render(scene, camera);
+	composer.render(dt);
 	watchPerf(dt);
 	requestAnimationFrame(frame);
 }
-renderer.render(scene, camera);
+composer.render(1 / 60);
 const loading = $('loading');
 loading.style.opacity = '0';
 setTimeout(() => loading.remove(), 700);
-requestAnimationFrame((t) => { last = t; requestAnimationFrame(frame); });
+if (QS.has('still')) { readouts(1); composer.render(1 / 60); document.body.dataset.ready = '1'; }
+else requestAnimationFrame((t) => { last = t; requestAnimationFrame(frame); });
